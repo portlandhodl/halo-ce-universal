@@ -152,8 +152,7 @@ struct editor_camera_player_starting_location
 	byte _unknown14[0x20];
 };
 
-typedef char editor_camera_player_starting_location_size_assert[
-	sizeof(struct editor_camera_player_starting_location) == 0x34 ? 1 : -1];
+typedef char editor_camera_player_starting_location_size_assert[HALO_LAYOUT_ASSERT_32(sizeof(struct editor_camera_player_starting_location) == 0x34)];
 
 typedef void (*editor_camera_update_function)(
 	struct flying_camera *camera,

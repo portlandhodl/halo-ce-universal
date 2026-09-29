@@ -127,8 +127,7 @@ struct path_node
 	real_point3d closest_point_to_attractor;
 };
 
-typedef char path_node_size_assert[
-	sizeof(struct path_node) == 0x44 ? 1 : -1];
+typedef char path_node_size_assert[HALO_LAYOUT_ASSERT_32(sizeof(struct path_node) == 0x44)];
 
 struct path_heap_element
 {
@@ -213,18 +212,12 @@ struct obstacle_path
 	byte reserved1532[2];
 };
 
-typedef char obstacle_path_step_size_assert[
-	sizeof(struct obstacle_path_step) == 0x28 ? 1 : -1];
-typedef char obstacle_path_size_assert[
-	sizeof(struct obstacle_path) == 0x1534 ? 1 : -1];
-typedef char obstacle_path_step_count_offset_assert[
-	offsetof(struct obstacle_path, step_count) == 0x2C ? 1 : -1];
-typedef char obstacle_path_steps_offset_assert[
-	offsetof(struct obstacle_path, steps) == 0x30 ? 1 : -1];
-typedef char obstacle_path_heap_count_offset_assert[
-	offsetof(struct obstacle_path, heap_count) == 0x1430 ? 1 : -1];
-typedef char obstacle_path_heap_offset_assert[
-	offsetof(struct obstacle_path, heap) == 0x1432 ? 1 : -1];
+typedef char obstacle_path_step_size_assert[HALO_LAYOUT_ASSERT_32(sizeof(struct obstacle_path_step) == 0x28)];
+typedef char obstacle_path_size_assert[HALO_LAYOUT_ASSERT_32(sizeof(struct obstacle_path) == 0x1534)];
+typedef char obstacle_path_step_count_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct obstacle_path, step_count) == 0x2C)];
+typedef char obstacle_path_steps_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct obstacle_path, steps) == 0x30)];
+typedef char obstacle_path_heap_count_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct obstacle_path, heap_count) == 0x1430)];
+typedef char obstacle_path_heap_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct obstacle_path, heap) == 0x1432)];
 
 struct obstacles_test_pill_result
 {
@@ -233,25 +226,16 @@ struct obstacles_test_pill_result
 	short obstacle_index;
 };
 
-typedef char obstacles_test_pill_result_size_assert[
-	sizeof(struct obstacles_test_pill_result) == 0x8 ? 1 : -1];
-typedef char obstacles_test_pill_result_disc_index_offset_assert[
-	offsetof(struct obstacles_test_pill_result, disc_index) == 0x4 ? 1 : -1];
-typedef char obstacles_test_pill_result_obstacle_index_offset_assert[
-	offsetof(struct obstacles_test_pill_result, obstacle_index) == 0x6 ? 1 : -1];
+typedef char obstacles_test_pill_result_size_assert[HALO_LAYOUT_ASSERT_32(sizeof(struct obstacles_test_pill_result) == 0x8)];
+typedef char obstacles_test_pill_result_disc_index_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct obstacles_test_pill_result, disc_index) == 0x4)];
+typedef char obstacles_test_pill_result_obstacle_index_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct obstacles_test_pill_result, obstacle_index) == 0x6)];
 
-typedef char obstacle_disc_size_assert[
-	sizeof(struct obstacle_disc) == 0x18 ? 1 : -1];
-typedef char obstacle_disc_obstacle_index_offset_assert[
-	offsetof(struct obstacle_disc, obstacle_index) == 0x2 ? 1 : -1];
-typedef char obstacle_disc_height_offset_assert[
-	offsetof(struct obstacle_disc, height) == 0x14 ? 1 : -1];
-typedef char obstacles_size_assert[
-	sizeof(struct obstacles) == 0xC08 ? 1 : -1];
-typedef char obstacles_disc_count_offset_assert[
-	offsetof(struct obstacles, disc_count) == 0x2 ? 1 : -1];
-typedef char obstacles_discs_offset_assert[
-	offsetof(struct obstacles, discs) == 0x8 ? 1 : -1];
+typedef char obstacle_disc_size_assert[HALO_LAYOUT_ASSERT_32(sizeof(struct obstacle_disc) == 0x18)];
+typedef char obstacle_disc_obstacle_index_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct obstacle_disc, obstacle_index) == 0x2)];
+typedef char obstacle_disc_height_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct obstacle_disc, height) == 0x14)];
+typedef char obstacles_size_assert[HALO_LAYOUT_ASSERT_32(sizeof(struct obstacles) == 0xC08)];
+typedef char obstacles_disc_count_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct obstacles, disc_count) == 0x2)];
+typedef char obstacles_discs_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct obstacles, discs) == 0x8)];
 
 struct path_debug_storage
 {
@@ -281,21 +265,14 @@ struct path_debug_storage
 	struct obstacle_path avoidance_paths[4];
 };
 
-typedef char path_state_node_count_offset_assert[
-	offsetof(struct path_state, node_count) == 0x80 ? 1 : -1];
-typedef char path_state_node_list_offset_assert[
-	offsetof(struct path_state, node_list) == 0x84 ? 1 : -1];
-typedef char path_state_hash_table_offset_assert[
-	offsetof(struct path_state, hash_table) == 0x1208A ? 1 : -1];
-typedef char path_state_size_assert[
-	sizeof(struct path_state) == 0x1408C ? 1 : -1];
+typedef char path_state_node_count_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct path_state, node_count) == 0x80)];
+typedef char path_state_node_list_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct path_state, node_list) == 0x84)];
+typedef char path_state_hash_table_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct path_state, hash_table) == 0x1208A)];
+typedef char path_state_size_assert[HALO_LAYOUT_ASSERT_32(sizeof(struct path_state) == 0x1408C)];
 
-typedef char path_debug_storage_size_assert[
-	sizeof(struct path_debug_storage) == 0x1CA7C ? 1 : -1];
-typedef char path_debug_storage_raw_steps_offset_assert[
-	offsetof(struct path_debug_storage, raw_steps) == 0x14100 ? 1 : -1];
-typedef char path_debug_storage_avoided_steps_offset_assert[
-	offsetof(struct path_debug_storage, avoided_steps) == 0x14548 ? 1 : -1];
+typedef char path_debug_storage_size_assert[HALO_LAYOUT_ASSERT_32(sizeof(struct path_debug_storage) == 0x1CA7C)];
+typedef char path_debug_storage_raw_steps_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct path_debug_storage, raw_steps) == 0x14100)];
+typedef char path_debug_storage_avoided_steps_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct path_debug_storage, avoided_steps) == 0x14548)];
 
 /* ---------- prototypes/PATH.C */
 

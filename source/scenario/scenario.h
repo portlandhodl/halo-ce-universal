@@ -82,8 +82,7 @@ struct scenario_globals
 	struct sound_environment_definition sound_environment;
 };
 
-typedef char scenario_globals_size_assert[
-	sizeof(struct scenario_globals) == 0x100 ? 1 : -1];
+typedef char scenario_globals_size_assert[HALO_LAYOUT_ASSERT_32(sizeof(struct scenario_globals) == 0x100)];
 
 /* ---------- prototypes/SCENARIO.C */
 

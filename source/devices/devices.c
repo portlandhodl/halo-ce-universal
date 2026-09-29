@@ -156,30 +156,18 @@ struct animation_graph_device_animations
 	struct tag_block animations;
 };
 
-typedef char device_group_datum_size_assert[
-	sizeof(struct device_group_datum) == 0x8 ? 1 : -1];
-typedef char device_group_datum_actual_value_offset_assert[
-	offsetof(struct device_group_datum, actual_value) == 0x4 ? 1 : -1];
-typedef char scenario_device_group_size_assert[
-	sizeof(struct scenario_device_group) == 0x34 ? 1 : -1];
-typedef char scenario_device_group_initial_value_offset_assert[
-	offsetof(struct scenario_device_group, initial_value) == 0x20 ? 1 : -1];
-typedef char scenario_device_group_flags_offset_assert[
-	offsetof(struct scenario_device_group, flags) == 0x24 ? 1 : -1];
-typedef char scenario_device_groups_offset_assert[
-	offsetof(struct scenario, device_groups) == 0x288 ? 1 : -1];
-typedef char animation_graph_device_animations_size_assert[
-	sizeof(struct animation_graph_device_animations) == 0x60 ? 1 : -1];
-typedef char animation_graph_device_animations_indices_offset_assert[
-	offsetof(struct animation_graph_device_animations, animations) == 0x54 ? 1 : -1];
-typedef char animation_graph_device_animations_offset_assert[
-	offsetof(struct animation_graph, device_animations) == 0x30 ? 1 : -1];
-typedef char animation_graph_animations_offset_assert[
-	offsetof(struct animation_graph, animations) == 0x74 ? 1 : -1];
-typedef char device_animation_size_assert[
-	sizeof(struct animation) == 0xB4 ? 1 : -1];
-typedef char device_animation_frame_count_offset_assert[
-	offsetof(struct animation, frame_count) == 0x22 ? 1 : -1];
+typedef char device_group_datum_size_assert[HALO_LAYOUT_ASSERT_32(sizeof(struct device_group_datum) == 0x8)];
+typedef char device_group_datum_actual_value_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct device_group_datum, actual_value) == 0x4)];
+typedef char scenario_device_group_size_assert[HALO_LAYOUT_ASSERT_32(sizeof(struct scenario_device_group) == 0x34)];
+typedef char scenario_device_group_initial_value_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct scenario_device_group, initial_value) == 0x20)];
+typedef char scenario_device_group_flags_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct scenario_device_group, flags) == 0x24)];
+typedef char scenario_device_groups_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct scenario, device_groups) == 0x288)];
+typedef char animation_graph_device_animations_size_assert[HALO_LAYOUT_ASSERT_32(sizeof(struct animation_graph_device_animations) == 0x60)];
+typedef char animation_graph_device_animations_indices_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct animation_graph_device_animations, animations) == 0x54)];
+typedef char animation_graph_device_animations_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct animation_graph, device_animations) == 0x30)];
+typedef char animation_graph_animations_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct animation_graph, animations) == 0x74)];
+typedef char device_animation_size_assert[HALO_LAYOUT_ASSERT_32(sizeof(struct animation) == 0xB4)];
+typedef char device_animation_frame_count_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct animation, frame_count) == 0x22)];
 
 /* ---------- prototypes */
 

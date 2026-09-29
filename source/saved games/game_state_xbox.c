@@ -133,14 +133,10 @@ struct xbox_game_state_globals_prefix
 	HANDLE handle;
 };
 
-typedef char verify_xbox_game_state_buffer_offset[
-	offsetof(struct xbox_game_state_globals_prefix, buffer) == 0x4 ? 1 : -1];
-typedef char verify_xbox_game_state_file_open_offset[
-	offsetof(struct xbox_game_state_globals_prefix, file_open) == 0xC ? 1 : -1];
-typedef char verify_xbox_game_state_handle_offset[
-	offsetof(struct xbox_game_state_globals_prefix, handle) == 0x10 ? 1 : -1];
-typedef char verify_xbox_game_state_globals_prefix_size[
-	sizeof(struct xbox_game_state_globals_prefix) == 0x14 ? 1 : -1];
+typedef char verify_xbox_game_state_buffer_offset[HALO_LAYOUT_ASSERT_32(offsetof(struct xbox_game_state_globals_prefix, buffer) == 0x4)];
+typedef char verify_xbox_game_state_file_open_offset[HALO_LAYOUT_ASSERT_32(offsetof(struct xbox_game_state_globals_prefix, file_open) == 0xC)];
+typedef char verify_xbox_game_state_handle_offset[HALO_LAYOUT_ASSERT_32(offsetof(struct xbox_game_state_globals_prefix, handle) == 0x10)];
+typedef char verify_xbox_game_state_globals_prefix_size[HALO_LAYOUT_ASSERT_32(sizeof(struct xbox_game_state_globals_prefix) == 0x14)];
 
 /* ---------- prototypes */
 

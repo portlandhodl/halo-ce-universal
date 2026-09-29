@@ -234,16 +234,12 @@ struct oddball_globals
 
 /* January's layout; the port's score arrays are larger */
 #ifndef HALO_LINUX
-typedef char verify_oddball_globals_size[
-	sizeof(struct oddball_globals) == 0x104 ? 1 : -1];
-typedef char verify_oddball_globals_ball_spawn_timer_offset[
-	offsetof(struct oddball_globals, ball_spawn_timer) == 0x84 ? 1 : -1];
-typedef char verify_oddball_globals_current_ball_owner_offset[
-	offsetof(struct oddball_globals, current_ball_owner) == 0xC4 ? 1 : -1];
+typedef char verify_oddball_globals_size[HALO_LAYOUT_ASSERT_32(sizeof(struct oddball_globals) == 0x104)];
+typedef char verify_oddball_globals_ball_spawn_timer_offset[HALO_LAYOUT_ASSERT_32(offsetof(struct oddball_globals, ball_spawn_timer) == 0x84)];
+typedef char verify_oddball_globals_current_ball_owner_offset[HALO_LAYOUT_ASSERT_32(offsetof(struct oddball_globals, current_ball_owner) == 0xC4)];
 #endif
 
-typedef char verify_scenario_netgame_flag_size[
-	sizeof(struct scenario_netgame_flag) == 0x94 ? 1 : -1];
+typedef char verify_scenario_netgame_flag_size[HALO_LAYOUT_ASSERT_32(sizeof(struct scenario_netgame_flag) == 0x94)];
 
 /* ---------- prototypes */
 

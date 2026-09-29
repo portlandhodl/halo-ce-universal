@@ -30,8 +30,7 @@ struct game_input_preferences
 
 struct game_input_state;
 
-typedef char verify_game_input_preferences_size[
-	sizeof(struct game_input_preferences) == 0x18 ? 1 : -1];
+typedef char verify_game_input_preferences_size[HALO_LAYOUT_ASSERT_32(sizeof(struct game_input_preferences) == 0x18)];
 
 /* ---------- prototypes/INPUT_ABSTRACTION.C */
 

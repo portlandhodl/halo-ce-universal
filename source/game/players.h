@@ -60,12 +60,9 @@ struct player_action
 	short pad;
 };
 
-typedef char player_action_size_assert[
-	sizeof(struct player_action) == 0x20 ? 1 : -1];
-typedef char player_action_desired_facing_yaw_offset_assert[
-	offsetof(struct player_action, desired_facing.yaw) == 0x4 ? 1 : -1];
-typedef char player_action_desired_facing_pitch_offset_assert[
-	offsetof(struct player_action, desired_facing.pitch) == 0x8 ? 1 : -1];
+typedef char player_action_size_assert[HALO_LAYOUT_ASSERT_32(sizeof(struct player_action) == 0x20)];
+typedef char player_action_desired_facing_yaw_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct player_action, desired_facing.yaw) == 0x4)];
+typedef char player_action_desired_facing_pitch_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct player_action, desired_facing.pitch) == 0x8)];
 
 struct network_player
 {
@@ -144,37 +141,22 @@ struct players_globals
 	unsigned long combined_pvs_local[16];
 };
 
-typedef char players_globals_local_player_count_offset_assert[
-	offsetof(struct players_globals, local_player_count) == 0x24 ? 1 : -1];
-typedef char players_globals_respawn_failure_offset_assert[
-	offsetof(struct players_globals, respawn_failure) == 0x2C ? 1 : -1];
-typedef char players_globals_all_dead_offset_assert[
-	offsetof(struct players_globals, all_dead) == 0x28 ? 1 : -1];
-typedef char players_globals_input_disabled_offset_assert[
-	offsetof(struct players_globals, input_disabled) == 0x29 ? 1 : -1];
-typedef char players_globals_combined_pvs_offset_assert[
-	offsetof(struct players_globals, combined_pvs) == 0x30 ? 1 : -1];
-typedef char players_globals_combined_pvs_local_offset_assert[
-	offsetof(struct players_globals, combined_pvs_local) == 0x70 ? 1 : -1];
-typedef char players_globals_size_assert[
-	sizeof(struct players_globals) == 0xB0 ? 1 : -1];
+typedef char players_globals_local_player_count_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct players_globals, local_player_count) == 0x24)];
+typedef char players_globals_respawn_failure_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct players_globals, respawn_failure) == 0x2C)];
+typedef char players_globals_all_dead_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct players_globals, all_dead) == 0x28)];
+typedef char players_globals_input_disabled_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct players_globals, input_disabled) == 0x29)];
+typedef char players_globals_combined_pvs_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct players_globals, combined_pvs) == 0x30)];
+typedef char players_globals_combined_pvs_local_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct players_globals, combined_pvs_local) == 0x70)];
+typedef char players_globals_size_assert[HALO_LAYOUT_ASSERT_32(sizeof(struct players_globals) == 0xB0)];
 
-typedef char player_datum_team_index_offset_assert[
-	offsetof(struct player_datum, team_index) == 0x20 ? 1 : -1];
-typedef char player_datum_target_hold_time_offset_assert[
-	offsetof(struct player_datum, target_hold_time) == 0x80 ? 1 : -1];
-typedef char player_datum_statistics_offset_assert[
-	offsetof(struct player_datum, statistics) == 0x8C ? 1 : -1];
-typedef char player_datum_telefrag_timeout_offset_assert[
-	offsetof(struct player_datum, telefrag_timeout) == 0xC8 ? 1 : -1];
-typedef char player_datum_quit_out_of_game_time_offset_assert[
-	offsetof(struct player_datum, quit_out_of_game_time) == 0xCC ? 1 : -1];
-typedef char player_datum_is_blocking_teleporter_offset_assert[
-	offsetof(struct player_datum, is_blocking_teleporter) == 0xD0 ? 1 : -1];
-typedef char player_datum_quit_out_of_game_offset_assert[
-	offsetof(struct player_datum, quit_out_of_game) == 0xD1 ? 1 : -1];
-typedef char player_datum_size_assert[
-	sizeof(struct player_datum) == 0xD4 ? 1 : -1];
+typedef char player_datum_team_index_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct player_datum, team_index) == 0x20)];
+typedef char player_datum_target_hold_time_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct player_datum, target_hold_time) == 0x80)];
+typedef char player_datum_statistics_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct player_datum, statistics) == 0x8C)];
+typedef char player_datum_telefrag_timeout_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct player_datum, telefrag_timeout) == 0xC8)];
+typedef char player_datum_quit_out_of_game_time_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct player_datum, quit_out_of_game_time) == 0xCC)];
+typedef char player_datum_is_blocking_teleporter_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct player_datum, is_blocking_teleporter) == 0xD0)];
+typedef char player_datum_quit_out_of_game_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct player_datum, quit_out_of_game) == 0xD1)];
+typedef char player_datum_size_assert[HALO_LAYOUT_ASSERT_32(sizeof(struct player_datum) == 0xD4)];
 
 /* ---------- prototypes/PLAYER_CONTROL.C */
 

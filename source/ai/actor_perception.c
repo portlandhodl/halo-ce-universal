@@ -859,222 +859,116 @@ struct actor_perception_refresh_locals
  * immediately after it, so specific_threats[NUMBER_OF_ACTOR_THREAT_TYPES] is
  * cumulative_threats[_actor_threat_none] and nothing else. If either ever stops
  * holding, that read stops being harmless and this file stops compiling. */
-typedef char actor_perception_specific_threats_size_assert[
-	sizeof(((struct actor_situation *)0)->specific_threats) ==
-		NUMBER_OF_ACTOR_THREAT_TYPES ? 1 : -1];
-typedef char actor_perception_threat_arrays_adjacent_assert[
-	offsetof(struct actor_situation, cumulative_threats) ==
+typedef char actor_perception_specific_threats_size_assert[HALO_LAYOUT_ASSERT_32(sizeof(((struct actor_situation *)0)->specific_threats) ==
+		NUMBER_OF_ACTOR_THREAT_TYPES)];
+typedef char actor_perception_threat_arrays_adjacent_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct actor_situation, cumulative_threats) ==
 		offsetof(struct actor_situation, specific_threats) +
-			NUMBER_OF_ACTOR_THREAT_TYPES ? 1 : -1];
+			NUMBER_OF_ACTOR_THREAT_TYPES)];
 
-typedef char actor_perception_actor_view_target_prop_index_offset_assert[
-	offsetof(struct actor_perception_actor_view, target_prop_index) == 0x270 ? 1 : -1];
-typedef char actor_perception_actor_view_team_offset_assert[
-	offsetof(struct actor_perception_actor_view, team) == 0x3E ? 1 : -1];
-typedef char actor_perception_actor_view_definition_index_offset_assert[
-	offsetof(struct actor_perception_actor_view, definition_index) == 0x58 ? 1 : -1];
-typedef char actor_perception_actor_view_preferred_prop_offset_assert[
-	offsetof(struct actor_perception_actor_view, preferred_target_prop_index) == 0x54 ? 1 : -1];
-typedef char actor_perception_actor_view_variant_definition_offset_assert[
-	offsetof(struct actor_perception_actor_view, variant_definition_index) == 0x5C ? 1 : -1];
-typedef char actor_perception_actor_view_underwater_offset_assert[
-	offsetof(struct actor_perception_actor_view, underwater) == 0x15D ? 1 : -1];
-typedef char actor_perception_actor_view_berserk_offset_assert[
-	offsetof(struct actor_perception_actor_view, berserk) == 0x378 ? 1 : -1];
-typedef char actor_perception_actor_view_orphan_inspection_offset_assert[
-	offsetof(struct actor_perception_actor_view, long_orphan_inspection) == 0x162 ? 1 : -1];
-typedef char actor_perception_actor_view_sighted_friend_offset_assert[
-	offsetof(struct actor_perception_actor_view, sighted_friendly_player) == 0x377 ? 1 : -1];
-typedef char actor_perception_actor_view_danger_zone_offset_assert[
-	offsetof(struct actor_perception_actor_view, danger_zone) == 0x280 ? 1 : -1];
-typedef char actor_perception_actor_view_active_offset_assert[
-	offsetof(struct actor_perception_actor_view, active) == 0x8 ? 1 : -1];
-typedef char actor_perception_actor_view_dormant_offset_assert[
-	offsetof(struct actor_perception_actor_view, dormant) == 0x13 ? 1 : -1];
-typedef char actor_perception_actor_view_encounter_index_offset_assert[
-	offsetof(struct actor_perception_actor_view, encounter_index) == 0x34 ? 1 : -1];
-typedef char actor_perception_actor_view_swarm_unit_index_offset_assert[
-	offsetof(struct actor_perception_actor_view, swarm_unit_index) == 0x24 ? 1 : -1];
-typedef char actor_perception_actor_view_swarm_cache_index_offset_assert[
-	offsetof(struct actor_perception_actor_view, swarm_cache_index) == 0x28 ? 1 : -1];
-typedef char actor_perception_actor_view_body_cluster_index_offset_assert[
-	offsetof(struct actor_perception_actor_view, body_cluster_index) == 0x148 ? 1 : -1];
-typedef char actor_perception_actor_view_vehicle_index_offset_assert[
-	offsetof(struct actor_perception_actor_view, vehicle_index) == 0x158 ? 1 : -1];
-typedef char actor_perception_actor_view_corpse_interest_inhibited_offset_assert[
-	offsetof(struct actor_perception_actor_view, corpse_interest_inhibited) == 0x1CC ? 1 : -1];
-typedef char actor_perception_actor_view_corpse_ignore_time_offset_assert[
-	offsetof(struct actor_perception_actor_view, corpse_ignore_time) == 0x3A0 ? 1 : -1];
-typedef char actor_perception_prop_view_unopposable_enemy_offset_assert[
-	offsetof(struct actor_perception_prop_view, unopposable_enemy) == 0xA4 ? 1 : -1];
-typedef char actor_perception_actor_view_active_threat_count_offset_assert[
-	offsetof(struct actor_perception_actor_view, active_threat_count) == 0x308 ? 1 : -1];
-typedef char actor_perception_actor_view_target_combat_status_offset_assert[
-	offsetof(struct actor_perception_actor_view, target_combat_status) == 0x72 ? 1 : -1];
-typedef char actor_perception_actor_view_pending_combat_status_offset_assert[
-	offsetof(struct actor_perception_actor_view, pending_combat_status) == 0x34A ? 1 : -1];
-typedef char actor_perception_actor_view_nearby_fighting_friend_count_offset_assert[
-	offsetof(struct actor_perception_actor_view, nearby_fighting_friend_count) == 0x1EC ? 1 : -1];
-typedef char actor_perception_prop_view_in_combat_offset_assert[
-	offsetof(struct actor_perception_prop_view, in_combat) == 0x12C ? 1 : -1];
-typedef char actor_perception_prop_swarm_offset_assert[
-	offsetof(struct prop_datum, swarm) == 0x14 ? 1 : -1];
-typedef char actor_perception_prop_unit_index_offset_assert[
-	offsetof(struct prop_datum, unit_index) == 0x18 ? 1 : -1];
-typedef char actor_perception_prop_actor_index_offset_assert[
-	offsetof(struct prop_datum, actor_index) == 0x1C ? 1 : -1];
-typedef char actor_perception_prop_enemy_offset_assert[
-	offsetof(struct prop_datum, enemy) == 0x60 ? 1 : -1];
-typedef char actor_perception_prop_body_position_offset_assert[
-	offsetof(struct prop_datum, body_position) == 0xBC ? 1 : -1];
-typedef char actor_perception_prop_dead_offset_assert[
-	offsetof(struct prop_datum, dead) == 0x127 ? 1 : -1];
-typedef char actor_perception_prop_view_vehicle_gunner_offset_assert[
-	offsetof(struct actor_perception_prop_view, vehicle_gunner) == 0x135 ? 1 : -1];
-typedef char actor_perception_prop_view_player_offset_assert[
-	offsetof(struct actor_perception_prop_view, player) == 0x12E ? 1 : -1];
-typedef char actor_perception_prop_view_perception_result_offset_assert[
-	offsetof(struct actor_perception_prop_view, perception_result) == 0x30 ? 1 : -1];
-typedef char actor_perception_prop_view_dangerous_vehicle_driver_offset_assert[
-	offsetof(struct actor_perception_prop_view, dangerous_vehicle_driver) == 0x136 ? 1 : -1];
-typedef char actor_perception_status_unit_flags_offset_assert[
-	offsetof(struct actor_perception_status_unit_view, status_flags) == 0x1B4 ? 1 : -1];
-typedef char actor_perception_target_unit_active_region_offset_assert[
-	offsetof(struct actor_perception_target_unit_view, active_region_flags) == 0xB6 ? 1 : -1];
-typedef char actor_target_weight_definition_melee_velocity_offset_assert[
-	offsetof(struct actor_definition, berserk.melee_leap_velocity) == 0x38C ? 1 : -1];
-typedef char actor_target_weight_variant_melee_range_offset_assert[
-	offsetof(struct actor_variant_definition, ranged_combat.melee_range) == 0x160 ? 1 : -1];
-typedef char actor_target_weight_variant_berserk_melee_range_offset_assert[
-	offsetof(struct actor_variant_definition, ranged_combat.berserk_melee_range) == 0x170 ? 1 : -1];
-typedef char actor_target_weight_firing_maximum_range_offset_assert[
-	offsetof(struct actor_variant_definition, ranged_combat.maximum_firing_range) == 0x74 ? 1 : -1];
-typedef char actor_target_weight_firing_combat_range_offset_assert[
-	offsetof(struct actor_variant_definition, ranged_combat.combat_range_upper_bound) == 0xA0 ? 1 : -1];
-typedef char actor_target_weight_weapon_minimum_range_offset_assert[
-	offsetof(struct actor_target_weight_weapon_definition_view, minimum_target_range) == 0x40C ? 1 : -1];
-typedef char actor_perception_preferred_target_prop_index_offset_assert[
-	offsetof(struct actor_datum, meta.interesting_orphan_index) == 0x54 ? 1 : -1];
-typedef char actor_perception_audibility_combat_status_offset_assert[
-	offsetof(struct actor_datum, state.mode) == 0x6A ? 1 : -1];
-typedef char actor_perception_target_weight_combat_status_offset_assert[
-	offsetof(struct actor_datum, state.combat_status) == 0x6E ? 1 : -1];
-typedef char actor_emotion_actor_unit_offset_assert[
-	offsetof(struct actor_datum, meta.unit_index) == 0x18 ? 1 : -1];
-typedef char actor_emotion_actor_definition_offset_assert[
-	offsetof(struct actor_datum, meta.definition_index) == 0x58 ? 1 : -1];
-typedef char actor_emotion_actor_combat_status_offset_assert[
-	offsetof(struct actor_datum, state.combat_status) == 0x6E ? 1 : -1];
-typedef char actor_emotion_actor_body_position_offset_assert[
-	offsetof(struct actor_datum, input.position.body_position) == 0x12C ? 1 : -1];
-typedef char actor_emotion_actor_body_vitality_offset_assert[
-	offsetof(struct actor_datum, input.body_vitality) == 0x1B8 ? 1 : -1];
-typedef char actor_emotion_actor_external_orders_offset_assert[
-	offsetof(struct actor_datum, external_orders) == 0x1C8 ? 1 : -1];
-typedef char actor_emotion_actor_target_offset_assert[
-	offsetof(struct actor_datum, target.target_type) == 0x268 ? 1 : -1];
-typedef char actor_emotion_actor_emotions_offset_assert[
-	offsetof(struct actor_datum, emotions) == 0x350 ? 1 : -1];
-typedef char actor_emotion_actor_firing_position_offset_assert[
-	offsetof(struct actor_datum, firing_positions.current_position_index) == 0x3B8 ? 1 : -1];
-typedef char actor_emotion_actor_control_moving_offset_assert[
-	offsetof(struct actor_datum, control.moving) == 0x504 ? 1 : -1];
-typedef char actor_emotion_actor_control_vector_offset_assert[
-	offsetof(struct actor_datum, control.moving_towards_vector) == 0x518 ? 1 : -1];
-typedef char actor_emotion_definition_crouch_type_offset_assert[
-	offsetof(struct actor_definition, defensive.defensive_crouch_type) == 0x2F8 ? 1 : -1];
-typedef char actor_emotion_definition_attacking_threshold_offset_assert[
-	offsetof(struct actor_definition, defensive.defensive_threshold_attacking) == 0x2FC ? 1 : -1];
-typedef char actor_emotion_definition_defending_threshold_offset_assert[
-	offsetof(struct actor_definition, defensive.defensive_threshold_defending) == 0x300 ? 1 : -1];
-typedef char actor_emotion_definition_minimum_stand_offset_assert[
-	offsetof(struct actor_definition, defensive.defensive_crouch_min_stand_time) == 0x304 ? 1 : -1];
-typedef char actor_emotion_definition_minimum_crouch_offset_assert[
-	offsetof(struct actor_definition, defensive.defensive_crouch_min_crouch_time) == 0x308 ? 1 : -1];
-typedef char actor_perception_ai_debug_ignore_players_offset_assert[
-	offsetof(struct actor_perception_ai_debug_state_view, perception_ignore_player_props) == 6 ? 1 : -1];
-typedef char actor_perception_ai_debug_blind_players_offset_assert[
-	offsetof(struct actor_perception_ai_debug_state_view, perception_blind_player_props) == 7 ? 1 : -1];
-typedef char actor_perception_ai_debug_blind_all_offset_assert[
-	offsetof(struct actor_perception_ai_debug_state_view, perception_blind_all_props) == 11 ? 1 : -1];
-typedef char actor_perception_ai_debug_deaf_all_offset_assert[
-	offsetof(struct actor_perception_ai_debug_state_view, perception_deaf_all_props) == 12 ? 1 : -1];
-typedef char actor_perception_ai_debug_trace_offset_assert[
-	offsetof(struct actor_perception_ai_debug_state_view, perception_trace_player_awareness) == 0xA1 ? 1 : -1];
-typedef char actor_perception_debug_awareness_speed_offset_assert[
-	offsetof(struct actor_perception_debug_info_view, perception_awareness_speed) == 0x6578 ? 1 : -1];
-typedef char actor_perception_projectile_attachment_flags_offset_assert[
-	offsetof(struct actor_perception_projectile_datum_view, attachment_flags) == 0x1DC ? 1 : -1];
-typedef char actor_perception_source_unit_sound_offset_assert[
-	offsetof(struct unit_definition, unit.constant_sound) == 0x182 ? 1 : -1];
-typedef char actor_perception_source_actor_target_offset_assert[
-	offsetof(struct actor_datum, target.target_type) == 0x268 ? 1 : -1];
-typedef char actor_perception_source_actor_shooting_offset_assert[
-	offsetof(struct actor_datum, orders.combat.shoot_at_target) == 0x454 ? 1 : -1];
-typedef char actor_perception_actor_weapon_range_offset_assert[
-	offsetof(struct actor_datum, control.weapon_maximum_range) == 0x608 ? 1 : -1];
-typedef char actor_perception_definition_melee_range_offset_assert[
-	offsetof(struct actor_definition, berserk.melee_attack_range) == 0x37C ? 1 : -1];
-typedef char actor_perception_vehicle_definition_radius_offset_assert[
-	offsetof(struct actor_perception_vehicle_definition_view, bounding_radius) == 4 ? 1 : -1];
-typedef char actor_perception_vehicle_definition_danger_zone_offset_assert[
-	offsetof(struct actor_perception_vehicle_definition_view, danger_zone_flags) == 0x2F0 ? 1 : -1];
-typedef char actor_perception_responsible_unit_team_offset_assert[
-	offsetof(struct actor_perception_responsible_unit_view, team) == 0x68 ? 1 : -1];
-typedef char actor_perception_encounter_view_blind_offset_assert[
-	offsetof(struct actor_perception_encounter_view, blind) == 0x42 ? 1 : -1];
-typedef char actor_perception_encounter_view_stand_down_offset_assert[
-	offsetof(struct actor_perception_encounter_view, stand_down) == 0x44 ? 1 : -1];
-typedef char actor_perception_encounter_view_enemy_target_offset_assert[
-	offsetof(struct actor_perception_encounter_view, enemy_target) == 0x45 ? 1 : -1];
-typedef char actor_perception_encounter_view_postcombat_timer_offset_assert[
-	offsetof(struct actor_perception_encounter_view, postcombat_timer) == 0x50 ? 1 : -1];
-typedef char actor_perception_encounter_view_corpse_ignore_time_offset_assert[
-	offsetof(struct actor_perception_encounter_view, corpse_ignore_time) == 0x58 ? 1 : -1];
-typedef char actor_visibility_variant_modified_vision_range_offset_assert[
-	offsetof(struct actor_variant_definition, ranged_combat.modified_vision_range) == 0x150 ? 1 : -1];
-typedef char actor_visibility_debug_info_size_assert[
-	sizeof(struct actor_debug_info) == 0x657C ? 1 : -1];
-typedef char actor_visibility_debug_info_last_time_offset_assert[
-	offsetof(struct actor_debug_info, vision_last_time) == 0x656C ? 1 : -1];
-typedef char actor_orphan_prop_view_related_prop_index_offset_assert[
-	offsetof(struct actor_orphan_prop_view, related_prop_index) == 0xC ? 1 : -1];
-typedef char actor_orphan_prop_view_orphan_inspection_ticks_offset_assert[
-	offsetof(struct actor_orphan_prop_view, orphan_inspection_ticks) == 0x3C ? 1 : -1];
-typedef char actor_orphan_prop_view_target_weight_offset_assert[
-	offsetof(struct actor_orphan_prop_view, target_weight) == 0x50 ? 1 : -1];
-typedef char actor_orphan_prop_view_unopposable_enemy_offset_assert[
-	offsetof(struct actor_orphan_prop_view, unopposable_enemy) == 0xA4 ? 1 : -1];
-typedef char actor_orphan_prop_view_definite_source_offset_assert[
-	offsetof(struct actor_orphan_prop_view, definite_knowledge_source_actor) == 0xB4 ? 1 : -1];
-typedef char actor_orphan_prop_view_definitely_located_offset_assert[
-	offsetof(struct actor_orphan_prop_view, definitely_located) == 0xB8 ? 1 : -1];
-typedef char actor_danger_zone_view_size_assert[
-	sizeof(struct actor_danger_zone_view) == 0x6C ? 1 : -1];
-typedef char actor_danger_zone_view_object_index_offset_assert[
-	offsetof(struct actor_danger_zone_view, object_index) == 0xC ? 1 : -1];
-typedef char actor_danger_zone_view_danger_radius_offset_assert[
-	offsetof(struct actor_danger_zone_view, danger_radius) == 0x14 ? 1 : -1];
-typedef char actor_danger_zone_view_initial_position_offset_assert[
-	offsetof(struct actor_danger_zone_view, initial_position) == 0x18 ? 1 : -1];
-typedef char actor_danger_zone_view_initial_velocity_offset_assert[
-	offsetof(struct actor_danger_zone_view, initial_velocity) == 0x24 ? 1 : -1];
-typedef char actor_danger_zone_view_position_offset_assert[
-	offsetof(struct actor_danger_zone_view, position) == 0x30 ? 1 : -1];
-typedef char actor_danger_zone_view_projected_position_offset_assert[
-	offsetof(struct actor_danger_zone_view, predict_danger_position) == 0x48 ? 1 : -1];
-typedef char actor_danger_zone_view_distance_offset_assert[
-	offsetof(struct actor_danger_zone_view, current_distance_from_actor) == 0x54 ? 1 : -1];
-typedef char actor_danger_zone_view_midpoint_offset_assert[
-	offsetof(struct actor_danger_zone_view, bounding_sphere_center) == 0x5C ? 1 : -1];
-typedef char actor_danger_zone_view_impact_ticks_offset_assert[
-	offsetof(struct actor_danger_zone_view, predicted_impact_ticks) == 0x68 ? 1 : -1];
-typedef char actor_perception_refresh_entry_size_assert[
-	sizeof(struct actor_perception_refresh_entry) == 0xC ? 1 : -1];
-typedef char actor_perception_refresh_list_entries_offset_assert[
-	offsetof(struct actor_perception_refresh_list, entries) == 4 ? 1 : -1];
-typedef char actor_perception_refresh_list_size_assert[
-	sizeof(struct actor_perception_refresh_list) == 0x604 ? 1 : -1];
+typedef char actor_perception_actor_view_target_prop_index_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct actor_perception_actor_view, target_prop_index) == 0x270)];
+typedef char actor_perception_actor_view_team_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct actor_perception_actor_view, team) == 0x3E)];
+typedef char actor_perception_actor_view_definition_index_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct actor_perception_actor_view, definition_index) == 0x58)];
+typedef char actor_perception_actor_view_preferred_prop_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct actor_perception_actor_view, preferred_target_prop_index) == 0x54)];
+typedef char actor_perception_actor_view_variant_definition_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct actor_perception_actor_view, variant_definition_index) == 0x5C)];
+typedef char actor_perception_actor_view_underwater_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct actor_perception_actor_view, underwater) == 0x15D)];
+typedef char actor_perception_actor_view_berserk_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct actor_perception_actor_view, berserk) == 0x378)];
+typedef char actor_perception_actor_view_orphan_inspection_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct actor_perception_actor_view, long_orphan_inspection) == 0x162)];
+typedef char actor_perception_actor_view_sighted_friend_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct actor_perception_actor_view, sighted_friendly_player) == 0x377)];
+typedef char actor_perception_actor_view_danger_zone_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct actor_perception_actor_view, danger_zone) == 0x280)];
+typedef char actor_perception_actor_view_active_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct actor_perception_actor_view, active) == 0x8)];
+typedef char actor_perception_actor_view_dormant_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct actor_perception_actor_view, dormant) == 0x13)];
+typedef char actor_perception_actor_view_encounter_index_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct actor_perception_actor_view, encounter_index) == 0x34)];
+typedef char actor_perception_actor_view_swarm_unit_index_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct actor_perception_actor_view, swarm_unit_index) == 0x24)];
+typedef char actor_perception_actor_view_swarm_cache_index_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct actor_perception_actor_view, swarm_cache_index) == 0x28)];
+typedef char actor_perception_actor_view_body_cluster_index_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct actor_perception_actor_view, body_cluster_index) == 0x148)];
+typedef char actor_perception_actor_view_vehicle_index_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct actor_perception_actor_view, vehicle_index) == 0x158)];
+typedef char actor_perception_actor_view_corpse_interest_inhibited_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct actor_perception_actor_view, corpse_interest_inhibited) == 0x1CC)];
+typedef char actor_perception_actor_view_corpse_ignore_time_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct actor_perception_actor_view, corpse_ignore_time) == 0x3A0)];
+typedef char actor_perception_prop_view_unopposable_enemy_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct actor_perception_prop_view, unopposable_enemy) == 0xA4)];
+typedef char actor_perception_actor_view_active_threat_count_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct actor_perception_actor_view, active_threat_count) == 0x308)];
+typedef char actor_perception_actor_view_target_combat_status_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct actor_perception_actor_view, target_combat_status) == 0x72)];
+typedef char actor_perception_actor_view_pending_combat_status_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct actor_perception_actor_view, pending_combat_status) == 0x34A)];
+typedef char actor_perception_actor_view_nearby_fighting_friend_count_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct actor_perception_actor_view, nearby_fighting_friend_count) == 0x1EC)];
+typedef char actor_perception_prop_view_in_combat_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct actor_perception_prop_view, in_combat) == 0x12C)];
+typedef char actor_perception_prop_swarm_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct prop_datum, swarm) == 0x14)];
+typedef char actor_perception_prop_unit_index_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct prop_datum, unit_index) == 0x18)];
+typedef char actor_perception_prop_actor_index_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct prop_datum, actor_index) == 0x1C)];
+typedef char actor_perception_prop_enemy_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct prop_datum, enemy) == 0x60)];
+typedef char actor_perception_prop_body_position_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct prop_datum, body_position) == 0xBC)];
+typedef char actor_perception_prop_dead_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct prop_datum, dead) == 0x127)];
+typedef char actor_perception_prop_view_vehicle_gunner_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct actor_perception_prop_view, vehicle_gunner) == 0x135)];
+typedef char actor_perception_prop_view_player_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct actor_perception_prop_view, player) == 0x12E)];
+typedef char actor_perception_prop_view_perception_result_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct actor_perception_prop_view, perception_result) == 0x30)];
+typedef char actor_perception_prop_view_dangerous_vehicle_driver_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct actor_perception_prop_view, dangerous_vehicle_driver) == 0x136)];
+typedef char actor_perception_status_unit_flags_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct actor_perception_status_unit_view, status_flags) == 0x1B4)];
+typedef char actor_perception_target_unit_active_region_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct actor_perception_target_unit_view, active_region_flags) == 0xB6)];
+typedef char actor_target_weight_definition_melee_velocity_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct actor_definition, berserk.melee_leap_velocity) == 0x38C)];
+typedef char actor_target_weight_variant_melee_range_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct actor_variant_definition, ranged_combat.melee_range) == 0x160)];
+typedef char actor_target_weight_variant_berserk_melee_range_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct actor_variant_definition, ranged_combat.berserk_melee_range) == 0x170)];
+typedef char actor_target_weight_firing_maximum_range_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct actor_variant_definition, ranged_combat.maximum_firing_range) == 0x74)];
+typedef char actor_target_weight_firing_combat_range_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct actor_variant_definition, ranged_combat.combat_range_upper_bound) == 0xA0)];
+typedef char actor_target_weight_weapon_minimum_range_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct actor_target_weight_weapon_definition_view, minimum_target_range) == 0x40C)];
+typedef char actor_perception_preferred_target_prop_index_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct actor_datum, meta.interesting_orphan_index) == 0x54)];
+typedef char actor_perception_audibility_combat_status_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct actor_datum, state.mode) == 0x6A)];
+typedef char actor_perception_target_weight_combat_status_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct actor_datum, state.combat_status) == 0x6E)];
+typedef char actor_emotion_actor_unit_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct actor_datum, meta.unit_index) == 0x18)];
+typedef char actor_emotion_actor_definition_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct actor_datum, meta.definition_index) == 0x58)];
+typedef char actor_emotion_actor_combat_status_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct actor_datum, state.combat_status) == 0x6E)];
+typedef char actor_emotion_actor_body_position_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct actor_datum, input.position.body_position) == 0x12C)];
+typedef char actor_emotion_actor_body_vitality_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct actor_datum, input.body_vitality) == 0x1B8)];
+typedef char actor_emotion_actor_external_orders_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct actor_datum, external_orders) == 0x1C8)];
+typedef char actor_emotion_actor_target_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct actor_datum, target.target_type) == 0x268)];
+typedef char actor_emotion_actor_emotions_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct actor_datum, emotions) == 0x350)];
+typedef char actor_emotion_actor_firing_position_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct actor_datum, firing_positions.current_position_index) == 0x3B8)];
+typedef char actor_emotion_actor_control_moving_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct actor_datum, control.moving) == 0x504)];
+typedef char actor_emotion_actor_control_vector_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct actor_datum, control.moving_towards_vector) == 0x518)];
+typedef char actor_emotion_definition_crouch_type_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct actor_definition, defensive.defensive_crouch_type) == 0x2F8)];
+typedef char actor_emotion_definition_attacking_threshold_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct actor_definition, defensive.defensive_threshold_attacking) == 0x2FC)];
+typedef char actor_emotion_definition_defending_threshold_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct actor_definition, defensive.defensive_threshold_defending) == 0x300)];
+typedef char actor_emotion_definition_minimum_stand_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct actor_definition, defensive.defensive_crouch_min_stand_time) == 0x304)];
+typedef char actor_emotion_definition_minimum_crouch_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct actor_definition, defensive.defensive_crouch_min_crouch_time) == 0x308)];
+typedef char actor_perception_ai_debug_ignore_players_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct actor_perception_ai_debug_state_view, perception_ignore_player_props) == 6)];
+typedef char actor_perception_ai_debug_blind_players_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct actor_perception_ai_debug_state_view, perception_blind_player_props) == 7)];
+typedef char actor_perception_ai_debug_blind_all_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct actor_perception_ai_debug_state_view, perception_blind_all_props) == 11)];
+typedef char actor_perception_ai_debug_deaf_all_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct actor_perception_ai_debug_state_view, perception_deaf_all_props) == 12)];
+typedef char actor_perception_ai_debug_trace_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct actor_perception_ai_debug_state_view, perception_trace_player_awareness) == 0xA1)];
+typedef char actor_perception_debug_awareness_speed_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct actor_perception_debug_info_view, perception_awareness_speed) == 0x6578)];
+typedef char actor_perception_projectile_attachment_flags_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct actor_perception_projectile_datum_view, attachment_flags) == 0x1DC)];
+typedef char actor_perception_source_unit_sound_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct unit_definition, unit.constant_sound) == 0x182)];
+typedef char actor_perception_source_actor_target_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct actor_datum, target.target_type) == 0x268)];
+typedef char actor_perception_source_actor_shooting_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct actor_datum, orders.combat.shoot_at_target) == 0x454)];
+typedef char actor_perception_actor_weapon_range_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct actor_datum, control.weapon_maximum_range) == 0x608)];
+typedef char actor_perception_definition_melee_range_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct actor_definition, berserk.melee_attack_range) == 0x37C)];
+typedef char actor_perception_vehicle_definition_radius_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct actor_perception_vehicle_definition_view, bounding_radius) == 4)];
+typedef char actor_perception_vehicle_definition_danger_zone_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct actor_perception_vehicle_definition_view, danger_zone_flags) == 0x2F0)];
+typedef char actor_perception_responsible_unit_team_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct actor_perception_responsible_unit_view, team) == 0x68)];
+typedef char actor_perception_encounter_view_blind_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct actor_perception_encounter_view, blind) == 0x42)];
+typedef char actor_perception_encounter_view_stand_down_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct actor_perception_encounter_view, stand_down) == 0x44)];
+typedef char actor_perception_encounter_view_enemy_target_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct actor_perception_encounter_view, enemy_target) == 0x45)];
+typedef char actor_perception_encounter_view_postcombat_timer_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct actor_perception_encounter_view, postcombat_timer) == 0x50)];
+typedef char actor_perception_encounter_view_corpse_ignore_time_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct actor_perception_encounter_view, corpse_ignore_time) == 0x58)];
+typedef char actor_visibility_variant_modified_vision_range_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct actor_variant_definition, ranged_combat.modified_vision_range) == 0x150)];
+typedef char actor_visibility_debug_info_size_assert[HALO_LAYOUT_ASSERT_32(sizeof(struct actor_debug_info) == 0x657C)];
+typedef char actor_visibility_debug_info_last_time_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct actor_debug_info, vision_last_time) == 0x656C)];
+typedef char actor_orphan_prop_view_related_prop_index_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct actor_orphan_prop_view, related_prop_index) == 0xC)];
+typedef char actor_orphan_prop_view_orphan_inspection_ticks_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct actor_orphan_prop_view, orphan_inspection_ticks) == 0x3C)];
+typedef char actor_orphan_prop_view_target_weight_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct actor_orphan_prop_view, target_weight) == 0x50)];
+typedef char actor_orphan_prop_view_unopposable_enemy_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct actor_orphan_prop_view, unopposable_enemy) == 0xA4)];
+typedef char actor_orphan_prop_view_definite_source_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct actor_orphan_prop_view, definite_knowledge_source_actor) == 0xB4)];
+typedef char actor_orphan_prop_view_definitely_located_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct actor_orphan_prop_view, definitely_located) == 0xB8)];
+typedef char actor_danger_zone_view_size_assert[HALO_LAYOUT_ASSERT_32(sizeof(struct actor_danger_zone_view) == 0x6C)];
+typedef char actor_danger_zone_view_object_index_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct actor_danger_zone_view, object_index) == 0xC)];
+typedef char actor_danger_zone_view_danger_radius_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct actor_danger_zone_view, danger_radius) == 0x14)];
+typedef char actor_danger_zone_view_initial_position_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct actor_danger_zone_view, initial_position) == 0x18)];
+typedef char actor_danger_zone_view_initial_velocity_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct actor_danger_zone_view, initial_velocity) == 0x24)];
+typedef char actor_danger_zone_view_position_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct actor_danger_zone_view, position) == 0x30)];
+typedef char actor_danger_zone_view_projected_position_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct actor_danger_zone_view, predict_danger_position) == 0x48)];
+typedef char actor_danger_zone_view_distance_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct actor_danger_zone_view, current_distance_from_actor) == 0x54)];
+typedef char actor_danger_zone_view_midpoint_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct actor_danger_zone_view, bounding_sphere_center) == 0x5C)];
+typedef char actor_danger_zone_view_impact_ticks_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct actor_danger_zone_view, predicted_impact_ticks) == 0x68)];
+typedef char actor_perception_refresh_entry_size_assert[HALO_LAYOUT_ASSERT_32(sizeof(struct actor_perception_refresh_entry) == 0xC)];
+typedef char actor_perception_refresh_list_entries_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct actor_perception_refresh_list, entries) == 4)];
+typedef char actor_perception_refresh_list_size_assert[HALO_LAYOUT_ASSERT_32(sizeof(struct actor_perception_refresh_list) == 0x604)];
 
 /*
  * Runtime perception values in the January actor definition. The shared
@@ -2461,18 +2355,12 @@ struct actor_emotion_prop_view
 	boolean dangerous_vehicle_driver;
 };
 
-typedef char actor_emotion_target_size_assert[
-	sizeof(struct actor_emotion_target) == 0x1C ? 1 : -1];
-typedef char actor_emotion_actor_last_time_offset_assert[
-	offsetof(struct actor_emotion_actor_view, last_emotion_target_time) == 0x3A4 ? 1 : -1];
-typedef char actor_emotion_actor_ticks_offset_assert[
-	offsetof(struct actor_emotion_actor_view, emotion_target_ticks) == 0x3A8 ? 1 : -1];
-typedef char actor_emotion_actor_prop_offset_assert[
-	offsetof(struct actor_emotion_actor_view, emotion_target_prop_index) == 0x3AC ? 1 : -1];
-typedef char actor_emotion_prop_distance_offset_assert[
-	offsetof(struct actor_emotion_prop_view, distance) == 0x11C ? 1 : -1];
-typedef char actor_emotion_prop_driver_offset_assert[
-	offsetof(struct actor_emotion_prop_view, dangerous_vehicle_driver) == 0x136 ? 1 : -1];
+typedef char actor_emotion_target_size_assert[HALO_LAYOUT_ASSERT_32(sizeof(struct actor_emotion_target) == 0x1C)];
+typedef char actor_emotion_actor_last_time_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct actor_emotion_actor_view, last_emotion_target_time) == 0x3A4)];
+typedef char actor_emotion_actor_ticks_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct actor_emotion_actor_view, emotion_target_ticks) == 0x3A8)];
+typedef char actor_emotion_actor_prop_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct actor_emotion_actor_view, emotion_target_prop_index) == 0x3AC)];
+typedef char actor_emotion_prop_distance_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct actor_emotion_prop_view, distance) == 0x11C)];
+typedef char actor_emotion_prop_driver_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct actor_emotion_prop_view, dangerous_vehicle_driver) == 0x136)];
 
 static short actor_emotion_get_unopposable_enemy(
 	struct actor_emotion_target *targets,

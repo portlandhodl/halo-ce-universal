@@ -140,23 +140,15 @@ struct transport_endpoint_set
 #ifdef HALO_LINUX
 /* the native builds raise FD_SETSIZE (port prefix headers) so that a server's
 set holds its listening socket and a socket for every machine */
-typedef char winsock_fd_set_size_assert[
-	FD_SETSIZE >= HALO_PORT_MAXIMUM_NETWORK_MACHINES + 1 ? 1 : -1];
+typedef char winsock_fd_set_size_assert[HALO_LAYOUT_ASSERT_32(FD_SETSIZE >= HALO_PORT_MAXIMUM_NETWORK_MACHINES + 1)];
 #else
-typedef char winsock_fd_set_size_assert[
-	sizeof(fd_set) == 0x104 ? 1 : -1];
-typedef char transport_endpoint_set_ep_array_offset_assert[
-	offsetof(struct transport_endpoint_set, ep_array) == 0x104 ? 1 : -1];
-typedef char transport_endpoint_set_max_endpoints_offset_assert[
-	offsetof(struct transport_endpoint_set, max_endpoints) == 0x108 ? 1 : -1];
-typedef char transport_endpoint_set_last_endpoint_index_offset_assert[
-	offsetof(struct transport_endpoint_set, last_endpoint_index) == 0x10C ? 1 : -1];
-typedef char transport_endpoint_set_current_endpoint_index_offset_assert[
-	offsetof(struct transport_endpoint_set, current_endpoint_index) == 0x110 ? 1 : -1];
-typedef char transport_endpoint_set_needs_compaction_offset_assert[
-	offsetof(struct transport_endpoint_set, needs_compaction) == 0x114 ? 1 : -1];
-typedef char transport_endpoint_set_size_assert[
-	sizeof(struct transport_endpoint_set) == 0x118 ? 1 : -1];
+typedef char winsock_fd_set_size_assert[HALO_LAYOUT_ASSERT_32(sizeof(fd_set) == 0x104)];
+typedef char transport_endpoint_set_ep_array_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct transport_endpoint_set, ep_array) == 0x104)];
+typedef char transport_endpoint_set_max_endpoints_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct transport_endpoint_set, max_endpoints) == 0x108)];
+typedef char transport_endpoint_set_last_endpoint_index_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct transport_endpoint_set, last_endpoint_index) == 0x10C)];
+typedef char transport_endpoint_set_current_endpoint_index_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct transport_endpoint_set, current_endpoint_index) == 0x110)];
+typedef char transport_endpoint_set_needs_compaction_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct transport_endpoint_set, needs_compaction) == 0x114)];
+typedef char transport_endpoint_set_size_assert[HALO_LAYOUT_ASSERT_32(sizeof(struct transport_endpoint_set) == 0x118)];
 #endif
 
 /* ---------- prototypes */

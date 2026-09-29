@@ -142,8 +142,7 @@ struct path_test_pill2d_result
 	short obstacle_index;
 };
 
-typedef char path_test_pill2d_result_size_assert[
-	sizeof(struct path_test_pill2d_result) == 0x10 ? 1 : -1];
+typedef char path_test_pill2d_result_size_assert[HALO_LAYOUT_ASSERT_32(sizeof(struct path_test_pill2d_result) == 0x10)];
 
 /* ---------- prototypes */
 

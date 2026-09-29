@@ -325,14 +325,10 @@ struct rasterizer_draw_primitives_debug_options_prefix
 	boolean split_dynamic_geometry_between_windows;
 };
 
-typedef char dynamic_vertex_group_size_assert[
-	sizeof(struct dynamic_vertex_group) == 0x14 ? 1 : -1];
-typedef char dynamic_vertex_buffer_size_assert[
-	sizeof(struct dynamic_vertex_buffer) == 0x10 ? 1 : -1];
-typedef char dynamic_triangle_buffer_size_assert[
-	sizeof(struct dynamic_triangle_buffer) == 0xC ? 1 : -1];
-typedef char rasterizer_triangle_size_assert[
-	sizeof(struct rasterizer_triangle) == 0x6 ? 1 : -1];
+typedef char dynamic_vertex_group_size_assert[HALO_LAYOUT_ASSERT_32(sizeof(struct dynamic_vertex_group) == 0x14)];
+typedef char dynamic_vertex_buffer_size_assert[HALO_LAYOUT_ASSERT_32(sizeof(struct dynamic_vertex_buffer) == 0x10)];
+typedef char dynamic_triangle_buffer_size_assert[HALO_LAYOUT_ASSERT_32(sizeof(struct dynamic_triangle_buffer) == 0xC)];
+typedef char rasterizer_triangle_size_assert[HALO_LAYOUT_ASSERT_32(sizeof(struct rasterizer_triangle) == 0x6)];
 
 /* ---------- prototypes */
 

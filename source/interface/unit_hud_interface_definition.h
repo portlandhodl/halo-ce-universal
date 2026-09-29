@@ -166,33 +166,19 @@ struct unit_hud_interface_definition
 	long unused2[12];
 };
 
-typedef char static_hud_element_definition_size_assert[
-	sizeof(struct static_hud_element_definition) == 0x68 ? 1 : -1];
-typedef char meter_hud_element_definition_size_assert[
-	sizeof(struct meter_hud_element_definition) == 0x68 ? 1 : -1];
-typedef char metered_panel_definition_shield_extras_offset_assert[
-	offsetof(struct metered_panel_definition, shield_extras) == 0xD0 ? 1 : -1];
-typedef char metered_panel_definition_size_assert[
-	sizeof(struct metered_panel_definition) == 0xF0 ? 1 : -1];
-typedef char motion_sensor_panel_definition_size_assert[
-	sizeof(struct motion_sensor_panel_definition) == 0xF0 ? 1 : -1];
-typedef char auxilary_panel_definition_size_assert[
-	sizeof(struct auxilary_panel_definition) == 0x40 ? 1 : -1];
-typedef char auxilary_overlay_definition_type_offset_assert[
-	offsetof(struct auxilary_overlay_definition, type) == 0x68 ? 1 : -1];
-typedef char auxilary_overlay_definition_flags_offset_assert[
-	offsetof(struct auxilary_overlay_definition, flags) == 0x6A ? 1 : -1];
-typedef char auxilary_overlay_definition_size_assert[
-	sizeof(struct auxilary_overlay_definition) == 0x84 ? 1 : -1];
-typedef char auxilary_meter_definition_panel_offset_assert[
-	offsetof(struct auxilary_meter_definition, panel) == 0x14 ? 1 : -1];
-typedef char auxilary_meter_definition_size_assert[
-	sizeof(struct auxilary_meter_definition) == 0x144 ? 1 : -1];
-typedef char unit_hud_interface_definition_warning_sounds_offset_assert[
-	offsetof(struct unit_hud_interface_definition, warning_sounds) == 0x3C0 ? 1 : -1];
-typedef char unit_hud_interface_definition_auxilary_meters_offset_assert[
-	offsetof(struct unit_hud_interface_definition, auxilary_meters) == 0x3CC ? 1 : -1];
-typedef char unit_hud_interface_definition_size_assert[
-	sizeof(struct unit_hud_interface_definition) == 0x56C ? 1 : -1];
+typedef char static_hud_element_definition_size_assert[HALO_LAYOUT_ASSERT_32(sizeof(struct static_hud_element_definition) == 0x68)];
+typedef char meter_hud_element_definition_size_assert[HALO_LAYOUT_ASSERT_32(sizeof(struct meter_hud_element_definition) == 0x68)];
+typedef char metered_panel_definition_shield_extras_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct metered_panel_definition, shield_extras) == 0xD0)];
+typedef char metered_panel_definition_size_assert[HALO_LAYOUT_ASSERT_32(sizeof(struct metered_panel_definition) == 0xF0)];
+typedef char motion_sensor_panel_definition_size_assert[HALO_LAYOUT_ASSERT_32(sizeof(struct motion_sensor_panel_definition) == 0xF0)];
+typedef char auxilary_panel_definition_size_assert[HALO_LAYOUT_ASSERT_32(sizeof(struct auxilary_panel_definition) == 0x40)];
+typedef char auxilary_overlay_definition_type_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct auxilary_overlay_definition, type) == 0x68)];
+typedef char auxilary_overlay_definition_flags_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct auxilary_overlay_definition, flags) == 0x6A)];
+typedef char auxilary_overlay_definition_size_assert[HALO_LAYOUT_ASSERT_32(sizeof(struct auxilary_overlay_definition) == 0x84)];
+typedef char auxilary_meter_definition_panel_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct auxilary_meter_definition, panel) == 0x14)];
+typedef char auxilary_meter_definition_size_assert[HALO_LAYOUT_ASSERT_32(sizeof(struct auxilary_meter_definition) == 0x144)];
+typedef char unit_hud_interface_definition_warning_sounds_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct unit_hud_interface_definition, warning_sounds) == 0x3C0)];
+typedef char unit_hud_interface_definition_auxilary_meters_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct unit_hud_interface_definition, auxilary_meters) == 0x3CC)];
+typedef char unit_hud_interface_definition_size_assert[HALO_LAYOUT_ASSERT_32(sizeof(struct unit_hud_interface_definition) == 0x56C)];
 
 #endif // __UNIT_HUD_INTERFACE_DEFINITION_H

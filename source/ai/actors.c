@@ -476,15 +476,11 @@ struct encounter_actor_iterator
 	long next_index;
 };
 
-typedef char encounter_actor_iterator_size_assert[
-	sizeof(struct encounter_actor_iterator) == 0xC ? 1 : -1];
-typedef char encounter_actor_iterator_index_offset_assert[
-	offsetof(struct encounter_actor_iterator, index) == 0x4 ? 1 : -1];
+typedef char encounter_actor_iterator_size_assert[HALO_LAYOUT_ASSERT_32(sizeof(struct encounter_actor_iterator) == 0xC)];
+typedef char encounter_actor_iterator_index_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct encounter_actor_iterator, index) == 0x4)];
 
-typedef char actor_iterator_size_assert[
-	sizeof(struct actor_iterator) == 0x1C ? 1 : -1];
-typedef char actor_iterator_index_offset_assert[
-	offsetof(struct actor_iterator, index) == 0x14 ? 1 : -1];
+typedef char actor_iterator_size_assert[HALO_LAYOUT_ASSERT_32(sizeof(struct actor_iterator) == 0x1C)];
+typedef char actor_iterator_index_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct actor_iterator, index) == 0x14)];
 
 struct actor_variant_change_colors
 {
@@ -493,24 +489,16 @@ struct actor_variant_change_colors
 	unsigned long unused[2];
 };
 
-typedef char actor_variant_change_colors_size_assert[
-	sizeof(struct actor_variant_change_colors) == 0x20 ? 1 : -1];
+typedef char actor_variant_change_colors_size_assert[HALO_LAYOUT_ASSERT_32(sizeof(struct actor_variant_change_colors) == 0x20)];
 
-typedef char swarm_component_datum_size_assert[
-	sizeof(struct swarm_component_datum) == SWARM_COMPONENT_DATUM_SIZE ? 1 : -1];
-typedef char swarm_component_datum_combat_target_prop_offset_assert[
-	offsetof(struct swarm_component_datum, combat_target_prop_index) == 0x14 ? 1 : -1];
+typedef char swarm_component_datum_size_assert[HALO_LAYOUT_ASSERT_32(sizeof(struct swarm_component_datum) == SWARM_COMPONENT_DATUM_SIZE)];
+typedef char swarm_component_datum_combat_target_prop_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct swarm_component_datum, combat_target_prop_index) == 0x14)];
 
-typedef char actor_datum_output_control_flags_offset_assert[
-	offsetof(struct actor_datum, output.control_flags) == 0x6D0 ? 1 : -1];
-typedef char actor_datum_output_animation_impulse_offset_assert[
-	offsetof(struct actor_datum, output.animation.impulse) == 0x6EC ? 1 : -1];
-typedef char actor_datum_meta_encounterless_offset_assert[
-	offsetof(struct actor_datum, meta.encounterless) == 0x09 ? 1 : -1];
-typedef char actor_datum_meta_encounter_index_offset_assert[
-	offsetof(struct actor_datum, meta.encounter_index) == 0x34 ? 1 : -1];
-typedef char actor_datum_meta_first_prop_index_offset_assert[
-	offsetof(struct actor_datum, meta.first_prop_index) == 0x50 ? 1 : -1];
+typedef char actor_datum_output_control_flags_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct actor_datum, output.control_flags) == 0x6D0)];
+typedef char actor_datum_output_animation_impulse_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct actor_datum, output.animation.impulse) == 0x6EC)];
+typedef char actor_datum_meta_encounterless_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct actor_datum, meta.encounterless) == 0x09)];
+typedef char actor_datum_meta_encounter_index_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct actor_datum, meta.encounter_index) == 0x34)];
+typedef char actor_datum_meta_first_prop_index_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct actor_datum, meta.first_prop_index) == 0x50)];
 
 /* The shared vehicle tag layout is still opaque past the common unit
  * definition (vehicle_definitions.h only forward-declares it).  Actors reads
@@ -524,10 +512,8 @@ struct vehicle_definition
 	real ai_destination_radius;
 };
 
-typedef char vehicle_definition_flags_offset_assert[
-	offsetof(struct vehicle_definition, flags) == 0x2F0 ? 1 : -1];
-typedef char vehicle_definition_ai_destination_radius_offset_assert[
-	offsetof(struct vehicle_definition, ai_destination_radius) == 0x384 ? 1 : -1];
+typedef char vehicle_definition_flags_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct vehicle_definition, flags) == 0x2F0)];
+typedef char vehicle_definition_ai_destination_radius_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct vehicle_definition, ai_destination_radius) == 0x384)];
 
 /* ai.h does not yet declare the ai globals; actors touches only the
  * January-authenticated service-timer prefix, so model that view locally
@@ -544,12 +530,9 @@ struct ai_globals_service_data
 	boolean grenades_enabled;
 };
 
-typedef char ai_globals_service_data_time_given_offset_assert[
-	offsetof(struct ai_globals_service_data, time_given_this_frame) == 0x3 ? 1 : -1];
-typedef char ai_globals_service_data_current_highest_offset_assert[
-	offsetof(struct ai_globals_service_data, current_highest_service_timer) == 0x6 ? 1 : -1];
-typedef char ai_globals_service_data_grenades_enabled_offset_assert[
-	offsetof(struct ai_globals_service_data, grenades_enabled) == 0x3B4 ? 1 : -1];
+typedef char ai_globals_service_data_time_given_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct ai_globals_service_data, time_given_this_frame) == 0x3)];
+typedef char ai_globals_service_data_current_highest_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct ai_globals_service_data, current_highest_service_timer) == 0x6)];
+typedef char ai_globals_service_data_grenades_enabled_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct ai_globals_service_data, grenades_enabled) == 0x3B4)];
 
 /* ---------- prototypes */
 

@@ -63,7 +63,7 @@ struct stub_game_engine
 	stub_game_engine_callback callbacks[NUMBER_OF_STUB_GAME_ENGINE_CALLBACKS];
 };
 
-typedef char verify_stub_game_engine_size[sizeof(struct stub_game_engine) == 0x88 ? 1 : -1];
+typedef char verify_stub_game_engine_size[HALO_LAYOUT_ASSERT_32(sizeof(struct stub_game_engine) == 0x88)];
 
 /* ---------- prototypes */
 

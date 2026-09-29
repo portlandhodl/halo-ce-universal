@@ -168,8 +168,7 @@ union argb_color
 };
 typedef union argb_color argb_color;
 
-typedef char argb_color_size_assert[
-	sizeof(argb_color) == 0x8 ? 1 : -1];
+typedef char argb_color_size_assert[HALO_LAYOUT_ASSERT_32(sizeof(argb_color) == 0x8)];
 
 struct interface_tag_references_definition
 {
@@ -177,8 +176,7 @@ struct interface_tag_references_definition
 	byte unused[48];
 };
 
-typedef char interface_tag_references_definition_size_assert[
-	sizeof(struct interface_tag_references_definition) == 0x130 ? 1 : -1];
+typedef char interface_tag_references_definition_size_assert[HALO_LAYOUT_ASSERT_32(sizeof(struct interface_tag_references_definition) == 0x130)];
 
 struct weapon_flash_state_definition
 {
@@ -245,22 +243,14 @@ struct hud_screen_effect_definition
 	long unusedA0[6];
 };
 
-typedef char weapon_hud_interface_definition_screen_effects_offset_assert[
-	offsetof(struct weapon_hud_interface_definition, screen_effects) == 0xAC ? 1 : -1];
-typedef char weapon_flash_state_definition_size_assert[
-	sizeof(struct weapon_flash_state_definition) == 0x2C ? 1 : -1];
-typedef char icon_hud_element_definition_size_assert[
-	sizeof(struct icon_hud_element_definition) == 0x10 ? 1 : -1];
-typedef char weapon_hud_interface_definition_size_assert[
-	sizeof(struct weapon_hud_interface_definition) == 0x17C ? 1 : -1];
-typedef char hud_screen_effect_definition_size_assert[
-	sizeof(struct hud_screen_effect_definition) == 0xB8 ? 1 : -1];
-typedef char hud_screen_effect_definition_light_flags_offset_assert[
-	offsetof(struct hud_screen_effect_definition, light_enhancement_flags) == 0x6C ? 1 : -1];
-typedef char hud_screen_effect_definition_desaturation_flags_offset_assert[
-	offsetof(struct hud_screen_effect_definition, desaturation_flags) == 0x8C ? 1 : -1];
-typedef char rasterizer_cinematic_screen_effect_parameters_tint_offset_assert[
-	offsetof(struct rasterizer_cinematic_screen_effect_parameters, filter_desaturation_tint) == 0x14 ? 1 : -1];
+typedef char weapon_hud_interface_definition_screen_effects_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct weapon_hud_interface_definition, screen_effects) == 0xAC)];
+typedef char weapon_flash_state_definition_size_assert[HALO_LAYOUT_ASSERT_32(sizeof(struct weapon_flash_state_definition) == 0x2C)];
+typedef char icon_hud_element_definition_size_assert[HALO_LAYOUT_ASSERT_32(sizeof(struct icon_hud_element_definition) == 0x10)];
+typedef char weapon_hud_interface_definition_size_assert[HALO_LAYOUT_ASSERT_32(sizeof(struct weapon_hud_interface_definition) == 0x17C)];
+typedef char hud_screen_effect_definition_size_assert[HALO_LAYOUT_ASSERT_32(sizeof(struct hud_screen_effect_definition) == 0xB8)];
+typedef char hud_screen_effect_definition_light_flags_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct hud_screen_effect_definition, light_enhancement_flags) == 0x6C)];
+typedef char hud_screen_effect_definition_desaturation_flags_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct hud_screen_effect_definition, desaturation_flags) == 0x8C)];
+typedef char rasterizer_cinematic_screen_effect_parameters_tint_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct rasterizer_cinematic_screen_effect_parameters, filter_desaturation_tint) == 0x14)];
 
 struct system_memory_information
 {
@@ -279,8 +269,7 @@ struct profile_value
 	boolean enabled;
 };
 
-typedef char profile_value_size_assert[
-	sizeof(struct profile_value) == 0x20C ? 1 : -1];
+typedef char profile_value_size_assert[HALO_LAYOUT_ASSERT_32(sizeof(struct profile_value) == 0x20C)];
 
 struct interface_hud_scripted_globals
 {
@@ -289,8 +278,7 @@ struct interface_hud_scripted_globals
 	byte unused[2];
 };
 
-typedef char interface_hud_globals_default_weapon_hud_index_offset_assert[
-	offsetof(struct hud_globals_definition, defaults.default_weapon_hud.index) == 0x2CC ? 1 : -1];
+typedef char interface_hud_globals_default_weapon_hud_index_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct hud_globals_definition, defaults.default_weapon_hud.index) == 0x2CC)];
 
 /* ---------- prototypes */
 

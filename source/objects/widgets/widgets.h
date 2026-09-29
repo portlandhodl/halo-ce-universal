@@ -29,8 +29,7 @@ struct widget_datum
 	long next_widget_index;
 };
 
-typedef char widget_datum_size_assert[
-	sizeof(struct widget_datum) == 0xC ? 1 : -1];
+typedef char widget_datum_size_assert[HALO_LAYOUT_ASSERT_32(sizeof(struct widget_datum) == 0xC)];
 
 /* ---------- macros */
 

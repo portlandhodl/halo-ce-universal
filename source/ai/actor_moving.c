@@ -310,24 +310,15 @@ struct vector_avoidance_ray
 	real_vector3d divergence;
 };
 
-typedef char actor_moving_vehicle_maximum_forward_speed_offset_assert[
-	offsetof(struct vehicle_definition, maximum_forward_speed) == 0x2F8 ? 1 : -1];
-typedef char actor_moving_vehicle_speed_acceleration_offset_assert[
-	offsetof(struct vehicle_definition, speed_acceleration) == 0x300 ? 1 : -1];
-typedef char actor_moving_vehicle_sideslip_distance_offset_assert[
-	offsetof(struct vehicle_definition, ai_sideslip_distance) == 0x380 ? 1 : -1];
-typedef char actor_moving_vehicle_avoidance_distance_offset_assert[
-	offsetof(struct vehicle_definition, ai_avoidance_distance) == 0x388 ? 1 : -1];
-typedef char actor_moving_vehicle_pathfinding_radius_offset_assert[
-	offsetof(struct vehicle_definition, ai_pathfinding_radius) == 0x38C ? 1 : -1];
-typedef char actor_moving_vehicle_oversteer_lower_bound_offset_assert[
-	offsetof(struct vehicle_definition, ai_oversteer_angle_lower_bound) == 0x398 ? 1 : -1];
-typedef char actor_moving_vehicle_oversteer_upper_bound_offset_assert[
-	offsetof(struct vehicle_definition, ai_oversteer_angle_upper_bound) == 0x39C ? 1 : -1];
-typedef char actor_moving_vehicle_steering_max_angle_offset_assert[
-	offsetof(struct vehicle_definition, ai_steering_max_angle) == 0x3A0 ? 1 : -1];
-typedef char actor_moving_vehicle_steering_max_throttle_offset_assert[
-	offsetof(struct vehicle_definition, ai_steering_max_throttle) == 0x3A4 ? 1 : -1];
+typedef char actor_moving_vehicle_maximum_forward_speed_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct vehicle_definition, maximum_forward_speed) == 0x2F8)];
+typedef char actor_moving_vehicle_speed_acceleration_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct vehicle_definition, speed_acceleration) == 0x300)];
+typedef char actor_moving_vehicle_sideslip_distance_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct vehicle_definition, ai_sideslip_distance) == 0x380)];
+typedef char actor_moving_vehicle_avoidance_distance_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct vehicle_definition, ai_avoidance_distance) == 0x388)];
+typedef char actor_moving_vehicle_pathfinding_radius_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct vehicle_definition, ai_pathfinding_radius) == 0x38C)];
+typedef char actor_moving_vehicle_oversteer_lower_bound_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct vehicle_definition, ai_oversteer_angle_lower_bound) == 0x398)];
+typedef char actor_moving_vehicle_oversteer_upper_bound_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct vehicle_definition, ai_oversteer_angle_upper_bound) == 0x39C)];
+typedef char actor_moving_vehicle_steering_max_angle_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct vehicle_definition, ai_steering_max_angle) == 0x3A0)];
+typedef char actor_moving_vehicle_steering_max_throttle_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct vehicle_definition, ai_steering_max_throttle) == 0x3A4)];
 
 /* ---------- prototypes */
 

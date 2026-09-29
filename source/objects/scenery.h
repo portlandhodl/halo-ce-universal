@@ -29,8 +29,7 @@ struct scenery_datum
 
 struct scenario_scenery_datum;
 
-typedef char verify_scenery_extension_offset[
-	sizeof(struct object_datum) == 0x1A4 ? 1 : -1];
+typedef char verify_scenery_extension_offset[HALO_LAYOUT_ASSERT_32(sizeof(struct object_datum) == 0x1A4)];
 
 /* ---------- prototypes/SCENERY.C */
 

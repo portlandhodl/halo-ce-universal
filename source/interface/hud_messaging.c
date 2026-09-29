@@ -405,70 +405,38 @@ struct hud_number_definition
 	long unused[19];
 };
 
-typedef char hud_timer_data_size_assert[
-	sizeof(struct hud_timer_data_definition) == 0x10 ? 1 : -1];
-typedef char hud_message_valid_offset_assert[
-	offsetof(struct hud_message_definition, valid) == 0x82 ? 1 : -1];
-typedef char hud_message_size_assert[
-	sizeof(struct hud_message_definition) == 0x8C ? 1 : -1];
-typedef char hud_state_message_text_info_size_assert[
-	sizeof(struct hud_state_message_text_info_definition) == 4 ? 1 : -1];
-typedef char hud_state_message_info_size_assert[
-	sizeof(union hud_state_message_info_definition) == 4 ? 1 : -1];
-typedef char hud_state_message_runtime_size_assert[
-	sizeof(struct hud_state_message_runtime_definition) == 0x22C ? 1 : -1];
-typedef char hud_state_message_runtime_info_offset_assert[
-	offsetof(struct hud_state_message_runtime_definition, info) == 0x204 ? 1 : -1];
-typedef char hud_state_message_runtime_state_message_offset_assert[
-	offsetof(struct hud_state_message_runtime_definition, state_message) == 0x224 ? 1 : -1];
-typedef char hud_state_message_runtime_valid_offset_assert[
-	offsetof(struct hud_state_message_runtime_definition, valid) == 0x228 ? 1 : -1];
-typedef char hud_state_message_runtime_is_text_flags_offset_assert[
-	offsetof(struct hud_state_message_runtime_definition, is_text_flags) == 0x229 ? 1 : -1];
-typedef char hud_messaging_datum_state_message_offset_assert[
-	offsetof(struct hud_messaging_datum_definition, state_message) == 0x230 ? 1 : -1];
-typedef char hud_messaging_datum_leave_first_line_blank_offset_assert[
-	offsetof(struct hud_messaging_datum_definition, leave_first_line_blank) == 0x45E ? 1 : -1];
-typedef char hud_messaging_datum_custom_message_offset_assert[
-	offsetof(struct hud_messaging_datum_definition, custom_message) == 0x45F ? 1 : -1];
-typedef char hud_messaging_datum_size_assert[
-	sizeof(struct hud_messaging_datum_definition) == 0x460 ? 1 : -1];
-typedef char hud_messaging_globals_size_assert[
-	sizeof(struct hud_messaging_globals_definition) == 0x11A8 ? 1 : -1];
-typedef char hud_messaging_flash_start_time_offset_assert[
-	offsetof(struct hud_messaging_globals_definition, flash_start_time) == 0x1180 ? 1 : -1];
-typedef char hud_messaging_use_flash_offset_assert[
-	offsetof(struct hud_messaging_globals_definition, use_flash) == 0x1184 ? 1 : -1];
-typedef char hud_messaging_magic_number_offset_assert[
-	offsetof(struct hud_messaging_globals_definition, magic_number) == 0x1185 ? 1 : -1];
-typedef char hud_messaging_help_message_offset_assert[
-	offsetof(struct hud_messaging_globals_definition, help_message) == 0x118C ? 1 : -1];
-typedef char hud_messaging_timer_offset_assert[
-	offsetof(struct hud_messaging_globals_definition, timer) == 0x1198 ? 1 : -1];
-typedef char hud_messaging_timer_flash_cutoff_offset_assert[
-	offsetof(struct hud_messaging_globals_definition, timer.flash_cutoff) == 0x119E ? 1 : -1];
-typedef char hud_messaging_timer_enabled_offset_assert[
-	offsetof(struct hud_messaging_globals_definition, timer.enabled) == 0x11A7 ? 1 : -1];
-typedef char hud_messaging_parameters_size_assert[
-	sizeof(struct hud_messaging_parameters_definition) == 0x120 ? 1 : -1];
-typedef char hud_messaging_single_player_font_index_offset_assert[
-	offsetof(struct hud_messaging_parameters_definition, single_player_font.index) == 0x54 ? 1 : -1];
-typedef char hud_messaging_multi_player_font_index_offset_assert[
-	offsetof(struct hud_messaging_parameters_definition, multi_player_font.index) == 0x64 ? 1 : -1];
-typedef char hud_messaging_state_color_offset_assert[
-	offsetof(struct hud_messaging_parameters_definition, state_color) == 0x70 ? 1 : -1];
-typedef char hud_globals_messaging_offset_assert[
-	offsetof(struct hud_globals_definition, messaging) == 0 ? 1 : -1];
-typedef char hud_absolute_placement_size_assert[
-	sizeof(struct hud_absolute_placement_definition) == 0x24 ? 1 : -1];
-typedef char hud_placement_size_assert[
-	sizeof(struct hud_placement_definition) == 0x24 ? 1 : -1];
-typedef char number_hud_element_size_assert[
-	sizeof(struct number_hud_element_definition) == 0x54 ? 1 : -1];
-typedef char hud_number_size_assert[
-	sizeof(struct hud_number_definition) == 0x64 ? 1 : -1];
-typedef char hud_globals_timer_definition_offset_assert[
-	offsetof(struct hud_globals_definition, timer_definition) == 0x360 ? 1 : -1];
+typedef char hud_timer_data_size_assert[HALO_LAYOUT_ASSERT_32(sizeof(struct hud_timer_data_definition) == 0x10)];
+typedef char hud_message_valid_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct hud_message_definition, valid) == 0x82)];
+typedef char hud_message_size_assert[HALO_LAYOUT_ASSERT_32(sizeof(struct hud_message_definition) == 0x8C)];
+typedef char hud_state_message_text_info_size_assert[HALO_LAYOUT_ASSERT_32(sizeof(struct hud_state_message_text_info_definition) == 4)];
+typedef char hud_state_message_info_size_assert[HALO_LAYOUT_ASSERT_32(sizeof(union hud_state_message_info_definition) == 4)];
+typedef char hud_state_message_runtime_size_assert[HALO_LAYOUT_ASSERT_32(sizeof(struct hud_state_message_runtime_definition) == 0x22C)];
+typedef char hud_state_message_runtime_info_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct hud_state_message_runtime_definition, info) == 0x204)];
+typedef char hud_state_message_runtime_state_message_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct hud_state_message_runtime_definition, state_message) == 0x224)];
+typedef char hud_state_message_runtime_valid_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct hud_state_message_runtime_definition, valid) == 0x228)];
+typedef char hud_state_message_runtime_is_text_flags_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct hud_state_message_runtime_definition, is_text_flags) == 0x229)];
+typedef char hud_messaging_datum_state_message_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct hud_messaging_datum_definition, state_message) == 0x230)];
+typedef char hud_messaging_datum_leave_first_line_blank_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct hud_messaging_datum_definition, leave_first_line_blank) == 0x45E)];
+typedef char hud_messaging_datum_custom_message_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct hud_messaging_datum_definition, custom_message) == 0x45F)];
+typedef char hud_messaging_datum_size_assert[HALO_LAYOUT_ASSERT_32(sizeof(struct hud_messaging_datum_definition) == 0x460)];
+typedef char hud_messaging_globals_size_assert[HALO_LAYOUT_ASSERT_32(sizeof(struct hud_messaging_globals_definition) == 0x11A8)];
+typedef char hud_messaging_flash_start_time_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct hud_messaging_globals_definition, flash_start_time) == 0x1180)];
+typedef char hud_messaging_use_flash_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct hud_messaging_globals_definition, use_flash) == 0x1184)];
+typedef char hud_messaging_magic_number_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct hud_messaging_globals_definition, magic_number) == 0x1185)];
+typedef char hud_messaging_help_message_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct hud_messaging_globals_definition, help_message) == 0x118C)];
+typedef char hud_messaging_timer_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct hud_messaging_globals_definition, timer) == 0x1198)];
+typedef char hud_messaging_timer_flash_cutoff_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct hud_messaging_globals_definition, timer.flash_cutoff) == 0x119E)];
+typedef char hud_messaging_timer_enabled_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct hud_messaging_globals_definition, timer.enabled) == 0x11A7)];
+typedef char hud_messaging_parameters_size_assert[HALO_LAYOUT_ASSERT_32(sizeof(struct hud_messaging_parameters_definition) == 0x120)];
+typedef char hud_messaging_single_player_font_index_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct hud_messaging_parameters_definition, single_player_font.index) == 0x54)];
+typedef char hud_messaging_multi_player_font_index_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct hud_messaging_parameters_definition, multi_player_font.index) == 0x64)];
+typedef char hud_messaging_state_color_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct hud_messaging_parameters_definition, state_color) == 0x70)];
+typedef char hud_globals_messaging_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct hud_globals_definition, messaging) == 0)];
+typedef char hud_absolute_placement_size_assert[HALO_LAYOUT_ASSERT_32(sizeof(struct hud_absolute_placement_definition) == 0x24)];
+typedef char hud_placement_size_assert[HALO_LAYOUT_ASSERT_32(sizeof(struct hud_placement_definition) == 0x24)];
+typedef char number_hud_element_size_assert[HALO_LAYOUT_ASSERT_32(sizeof(struct number_hud_element_definition) == 0x54)];
+typedef char hud_number_size_assert[HALO_LAYOUT_ASSERT_32(sizeof(struct hud_number_definition) == 0x64)];
+typedef char hud_globals_timer_definition_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct hud_globals_definition, timer_definition) == 0x360)];
 
 /* ---------- prototypes */
 

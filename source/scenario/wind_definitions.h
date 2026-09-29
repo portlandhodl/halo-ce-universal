@@ -36,8 +36,7 @@ struct wind_definition
 	long unused[9];
 };
 
-typedef char wind_definition_size_assert[
-	sizeof(struct wind_definition) == 0x40 ? 1 : -1];
+typedef char wind_definition_size_assert[HALO_LAYOUT_ASSERT_32(sizeof(struct wind_definition) == 0x40)];
 
 /* ---------- prototypes/EXAMPLE.C */
 

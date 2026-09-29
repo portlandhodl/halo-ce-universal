@@ -200,16 +200,11 @@ struct game_sound_globals
 	long music_looping_sound_index;
 };
 
-typedef char game_looping_sound_datum_size_assert[
-	sizeof(struct game_looping_sound_datum) == 0x34 ? 1 : -1];
-typedef char game_sound_globals_size_assert[
-	sizeof(struct game_sound_globals) == 0x8 ? 1 : -1];
-typedef char sound_source_size_assert[
-	sizeof(struct sound_source) == 0x40 ? 1 : -1];
-typedef char sound_attachment_data_size_assert[
-	sizeof(struct sound_attachment_data) == 0x1C ? 1 : -1];
-typedef char sound_attachment_data_node_index_offset_assert[
-	offsetof(struct sound_attachment_data, node_index) == 2 ? 1 : -1];
+typedef char game_looping_sound_datum_size_assert[HALO_LAYOUT_ASSERT_32(sizeof(struct game_looping_sound_datum) == 0x34)];
+typedef char game_sound_globals_size_assert[HALO_LAYOUT_ASSERT_32(sizeof(struct game_sound_globals) == 0x8)];
+typedef char sound_source_size_assert[HALO_LAYOUT_ASSERT_32(sizeof(struct sound_source) == 0x40)];
+typedef char sound_attachment_data_size_assert[HALO_LAYOUT_ASSERT_32(sizeof(struct sound_attachment_data) == 0x1C)];
+typedef char sound_attachment_data_node_index_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct sound_attachment_data, node_index) == 2)];
 
 /* ---------- prototypes */
 

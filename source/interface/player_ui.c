@@ -206,12 +206,9 @@ struct player_ui_globals
 	boolean initialized;
 };
 
-typedef char player_profile_size_assert[
-	sizeof(struct player_profile) == 0x30 ? 1 : -1];
-typedef char player_ui_edit_profile_size_assert[
-	sizeof(struct player_ui_edit_profile) == 0xD0 ? 1 : -1];
-typedef char player_ui_globals_size_assert[
-	sizeof(struct player_ui_globals) == 0x230 ? 1 : -1];
+typedef char player_profile_size_assert[HALO_LAYOUT_ASSERT_32(sizeof(struct player_profile) == 0x30)];
+typedef char player_ui_edit_profile_size_assert[HALO_LAYOUT_ASSERT_32(sizeof(struct player_ui_edit_profile) == 0xD0)];
+typedef char player_ui_globals_size_assert[HALO_LAYOUT_ASSERT_32(sizeof(struct player_ui_globals) == 0x230)];
 
 /* ---------- prototypes */
 

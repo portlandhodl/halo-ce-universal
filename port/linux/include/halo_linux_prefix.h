@@ -10,11 +10,45 @@ byte-for-byte identical to what the matching MSVC build compiles.
 #ifndef __HALO_LINUX_PREFIX_H
 #define __HALO_LINUX_PREFIX_H
 
-#if !defined(__i386__) && !defined(HALO_ANDROID)
-#error the Linux port targets 32-bit x86: game data structures assume 32-bit pointers
+#if !defined(__i386__) && !defined(__x86_64__) && !defined(HALO_ANDROID)
+#error the Linux port targets x86: game data structures assume x86 pointers
 #endif
 
 #define HALO_LINUX 1
+
+/* The experimental true 64-bit (LP64) port (`ninja linux64`). Pointers and
+long are 64-bit; game data keeps its 32-bit format on disk, so anything the
+disk format touches needs translation (docs/linux64.md). Where the 32-bit
+port relies on -malign-double for the MSVC layout of 64-bit members, the
+x86-64 ABI already has it. */
+#if defined(__x86_64__) && !defined(HALO_ANDROID)
+#define HALO_LINUX64 1
+#endif
+
+/* The decompilation guards the Xbox/Win32 layouts with compile-time
+asserts: `typedef char name[expr ? 1 : -1]`. On LP64, pointers and longs
+widen, and every struct the disk formats touch drifts. Each assert that
+would fail marks a structure the LP64 data translation has to handle
+(docs/linux64.md); it compiles to a harmless typedef instead. */
+#ifdef HALO_LINUX64
+#define HALO_LAYOUT_ASSERT_32(expr) 1
+#else
+#define HALO_LAYOUT_ASSERT_32(expr) (expr) ? 1 : -1
+#endif
+
+/* The XDK/Win32 surface on LP64 (docs/linux64.md): as on Win64, the Win32
+integers (DWORD, LONG, ULONG, HRESULT, and the fields of the SDK's
+structures) stay 32-bit; only the pointer-sized family (DWORD_PTR, SIZE_T,
+HANDLE) is 64-bit. The game side's disk formats use long32/ulong32
+(cseries.h). On the 32-bit build these are the historical spellings, so the
+objects do not change. */
+#ifdef HALO_LINUX64
+#define HALO_LONG32 int
+#define HALO_ULONG32 unsigned int
+#else
+#define HALO_LONG32 long
+#define HALO_ULONG32 unsigned long
+#endif
 
 /* ---------- XDK architecture selection (MSVC predefines these) */
 

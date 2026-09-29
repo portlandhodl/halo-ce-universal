@@ -38,8 +38,7 @@ struct render_media_globals
 	byte unknown[36];
 };
 
-typedef char render_media_globals_size_assert[
-	sizeof(struct render_media_globals) == 44 ? 1 : -1];
+typedef char render_media_globals_size_assert[HALO_LAYOUT_ASSERT_32(sizeof(struct render_media_globals) == 44)];
 
 struct frame_level_of_detail
 {
@@ -54,8 +53,7 @@ struct frame_level_of_detail
 	real minimum_level;
 };
 
-typedef char frame_level_of_detail_size_assert[
-	sizeof(struct frame_level_of_detail) == 84 ? 1 : -1];
+typedef char frame_level_of_detail_size_assert[HALO_LAYOUT_ASSERT_32(sizeof(struct frame_level_of_detail) == 84)];
 
 /* ---------- prototypes */
 

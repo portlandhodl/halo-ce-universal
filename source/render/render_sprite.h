@@ -58,8 +58,7 @@ struct build_sprite_group
 	struct bitmap_data *bitmap;
 };
 
-typedef char build_sprite_group_size_assert[
-	sizeof(struct build_sprite_group) == 0x10 ? 1 : -1];
+typedef char build_sprite_group_size_assert[HALO_LAYOUT_ASSERT_32(sizeof(struct build_sprite_group) == 0x10)];
 
 struct build_sprite_data
 {
@@ -76,8 +75,7 @@ struct build_sprite_data
 	struct build_sprite_group groups[8];
 };
 
-typedef char build_sprite_data_size_assert[
-	sizeof(struct build_sprite_data) == 0xA4 ? 1 : -1];
+typedef char build_sprite_data_size_assert[HALO_LAYOUT_ASSERT_32(sizeof(struct build_sprite_data) == 0xA4)];
 
 /* ---------- prototypes/RENDER_SPRITE.C */
 

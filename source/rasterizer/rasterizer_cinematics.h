@@ -37,8 +37,7 @@ struct rasterizer_cinematic_screen_effect_parameters
 	struct bitmap_data *video_noise_map;
 };
 
-typedef char rasterizer_cinematic_screen_effect_parameters_size_assert[
-	sizeof(struct rasterizer_cinematic_screen_effect_parameters) == 0x38 ? 1 : -1];
+typedef char rasterizer_cinematic_screen_effect_parameters_size_assert[HALO_LAYOUT_ASSERT_32(sizeof(struct rasterizer_cinematic_screen_effect_parameters) == 0x38)];
 
 /* ---------- prototypes/RASTERIZER_CINEMATICS.C */
 

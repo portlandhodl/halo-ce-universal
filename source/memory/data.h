@@ -47,8 +47,7 @@ struct data_iterator
 	unsigned long signature;
 };
 
-typedef char data_iterator_size_assert[
-	sizeof(struct data_iterator) == 0x10 ? 1 : -1];
+typedef char data_iterator_size_assert[HALO_LAYOUT_ASSERT_32(sizeof(struct data_iterator) == 0x10)];
 
 /* ---------- prototypes/DATA.C */
 

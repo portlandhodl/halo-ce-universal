@@ -85,8 +85,7 @@ struct riff_byte_swap_globals
 	struct byte_swap_definition chunk_definition;
 };
 
-typedef char verify_riff_byte_swap_globals_size[
-	sizeof(struct riff_byte_swap_globals) == 0xB0 ? 1 : -1];
+typedef char verify_riff_byte_swap_globals_size[HALO_LAYOUT_ASSERT_32(sizeof(struct riff_byte_swap_globals) == 0xB0)];
 
 /* ---------- prototypes */
 

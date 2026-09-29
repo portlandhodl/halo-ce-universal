@@ -153,12 +153,9 @@ struct hud_globals_definition
 	long unused2[24];
 };
 
-typedef char hud_absolute_placement_definition_size_assert[
-	sizeof(struct hud_absolute_placement_definition) == 0x24 ? 1 : -1];
-typedef char hud_placement_definition_size_assert[
-	sizeof(struct hud_placement_definition) == 0x24 ? 1 : -1];
-typedef char hud_color_definition_size_assert[
-	sizeof(struct hud_color_definition) == 0x20 ? 1 : -1];
+typedef char hud_absolute_placement_definition_size_assert[HALO_LAYOUT_ASSERT_32(sizeof(struct hud_absolute_placement_definition) == 0x24)];
+typedef char hud_placement_definition_size_assert[HALO_LAYOUT_ASSERT_32(sizeof(struct hud_placement_definition) == 0x24)];
+typedef char hud_color_definition_size_assert[HALO_LAYOUT_ASSERT_32(sizeof(struct hud_color_definition) == 0x20)];
 
 /* ---------- prototypes/EXAMPLE.C */
 

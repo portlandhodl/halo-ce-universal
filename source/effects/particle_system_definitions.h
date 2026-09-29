@@ -199,60 +199,33 @@ struct particle_system_definition
 	struct tag_block types;
 };
 
-typedef char particle_system_definition_size_assert[
-	sizeof(struct particle_system_definition) == 0x68 ? 1 : -1];
-typedef char particle_system_definition_system_update_point_physics_offset_assert[
-	offsetof(struct particle_system_definition, system_update_point_physics) == 0x38 ? 1 : -1];
-typedef char particle_system_definition_system_update_point_physics_index_offset_assert[
-	offsetof(struct particle_system_definition, system_update_point_physics.index) == 0x44 ? 1 : -1];
-typedef char particle_system_definition_system_update_physics_offset_assert[
-	offsetof(struct particle_system_definition, system_update_physics) == 0x48 ? 1 : -1];
-typedef char particle_system_definition_types_offset_assert[
-	offsetof(struct particle_system_definition, types) == 0x5C ? 1 : -1];
-typedef char old_particle_system_type_size_assert[
-	sizeof(struct old_particle_system_type) == 0x80 ? 1 : -1];
-typedef char old_particle_system_type_type_states_offset_assert[
-	offsetof(struct old_particle_system_type, type_states) == 0x68 ? 1 : -1];
-typedef char particle_system_type_size_assert[
-	sizeof(struct particle_system_type) == 0x80 ? 1 : -1];
-typedef char particle_system_type_flags_offset_assert[
-	offsetof(struct particle_system_type, flags) == 0x20 ? 1 : -1];
-typedef char particle_system_type_physics_constants_offset_assert[
-	offsetof(struct particle_system_type, physics_constants) == 0x5C ? 1 : -1];
-typedef char particle_system_type_type_states_offset_assert[
-	offsetof(struct particle_system_type, type_states) == 0x68 ? 1 : -1];
-typedef char particle_system_type_particle_states_offset_assert[
-	offsetof(struct particle_system_type, particle_states) == 0x74 ? 1 : -1];
-typedef char particle_system_physics_constant_size_assert[
-	sizeof(struct particle_system_physics_constant) == sizeof(real) ? 1 : -1];
-typedef char particle_system_type_particle_state_interpolated_randomized_variables_size_assert[
-	sizeof(struct particle_system_type_particle_state_interpolated_randomized_variables) == 0x1C ? 1 : -1];
-typedef char particle_system_type_particle_state_interpolated_variables_size_assert[
-	sizeof(struct particle_system_type_particle_state_interpolated_variables) == sizeof(real) ? 1 : -1];
-typedef char particle_system_type_state_interpolated_variables_size_assert[
-	sizeof(struct particle_system_type_state_interpolated_variables) == 0x28 ? 1 : -1];
-typedef char particle_system_type_particle_state_size_assert[
-	sizeof(struct particle_system_type_particle_state) == 0x178 ? 1 : -1];
-typedef char particle_system_type_particle_state_scale_lower_bound_offset_assert[
-	offsetof(struct particle_system_type_particle_state, scale_lower_bound) == 0x48 ? 1 : -1];
-typedef char particle_system_type_particle_state_color_lower_bound_offset_assert[
-	offsetof(struct particle_system_type_particle_state, color_lower_bound) == 0x60 ? 1 : -1];
-typedef char particle_system_type_particle_state_variables_offset_assert[
-	offsetof(struct particle_system_type_particle_state, variables) == 0x80 ? 1 : -1];
-typedef char particle_system_type_particle_state_point_physics_offset_assert[
-	offsetof(struct particle_system_type_particle_state, point_physics) == 0x84 ? 1 : -1];
-typedef char particle_system_type_particle_state_shader_offset_assert[
-	offsetof(struct particle_system_type_particle_state, shader) == 0xB8 ? 1 : -1];
-typedef char particle_system_type_state_size_assert[
-	sizeof(struct particle_system_type_state) == 0xC0 ? 1 : -1];
-typedef char particle_system_type_state_duration_lower_bound_offset_assert[
-	offsetof(struct particle_system_type_state, duration_lower_bound) == 0x20 ? 1 : -1];
-typedef char particle_system_type_state_duration_upper_bound_offset_assert[
-	offsetof(struct particle_system_type_state, duration_upper_bound) == 0x24 ? 1 : -1];
-typedef char particle_system_type_state_variables_offset_assert[
-	offsetof(struct particle_system_type_state, variables) == 0x34 ? 1 : -1];
-typedef char particle_system_type_state_particle_update_physics_offset_assert[
-	offsetof(struct particle_system_type_state, particle_update_physics) == 0xB2 ? 1 : -1];
+typedef char particle_system_definition_size_assert[HALO_LAYOUT_ASSERT_32(sizeof(struct particle_system_definition) == 0x68)];
+typedef char particle_system_definition_system_update_point_physics_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct particle_system_definition, system_update_point_physics) == 0x38)];
+typedef char particle_system_definition_system_update_point_physics_index_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct particle_system_definition, system_update_point_physics.index) == 0x44)];
+typedef char particle_system_definition_system_update_physics_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct particle_system_definition, system_update_physics) == 0x48)];
+typedef char particle_system_definition_types_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct particle_system_definition, types) == 0x5C)];
+typedef char old_particle_system_type_size_assert[HALO_LAYOUT_ASSERT_32(sizeof(struct old_particle_system_type) == 0x80)];
+typedef char old_particle_system_type_type_states_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct old_particle_system_type, type_states) == 0x68)];
+typedef char particle_system_type_size_assert[HALO_LAYOUT_ASSERT_32(sizeof(struct particle_system_type) == 0x80)];
+typedef char particle_system_type_flags_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct particle_system_type, flags) == 0x20)];
+typedef char particle_system_type_physics_constants_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct particle_system_type, physics_constants) == 0x5C)];
+typedef char particle_system_type_type_states_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct particle_system_type, type_states) == 0x68)];
+typedef char particle_system_type_particle_states_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct particle_system_type, particle_states) == 0x74)];
+typedef char particle_system_physics_constant_size_assert[HALO_LAYOUT_ASSERT_32(sizeof(struct particle_system_physics_constant) == sizeof(real))];
+typedef char particle_system_type_particle_state_interpolated_randomized_variables_size_assert[HALO_LAYOUT_ASSERT_32(sizeof(struct particle_system_type_particle_state_interpolated_randomized_variables) == 0x1C)];
+typedef char particle_system_type_particle_state_interpolated_variables_size_assert[HALO_LAYOUT_ASSERT_32(sizeof(struct particle_system_type_particle_state_interpolated_variables) == sizeof(real))];
+typedef char particle_system_type_state_interpolated_variables_size_assert[HALO_LAYOUT_ASSERT_32(sizeof(struct particle_system_type_state_interpolated_variables) == 0x28)];
+typedef char particle_system_type_particle_state_size_assert[HALO_LAYOUT_ASSERT_32(sizeof(struct particle_system_type_particle_state) == 0x178)];
+typedef char particle_system_type_particle_state_scale_lower_bound_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct particle_system_type_particle_state, scale_lower_bound) == 0x48)];
+typedef char particle_system_type_particle_state_color_lower_bound_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct particle_system_type_particle_state, color_lower_bound) == 0x60)];
+typedef char particle_system_type_particle_state_variables_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct particle_system_type_particle_state, variables) == 0x80)];
+typedef char particle_system_type_particle_state_point_physics_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct particle_system_type_particle_state, point_physics) == 0x84)];
+typedef char particle_system_type_particle_state_shader_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct particle_system_type_particle_state, shader) == 0xB8)];
+typedef char particle_system_type_state_size_assert[HALO_LAYOUT_ASSERT_32(sizeof(struct particle_system_type_state) == 0xC0)];
+typedef char particle_system_type_state_duration_lower_bound_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct particle_system_type_state, duration_lower_bound) == 0x20)];
+typedef char particle_system_type_state_duration_upper_bound_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct particle_system_type_state, duration_upper_bound) == 0x24)];
+typedef char particle_system_type_state_variables_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct particle_system_type_state, variables) == 0x34)];
+typedef char particle_system_type_state_particle_update_physics_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct particle_system_type_state, particle_update_physics) == 0xB2)];
 
 /* ---------- prototypes */
 

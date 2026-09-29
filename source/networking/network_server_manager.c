@@ -654,8 +654,7 @@ struct network_machine
 	byte padding41[3];
 };
 
-typedef char network_machine_size_assert[
-	sizeof(struct network_machine) == 0x44 ? 1 : -1];
+typedef char network_machine_size_assert[HALO_LAYOUT_ASSERT_32(sizeof(struct network_machine) == 0x44)];
 
 struct network_game_map
 {
@@ -728,30 +727,21 @@ struct network_game_server
 
 #ifdef HALO_LINUX
 /* the layout follows the session limits (port/linux/include/halo_port_limits.h) */
-typedef char network_game_players_offset_assert[
-	offsetof(struct network_game, players) == HALO_PORT_NETWORK_GAME_PLAYERS_OFFSET ? 1 : -1];
+typedef char network_game_players_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct network_game, players) == HALO_PORT_NETWORK_GAME_PLAYERS_OFFSET)];
 #else
-typedef char network_game_players_offset_assert[
-	offsetof(struct network_game, players) == 0x226 ? 1 : -1];
+typedef char network_game_players_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct network_game, players) == 0x226)];
 #endif
-typedef char network_game_variant_has_teams_offset_assert[
-	offsetof(struct network_game, variant) +
-		offsetof(struct game_variant, universal_variant.teams) == 0xC0 ? 1 : -1];
+typedef char network_game_variant_has_teams_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct network_game, variant) +
+		offsetof(struct game_variant, universal_variant.teams) == 0xC0)];
 #ifdef HALO_LINUX
-typedef char network_game_size_assert[
-	sizeof(struct network_game) == HALO_PORT_NETWORK_GAME_SIZE ? 1 : -1];
-typedef char network_game_server_client_machines_offset_assert[
-	offsetof(struct network_game_server, client_machines) == 8 + HALO_PORT_NETWORK_GAME_SIZE ? 1 : -1];
-typedef char network_game_server_countdown_state_offset_assert[
-	offsetof(struct network_game_server, countdown_state) ==
-		8 + HALO_PORT_NETWORK_GAME_SIZE + MAXIMUM_NETWORK_MACHINE_COUNT * 0x10 + 0xC ? 1 : -1];
+typedef char network_game_size_assert[HALO_LAYOUT_ASSERT_32(sizeof(struct network_game) == HALO_PORT_NETWORK_GAME_SIZE)];
+typedef char network_game_server_client_machines_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct network_game_server, client_machines) == 8 + HALO_PORT_NETWORK_GAME_SIZE)];
+typedef char network_game_server_countdown_state_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct network_game_server, countdown_state) ==
+		8 + HALO_PORT_NETWORK_GAME_SIZE + MAXIMUM_NETWORK_MACHINE_COUNT * 0x10 + 0xC)];
 #else
-typedef char network_game_size_assert[
-	sizeof(struct network_game) == 0x434 ? 1 : -1];
-typedef char network_game_server_client_machines_offset_assert[
-	offsetof(struct network_game_server, client_machines) == 0x43C ? 1 : -1];
-typedef char network_game_server_countdown_state_offset_assert[
-	offsetof(struct network_game_server, countdown_state) == 0x488 ? 1 : -1];
+typedef char network_game_size_assert[HALO_LAYOUT_ASSERT_32(sizeof(struct network_game) == 0x434)];
+typedef char network_game_server_client_machines_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct network_game_server, client_machines) == 0x43C)];
+typedef char network_game_server_countdown_state_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct network_game_server, countdown_state) == 0x488)];
 #endif
 
 /* ---------- prototypes */

@@ -71,8 +71,7 @@ struct point_physics_definition
 	long unused2[3];
 };
 
-typedef char point_physics_definition_size_assert[
-	sizeof(struct point_physics_definition) == 0x40 ? 1 : -1];
+typedef char point_physics_definition_size_assert[HALO_LAYOUT_ASSERT_32(sizeof(struct point_physics_definition) == 0x40)];
 
 /* ---------- prototypes/POINT_PHYSICS.C */
 

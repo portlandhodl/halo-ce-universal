@@ -120,24 +120,15 @@ union projectile_aim_direction
 	};
 };
 
-typedef char swarm_component_datum_size_check[
-	sizeof(struct swarm_component_datum) == 0x40 ? 1 : -1];
-typedef char swarm_wander_control_size_check[
-	sizeof(struct swarm_wander_control) == 0x14 ? 1 : -1];
-typedef char swarm_component_target_prop_offset_check[
-	offsetof(struct swarm_component_datum, combat_target_prop_index) == 0x14 ? 1 : -1];
-typedef char swarm_component_wander_offset_check[
-	offsetof(struct swarm_component_datum, wander) == 0x1C ? 1 : -1];
-typedef char swarm_component_obey_vector_offset_check[
-	offsetof(struct swarm_component_datum, obey.directmovement.vector) == 0x28 ? 1 : -1];
-typedef char unit_control_data_size_check[
-	sizeof(struct unit_control_data) == 0x40 ? 1 : -1];
-typedef char unit_control_data_throttle_offset_check[
-	offsetof(struct unit_control_data, throttle) == 0x0C ? 1 : -1];
-typedef char unit_control_data_facing_offset_check[
-	offsetof(struct unit_control_data, facing_vector) == 0x1C ? 1 : -1];
-typedef char projectile_aim_direction_size_check[
-	sizeof(union projectile_aim_direction) == sizeof(real_vector3d) ? 1 : -1];
+typedef char swarm_component_datum_size_check[HALO_LAYOUT_ASSERT_32(sizeof(struct swarm_component_datum) == 0x40)];
+typedef char swarm_wander_control_size_check[HALO_LAYOUT_ASSERT_32(sizeof(struct swarm_wander_control) == 0x14)];
+typedef char swarm_component_target_prop_offset_check[HALO_LAYOUT_ASSERT_32(offsetof(struct swarm_component_datum, combat_target_prop_index) == 0x14)];
+typedef char swarm_component_wander_offset_check[HALO_LAYOUT_ASSERT_32(offsetof(struct swarm_component_datum, wander) == 0x1C)];
+typedef char swarm_component_obey_vector_offset_check[HALO_LAYOUT_ASSERT_32(offsetof(struct swarm_component_datum, obey.directmovement.vector) == 0x28)];
+typedef char unit_control_data_size_check[HALO_LAYOUT_ASSERT_32(sizeof(struct unit_control_data) == 0x40)];
+typedef char unit_control_data_throttle_offset_check[HALO_LAYOUT_ASSERT_32(offsetof(struct unit_control_data, throttle) == 0x0C)];
+typedef char unit_control_data_facing_offset_check[HALO_LAYOUT_ASSERT_32(offsetof(struct unit_control_data, facing_vector) == 0x1C)];
+typedef char projectile_aim_direction_size_check[HALO_LAYOUT_ASSERT_32(sizeof(union projectile_aim_direction) == sizeof(real_vector3d))];
 
 /* ---------- prototypes */
 

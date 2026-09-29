@@ -188,36 +188,21 @@ struct pixel_shader_definition
 	unsigned long final_combiner_constants;
 };
 
-typedef char verify_water_ripple_size[
-	sizeof(struct water_ripple) == 0x4C ? 1 : -1];
-typedef char verify_water_ripple_animation_angle_offset[
-	offsetof(struct water_ripple, animation_angle) == 0x28 ? 1 : -1];
-typedef char verify_water_ripple_map_repeats_offset[
-	offsetof(struct water_ripple, map_repeats) == 0x38 ? 1 : -1];
-typedef char verify_water_definition_flags_offset[
-	offsetof(struct shader_transparent_water_definition, flags) == 0x28 ? 1 : -1];
-typedef char verify_water_definition_base_map_offset[
-	offsetof(struct shader_transparent_water_definition, base_map) == 0x4C ? 1 : -1];
-typedef char verify_water_definition_perpendicular_tint_offset[
-	offsetof(struct shader_transparent_water_definition, view_perpendicular_tint_color) == 0x6C ? 1 : -1];
-typedef char verify_water_definition_parallel_tint_offset[
-	offsetof(struct shader_transparent_water_definition, view_parallel_tint_color) == 0x7C ? 1 : -1];
-typedef char verify_water_definition_reflection_map_offset[
-	offsetof(struct shader_transparent_water_definition, reflection_map) == 0x9C ? 1 : -1];
-typedef char verify_water_definition_animation_angle_offset[
-	offsetof(struct shader_transparent_water_definition, ripple_animation_angle) == 0xBC ? 1 : -1];
-typedef char verify_water_definition_ripple_maps_offset[
-	offsetof(struct shader_transparent_water_definition, ripple_maps) == 0xC8 ? 1 : -1];
-typedef char verify_water_definition_lod_bias_offset[
-	offsetof(struct shader_transparent_water_definition, ripple_mipmap_lod_bias) == 0xE0 ? 1 : -1];
-typedef char verify_water_geometry_group_plane_offset[
-	offsetof(struct transparent_geometry_group, plane) == 0x80 ? 1 : -1];
-typedef char verify_water_definition_mipmap_levels_offset[
-	offsetof(struct shader_transparent_water_definition, ripple_mipmap_levels) == 0xD8 ? 1 : -1];
-typedef char verify_water_definition_ripples_offset[
-	offsetof(struct shader_transparent_water_definition, ripples) == 0x124 ? 1 : -1];
-typedef char verify_pixel_shader_definition_size[
-	sizeof(struct pixel_shader_definition) == 0xF0 ? 1 : -1];
+typedef char verify_water_ripple_size[HALO_LAYOUT_ASSERT_32(sizeof(struct water_ripple) == 0x4C)];
+typedef char verify_water_ripple_animation_angle_offset[HALO_LAYOUT_ASSERT_32(offsetof(struct water_ripple, animation_angle) == 0x28)];
+typedef char verify_water_ripple_map_repeats_offset[HALO_LAYOUT_ASSERT_32(offsetof(struct water_ripple, map_repeats) == 0x38)];
+typedef char verify_water_definition_flags_offset[HALO_LAYOUT_ASSERT_32(offsetof(struct shader_transparent_water_definition, flags) == 0x28)];
+typedef char verify_water_definition_base_map_offset[HALO_LAYOUT_ASSERT_32(offsetof(struct shader_transparent_water_definition, base_map) == 0x4C)];
+typedef char verify_water_definition_perpendicular_tint_offset[HALO_LAYOUT_ASSERT_32(offsetof(struct shader_transparent_water_definition, view_perpendicular_tint_color) == 0x6C)];
+typedef char verify_water_definition_parallel_tint_offset[HALO_LAYOUT_ASSERT_32(offsetof(struct shader_transparent_water_definition, view_parallel_tint_color) == 0x7C)];
+typedef char verify_water_definition_reflection_map_offset[HALO_LAYOUT_ASSERT_32(offsetof(struct shader_transparent_water_definition, reflection_map) == 0x9C)];
+typedef char verify_water_definition_animation_angle_offset[HALO_LAYOUT_ASSERT_32(offsetof(struct shader_transparent_water_definition, ripple_animation_angle) == 0xBC)];
+typedef char verify_water_definition_ripple_maps_offset[HALO_LAYOUT_ASSERT_32(offsetof(struct shader_transparent_water_definition, ripple_maps) == 0xC8)];
+typedef char verify_water_definition_lod_bias_offset[HALO_LAYOUT_ASSERT_32(offsetof(struct shader_transparent_water_definition, ripple_mipmap_lod_bias) == 0xE0)];
+typedef char verify_water_geometry_group_plane_offset[HALO_LAYOUT_ASSERT_32(offsetof(struct transparent_geometry_group, plane) == 0x80)];
+typedef char verify_water_definition_mipmap_levels_offset[HALO_LAYOUT_ASSERT_32(offsetof(struct shader_transparent_water_definition, ripple_mipmap_levels) == 0xD8)];
+typedef char verify_water_definition_ripples_offset[HALO_LAYOUT_ASSERT_32(offsetof(struct shader_transparent_water_definition, ripples) == 0x124)];
+typedef char verify_pixel_shader_definition_size[HALO_LAYOUT_ASSERT_32(sizeof(struct pixel_shader_definition) == 0xF0)];
 
 /* ---------- globals */
 

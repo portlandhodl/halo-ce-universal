@@ -145,8 +145,7 @@ struct dynamic_screen_vertex
 	pixel32 color;
 };
 
-typedef char verify_dynamic_screen_vertex_size[
-	sizeof(struct dynamic_screen_vertex) == 0x14 ? 1 : -1];
+typedef char verify_dynamic_screen_vertex_size[HALO_LAYOUT_ASSERT_32(sizeof(struct dynamic_screen_vertex) == 0x14)];
 
 struct rasterizer_dynamic_screen_geometry_parameters
 {
@@ -172,8 +171,7 @@ struct rasterizer_dynamic_screen_geometry_parameters
 	byte pad8B;
 };
 
-typedef char verify_rasterizer_dynamic_screen_geometry_parameters_size[
-	sizeof(struct rasterizer_dynamic_screen_geometry_parameters) == 0x8C ? 1 : -1];
+typedef char verify_rasterizer_dynamic_screen_geometry_parameters_size[HALO_LAYOUT_ASSERT_32(sizeof(struct rasterizer_dynamic_screen_geometry_parameters) == 0x8C)];
 
 struct rasterizer_globals_reserved04
 {
@@ -227,32 +225,19 @@ struct rasterizer_globals_definition
 	byte reserved62[0x6];
 };
 
-typedef char verify_rasterizer_globals_size[
-	sizeof(struct rasterizer_globals_definition) == 0x68 ? 1 : -1];
-typedef char verify_rasterizer_globals_initialized_offset[
-	offsetof(struct rasterizer_globals_definition, initialized) == 0x00 ? 1 : -1];
-typedef char verify_rasterizer_globals_lock_operation_offset[
-	offsetof(struct rasterizer_globals_definition, current_lock_operation) == 0x02 ? 1 : -1];
-typedef char verify_rasterizer_globals_frame_bounds_offset[
-	offsetof(struct rasterizer_globals_definition, reserved04.frame_bounds) == 0x0C ? 1 : -1];
-typedef char verify_rasterizer_globals_fps_accumulation_frame_index_offset[
-	offsetof(struct rasterizer_globals_definition, fps_accumulation_frame_index) == 0x18 ? 1 : -1];
-typedef char verify_rasterizer_globals_framerate_throttle_offset[
-	offsetof(struct rasterizer_globals_definition, framerate_throttle) == 0x3D ? 1 : -1];
-typedef char verify_rasterizer_globals_d3d_flip_count_offset[
-	offsetof(struct rasterizer_globals_definition, d3d_flip_count) == 0x20 ? 1 : -1];
-typedef char verify_rasterizer_globals_frame_and_vertical_blank_index_offset[
-	offsetof(struct rasterizer_globals_definition, frame_and_vertical_blank_index) == 0x28 ? 1 : -1];
-typedef char verify_rasterizer_globals_previous_frame_and_vertical_blank_index_offset[
-	offsetof(struct rasterizer_globals_definition, previous_frame_and_vertical_blank_index) == 0x30 ? 1 : -1];
-typedef char verify_rasterizer_globals_framerate_throttle_debug_offset[
-	offsetof(struct rasterizer_globals_definition, framerate_throttle_debug) == 0x3E ? 1 : -1];
-typedef char verify_rasterizer_globals_framerate_throttle_target_offset[
-	offsetof(struct rasterizer_globals_definition, framerate_throttle_target) == 0x40 ? 1 : -1];
-typedef char verify_rasterizer_globals_floating_point_zbuffer_offset[
-	offsetof(struct rasterizer_globals_definition, floating_point_zbuffer) == 0x3C ? 1 : -1];
-typedef char verify_rasterizer_globals_near_clip_distance_offset[
-	offsetof(struct rasterizer_globals_definition, near_clip_distance) == 0x44 ? 1 : -1];
+typedef char verify_rasterizer_globals_size[HALO_LAYOUT_ASSERT_32(sizeof(struct rasterizer_globals_definition) == 0x68)];
+typedef char verify_rasterizer_globals_initialized_offset[HALO_LAYOUT_ASSERT_32(offsetof(struct rasterizer_globals_definition, initialized) == 0x00)];
+typedef char verify_rasterizer_globals_lock_operation_offset[HALO_LAYOUT_ASSERT_32(offsetof(struct rasterizer_globals_definition, current_lock_operation) == 0x02)];
+typedef char verify_rasterizer_globals_frame_bounds_offset[HALO_LAYOUT_ASSERT_32(offsetof(struct rasterizer_globals_definition, reserved04.frame_bounds) == 0x0C)];
+typedef char verify_rasterizer_globals_fps_accumulation_frame_index_offset[HALO_LAYOUT_ASSERT_32(offsetof(struct rasterizer_globals_definition, fps_accumulation_frame_index) == 0x18)];
+typedef char verify_rasterizer_globals_framerate_throttle_offset[HALO_LAYOUT_ASSERT_32(offsetof(struct rasterizer_globals_definition, framerate_throttle) == 0x3D)];
+typedef char verify_rasterizer_globals_d3d_flip_count_offset[HALO_LAYOUT_ASSERT_32(offsetof(struct rasterizer_globals_definition, d3d_flip_count) == 0x20)];
+typedef char verify_rasterizer_globals_frame_and_vertical_blank_index_offset[HALO_LAYOUT_ASSERT_32(offsetof(struct rasterizer_globals_definition, frame_and_vertical_blank_index) == 0x28)];
+typedef char verify_rasterizer_globals_previous_frame_and_vertical_blank_index_offset[HALO_LAYOUT_ASSERT_32(offsetof(struct rasterizer_globals_definition, previous_frame_and_vertical_blank_index) == 0x30)];
+typedef char verify_rasterizer_globals_framerate_throttle_debug_offset[HALO_LAYOUT_ASSERT_32(offsetof(struct rasterizer_globals_definition, framerate_throttle_debug) == 0x3E)];
+typedef char verify_rasterizer_globals_framerate_throttle_target_offset[HALO_LAYOUT_ASSERT_32(offsetof(struct rasterizer_globals_definition, framerate_throttle_target) == 0x40)];
+typedef char verify_rasterizer_globals_floating_point_zbuffer_offset[HALO_LAYOUT_ASSERT_32(offsetof(struct rasterizer_globals_definition, floating_point_zbuffer) == 0x3C)];
+typedef char verify_rasterizer_globals_near_clip_distance_offset[HALO_LAYOUT_ASSERT_32(offsetof(struct rasterizer_globals_definition, near_clip_distance) == 0x44)];
 struct rasterizer_window_begin_parameters
 {
 	short rasterizer_target;

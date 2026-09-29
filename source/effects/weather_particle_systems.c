@@ -168,8 +168,7 @@ struct weather_particle_type_definition
 	struct shader_effect_definition shader;
 };
 
-typedef char weather_particle_type_definition_size_assert[
-	sizeof(struct weather_particle_type_definition) == 0x25C ? 1 : -1];
+typedef char weather_particle_type_definition_size_assert[HALO_LAYOUT_ASSERT_32(sizeof(struct weather_particle_type_definition) == 0x25C)];
 
 struct weather_particle_type
 {
@@ -218,14 +217,10 @@ struct weather_particle_system_globals
 	struct weather_particle_system systems[MAXIMUM_NUMBER_OF_LOCAL_PLAYERS];
 };
 
-typedef char weather_particle_type_size_assert[
-	sizeof(struct weather_particle_type) == 0x10 ? 1 : -1];
-typedef char weather_particle_system_size_assert[
-	sizeof(struct weather_particle_system) == 0x9C ? 1 : -1];
-typedef char weather_particle_size_assert[
-	sizeof(struct weather_particle) == 0x54 ? 1 : -1];
-typedef char weather_particle_system_globals_size_assert[
-	sizeof(struct weather_particle_system_globals) == 0x274 ? 1 : -1];
+typedef char weather_particle_type_size_assert[HALO_LAYOUT_ASSERT_32(sizeof(struct weather_particle_type) == 0x10)];
+typedef char weather_particle_system_size_assert[HALO_LAYOUT_ASSERT_32(sizeof(struct weather_particle_system) == 0x9C)];
+typedef char weather_particle_size_assert[HALO_LAYOUT_ASSERT_32(sizeof(struct weather_particle) == 0x54)];
+typedef char weather_particle_system_globals_size_assert[HALO_LAYOUT_ASSERT_32(sizeof(struct weather_particle_system_globals) == 0x274)];
 
 /*
  * These three tag-block element layouts are private here because their owner
@@ -257,10 +252,8 @@ struct structure_weather_polyhedron
 	struct tag_block planes;
 };
 
-typedef char structure_weather_palette_entry_size_assert[
-	sizeof(struct structure_weather_palette_entry) == 0xF0 ? 1 : -1];
-typedef char structure_weather_polyhedron_size_assert[
-	sizeof(struct structure_weather_polyhedron) == 0x20 ? 1 : -1];
+typedef char structure_weather_palette_entry_size_assert[HALO_LAYOUT_ASSERT_32(sizeof(struct structure_weather_palette_entry) == 0xF0)];
+typedef char structure_weather_polyhedron_size_assert[HALO_LAYOUT_ASSERT_32(sizeof(struct structure_weather_polyhedron) == 0x20)];
 /* ---------- prototypes */
 
 static struct weather_particle_system *weather_particle_system_get(

@@ -308,10 +308,8 @@ struct network_game
 };
 
 #ifdef HALO_LINUX
-typedef char network_game_players_offset_assert[
-	offsetof(struct network_game, players) == HALO_PORT_NETWORK_GAME_PLAYERS_OFFSET ? 1 : -1];
-typedef char network_game_size_assert[
-	sizeof(struct network_game) == HALO_PORT_NETWORK_GAME_SIZE ? 1 : -1];
+typedef char network_game_players_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct network_game, players) == HALO_PORT_NETWORK_GAME_PLAYERS_OFFSET)];
+typedef char network_game_size_assert[HALO_LAYOUT_ASSERT_32(sizeof(struct network_game) == HALO_PORT_NETWORK_GAME_SIZE)];
 
 /* one piece of the game settings record, which no longer fits one message
 (network_server_message_handler.c sends them in order) */

@@ -570,30 +570,21 @@ struct network_game
 #endif
 };
 
-typedef char network_advertised_game_size_assert[
-	sizeof(struct network_advertised_game) == 0xE4 ? 1 : -1];
-typedef char network_advertised_game_game_name_offset_assert[
-	offsetof(struct network_advertised_game, game_name) == 0x30 ? 1 : -1];
-typedef char network_advertised_game_engine_type_offset_assert[
-	offsetof(struct network_advertised_game, engine_type) == 0xD4 ? 1 : -1];
-typedef char network_advertised_game_platform_offset_assert[
-	offsetof(struct network_advertised_game, platform) == 0xDE ? 1 : -1];
-typedef char network_machine_size_assert[
-	sizeof(struct network_machine) == 0x44 ? 1 : -1];
+typedef char network_advertised_game_size_assert[HALO_LAYOUT_ASSERT_32(sizeof(struct network_advertised_game) == 0xE4)];
+typedef char network_advertised_game_game_name_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct network_advertised_game, game_name) == 0x30)];
+typedef char network_advertised_game_engine_type_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct network_advertised_game, engine_type) == 0xD4)];
+typedef char network_advertised_game_platform_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct network_advertised_game, platform) == 0xDE)];
+typedef char network_machine_size_assert[HALO_LAYOUT_ASSERT_32(sizeof(struct network_machine) == 0x44)];
 #ifndef HALO_LINUX
-typedef char network_game_players_offset_assert[
-	offsetof(struct network_game, players) == 0x226 ? 1 : -1];
+typedef char network_game_players_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct network_game, players) == 0x226)];
 #else
 /* the native builds' session limits move the players; every copy of the
 record is checked against port/linux/include/halo_port_limits.h (this one
 declares it only up to the players) */
-typedef char network_game_players_offset_assert[
-	offsetof(struct network_game, players) == HALO_PORT_NETWORK_GAME_PLAYERS_OFFSET ? 1 : -1];
-typedef char network_game_players_end_assert[
-	offsetof(struct network_game, players) + sizeof(((struct network_game *)0)->players) ==
-		HALO_PORT_NETWORK_GAME_PLAYERS_END ? 1 : -1];
-typedef char network_game_size_assert[
-	sizeof(struct network_game) <= HALO_PORT_NETWORK_GAME_SIZE ? 1 : -1];
+typedef char network_game_players_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct network_game, players) == HALO_PORT_NETWORK_GAME_PLAYERS_OFFSET)];
+typedef char network_game_players_end_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct network_game, players) + sizeof(((struct network_game *)0)->players) ==
+		HALO_PORT_NETWORK_GAME_PLAYERS_END)];
+typedef char network_game_size_assert[HALO_LAYOUT_ASSERT_32(sizeof(struct network_game) <= HALO_PORT_NETWORK_GAME_SIZE)];
 #endif
 
 struct playlist_profile

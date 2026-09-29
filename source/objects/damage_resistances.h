@@ -31,14 +31,10 @@ struct damage_resistance_material
 	long body_unused[2];
 };
 
-typedef char damage_resistance_material_size_assert[
-	sizeof(struct damage_resistance_material) == 0x48 ? 1 : -1];
-typedef char damage_resistance_material_type_offset_assert[
-	offsetof(struct damage_resistance_material, material_type) == 0x24 ? 1 : -1];
-typedef char damage_resistance_material_shield_leak_fraction_offset_assert[
-	offsetof(struct damage_resistance_material, shield_leak_fraction) == 0x28 ? 1 : -1];
-typedef char damage_resistance_material_body_damage_multiplier_offset_assert[
-	offsetof(struct damage_resistance_material, body_damage_multiplier) == 0x3C ? 1 : -1];
+typedef char damage_resistance_material_size_assert[HALO_LAYOUT_ASSERT_32(sizeof(struct damage_resistance_material) == 0x48)];
+typedef char damage_resistance_material_type_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct damage_resistance_material, material_type) == 0x24)];
+typedef char damage_resistance_material_shield_leak_fraction_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct damage_resistance_material, shield_leak_fraction) == 0x28)];
+typedef char damage_resistance_material_body_damage_multiplier_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct damage_resistance_material, body_damage_multiplier) == 0x3C)];
 
 struct damage_resistance
 {

@@ -126,26 +126,16 @@ struct transparent_geometry_group
 	byte opaque9e[2];
 };
 
-typedef char transparent_geometry_group_size_assert[
-	sizeof(struct transparent_geometry_group) == 0xA0 ? 1 : -1];
-typedef char transparent_geometry_group_geometry_flags_offset_assert[
-	offsetof(struct transparent_geometry_group, geometry_flags) == 0x0 ? 1 : -1];
-typedef char transparent_geometry_group_object_index_offset_assert[
-	offsetof(struct transparent_geometry_group, object_index) == 0x4 ? 1 : -1];
-typedef char transparent_geometry_group_source_object_index_offset_assert[
-	offsetof(struct transparent_geometry_group, source_object_index) == 0x8 ? 1 : -1];
-typedef char transparent_geometry_group_shader_offset_assert[
-	offsetof(struct transparent_geometry_group, shader) == 0xC ? 1 : -1];
-typedef char transparent_geometry_group_dynamic_vertex_buffer_index_offset_assert[
-	offsetof(struct transparent_geometry_group, dynamic_vertex_buffer_index) == 0x54 ? 1 : -1];
-typedef char transparent_geometry_group_vertex_buffer_offset_assert[
-	offsetof(struct transparent_geometry_group, vertex_buffer) == 0x58 ? 1 : -1];
-typedef char transparent_geometry_group_z_sort_offset_assert[
-	offsetof(struct transparent_geometry_group, z_sort) == 0x70 ? 1 : -1];
-typedef char transparent_geometry_group_sorted_index_offset_assert[
-	offsetof(struct transparent_geometry_group, sorted_index) == 0x90 ? 1 : -1];
-typedef char transparent_geometry_group_cortana_hack_offset_assert[
-	offsetof(struct transparent_geometry_group, cortana_hack) == 0x9D ? 1 : -1];
+typedef char transparent_geometry_group_size_assert[HALO_LAYOUT_ASSERT_32(sizeof(struct transparent_geometry_group) == 0xA0)];
+typedef char transparent_geometry_group_geometry_flags_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct transparent_geometry_group, geometry_flags) == 0x0)];
+typedef char transparent_geometry_group_object_index_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct transparent_geometry_group, object_index) == 0x4)];
+typedef char transparent_geometry_group_source_object_index_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct transparent_geometry_group, source_object_index) == 0x8)];
+typedef char transparent_geometry_group_shader_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct transparent_geometry_group, shader) == 0xC)];
+typedef char transparent_geometry_group_dynamic_vertex_buffer_index_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct transparent_geometry_group, dynamic_vertex_buffer_index) == 0x54)];
+typedef char transparent_geometry_group_vertex_buffer_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct transparent_geometry_group, vertex_buffer) == 0x58)];
+typedef char transparent_geometry_group_z_sort_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct transparent_geometry_group, z_sort) == 0x70)];
+typedef char transparent_geometry_group_sorted_index_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct transparent_geometry_group, sorted_index) == 0x90)];
+typedef char transparent_geometry_group_cortana_hack_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct transparent_geometry_group, cortana_hack) == 0x9D)];
 
 /* ---------- prototypes */
 

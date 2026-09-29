@@ -680,68 +680,68 @@ struct IDirectSoundBuffer {};
 #endif
 
 struct D3DBaseTexture {
-    unsigned long Common;
-    unsigned long Data;
-    unsigned long Lock;
-    unsigned long Format;
-    unsigned long Size;
+    HALO_ULONG32 Common;
+    HALO_ULONG32 Data;
+    HALO_ULONG32 Lock;
+    HALO_ULONG32 Format;
+    HALO_ULONG32 Size;
 };
 
 struct D3DCubeTexture {
-    unsigned long Common;
-    unsigned long Data;
-    unsigned long Lock;
-    unsigned long Format;
-    unsigned long Size;
+    HALO_ULONG32 Common;
+    HALO_ULONG32 Data;
+    HALO_ULONG32 Lock;
+    HALO_ULONG32 Format;
+    HALO_ULONG32 Size;
 };
 
 struct D3DIndexBuffer {
-    unsigned long Common;
-    unsigned long Data;
-    unsigned long Lock;
+    HALO_ULONG32 Common;
+    HALO_ULONG32 Data;
+    HALO_ULONG32 Lock;
 };
 
 struct D3DPalette {
-    unsigned long Common;
-    unsigned long Data;
-    unsigned long Lock;
+    HALO_ULONG32 Common;
+    HALO_ULONG32 Data;
+    HALO_ULONG32 Lock;
 };
 
 struct D3DResource {
-    unsigned long Common;
-    unsigned long Data;
-    unsigned long Lock;
+    HALO_ULONG32 Common;
+    HALO_ULONG32 Data;
+    HALO_ULONG32 Lock;
 };
 
 struct D3DSurface {
-    unsigned long Common;
-    unsigned long Data;
-    unsigned long Lock;
-    unsigned long Format;
-    unsigned long Size;
+    HALO_ULONG32 Common;
+    HALO_ULONG32 Data;
+    HALO_ULONG32 Lock;
+    HALO_ULONG32 Format;
+    HALO_ULONG32 Size;
     struct D3DBaseTexture *Parent;
 };
 
 struct D3DTexture {
-    unsigned long Common;
-    unsigned long Data;
-    unsigned long Lock;
-    unsigned long Format;
-    unsigned long Size;
+    HALO_ULONG32 Common;
+    HALO_ULONG32 Data;
+    HALO_ULONG32 Lock;
+    HALO_ULONG32 Format;
+    HALO_ULONG32 Size;
 };
 
 struct D3DVertexBuffer {
-    unsigned long Common;
-    unsigned long Data;
-    unsigned long Lock;
+    HALO_ULONG32 Common;
+    HALO_ULONG32 Data;
+    HALO_ULONG32 Lock;
 };
 
 struct D3DVolumeTexture {
-    unsigned long Common;
-    unsigned long Data;
-    unsigned long Lock;
-    unsigned long Format;
-    unsigned long Size;
+    HALO_ULONG32 Common;
+    HALO_ULONG32 Data;
+    HALO_ULONG32 Lock;
+    HALO_ULONG32 Format;
+    HALO_ULONG32 Size;
 };
 
 struct D3DXVECTOR4 {
@@ -756,13 +756,13 @@ struct IDirectSoundStream {
 };
 
 struct IDirectSoundStreamVtbl {
-    unsigned long (__stdcall *AddRef)(struct IDirectSoundStream *);
-    unsigned long (__stdcall *Release)(struct IDirectSoundStream *);
-    long (__stdcall *GetInfo)(struct IDirectSoundStream *, struct _XMEDIAINFO *);
-    long (__stdcall *GetStatus)(struct IDirectSoundStream *, unsigned long *);
-    long (__stdcall *Process)(struct IDirectSoundStream *, const struct _XMEDIAPACKET *, const struct _XMEDIAPACKET *);
-    long (__stdcall *Discontinuity)(struct IDirectSoundStream *);
-    long (__stdcall *Flush)(struct IDirectSoundStream *);
+    HALO_ULONG32 (__stdcall *AddRef)(struct IDirectSoundStream *);
+    HALO_ULONG32 (__stdcall *Release)(struct IDirectSoundStream *);
+    HALO_LONG32 (__stdcall *GetInfo)(struct IDirectSoundStream *, struct _XMEDIAINFO *);
+    HALO_LONG32 (__stdcall *GetStatus)(struct IDirectSoundStream *, HALO_ULONG32 *);
+    HALO_LONG32 (__stdcall *Process)(struct IDirectSoundStream *, const struct _XMEDIAPACKET *, const struct _XMEDIAPACKET *);
+    HALO_LONG32 (__stdcall *Discontinuity)(struct IDirectSoundStream *);
+    HALO_LONG32 (__stdcall *Flush)(struct IDirectSoundStream *);
 };
 
 struct WSAData {
@@ -787,7 +787,7 @@ struct in_addr {
             unsigned short s_w1;
             unsigned short s_w2;
         } S_un_w;
-        unsigned long S_addr;
+        HALO_ULONG32 S_addr;
     } S_un;
 };
 
@@ -825,33 +825,33 @@ struct _FLOATING_SAVE_AREA {
     unsigned short StatusWord;
     unsigned short TagWord;
     unsigned short ErrorOpcode;
-    unsigned long ErrorOffset;
-    unsigned long ErrorSelector;
-    unsigned long DataOffset;
-    unsigned long DataSelector;
-    unsigned long MXCsr;
-    unsigned long Reserved2;
+    HALO_ULONG32 ErrorOffset;
+    HALO_ULONG32 ErrorSelector;
+    HALO_ULONG32 DataOffset;
+    HALO_ULONG32 DataSelector;
+    HALO_ULONG32 MXCsr;
+    HALO_ULONG32 Reserved2;
     unsigned char RegisterArea[128];
     unsigned char XmmRegisterArea[128];
     unsigned char Reserved4[224];
-    unsigned long Cr0NpxState;
+    HALO_ULONG32 Cr0NpxState;
 };
 
 struct _CONTEXT {
-    unsigned long ContextFlags;
+    HALO_ULONG32 ContextFlags;
     struct _FLOATING_SAVE_AREA FloatSave;
-    unsigned long Edi;
-    unsigned long Esi;
-    unsigned long Ebx;
-    unsigned long Edx;
-    unsigned long Ecx;
-    unsigned long Eax;
-    unsigned long Ebp;
-    unsigned long Eip;
-    unsigned long SegCs;
-    unsigned long EFlags;
-    unsigned long Esp;
-    unsigned long SegSs;
+    HALO_ULONG32 Edi;
+    HALO_ULONG32 Esi;
+    HALO_ULONG32 Ebx;
+    HALO_ULONG32 Edx;
+    HALO_ULONG32 Ecx;
+    HALO_ULONG32 Eax;
+    HALO_ULONG32 Ebp;
+    HALO_ULONG32 Eip;
+    HALO_ULONG32 SegCs;
+    HALO_ULONG32 EFlags;
+    HALO_ULONG32 Esp;
+    HALO_ULONG32 SegSs;
 };
 
 struct _D3DBOX {
@@ -866,56 +866,56 @@ struct _D3DBOX {
 struct _D3DCAPS8 {
     enum _D3DDEVTYPE DeviceType;
     unsigned int AdapterOrdinal;
-    unsigned long Caps;
-    unsigned long Caps2;
-    unsigned long Caps3;
-    unsigned long PresentationIntervals;
-    unsigned long CursorCaps;
-    unsigned long DevCaps;
-    unsigned long PrimitiveMiscCaps;
-    unsigned long RasterCaps;
-    unsigned long ZCmpCaps;
-    unsigned long SrcBlendCaps;
-    unsigned long DestBlendCaps;
-    unsigned long AlphaCmpCaps;
-    unsigned long ShadeCaps;
-    unsigned long TextureCaps;
-    unsigned long TextureFilterCaps;
-    unsigned long CubeTextureFilterCaps;
-    unsigned long VolumeTextureFilterCaps;
-    unsigned long TextureAddressCaps;
-    unsigned long VolumeTextureAddressCaps;
-    unsigned long LineCaps;
-    unsigned long MaxTextureWidth;
-    unsigned long MaxTextureHeight;
-    unsigned long MaxVolumeExtent;
-    unsigned long MaxTextureRepeat;
-    unsigned long MaxTextureAspectRatio;
-    unsigned long MaxAnisotropy;
+    HALO_ULONG32 Caps;
+    HALO_ULONG32 Caps2;
+    HALO_ULONG32 Caps3;
+    HALO_ULONG32 PresentationIntervals;
+    HALO_ULONG32 CursorCaps;
+    HALO_ULONG32 DevCaps;
+    HALO_ULONG32 PrimitiveMiscCaps;
+    HALO_ULONG32 RasterCaps;
+    HALO_ULONG32 ZCmpCaps;
+    HALO_ULONG32 SrcBlendCaps;
+    HALO_ULONG32 DestBlendCaps;
+    HALO_ULONG32 AlphaCmpCaps;
+    HALO_ULONG32 ShadeCaps;
+    HALO_ULONG32 TextureCaps;
+    HALO_ULONG32 TextureFilterCaps;
+    HALO_ULONG32 CubeTextureFilterCaps;
+    HALO_ULONG32 VolumeTextureFilterCaps;
+    HALO_ULONG32 TextureAddressCaps;
+    HALO_ULONG32 VolumeTextureAddressCaps;
+    HALO_ULONG32 LineCaps;
+    HALO_ULONG32 MaxTextureWidth;
+    HALO_ULONG32 MaxTextureHeight;
+    HALO_ULONG32 MaxVolumeExtent;
+    HALO_ULONG32 MaxTextureRepeat;
+    HALO_ULONG32 MaxTextureAspectRatio;
+    HALO_ULONG32 MaxAnisotropy;
     float MaxVertexW;
     float GuardBandLeft;
     float GuardBandTop;
     float GuardBandRight;
     float GuardBandBottom;
     float ExtentsAdjust;
-    unsigned long StencilCaps;
-    unsigned long FVFCaps;
-    unsigned long TextureOpCaps;
-    unsigned long MaxTextureBlendStages;
-    unsigned long MaxSimultaneousTextures;
-    unsigned long VertexProcessingCaps;
-    unsigned long MaxActiveLights;
-    unsigned long MaxUserClipPlanes;
-    unsigned long MaxVertexBlendMatrices;
-    unsigned long MaxVertexBlendMatrixIndex;
+    HALO_ULONG32 StencilCaps;
+    HALO_ULONG32 FVFCaps;
+    HALO_ULONG32 TextureOpCaps;
+    HALO_ULONG32 MaxTextureBlendStages;
+    HALO_ULONG32 MaxSimultaneousTextures;
+    HALO_ULONG32 VertexProcessingCaps;
+    HALO_ULONG32 MaxActiveLights;
+    HALO_ULONG32 MaxUserClipPlanes;
+    HALO_ULONG32 MaxVertexBlendMatrices;
+    HALO_ULONG32 MaxVertexBlendMatrixIndex;
     float MaxPointSize;
-    unsigned long MaxPrimitiveCount;
-    unsigned long MaxVertexIndex;
-    unsigned long MaxStreams;
-    unsigned long MaxStreamStride;
-    unsigned long VertexShaderVersion;
-    unsigned long MaxVertexShaderConst;
-    unsigned long PixelShaderVersion;
+    HALO_ULONG32 MaxPrimitiveCount;
+    HALO_ULONG32 MaxVertexIndex;
+    HALO_ULONG32 MaxStreams;
+    HALO_ULONG32 MaxStreamStride;
+    HALO_ULONG32 VertexShaderVersion;
+    HALO_ULONG32 MaxVertexShaderConst;
+    HALO_ULONG32 PixelShaderVersion;
     float MaxPixelShaderValue;
 };
 
@@ -959,114 +959,114 @@ struct _D3DPRESENT_PARAMETERS_ {
     unsigned int BackBufferHeight;
     enum _D3DFORMAT BackBufferFormat;
     unsigned int BackBufferCount;
-    unsigned long MultiSampleType;
+    HALO_ULONG32 MultiSampleType;
     enum _D3DSWAPEFFECT SwapEffect;
     struct HWND__ *hDeviceWindow;
     int Windowed;
     int EnableAutoDepthStencil;
     enum _D3DFORMAT AutoDepthStencilFormat;
-    unsigned long Flags;
+    HALO_ULONG32 Flags;
     unsigned int FullScreen_RefreshRateInHz;
     unsigned int FullScreen_PresentationInterval;
 };
 
 struct _D3DPixelShaderDef {
-    unsigned long PSAlphaInputs[8];
-    unsigned long PSFinalCombinerInputsABCD;
-    unsigned long PSFinalCombinerInputsEFG;
-    unsigned long PSConstant0[8];
-    unsigned long PSConstant1[8];
-    unsigned long PSAlphaOutputs[8];
-    unsigned long PSRGBInputs[8];
-    unsigned long PSCompareMode;
-    unsigned long PSFinalCombinerConstant0;
-    unsigned long PSFinalCombinerConstant1;
-    unsigned long PSRGBOutputs[8];
-    unsigned long PSCombinerCount;
-    unsigned long PSTextureModes;
-    unsigned long PSDotMapping;
-    unsigned long PSInputTexture;
-    unsigned long PSC0Mapping;
-    unsigned long PSC1Mapping;
-    unsigned long PSFinalCombinerConstants;
+    HALO_ULONG32 PSAlphaInputs[8];
+    HALO_ULONG32 PSFinalCombinerInputsABCD;
+    HALO_ULONG32 PSFinalCombinerInputsEFG;
+    HALO_ULONG32 PSConstant0[8];
+    HALO_ULONG32 PSConstant1[8];
+    HALO_ULONG32 PSAlphaOutputs[8];
+    HALO_ULONG32 PSRGBInputs[8];
+    HALO_ULONG32 PSCompareMode;
+    HALO_ULONG32 PSFinalCombinerConstant0;
+    HALO_ULONG32 PSFinalCombinerConstant1;
+    HALO_ULONG32 PSRGBOutputs[8];
+    HALO_ULONG32 PSCombinerCount;
+    HALO_ULONG32 PSTextureModes;
+    HALO_ULONG32 PSDotMapping;
+    HALO_ULONG32 PSInputTexture;
+    HALO_ULONG32 PSC0Mapping;
+    HALO_ULONG32 PSC1Mapping;
+    HALO_ULONG32 PSFinalCombinerConstants;
 };
 
 struct _D3DRECT {
-    long x1;
-    long y1;
-    long x2;
-    long y2;
+    HALO_LONG32 x1;
+    HALO_LONG32 y1;
+    HALO_LONG32 x2;
+    HALO_LONG32 y2;
 };
 
 struct _D3DSURFACE_DESC {
     enum _D3DFORMAT Format;
     enum _D3DRESOURCETYPE Type;
-    unsigned long Usage;
+    HALO_ULONG32 Usage;
     unsigned int Size;
-    unsigned long MultiSampleType;
+    HALO_ULONG32 MultiSampleType;
     unsigned int Width;
     unsigned int Height;
 };
 
 struct _D3DVIEWPORT8 {
-    unsigned long X;
-    unsigned long Y;
-    unsigned long Width;
-    unsigned long Height;
+    HALO_ULONG32 X;
+    HALO_ULONG32 Y;
+    HALO_ULONG32 Width;
+    HALO_ULONG32 Height;
     float MinZ;
     float MaxZ;
 };
 
 struct _DSBUFFERDESC {
-    unsigned long dwSize;
-    unsigned long dwFlags;
-    unsigned long dwBufferBytes;
+    HALO_ULONG32 dwSize;
+    HALO_ULONG32 dwFlags;
+    HALO_ULONG32 dwBufferBytes;
     struct tWAVEFORMATEX *lpwfxFormat;
-    unsigned long dwMixBinMask;
-    unsigned long dwInputMixBinMask;
+    HALO_ULONG32 dwMixBinMask;
+    HALO_ULONG32 dwInputMixBinMask;
 };
 
 struct _DSCAPS {
-    unsigned long dwFree2DBuffers;
-    unsigned long dwFree3DBuffers;
-    unsigned long dwFreeBufferSGEs;
-    unsigned long dwMemoryAllocated;
+    HALO_ULONG32 dwFree2DBuffers;
+    HALO_ULONG32 dwFree3DBuffers;
+    HALO_ULONG32 dwFreeBufferSGEs;
+    HALO_ULONG32 dwMemoryAllocated;
 };
 
 struct _DSEFFECTIMAGELOC {
-    unsigned long dwI3DL2ReverbIndex;
-    unsigned long dwCrosstalkIndex;
+    HALO_ULONG32 dwI3DL2ReverbIndex;
+    HALO_ULONG32 dwCrosstalkIndex;
 };
 
 struct _DSI3DL2OBSTRUCTION {
-    long lHFLevel;
+    HALO_LONG32 lHFLevel;
     float flLFRatio;
 };
 
 struct _DSI3DL2OCCLUSION {
-    long lHFLevel;
+    HALO_LONG32 lHFLevel;
     float flLFRatio;
 };
 
 struct _DSI3DL2BUFFER {
-    long lDirect;
-    long lDirectHF;
-    long lRoom;
-    long lRoomHF;
+    HALO_LONG32 lDirect;
+    HALO_LONG32 lDirectHF;
+    HALO_LONG32 lRoom;
+    HALO_LONG32 lRoomHF;
     float flRoomRolloffFactor;
     struct _DSI3DL2OBSTRUCTION Obstruction;
     struct _DSI3DL2OCCLUSION Occlusion;
 };
 
 struct _DSI3DL2LISTENER {
-    long lRoom;
-    long lRoomHF;
+    HALO_LONG32 lRoom;
+    HALO_LONG32 lRoomHF;
     float flRoomRolloffFactor;
     float flDecayTime;
     float flDecayHFRatio;
-    long lReflections;
+    HALO_LONG32 lReflections;
     float flReflectionsDelay;
-    long lReverb;
+    HALO_LONG32 lReverb;
     float flReverbDelay;
     float flDiffusion;
     float flDensity;
@@ -1074,12 +1074,12 @@ struct _DSI3DL2LISTENER {
 };
 
 struct _DSSTREAMDESC {
-    unsigned long dwFlags;
-    unsigned long dwMaxAttachedPackets;
+    HALO_ULONG32 dwFlags;
+    HALO_ULONG32 dwMaxAttachedPackets;
     struct tWAVEFORMATEX *lpwfxFormat;
-    void (__stdcall *lpfnCallback)(void *, void *, unsigned long);
+    void (__stdcall *lpfnCallback)(void *, void *, HALO_ULONG32);
     void *lpvContext;
-    unsigned long dwMixBinMask;
+    HALO_ULONG32 dwMixBinMask;
 };
 
 struct _EXCEPTION_POINTERS {
@@ -1088,18 +1088,18 @@ struct _EXCEPTION_POINTERS {
 };
 
 struct _FILETIME {
-    unsigned long dwLowDateTime;
-    unsigned long dwHighDateTime;
+    HALO_ULONG32 dwLowDateTime;
+    HALO_ULONG32 dwHighDateTime;
 };
 
 union _LARGE_INTEGER {
     struct {
-        unsigned long LowPart;
-        long HighPart;
+        HALO_ULONG32 LowPart;
+        HALO_LONG32 HighPart;
     };
     struct {
-        unsigned long LowPart;
-        long HighPart;
+        HALO_ULONG32 LowPart;
+        HALO_LONG32 HighPart;
     } u;
     __int64 QuadPart;
 };
@@ -1109,10 +1109,10 @@ struct _LAUNCH_DATA {
 };
 
 struct _LD_LAUNCH_DASHBOARD {
-    unsigned long dwReason;
-    unsigned long dwContext;
-    unsigned long dwParameter1;
-    unsigned long dwParameter2;
+    HALO_ULONG32 dwReason;
+    HALO_ULONG32 dwContext;
+    HALO_ULONG32 dwParameter1;
+    HALO_ULONG32 dwParameter2;
     unsigned char Reserved[3056];
 };
 
@@ -1122,21 +1122,21 @@ struct _LIST_ENTRY {
 };
 
 struct _MEMORYSTATUS {
-    unsigned long dwLength;
-    unsigned long dwMemoryLoad;
-    unsigned long dwTotalPhys;
-    unsigned long dwAvailPhys;
-    unsigned long dwTotalPageFile;
-    unsigned long dwAvailPageFile;
-    unsigned long dwTotalVirtual;
-    unsigned long dwAvailVirtual;
+    HALO_ULONG32 dwLength;
+    HALO_ULONG32 dwMemoryLoad;
+    HALO_ULONG32 dwTotalPhys;
+    HALO_ULONG32 dwAvailPhys;
+    HALO_ULONG32 dwTotalPageFile;
+    HALO_ULONG32 dwAvailPageFile;
+    HALO_ULONG32 dwTotalVirtual;
+    HALO_ULONG32 dwAvailVirtual;
 };
 
 struct _OVERLAPPED {
-    unsigned long Internal;
-    unsigned long InternalHigh;
-    unsigned long Offset;
-    unsigned long OffsetHigh;
+    HALO_ULONG32 Internal;
+    HALO_ULONG32 InternalHigh;
+    HALO_ULONG32 Offset;
+    HALO_ULONG32 OffsetHigh;
     void *hEvent;
 };
 
@@ -1147,13 +1147,13 @@ struct _RTL_CRITICAL_SECTION {
             unsigned char Absolute;
             unsigned char Size;
             unsigned char Inserted;
-            long SignalState;
+            HALO_LONG32 SignalState;
             struct _LIST_ENTRY WaitListHead;
         } Event;
-        unsigned long RawEvent[4];
+        HALO_ULONG32 RawEvent[4];
     } Synchronization;
-    long LockCount;
-    long RecursionCount;
+    HALO_LONG32 LockCount;
+    HALO_LONG32 RecursionCount;
     void *OwningThread;
 };
 
@@ -1170,34 +1170,34 @@ struct _SYSTEMTIME {
 
 union _ULARGE_INTEGER {
     struct {
-        unsigned long LowPart;
-        unsigned long HighPart;
+        HALO_ULONG32 LowPart;
+        HALO_ULONG32 HighPart;
     };
     struct {
-        unsigned long LowPart;
-        unsigned long HighPart;
+        HALO_ULONG32 LowPart;
+        HALO_ULONG32 HighPart;
     } u;
     unsigned __int64 QuadPart;
 };
 
 struct _WIN32_FILE_ATTRIBUTE_DATA {
-    unsigned long dwFileAttributes;
+    HALO_ULONG32 dwFileAttributes;
     struct _FILETIME ftCreationTime;
     struct _FILETIME ftLastAccessTime;
     struct _FILETIME ftLastWriteTime;
-    unsigned long nFileSizeHigh;
-    unsigned long nFileSizeLow;
+    HALO_ULONG32 nFileSizeHigh;
+    HALO_ULONG32 nFileSizeLow;
 };
 
 struct _WIN32_FIND_DATAA {
-    unsigned long dwFileAttributes;
+    HALO_ULONG32 dwFileAttributes;
     struct _FILETIME ftCreationTime;
     struct _FILETIME ftLastAccessTime;
     struct _FILETIME ftLastWriteTime;
-    unsigned long nFileSizeHigh;
-    unsigned long nFileSizeLow;
-    unsigned long dwReserved0;
-    unsigned long dwReserved1;
+    HALO_ULONG32 nFileSizeHigh;
+    HALO_ULONG32 nFileSizeLow;
+    HALO_ULONG32 dwReserved0;
+    HALO_ULONG32 dwReserved1;
     char cFileName[260];
     char cAlternateFileName[14];
 };
@@ -1208,7 +1208,7 @@ struct _XCALCSIG_SIGNATURE {
 
 struct _XDEVICE_PREALLOC_TYPE {
     struct _XPP_DEVICE_TYPE *DeviceType;
-    unsigned long dwPreallocCount;
+    HALO_ULONG32 dwPreallocCount;
 };
 
 struct _XGAME_FIND_DATA {
@@ -1218,10 +1218,10 @@ struct _XGAME_FIND_DATA {
 };
 
 struct _XINPUT_DEBUG_KEYQUEUE_PARAMETERS {
-    unsigned long dwFlags;
-    unsigned long dwQueueSize;
-    unsigned long dwRepeatDelay;
-    unsigned long dwRepeatInterval;
+    HALO_ULONG32 dwFlags;
+    HALO_ULONG32 dwQueueSize;
+    HALO_ULONG32 dwRepeatDelay;
+    HALO_ULONG32 dwRepeatInterval;
 };
 
 struct _XINPUT_DEBUG_KEYSTROKE {
@@ -1232,7 +1232,7 @@ struct _XINPUT_DEBUG_KEYSTROKE {
 
 #pragma pack(push, 2)
 struct _XINPUT_FEEDBACK_HEADER {
-    unsigned long dwStatus;
+    HALO_ULONG32 dwStatus;
     void *hEvent;
     unsigned char Reserved[58];
 };
@@ -1261,23 +1261,23 @@ struct _XINPUT_GAMEPAD {
 
 #pragma pack(push, 2)
 struct _XINPUT_STATE {
-    unsigned long dwPacketNumber;
+    HALO_ULONG32 dwPacketNumber;
     struct _XINPUT_GAMEPAD Gamepad;
 };
 #pragma pack(pop)
 
 struct _XMEDIAINFO {
-    unsigned long dwFlags;
-    unsigned long dwInputSize;
-    unsigned long dwOutputSize;
-    unsigned long dwMaxLookahead;
+    HALO_ULONG32 dwFlags;
+    HALO_ULONG32 dwInputSize;
+    HALO_ULONG32 dwOutputSize;
+    HALO_ULONG32 dwMaxLookahead;
 };
 
 struct _XMEDIAPACKET {
     void *pvBuffer;
-    unsigned long dwMaxSize;
-    unsigned long *pdwCompletedSize;
-    unsigned long *pdwStatus;
+    HALO_ULONG32 dwMaxSize;
+    HALO_ULONG32 *pdwCompletedSize;
+    HALO_ULONG32 *pdwStatus;
     union {
         void *hCompletionEvent;
         void *pContext;
@@ -1286,7 +1286,7 @@ struct _XMEDIAPACKET {
 };
 
 struct _XPP_DEVICE_TYPE {
-    unsigned long Reserved[3];
+    HALO_ULONG32 Reserved[3];
 };
 
 struct fd_set {
@@ -1310,8 +1310,8 @@ struct sockaddr_in {
 struct tWAVEFORMATEX {
     unsigned short wFormatTag;
     unsigned short nChannels;
-    unsigned long nSamplesPerSec;
-    unsigned long nAvgBytesPerSec;
+    HALO_ULONG32 nSamplesPerSec;
+    HALO_ULONG32 nAvgBytesPerSec;
     unsigned short nBlockAlign;
     unsigned short wBitsPerSample;
     unsigned short cbSize;
@@ -1319,15 +1319,15 @@ struct tWAVEFORMATEX {
 #pragma pack(pop)
 
 struct tagRECT {
-    long left;
-    long top;
-    long right;
-    long bottom;
+    HALO_LONG32 left;
+    HALO_LONG32 top;
+    HALO_LONG32 right;
+    HALO_LONG32 bottom;
 };
 
 struct timeval {
-    long tv_sec;
-    long tv_usec;
+    HALO_LONG32 tv_sec;
+    HALO_LONG32 tv_usec;
 };
 
 #pragma pack(push, 2)
@@ -1343,13 +1343,13 @@ typedef int BOOL;
 typedef unsigned char BYTE;
 typedef char CHAR;
 typedef struct _CONTEXT CONTEXT;
-typedef unsigned long D3DBACKBUFFER_TYPE;
+typedef HALO_ULONG32 D3DBACKBUFFER_TYPE;
 typedef struct _D3DBOX D3DBOX;
 typedef struct D3DBaseTexture D3DBaseTexture;
-typedef void (*D3DCALLBACK)(unsigned long);
+typedef void (*D3DCALLBACK)(HALO_ULONG32);
 typedef enum _D3DCALLBACKTYPE D3DCALLBACKTYPE;
 typedef struct _D3DCAPS8 D3DCAPS8;
-typedef unsigned long D3DCOLOR;
+typedef HALO_ULONG32 D3DCOLOR;
 typedef enum _D3DCUBEMAP_FACES D3DCUBEMAP_FACES;
 typedef struct D3DCubeTexture D3DCubeTexture;
 typedef enum _D3DDEVTYPE D3DDEVTYPE;
@@ -1361,14 +1361,14 @@ typedef struct _D3DLOCKED_RECT D3DLOCKED_RECT;
 typedef struct _D3DMATRIX D3DMATRIX;
 typedef enum _D3DPALETTESIZE D3DPALETTESIZE;
 typedef struct _D3DPixelShaderDef D3DPIXELSHADERDEF;
-typedef unsigned long D3DPOOL;
+typedef HALO_ULONG32 D3DPOOL;
 typedef struct _D3DPRESENT_PARAMETERS_ D3DPRESENT_PARAMETERS;
 typedef enum _D3DPRIMITIVETYPE D3DPRIMITIVETYPE;
 typedef struct D3DPalette D3DPalette;
 typedef struct _D3DRECT D3DRECT;
 typedef enum _D3DRENDERSTATETYPE D3DRENDERSTATETYPE;
 typedef struct D3DResource D3DResource;
-typedef unsigned long D3DSHADERCONSTANTMODE;
+typedef HALO_ULONG32 D3DSHADERCONSTANTMODE;
 typedef struct _D3DSURFACE_DESC D3DSURFACE_DESC;
 typedef struct D3DSurface D3DSurface;
 typedef enum _D3DTEXTURESTAGESTATETYPE D3DTEXTURESTAGESTATETYPE;
@@ -1385,7 +1385,7 @@ typedef struct _DSEFFECTIMAGELOC DSEFFECTIMAGELOC;
 typedef struct _DSI3DL2BUFFER DSI3DL2BUFFER;
 typedef struct _DSI3DL2LISTENER DSI3DL2LISTENER;
 typedef struct _DSSTREAMDESC DSSTREAMDESC;
-typedef unsigned long DWORD;
+typedef HALO_ULONG32 DWORD;
 typedef unsigned long DWORD_PTR;
 typedef struct Direct3D Direct3D;
 typedef struct _FILETIME FILETIME;
@@ -1395,7 +1395,7 @@ typedef void *HANDLE;
 typedef void *HGLOBAL;
 typedef struct HINSTANCE__ *HINSTANCE;
 typedef void *HLOCAL;
-typedef long HRESULT;
+typedef HALO_LONG32 HRESULT;
 typedef struct HWND__ *HWND;
 typedef struct IDirectSoundBuffer IDirectSoundBuffer;
 typedef struct IDirectSoundStream IDirectSoundStream;
@@ -1404,7 +1404,7 @@ typedef int INT;
 typedef struct in_addr IN_ADDR;
 typedef union _LARGE_INTEGER LARGE_INTEGER;
 typedef struct _LAUNCH_DATA LAUNCH_DATA;
-typedef long LONG;
+typedef HALO_LONG32 LONG;
 typedef __int64 LONGLONG;
 typedef const struct _DSBUFFERDESC *LPCDSBUFFERDESC;
 typedef const struct _DSEFFECTIMAGELOC *LPCDSEFFECTIMAGELOC;
@@ -1420,18 +1420,18 @@ typedef struct IDirectSoundBuffer *LPDIRECTSOUNDBUFFER;
 typedef struct IDirectSoundStream *LPDIRECTSOUNDSTREAM;
 typedef struct _DSCAPS *LPDSCAPS;
 typedef struct _DSEFFECTIMAGEDESC *LPDSEFFECTIMAGEDESC;
-typedef unsigned long *LPDWORD;
+typedef DWORD *LPDWORD;
 typedef struct _FILETIME *LPFILETIME;
-typedef void (__stdcall *LPFNXMEDIAOBJECTCALLBACK)(void *, void *, unsigned long);
+typedef void (__stdcall *LPFNXMEDIAOBJECTCALLBACK)(void *, void *, HALO_ULONG32);
 typedef struct _GUID *LPGUID;
-typedef long *LPLONG;
+typedef LONG *LPLONG;
 typedef struct _MEMORYSTATUS *LPMEMORYSTATUS;
 typedef struct _OVERLAPPED *LPOVERLAPPED;
-typedef void (__stdcall *LPOVERLAPPED_COMPLETION_ROUTINE)(unsigned long, unsigned long, struct _OVERLAPPED *);
+typedef void (__stdcall *LPOVERLAPPED_COMPLETION_ROUTINE)(HALO_ULONG32, HALO_ULONG32, struct _OVERLAPPED *);
 typedef void *LPSECURITY_ATTRIBUTES;
 typedef char *LPSTR;
 typedef struct _SYSTEMTIME *LPSYSTEMTIME;
-typedef unsigned long (__stdcall *LPTHREAD_START_ROUTINE)(void *);
+typedef HALO_ULONG32 (__stdcall *LPTHREAD_START_ROUTINE)(void *);
 typedef struct IUnknown *LPUNKNOWN;
 typedef void *LPVOID;
 typedef struct _WIN32_FIND_DATAA *LPWIN32_FIND_DATAA;
@@ -1440,11 +1440,11 @@ typedef unsigned short *LPWSTR;
 typedef struct _XMEDIAINFO *LPXMEDIAINFO;
 typedef struct _MEMORYSTATUS MEMORYSTATUS;
 typedef struct _OVERLAPPED OVERLAPPED;
-typedef unsigned long *PDWORD;
+typedef DWORD *PDWORD;
 typedef struct _EXCEPTION_POINTERS *PEXCEPTION_POINTERS;
 typedef struct _LAUNCH_DATA *PLAUNCH_DATA;
 typedef struct _LD_LAUNCH_DASHBOARD *PLD_LAUNCH_DASHBOARD;
-typedef long *PLONG;
+typedef LONG *PLONG;
 typedef struct _RTL_CRITICAL_SECTION *PRTL_CRITICAL_SECTION;
 typedef union _ULARGE_INTEGER *PULARGE_INTEGER;
 typedef struct _XCALCSIG_SIGNATURE *PXCALCSIG_SIGNATURE;
@@ -1464,7 +1464,7 @@ typedef unsigned int SOCKET;
 typedef struct _SYSTEMTIME SYSTEMTIME;
 typedef unsigned int UINT;
 typedef union _ULARGE_INTEGER ULARGE_INTEGER;
-typedef unsigned long ULONG;
+typedef HALO_ULONG32 ULONG;
 typedef unsigned __int64 ULONGLONG;
 typedef unsigned long ULONG_PTR;
 typedef struct tWAVEFORMATEX WAVEFORMATEX;
@@ -1540,6 +1540,10 @@ typedef struct tWAVEFORMATEX tWAVEFORMATEX;
 typedef struct tagRECT tagRECT;
 typedef struct timeval timeval;
 typedef unsigned int u_int;
+/* glibc typedefs u_long (unsigned long) too; identical types made the
+double definition legal on 32-bit. Keep glibc's spelling on LP64; the
+winsong struct fields that must stay 32-bit (in_addr.S_addr, ...) are
+pinned directly. */
 typedef unsigned long u_long;
 typedef unsigned short u_short;
 typedef struct xbox_adpcmwaveformat_tag xbox_adpcmwaveformat_tag;
@@ -1550,237 +1554,237 @@ typedef struct xbox_adpcmwaveformat_tag xbox_adpcmwaveformat_tag;
 /* ---------- functions */
 
 int __stdcall CloseHandle(void *);
-long __stdcall CompareFileTime(const struct _FILETIME *, const struct _FILETIME *);
+HALO_LONG32 __stdcall CompareFileTime(const struct _FILETIME *, const struct _FILETIME *);
 int __stdcall CopyFileA(const char *, const char *, int);
 int __stdcall CreateDirectoryA(const char *, void *);
 void *__stdcall CreateEventA(void *, int, int, const char *);
-void *__stdcall CreateFileA(const char *, unsigned long, unsigned long, void *, unsigned long, unsigned long, void *);
+void *__stdcall CreateFileA(const char *, HALO_ULONG32, HALO_ULONG32, void *, HALO_ULONG32, HALO_ULONG32, void *);
 void *__stdcall CreateMutexA(void *, int, const char *);
-void *__stdcall CreateThread(void *, unsigned long, unsigned long (__stdcall *)(void *), void *, unsigned long, unsigned long *);
-void __stdcall D3DCubeTexture_LockRect(struct D3DCubeTexture *, enum _D3DCUBEMAP_FACES, unsigned int, struct _D3DLOCKED_RECT *, const struct tagRECT *, unsigned long);
+void *__stdcall CreateThread(void *, HALO_ULONG32, HALO_ULONG32 (__stdcall *)(void *), void *, HALO_ULONG32, HALO_ULONG32 *);
+void __stdcall D3DCubeTexture_LockRect(struct D3DCubeTexture *, enum _D3DCUBEMAP_FACES, unsigned int, struct _D3DLOCKED_RECT *, const struct tagRECT *, HALO_ULONG32);
 void __stdcall D3DDevice_Begin(enum _D3DPRIMITIVETYPE);
 void __stdcall D3DDevice_BeginVisibilityTest(void);
 void __stdcall D3DDevice_BlockUntilVerticalBlank(void);
-void __stdcall D3DDevice_Clear(unsigned long, const struct _D3DRECT *, unsigned long, unsigned long, float, unsigned long);
-long __stdcall D3DDevice_CreateCubeTexture(unsigned int, unsigned int, unsigned long, enum _D3DFORMAT, unsigned long, struct D3DCubeTexture **);
-long __stdcall D3DDevice_CreateIndexBuffer(unsigned int, unsigned long, enum _D3DFORMAT, unsigned long, struct D3DIndexBuffer **);
-long __stdcall D3DDevice_CreatePalette(enum _D3DPALETTESIZE, struct D3DPalette **);
-long __stdcall D3DDevice_CreateTexture(unsigned int, unsigned int, unsigned int, unsigned long, enum _D3DFORMAT, unsigned long, struct D3DTexture **);
-long __stdcall D3DDevice_CreateVertexBuffer(unsigned int, unsigned long, unsigned long, unsigned long, struct D3DVertexBuffer **);
-long __stdcall D3DDevice_CreateVertexShader(const unsigned long *, const unsigned long *, unsigned long *, unsigned long);
-long __stdcall D3DDevice_CreateVolumeTexture(unsigned int, unsigned int, unsigned int, unsigned int, unsigned long, enum _D3DFORMAT, unsigned long, struct D3DVolumeTexture **);
-void __stdcall D3DDevice_DeleteVertexShader(unsigned long);
+void __stdcall D3DDevice_Clear(HALO_ULONG32, const struct _D3DRECT *, HALO_ULONG32, HALO_ULONG32, float, HALO_ULONG32);
+HALO_LONG32 __stdcall D3DDevice_CreateCubeTexture(unsigned int, unsigned int, HALO_ULONG32, enum _D3DFORMAT, HALO_ULONG32, struct D3DCubeTexture **);
+HALO_LONG32 __stdcall D3DDevice_CreateIndexBuffer(unsigned int, HALO_ULONG32, enum _D3DFORMAT, HALO_ULONG32, struct D3DIndexBuffer **);
+HALO_LONG32 __stdcall D3DDevice_CreatePalette(enum _D3DPALETTESIZE, struct D3DPalette **);
+HALO_LONG32 __stdcall D3DDevice_CreateTexture(unsigned int, unsigned int, unsigned int, HALO_ULONG32, enum _D3DFORMAT, HALO_ULONG32, struct D3DTexture **);
+HALO_LONG32 __stdcall D3DDevice_CreateVertexBuffer(unsigned int, HALO_ULONG32, HALO_ULONG32, HALO_ULONG32, struct D3DVertexBuffer **);
+HALO_LONG32 __stdcall D3DDevice_CreateVertexShader(const HALO_ULONG32 *, const HALO_ULONG32 *, HALO_ULONG32 *, HALO_ULONG32);
+HALO_LONG32 __stdcall D3DDevice_CreateVolumeTexture(unsigned int, unsigned int, unsigned int, unsigned int, HALO_ULONG32, enum _D3DFORMAT, HALO_ULONG32, struct D3DVolumeTexture **);
+void __stdcall D3DDevice_DeleteVertexShader(HALO_ULONG32);
 void __stdcall D3DDevice_DrawIndexedVertices(enum _D3DPRIMITIVETYPE, unsigned int, const unsigned short *);
 void __stdcall D3DDevice_DrawVertices(enum _D3DPRIMITIVETYPE, unsigned int, unsigned int);
 void __stdcall D3DDevice_End(void);
-long __stdcall D3DDevice_EndVisibilityTest(unsigned long);
-void __stdcall D3DDevice_GetBackBuffer(int, unsigned long, struct D3DSurface **);
-long __stdcall D3DDevice_GetDepthStencilSurface(struct D3DSurface **);
+HALO_LONG32 __stdcall D3DDevice_EndVisibilityTest(HALO_ULONG32);
+void __stdcall D3DDevice_GetBackBuffer(int, HALO_ULONG32, struct D3DSurface **);
+HALO_LONG32 __stdcall D3DDevice_GetDepthStencilSurface(struct D3DSurface **);
 void __stdcall D3DDevice_GetDeviceCaps(struct _D3DCAPS8 *);
 void __stdcall D3DDevice_GetTransform(enum _D3DTRANSFORMSTATETYPE, struct _D3DMATRIX *);
-void __stdcall D3DDevice_GetVertexShaderSize(unsigned long, unsigned int *);
-long __stdcall D3DDevice_GetVisibilityTestResult(unsigned long, unsigned int *, unsigned __int64 *);
-void __stdcall D3DDevice_InsertCallback(enum _D3DCALLBACKTYPE, void (*)(unsigned long), unsigned long);
+void __stdcall D3DDevice_GetVertexShaderSize(HALO_ULONG32, unsigned int *);
+HALO_LONG32 __stdcall D3DDevice_GetVisibilityTestResult(HALO_ULONG32, unsigned int *, unsigned __int64 *);
+void __stdcall D3DDevice_InsertCallback(enum _D3DCALLBACKTYPE, void (*)(HALO_ULONG32), HALO_ULONG32);
 int __stdcall D3DDevice_IsBusy(void);
 void __stdcall D3DDevice_KickPushBuffer(void);
-void __stdcall D3DDevice_LoadVertexShader(unsigned long, unsigned long);
-long __stdcall D3DDevice_PersistDisplay(void);
+void __stdcall D3DDevice_LoadVertexShader(HALO_ULONG32, HALO_ULONG32);
+HALO_LONG32 __stdcall D3DDevice_PersistDisplay(void);
 void __stdcall D3DDevice_Present(const struct tagRECT *, const struct tagRECT *, void *, void *);
-unsigned long __stdcall D3DDevice_Release(void);
-void __stdcall D3DDevice_SelectVertexShader(unsigned long, unsigned long);
-void __stdcall D3DDevice_SetFlickerFilter(unsigned long);
+HALO_ULONG32 __stdcall D3DDevice_Release(void);
+void __stdcall D3DDevice_SelectVertexShader(HALO_ULONG32, HALO_ULONG32);
+void __stdcall D3DDevice_SetFlickerFilter(HALO_ULONG32);
 void __stdcall D3DDevice_SetIndices(struct D3DIndexBuffer *, unsigned int);
-void __stdcall D3DDevice_SetPalette(unsigned long, struct D3DPalette *);
+void __stdcall D3DDevice_SetPalette(HALO_ULONG32, struct D3DPalette *);
 void __stdcall D3DDevice_SetPixelShaderProgram(struct _D3DPixelShaderDef *);
-void __stdcall D3DDevice_SetRenderStateNotInline(enum _D3DRENDERSTATETYPE, unsigned long);
-void __stdcall D3DDevice_SetRenderState_BackFillMode(unsigned long);
-void __stdcall D3DDevice_SetRenderState_CullMode(unsigned long);
-void __fastcall D3DDevice_SetRenderState_Deferred(enum _D3DRENDERSTATETYPE, unsigned long);
-void __stdcall D3DDevice_SetRenderState_DoNotCullUncompressed(unsigned long);
-void __stdcall D3DDevice_SetRenderState_Dxt1NoiseEnable(unsigned long);
-void __stdcall D3DDevice_SetRenderState_EdgeAntiAlias(unsigned long);
-void __stdcall D3DDevice_SetRenderState_FillMode(unsigned long);
-void __stdcall D3DDevice_SetRenderState_FogColor(unsigned long);
-void __stdcall D3DDevice_SetRenderState_FrontFace(unsigned long);
-void __stdcall D3DDevice_SetRenderState_LineWidth(unsigned long);
-void __stdcall D3DDevice_SetRenderState_LogicOp(unsigned long);
-void __stdcall D3DDevice_SetRenderState_MultiSampleAntiAlias(unsigned long);
-void __stdcall D3DDevice_SetRenderState_MultiSampleMask(unsigned long);
-void __stdcall D3DDevice_SetRenderState_MultiSampleType(unsigned long);
-void __stdcall D3DDevice_SetRenderState_NormalizeNormals(unsigned long);
-void __stdcall D3DDevice_SetRenderState_OcclusionCullEnable(unsigned long);
-void __stdcall D3DDevice_SetRenderState_PSTextureModes(unsigned long);
-void __stdcall D3DDevice_SetRenderState_RopZCmpAlwaysRead(unsigned long);
-void __stdcall D3DDevice_SetRenderState_RopZRead(unsigned long);
-void __stdcall D3DDevice_SetRenderState_ShadowFunc(unsigned long);
-void __fastcall D3DDevice_SetRenderState_Simple(unsigned long, unsigned long);
-void __stdcall D3DDevice_SetRenderState_StencilCullEnable(unsigned long);
-void __stdcall D3DDevice_SetRenderState_StencilEnable(unsigned long);
-void __stdcall D3DDevice_SetRenderState_StencilFail(unsigned long);
-void __stdcall D3DDevice_SetRenderState_TextureFactor(unsigned long);
-void __stdcall D3DDevice_SetRenderState_TwoSidedLighting(unsigned long);
-void __stdcall D3DDevice_SetRenderState_VertexBlend(unsigned long);
-void __stdcall D3DDevice_SetRenderState_YuvEnable(unsigned long);
-void __stdcall D3DDevice_SetRenderState_ZBias(unsigned long);
-void __stdcall D3DDevice_SetRenderState_ZEnable(unsigned long);
+void __stdcall D3DDevice_SetRenderStateNotInline(enum _D3DRENDERSTATETYPE, HALO_ULONG32);
+void __stdcall D3DDevice_SetRenderState_BackFillMode(HALO_ULONG32);
+void __stdcall D3DDevice_SetRenderState_CullMode(HALO_ULONG32);
+void __fastcall D3DDevice_SetRenderState_Deferred(enum _D3DRENDERSTATETYPE, HALO_ULONG32);
+void __stdcall D3DDevice_SetRenderState_DoNotCullUncompressed(HALO_ULONG32);
+void __stdcall D3DDevice_SetRenderState_Dxt1NoiseEnable(HALO_ULONG32);
+void __stdcall D3DDevice_SetRenderState_EdgeAntiAlias(HALO_ULONG32);
+void __stdcall D3DDevice_SetRenderState_FillMode(HALO_ULONG32);
+void __stdcall D3DDevice_SetRenderState_FogColor(HALO_ULONG32);
+void __stdcall D3DDevice_SetRenderState_FrontFace(HALO_ULONG32);
+void __stdcall D3DDevice_SetRenderState_LineWidth(HALO_ULONG32);
+void __stdcall D3DDevice_SetRenderState_LogicOp(HALO_ULONG32);
+void __stdcall D3DDevice_SetRenderState_MultiSampleAntiAlias(HALO_ULONG32);
+void __stdcall D3DDevice_SetRenderState_MultiSampleMask(HALO_ULONG32);
+void __stdcall D3DDevice_SetRenderState_MultiSampleType(HALO_ULONG32);
+void __stdcall D3DDevice_SetRenderState_NormalizeNormals(HALO_ULONG32);
+void __stdcall D3DDevice_SetRenderState_OcclusionCullEnable(HALO_ULONG32);
+void __stdcall D3DDevice_SetRenderState_PSTextureModes(HALO_ULONG32);
+void __stdcall D3DDevice_SetRenderState_RopZCmpAlwaysRead(HALO_ULONG32);
+void __stdcall D3DDevice_SetRenderState_RopZRead(HALO_ULONG32);
+void __stdcall D3DDevice_SetRenderState_ShadowFunc(HALO_ULONG32);
+void __fastcall D3DDevice_SetRenderState_Simple(HALO_ULONG32, HALO_ULONG32);
+void __stdcall D3DDevice_SetRenderState_StencilCullEnable(HALO_ULONG32);
+void __stdcall D3DDevice_SetRenderState_StencilEnable(HALO_ULONG32);
+void __stdcall D3DDevice_SetRenderState_StencilFail(HALO_ULONG32);
+void __stdcall D3DDevice_SetRenderState_TextureFactor(HALO_ULONG32);
+void __stdcall D3DDevice_SetRenderState_TwoSidedLighting(HALO_ULONG32);
+void __stdcall D3DDevice_SetRenderState_VertexBlend(HALO_ULONG32);
+void __stdcall D3DDevice_SetRenderState_YuvEnable(HALO_ULONG32);
+void __stdcall D3DDevice_SetRenderState_ZBias(HALO_ULONG32);
+void __stdcall D3DDevice_SetRenderState_ZEnable(HALO_ULONG32);
 void __stdcall D3DDevice_SetRenderTarget(struct D3DSurface *, struct D3DSurface *);
-void __stdcall D3DDevice_SetShaderConstantMode(unsigned long);
+void __stdcall D3DDevice_SetShaderConstantMode(HALO_ULONG32);
 void __stdcall D3DDevice_SetSoftDisplayFilter(int);
 void __stdcall D3DDevice_SetStreamSource(unsigned int, struct D3DVertexBuffer *, unsigned int);
-void __stdcall D3DDevice_SetTexture(unsigned long, struct D3DBaseTexture *);
-void __stdcall D3DDevice_SetTextureState_BorderColor(unsigned long, unsigned long);
-void __stdcall D3DDevice_SetTextureState_BumpEnv(unsigned long, enum _D3DTEXTURESTAGESTATETYPE, unsigned long);
-void __stdcall D3DDevice_SetTextureState_ColorKeyColor(unsigned long, unsigned long);
-void __fastcall D3DDevice_SetTextureState_Deferred(unsigned long, enum _D3DTEXTURESTAGESTATETYPE, unsigned long);
-void __stdcall D3DDevice_SetTextureState_TexCoordIndex(unsigned long, unsigned long);
+void __stdcall D3DDevice_SetTexture(HALO_ULONG32, struct D3DBaseTexture *);
+void __stdcall D3DDevice_SetTextureState_BorderColor(HALO_ULONG32, HALO_ULONG32);
+void __stdcall D3DDevice_SetTextureState_BumpEnv(HALO_ULONG32, enum _D3DTEXTURESTAGESTATETYPE, HALO_ULONG32);
+void __stdcall D3DDevice_SetTextureState_ColorKeyColor(HALO_ULONG32, HALO_ULONG32);
+void __fastcall D3DDevice_SetTextureState_Deferred(HALO_ULONG32, enum _D3DTEXTURESTAGESTATETYPE, HALO_ULONG32);
+void __stdcall D3DDevice_SetTextureState_TexCoordIndex(HALO_ULONG32, HALO_ULONG32);
 void __stdcall D3DDevice_SetTransform(enum _D3DTRANSFORMSTATETYPE, const struct _D3DMATRIX *);
 void __stdcall D3DDevice_SetVertexData2f(int, float, float);
 void __stdcall D3DDevice_SetVertexData2s(int, short, short);
 void __stdcall D3DDevice_SetVertexData4f(int, float, float, float, float);
 void __stdcall D3DDevice_SetVertexData4ub(int, unsigned char, unsigned char, unsigned char, unsigned char);
-void __stdcall D3DDevice_SetVertexDataColor(int, unsigned long);
-void __stdcall D3DDevice_SetVertexShader(unsigned long);
-void __stdcall D3DDevice_SetVertexShaderConstant(int, const void *, unsigned long);
-void __stdcall D3DDevice_SetVerticalBlankCallback(void (*)(unsigned long));
+void __stdcall D3DDevice_SetVertexDataColor(int, HALO_ULONG32);
+void __stdcall D3DDevice_SetVertexShader(HALO_ULONG32);
+void __stdcall D3DDevice_SetVertexShaderConstant(int, const void *, HALO_ULONG32);
+void __stdcall D3DDevice_SetVerticalBlankCallback(void (*)(HALO_ULONG32));
 void __stdcall D3DDevice_SetViewport(const struct _D3DVIEWPORT8 *);
-void __stdcall D3DPalette_Lock(struct D3DPalette *, unsigned long **, unsigned long);
+void __stdcall D3DPalette_Lock(struct D3DPalette *, HALO_ULONG32 **, HALO_ULONG32);
 void __stdcall D3DResource_BlockUntilNotBusy(struct D3DResource *);
 int __stdcall D3DResource_IsBusy(struct D3DResource *);
 void __stdcall D3DResource_Register(struct D3DResource *, void *);
-unsigned long __stdcall D3DResource_Release(struct D3DResource *);
+HALO_ULONG32 __stdcall D3DResource_Release(struct D3DResource *);
 void __stdcall D3DSurface_GetDesc(struct D3DSurface *, struct _D3DSURFACE_DESC *);
-void __stdcall D3DSurface_LockRect(struct D3DSurface *, struct _D3DLOCKED_RECT *, const struct tagRECT *, unsigned long);
+void __stdcall D3DSurface_LockRect(struct D3DSurface *, struct _D3DLOCKED_RECT *, const struct tagRECT *, HALO_ULONG32);
 void __stdcall D3DTexture_GetLevelDesc(struct D3DTexture *, unsigned int, struct _D3DSURFACE_DESC *);
-long __stdcall D3DTexture_GetSurfaceLevel(struct D3DTexture *, unsigned int, struct D3DSurface **);
-void __stdcall D3DTexture_LockRect(struct D3DTexture *, unsigned int, struct _D3DLOCKED_RECT *, const struct tagRECT *, unsigned long);
-void __stdcall D3DVertexBuffer_Lock(struct D3DVertexBuffer *, unsigned int, unsigned int, unsigned char **, unsigned long);
-void __stdcall D3DVolumeTexture_LockBox(struct D3DVolumeTexture *, unsigned int, struct _D3DLOCKED_BOX *, const struct _D3DBOX *, unsigned long);
+HALO_LONG32 __stdcall D3DTexture_GetSurfaceLevel(struct D3DTexture *, unsigned int, struct D3DSurface **);
+void __stdcall D3DTexture_LockRect(struct D3DTexture *, unsigned int, struct _D3DLOCKED_RECT *, const struct tagRECT *, HALO_ULONG32);
+void __stdcall D3DVertexBuffer_Lock(struct D3DVertexBuffer *, unsigned int, unsigned int, unsigned char **, HALO_ULONG32);
+void __stdcall D3DVolumeTexture_LockBox(struct D3DVolumeTexture *, unsigned int, struct _D3DLOCKED_BOX *, const struct _D3DBOX *, HALO_ULONG32);
 D3DXMATRIX *D3DXMatrixIdentity(D3DXMATRIX *);
 D3DXMATRIX *__stdcall D3DXMatrixOrthoLH(D3DXMATRIX *, float, float, float, float);
 D3DXMATRIX *__stdcall D3DXMatrixPerspectiveLH(D3DXMATRIX *, float, float, float, float);
 struct D3DXVECTOR4 *__stdcall D3DXVec4Transform(struct D3DXVECTOR4 *, const struct D3DXVECTOR4 *, const D3DXMATRIX *);
 int __stdcall DeleteFileA(const char *);
 struct Direct3D *__stdcall Direct3DCreate8(unsigned int);
-long __stdcall Direct3D_CreateDevice(unsigned int, enum _D3DDEVTYPE, void *, unsigned long, struct _D3DPRESENT_PARAMETERS_ *, struct D3DDevice **);
-void __stdcall Direct3D_SetPushBufferSize(unsigned long, unsigned long);
-long __stdcall DirectSoundCreate(struct _GUID *, struct IDirectSound **, struct IUnknown *);
-long __stdcall DirectSoundCreateBuffer(const struct _DSBUFFERDESC *, struct IDirectSoundBuffer **);
+HALO_LONG32 __stdcall Direct3D_CreateDevice(unsigned int, enum _D3DDEVTYPE, void *, HALO_ULONG32, struct _D3DPRESENT_PARAMETERS_ *, struct D3DDevice **);
+void __stdcall Direct3D_SetPushBufferSize(HALO_ULONG32, HALO_ULONG32);
+HALO_LONG32 __stdcall DirectSoundCreate(struct _GUID *, struct IDirectSound **, struct IUnknown *);
+HALO_LONG32 __stdcall DirectSoundCreateBuffer(const struct _DSBUFFERDESC *, struct IDirectSoundBuffer **);
 void __stdcall DirectSoundDoWork(void);
 void __stdcall DirectSoundUseFullHRTF(void);
 void *__stdcall FindFirstFileA(const char *, struct _WIN32_FIND_DATAA *);
 int __stdcall FindNextFileA(void *, struct _WIN32_FIND_DATAA *);
 int __stdcall GetDiskFreeSpaceExA(const char *, union _ULARGE_INTEGER *, union _ULARGE_INTEGER *, union _ULARGE_INTEGER *);
-int __stdcall GetExitCodeThread(void *, unsigned long *);
-unsigned long __stdcall GetFileAttributesA(const char *);
+int __stdcall GetExitCodeThread(void *, HALO_ULONG32 *);
+HALO_ULONG32 __stdcall GetFileAttributesA(const char *);
 int __stdcall GetFileAttributesExA(const char *, enum _GET_FILEEX_INFO_LEVELS, void *);
-unsigned long __stdcall GetFileSize(void *, unsigned long *);
+HALO_ULONG32 __stdcall GetFileSize(void *, HALO_ULONG32 *);
 int __stdcall GetFileTime(void *, struct _FILETIME *, struct _FILETIME *, struct _FILETIME *);
-unsigned long __stdcall GetLastError(void);
+HALO_ULONG32 __stdcall GetLastError(void);
 void __stdcall GetSystemTime(struct _SYSTEMTIME *);
-unsigned long __stdcall GetTickCount(void);
-void *__stdcall GlobalAlloc(unsigned int, unsigned long);
+HALO_ULONG32 __stdcall GetTickCount(void);
+void *__stdcall GlobalAlloc(unsigned int, SIZE_T);
 void __stdcall GlobalMemoryStatus(struct _MEMORYSTATUS *);
-void *__stdcall GlobalReAlloc(void *, unsigned long, unsigned int);
-long __stdcall IDirectSoundBuffer_Play(struct IDirectSoundBuffer *, unsigned long, unsigned long, unsigned long);
-unsigned long __stdcall IDirectSoundBuffer_Release(struct IDirectSoundBuffer *);
-long __stdcall IDirectSoundBuffer_SetBufferData(struct IDirectSoundBuffer *, void *, unsigned long);
-long __stdcall IDirectSoundBuffer_SetCurrentPosition(struct IDirectSoundBuffer *, unsigned long);
-long __stdcall IDirectSoundBuffer_SetLoopRegion(struct IDirectSoundBuffer *, unsigned long, unsigned long);
-long __stdcall IDirectSoundBuffer_SetPitch(struct IDirectSoundBuffer *, long);
-long __stdcall IDirectSoundBuffer_SetVolume(struct IDirectSoundBuffer *, long);
-long __stdcall IDirectSoundBuffer_Stop(struct IDirectSoundBuffer *);
-long __stdcall IDirectSoundStream_SetConeAngles(struct IDirectSoundStream *, unsigned long, unsigned long, unsigned long);
-long __stdcall IDirectSoundStream_SetConeOrientation(struct IDirectSoundStream *, float, float, float, unsigned long);
-long __stdcall IDirectSoundStream_SetConeOutsideVolume(struct IDirectSoundStream *, long, unsigned long);
-long __stdcall IDirectSoundStream_SetFrequency(struct IDirectSoundStream *, unsigned long);
-long __stdcall IDirectSoundStream_SetI3DL2Source(struct IDirectSoundStream *, const struct _DSI3DL2BUFFER *, unsigned long);
-long __stdcall IDirectSoundStream_SetMaxDistance(struct IDirectSoundStream *, float, unsigned long);
-long __stdcall IDirectSoundStream_SetMinDistance(struct IDirectSoundStream *, float, unsigned long);
-long __stdcall IDirectSoundStream_SetMixBinVolumes(struct IDirectSoundStream *, unsigned long, const long *);
-long __stdcall IDirectSoundStream_SetMixBins(struct IDirectSoundStream *, unsigned long);
-long __stdcall IDirectSoundStream_SetMode(struct IDirectSoundStream *, unsigned long, unsigned long);
-long __stdcall IDirectSoundStream_SetPosition(struct IDirectSoundStream *, float, float, float, unsigned long);
-long __stdcall IDirectSoundStream_SetVelocity(struct IDirectSoundStream *, float, float, float, unsigned long);
-long __stdcall IDirectSoundStream_SetVolume(struct IDirectSoundStream *, long);
-long __stdcall IDirectSound_CommitDeferredSettings(struct IDirectSound *);
-long __stdcall IDirectSound_CreateSoundBuffer(struct IDirectSound *, const struct _DSBUFFERDESC *, struct IDirectSoundBuffer **, struct IUnknown *);
-long __stdcall IDirectSound_CreateSoundStream(struct IDirectSound *, const struct _DSSTREAMDESC *, struct IDirectSoundStream **, struct IUnknown *);
-long __stdcall IDirectSound_DownloadEffectsImage(struct IDirectSound *, const void *, unsigned long, const struct _DSEFFECTIMAGELOC *, struct _DSEFFECTIMAGEDESC **);
-long __stdcall IDirectSound_GetCaps(struct IDirectSound *, struct _DSCAPS *);
-long __stdcall IDirectSound_GetSpeakerConfig(struct IDirectSound *, unsigned long *);
-unsigned long __stdcall IDirectSound_Release(struct IDirectSound *);
-long __stdcall IDirectSound_SetDistanceFactor(struct IDirectSound *, float, unsigned long);
-long __stdcall IDirectSound_SetI3DL2Listener(struct IDirectSound *, const struct _DSI3DL2LISTENER *, unsigned long);
-long __stdcall IDirectSound_SetMixBinHeadroom(struct IDirectSound *, unsigned long, unsigned long);
-long __stdcall IDirectSound_SetOrientation(struct IDirectSound *, float, float, float, float, float, float, unsigned long);
-long __stdcall IDirectSound_SetPosition(struct IDirectSound *, float, float, float, unsigned long);
-long __stdcall IDirectSound_SetRolloffFactor(struct IDirectSound *, float, unsigned long);
-long __stdcall IDirectSound_SetVelocity(struct IDirectSound *, float, float, float, unsigned long);
+void *__stdcall GlobalReAlloc(void *, SIZE_T, unsigned int);
+HALO_LONG32 __stdcall IDirectSoundBuffer_Play(struct IDirectSoundBuffer *, HALO_ULONG32, HALO_ULONG32, HALO_ULONG32);
+HALO_ULONG32 __stdcall IDirectSoundBuffer_Release(struct IDirectSoundBuffer *);
+HALO_LONG32 __stdcall IDirectSoundBuffer_SetBufferData(struct IDirectSoundBuffer *, void *, HALO_ULONG32);
+HALO_LONG32 __stdcall IDirectSoundBuffer_SetCurrentPosition(struct IDirectSoundBuffer *, HALO_ULONG32);
+HALO_LONG32 __stdcall IDirectSoundBuffer_SetLoopRegion(struct IDirectSoundBuffer *, HALO_ULONG32, HALO_ULONG32);
+HALO_LONG32 __stdcall IDirectSoundBuffer_SetPitch(struct IDirectSoundBuffer *, HALO_LONG32);
+HALO_LONG32 __stdcall IDirectSoundBuffer_SetVolume(struct IDirectSoundBuffer *, HALO_LONG32);
+HALO_LONG32 __stdcall IDirectSoundBuffer_Stop(struct IDirectSoundBuffer *);
+HALO_LONG32 __stdcall IDirectSoundStream_SetConeAngles(struct IDirectSoundStream *, HALO_ULONG32, HALO_ULONG32, HALO_ULONG32);
+HALO_LONG32 __stdcall IDirectSoundStream_SetConeOrientation(struct IDirectSoundStream *, float, float, float, HALO_ULONG32);
+HALO_LONG32 __stdcall IDirectSoundStream_SetConeOutsideVolume(struct IDirectSoundStream *, HALO_LONG32, HALO_ULONG32);
+HALO_LONG32 __stdcall IDirectSoundStream_SetFrequency(struct IDirectSoundStream *, HALO_ULONG32);
+HALO_LONG32 __stdcall IDirectSoundStream_SetI3DL2Source(struct IDirectSoundStream *, const struct _DSI3DL2BUFFER *, HALO_ULONG32);
+HALO_LONG32 __stdcall IDirectSoundStream_SetMaxDistance(struct IDirectSoundStream *, float, HALO_ULONG32);
+HALO_LONG32 __stdcall IDirectSoundStream_SetMinDistance(struct IDirectSoundStream *, float, HALO_ULONG32);
+HALO_LONG32 __stdcall IDirectSoundStream_SetMixBinVolumes(struct IDirectSoundStream *, HALO_ULONG32, const HALO_LONG32 *);
+HALO_LONG32 __stdcall IDirectSoundStream_SetMixBins(struct IDirectSoundStream *, HALO_ULONG32);
+HALO_LONG32 __stdcall IDirectSoundStream_SetMode(struct IDirectSoundStream *, HALO_ULONG32, HALO_ULONG32);
+HALO_LONG32 __stdcall IDirectSoundStream_SetPosition(struct IDirectSoundStream *, float, float, float, HALO_ULONG32);
+HALO_LONG32 __stdcall IDirectSoundStream_SetVelocity(struct IDirectSoundStream *, float, float, float, HALO_ULONG32);
+HALO_LONG32 __stdcall IDirectSoundStream_SetVolume(struct IDirectSoundStream *, HALO_LONG32);
+HALO_LONG32 __stdcall IDirectSound_CommitDeferredSettings(struct IDirectSound *);
+HALO_LONG32 __stdcall IDirectSound_CreateSoundBuffer(struct IDirectSound *, const struct _DSBUFFERDESC *, struct IDirectSoundBuffer **, struct IUnknown *);
+HALO_LONG32 __stdcall IDirectSound_CreateSoundStream(struct IDirectSound *, const struct _DSSTREAMDESC *, struct IDirectSoundStream **, struct IUnknown *);
+HALO_LONG32 __stdcall IDirectSound_DownloadEffectsImage(struct IDirectSound *, const void *, HALO_ULONG32, const struct _DSEFFECTIMAGELOC *, struct _DSEFFECTIMAGEDESC **);
+HALO_LONG32 __stdcall IDirectSound_GetCaps(struct IDirectSound *, struct _DSCAPS *);
+HALO_LONG32 __stdcall IDirectSound_GetSpeakerConfig(struct IDirectSound *, HALO_ULONG32 *);
+HALO_ULONG32 __stdcall IDirectSound_Release(struct IDirectSound *);
+HALO_LONG32 __stdcall IDirectSound_SetDistanceFactor(struct IDirectSound *, float, HALO_ULONG32);
+HALO_LONG32 __stdcall IDirectSound_SetI3DL2Listener(struct IDirectSound *, const struct _DSI3DL2LISTENER *, HALO_ULONG32);
+HALO_LONG32 __stdcall IDirectSound_SetMixBinHeadroom(struct IDirectSound *, HALO_ULONG32, HALO_ULONG32);
+HALO_LONG32 __stdcall IDirectSound_SetOrientation(struct IDirectSound *, float, float, float, float, float, float, HALO_ULONG32);
+HALO_LONG32 __stdcall IDirectSound_SetPosition(struct IDirectSound *, float, float, float, HALO_ULONG32);
+HALO_LONG32 __stdcall IDirectSound_SetRolloffFactor(struct IDirectSound *, float, HALO_ULONG32);
+HALO_LONG32 __stdcall IDirectSound_SetVelocity(struct IDirectSound *, float, float, float, HALO_ULONG32);
 void *__stdcall LocalFree(void *);
-unsigned long __stdcall LocalSize(void *);
+SIZE_T __stdcall LocalSize(void *);
 int __stdcall MoveFileA(const char *, const char *);
 void __stdcall OutputDebugStringA(const char *);
 int __stdcall QueryPerformanceCounter(union _LARGE_INTEGER *);
 int __stdcall QueryPerformanceFrequency(union _LARGE_INTEGER *);
-int __stdcall ReadFile(void *, void *, unsigned long, unsigned long *, struct _OVERLAPPED *);
-int __stdcall ReadFileEx(void *, void *, unsigned long, struct _OVERLAPPED *, void (__stdcall *)(unsigned long, unsigned long, struct _OVERLAPPED *));
+int __stdcall ReadFile(void *, void *, HALO_ULONG32, HALO_ULONG32 *, struct _OVERLAPPED *);
+int __stdcall ReadFileEx(void *, void *, HALO_ULONG32, struct _OVERLAPPED *, void (__stdcall *)(HALO_ULONG32, HALO_ULONG32, struct _OVERLAPPED *));
 int __stdcall ReleaseMutex(void *);
 int __stdcall RemoveDirectoryA(const char *);
 int __stdcall ResetEvent(void *);
-unsigned long __stdcall ResumeThread(void *);
+HALO_ULONG32 __stdcall ResumeThread(void *);
 int __stdcall SetEndOfFile(void *);
 int __stdcall SetEvent(void *);
-int __stdcall SetFileAttributesA(const char *, unsigned long);
-unsigned long __stdcall SetFilePointer(void *, long, long *, unsigned long);
+int __stdcall SetFileAttributesA(const char *, HALO_ULONG32);
+HALO_ULONG32 __stdcall SetFilePointer(void *, HALO_LONG32, HALO_LONG32 *, HALO_ULONG32);
 int __stdcall SetFileTime(void *, const struct _FILETIME *, const struct _FILETIME *, const struct _FILETIME *);
-void __stdcall SetLastError(unsigned long);
+void __stdcall SetLastError(HALO_ULONG32);
 int __stdcall SetThreadPriority(void *, int);
-void __stdcall Sleep(unsigned long);
-unsigned long __stdcall SleepEx(unsigned long, int);
+void __stdcall Sleep(HALO_ULONG32);
+HALO_ULONG32 __stdcall SleepEx(HALO_ULONG32, int);
 int __stdcall SwitchToThread(void);
 int __stdcall SystemTimeToFileTime(const struct _SYSTEMTIME *, struct _FILETIME *);
-int __stdcall VirtualProtect(void *, unsigned long, unsigned long, unsigned long *);
+int __stdcall VirtualProtect(void *, SIZE_T, DWORD, DWORD *);
 int __stdcall WSACleanup(void);
 int __stdcall WSAGetLastError(void);
 void __stdcall WSASetLastError(int);
 int __stdcall WSAStartup(unsigned short, struct WSAData *);
-unsigned long __stdcall WaitForSingleObject(void *, unsigned long);
-unsigned long __stdcall WaitForSingleObjectEx(void *, unsigned long, int);
-int __stdcall WriteFile(void *, const void *, unsigned long, unsigned long *, struct _OVERLAPPED *);
-int __stdcall WriteFileEx(void *, const void *, unsigned long, struct _OVERLAPPED *, void (__stdcall *)(unsigned long, unsigned long, struct _OVERLAPPED *));
-void *__stdcall XCalculateSignatureBegin(unsigned long);
-unsigned long __stdcall XCalculateSignatureEnd(void *, struct _XCALCSIG_SIGNATURE *);
-unsigned long __stdcall XCalculateSignatureUpdate(void *, const unsigned char *, unsigned long);
-unsigned long __stdcall XCreateSaveGame(const char *, const unsigned short *, unsigned long, unsigned long, char *, unsigned int);
-unsigned long __stdcall XDeleteSaveGame(const char *, const unsigned short *);
+HALO_ULONG32 __stdcall WaitForSingleObject(void *, HALO_ULONG32);
+HALO_ULONG32 __stdcall WaitForSingleObjectEx(void *, HALO_ULONG32, int);
+int __stdcall WriteFile(void *, const void *, HALO_ULONG32, HALO_ULONG32 *, struct _OVERLAPPED *);
+int __stdcall WriteFileEx(void *, const void *, HALO_ULONG32, struct _OVERLAPPED *, void (__stdcall *)(HALO_ULONG32, HALO_ULONG32, struct _OVERLAPPED *));
+void *__stdcall XCalculateSignatureBegin(HALO_ULONG32);
+HALO_ULONG32 __stdcall XCalculateSignatureEnd(void *, struct _XCALCSIG_SIGNATURE *);
+HALO_ULONG32 __stdcall XCalculateSignatureUpdate(void *, const unsigned char *, HALO_ULONG32);
+HALO_ULONG32 __stdcall XCreateSaveGame(const char *, const unsigned short *, HALO_ULONG32, HALO_ULONG32, char *, unsigned int);
+HALO_ULONG32 __stdcall XDeleteSaveGame(const char *, const unsigned short *);
 int __stdcall XFindClose(void *);
 void *__stdcall XFindFirstNicknameW(int, unsigned short *, unsigned int);
 void *__stdcall XFindFirstSaveGame(const char *, struct _XGAME_FIND_DATA *);
 int __stdcall XFindNextSaveGame(void *, struct _XGAME_FIND_DATA *);
-int __stdcall XGetDeviceChanges(struct _XPP_DEVICE_TYPE *, unsigned long *, unsigned long *);
-unsigned long __stdcall XGetLanguage(void);
-unsigned long __stdcall XGetLaunchInfo(unsigned long *, struct _LAUNCH_DATA *);
-void __stdcall XInitDevices(unsigned long, struct _XDEVICE_PREALLOC_TYPE *);
+int __stdcall XGetDeviceChanges(struct _XPP_DEVICE_TYPE *, HALO_ULONG32 *, HALO_ULONG32 *);
+HALO_ULONG32 __stdcall XGetLanguage(void);
+HALO_ULONG32 __stdcall XGetLaunchInfo(HALO_ULONG32 *, struct _LAUNCH_DATA *);
+void __stdcall XInitDevices(HALO_ULONG32, struct _XDEVICE_PREALLOC_TYPE *);
 void __stdcall XInputClose(void *);
-unsigned long __stdcall XInputDebugGetKeystroke(struct _XINPUT_DEBUG_KEYSTROKE *);
-unsigned long __stdcall XInputDebugInitKeyboardQueue(struct _XINPUT_DEBUG_KEYQUEUE_PARAMETERS *);
-unsigned long __stdcall XInputGetState(void *, struct _XINPUT_STATE *);
-void *__stdcall XInputOpen(struct _XPP_DEVICE_TYPE *, unsigned long, unsigned long, struct _XINPUT_POLLING_PARAMETERS *);
-unsigned long __stdcall XInputSetState(void *, struct _XINPUT_FEEDBACK *);
-unsigned long __stdcall XLaunchNewImageA(const char *, struct _LAUNCH_DATA *);
+HALO_ULONG32 __stdcall XInputDebugGetKeystroke(struct _XINPUT_DEBUG_KEYSTROKE *);
+HALO_ULONG32 __stdcall XInputDebugInitKeyboardQueue(struct _XINPUT_DEBUG_KEYQUEUE_PARAMETERS *);
+HALO_ULONG32 __stdcall XInputGetState(void *, struct _XINPUT_STATE *);
+void *__stdcall XInputOpen(struct _XPP_DEVICE_TYPE *, HALO_ULONG32, HALO_ULONG32, struct _XINPUT_POLLING_PARAMETERS *);
+HALO_ULONG32 __stdcall XInputSetState(void *, struct _XINPUT_FEEDBACK *);
+HALO_ULONG32 __stdcall XLaunchNewImageA(const char *, struct _LAUNCH_DATA *);
 int __stdcall XNetCleanup(void);
 int __stdcall XNetCreateKey(struct XNKID *, struct XNKEY *);
-unsigned long __stdcall XNetGetEthernetLinkStatus(void);
-unsigned long __stdcall XNetGetTitleXnAddr(struct XNADDR *);
+HALO_ULONG32 __stdcall XNetGetEthernetLinkStatus(void);
+HALO_ULONG32 __stdcall XNetGetTitleXnAddr(struct XNADDR *);
 int __stdcall XNetRandom(unsigned char *, unsigned int);
 int __stdcall XNetRegisterKey(const struct XNKID *, const struct XNKEY *);
 int __stdcall XNetStartup(const struct XNetStartupParams *);
 int __stdcall XNetUnregisterKey(const struct XNKID *);
 int __stdcall XNetXnAddrToInAddr(const struct XNADDR *, const struct XNKID *, struct in_addr *);
-void *__stdcall XPhysicalAlloc(unsigned long, unsigned long, unsigned long, unsigned long);
+void *__stdcall XPhysicalAlloc(SIZE_T, ULONG_PTR, ULONG_PTR, DWORD);
 void __stdcall XPhysicalFree(void *);
-void __stdcall XPhysicalProtect(void *, unsigned long, unsigned long);
-unsigned long __stdcall XQueryMemoryProtect(void *);
+void __stdcall XPhysicalProtect(void *, SIZE_T, DWORD);
+HALO_ULONG32 __stdcall XQueryMemoryProtect(void *);
 int __stdcall XSetNicknameW(const unsigned short *, int);
 int __stdcall __WSAFDIsSet(unsigned int, struct fd_set *);
 unsigned int __stdcall accept(unsigned int, struct sockaddr *, int *);
@@ -1790,12 +1794,12 @@ int __stdcall connect(unsigned int, const struct sockaddr *, int);
 int __stdcall getpeername(unsigned int, struct sockaddr *, int *);
 int __stdcall getsockname(unsigned int, struct sockaddr *, int *);
 int __stdcall getsockopt(unsigned int, int, int, char *, int *);
-unsigned long __stdcall htonl(unsigned long);
+u_long __stdcall htonl(u_long);
 unsigned short __stdcall htons(unsigned short);
-unsigned long __stdcall inet_addr(const char *);
-int __stdcall ioctlsocket(unsigned int, long, unsigned long *);
+u_long __stdcall inet_addr(const char *);
+int __stdcall ioctlsocket(unsigned int, long, u_long *);
 int __stdcall listen(unsigned int, int);
-unsigned long __stdcall ntohl(unsigned long);
+u_long __stdcall ntohl(u_long);
 unsigned short __stdcall ntohs(unsigned short);
 int __stdcall recv(unsigned int, char *, int, int);
 int __stdcall recvfrom(unsigned int, char *, int, int, struct sockaddr *, int *);
@@ -1808,6 +1812,6 @@ unsigned int __stdcall socket(int, int, int);
 
 /* functions the SDK defined inline (see xdk_d3d8.h) */
 
-void __stdcall D3DDevice_SetRenderState(enum _D3DRENDERSTATETYPE, unsigned long);
+void __stdcall D3DDevice_SetRenderState(enum _D3DRENDERSTATETYPE, HALO_ULONG32);
 
 #endif

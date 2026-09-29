@@ -241,12 +241,9 @@ struct transparent_geometry_group
 	byte pad9E[2];
 };
 
-typedef char verify_shader_model_texture_animation_offset[
-	offsetof(struct shader_model_definition, model.texture_animation) == 0xFC ? 1 : -1];
-typedef char verify_transparent_geometry_group_size[
-	sizeof(struct transparent_geometry_group) == 0xA0 ? 1 : -1];
-typedef char verify_transparent_geometry_group_animation_offset[
-	offsetof(struct transparent_geometry_group, animation) == 0x6C ? 1 : -1];
+typedef char verify_shader_model_texture_animation_offset[HALO_LAYOUT_ASSERT_32(offsetof(struct shader_model_definition, model.texture_animation) == 0xFC)];
+typedef char verify_transparent_geometry_group_size[HALO_LAYOUT_ASSERT_32(sizeof(struct transparent_geometry_group) == 0xA0)];
+typedef char verify_transparent_geometry_group_animation_offset[HALO_LAYOUT_ASSERT_32(offsetof(struct transparent_geometry_group, animation) == 0x6C)];
 
 /* ---------- prototypes */
 

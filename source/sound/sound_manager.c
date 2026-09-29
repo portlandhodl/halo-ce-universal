@@ -538,43 +538,26 @@ struct sound_manager_globals
 	short pad_176;
 };
 
-typedef char verify_sound_class_definition_size[
-	sizeof(struct sound_class_definition) == 0x2C ? 1 : -1];
-typedef char verify_sound_source_size[
-	sizeof(struct sound_source) == 0x40 ? 1 : -1];
-typedef char verify_sound_listener_size[
-	sizeof(struct sound_listener) == 0x44 ? 1 : -1];
-typedef char verify_sound_channel_datum_size[
-	sizeof(struct sound_channel_datum) == 0x18 ? 1 : -1];
-typedef char verify_sound_channel_summary_size[
-	sizeof(struct sound_channel_summary) == 0x48 ? 1 : -1];
-typedef char verify_platform_sound_channel_properties_size[
-	sizeof(struct platform_sound_channel_properties) == 0x20 ? 1 : -1];
-typedef char verify_sound_datum_size[
-	sizeof(struct sound_datum) == 0xAC ? 1 : -1];
-typedef char verify_looping_sound_datum_size[
-	sizeof(struct looping_sound_datum) == 0xE4 ? 1 : -1];
+typedef char verify_sound_class_definition_size[HALO_LAYOUT_ASSERT_32(sizeof(struct sound_class_definition) == 0x2C)];
+typedef char verify_sound_source_size[HALO_LAYOUT_ASSERT_32(sizeof(struct sound_source) == 0x40)];
+typedef char verify_sound_listener_size[HALO_LAYOUT_ASSERT_32(sizeof(struct sound_listener) == 0x44)];
+typedef char verify_sound_channel_datum_size[HALO_LAYOUT_ASSERT_32(sizeof(struct sound_channel_datum) == 0x18)];
+typedef char verify_sound_channel_summary_size[HALO_LAYOUT_ASSERT_32(sizeof(struct sound_channel_summary) == 0x48)];
+typedef char verify_platform_sound_channel_properties_size[HALO_LAYOUT_ASSERT_32(sizeof(struct platform_sound_channel_properties) == 0x20)];
+typedef char verify_sound_datum_size[HALO_LAYOUT_ASSERT_32(sizeof(struct sound_datum) == 0xAC)];
+typedef char verify_looping_sound_datum_size[HALO_LAYOUT_ASSERT_32(sizeof(struct looping_sound_datum) == 0xE4)];
 
-typedef char verify_sound_manager_globals_size[
-	sizeof(struct sound_manager_globals) == 0x178 ? 1 : -1];
-typedef char verify_sound_platform_definition_size[
-	sizeof(struct sound_platform_definition) == 0x3C ? 1 : -1];
-typedef char verify_sound_platform_dispose_offset[
-	offsetof(struct sound_platform_definition, dispose) == 0x8 ? 1 : -1];
-typedef char verify_sound_platform_pause_offset[
-	offsetof(struct sound_platform_definition, set_pause) == 0x28 ? 1 : -1];
-typedef char verify_sound_manager_paused_offset[
-	offsetof(struct sound_manager_globals, paused) == 0x2 ? 1 : -1];
-typedef char verify_sound_manager_dialog_time_offset[
-	offsetof(
+typedef char verify_sound_manager_globals_size[HALO_LAYOUT_ASSERT_32(sizeof(struct sound_manager_globals) == 0x178)];
+typedef char verify_sound_platform_definition_size[HALO_LAYOUT_ASSERT_32(sizeof(struct sound_platform_definition) == 0x3C)];
+typedef char verify_sound_platform_dispose_offset[HALO_LAYOUT_ASSERT_32(offsetof(struct sound_platform_definition, dispose) == 0x8)];
+typedef char verify_sound_platform_pause_offset[HALO_LAYOUT_ASSERT_32(offsetof(struct sound_platform_definition, set_pause) == 0x28)];
+typedef char verify_sound_manager_paused_offset[HALO_LAYOUT_ASSERT_32(offsetof(struct sound_manager_globals, paused) == 0x2)];
+typedef char verify_sound_manager_dialog_time_offset[HALO_LAYOUT_ASSERT_32(offsetof(
 		struct sound_manager_globals,
-		game_time_when_no_scripted_dialog_will_be_playing) == 0x4 ? 1 : -1];
-typedef char verify_sound_manager_listeners_offset[
-	offsetof(struct sound_manager_globals, listeners) == 0x18 ? 1 : -1];
-typedef char verify_sound_manager_environment_offset[
-	offsetof(struct sound_manager_globals, sound_environment) == 0x128 ? 1 : -1];
-typedef char verify_sound_manager_channel_count_offset[
-	offsetof(struct sound_manager_globals, channel_count) == 0x174 ? 1 : -1];
+		game_time_when_no_scripted_dialog_will_be_playing) == 0x4)];
+typedef char verify_sound_manager_listeners_offset[HALO_LAYOUT_ASSERT_32(offsetof(struct sound_manager_globals, listeners) == 0x18)];
+typedef char verify_sound_manager_environment_offset[HALO_LAYOUT_ASSERT_32(offsetof(struct sound_manager_globals, sound_environment) == 0x128)];
+typedef char verify_sound_manager_channel_count_offset[HALO_LAYOUT_ASSERT_32(offsetof(struct sound_manager_globals, channel_count) == 0x174)];
 
 /* ---------- prototypes */
 

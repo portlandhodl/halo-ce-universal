@@ -187,16 +187,11 @@ struct looping_sound_definition
 	struct tag_block details;
 };
 
-typedef char looping_sound_definition_runtime_scripting_sound_index_offset_assert[
-	offsetof(struct looping_sound_definition, runtime_scripting_sound_index) == 0x1C ? 1 : -1];
-typedef char looping_sound_definition_tracks_offset_assert[
-	offsetof(struct looping_sound_definition, tracks) == 0x3C ? 1 : -1];
-typedef char looping_sound_definition_size_assert[
-	sizeof(struct looping_sound_definition) == 0x54 ? 1 : -1];
-typedef char looping_sound_track_size_assert[
-	sizeof(struct looping_sound_track) == 0xA0 ? 1 : -1];
-typedef char looping_sound_detail_size_assert[
-	sizeof(struct looping_sound_detail) == 0x68 ? 1 : -1];
+typedef char looping_sound_definition_runtime_scripting_sound_index_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct looping_sound_definition, runtime_scripting_sound_index) == 0x1C)];
+typedef char looping_sound_definition_tracks_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct looping_sound_definition, tracks) == 0x3C)];
+typedef char looping_sound_definition_size_assert[HALO_LAYOUT_ASSERT_32(sizeof(struct looping_sound_definition) == 0x54)];
+typedef char looping_sound_track_size_assert[HALO_LAYOUT_ASSERT_32(sizeof(struct looping_sound_track) == 0xA0)];
+typedef char looping_sound_detail_size_assert[HALO_LAYOUT_ASSERT_32(sizeof(struct looping_sound_detail) == 0x68)];
 
 /* ---------- prototypes/EXAMPLE.C */
 

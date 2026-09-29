@@ -118,40 +118,23 @@ struct particle_definition
 	struct shader_effect_definition shader;
 };
 
-typedef char particle_datum_size_assert[
-	sizeof(struct particle_datum) == 0x70 ? 1 : -1];
-typedef char particle_datum_flags_offset_assert[
-	offsetof(struct particle_datum, flags) == 0x02 ? 1 : -1];
-typedef char particle_datum_definition_index_offset_assert[
-	offsetof(struct particle_datum, definition_index) == 0x04 ? 1 : -1];
-typedef char particle_datum_object_index_offset_assert[
-	offsetof(struct particle_datum, object_index) == 0x08 ? 1 : -1];
-typedef char particle_datum_node_index_offset_assert[
-	offsetof(struct particle_datum, node_index) == 0x0C ? 1 : -1];
-typedef char particle_datum_local_player_index_offset_assert[
-	offsetof(struct particle_datum, local_player_index) == 0x0F ? 1 : -1];
-typedef char particle_datum_age_offset_assert[
-	offsetof(struct particle_datum, age) == 0x14 ? 1 : -1];
-typedef char particle_datum_lifespan_offset_assert[
-	offsetof(struct particle_datum, lifespan) == 0x18 ? 1 : -1];
-typedef char particle_datum_location_offset_assert[
-	offsetof(struct particle_datum, location) == 0x28 ? 1 : -1];
-typedef char particle_datum_position_offset_assert[
-	offsetof(struct particle_datum, position) == 0x30 ? 1 : -1];
-typedef char particle_datum_radius_offset_assert[
-	offsetof(struct particle_datum, radius) == 0x5C ? 1 : -1];
-typedef char particle_datum_color_offset_assert[
-	offsetof(struct particle_datum, color) == 0x60 ? 1 : -1];
-typedef char particle_definition_radius_lower_bound_offset_assert[
-	offsetof(struct particle_definition, radius_lower_bound) == 0x74 ? 1 : -1];
-typedef char particle_definition_radius_upper_bound_offset_assert[
-	offsetof(struct particle_definition, radius_upper_bound) == 0x78 ? 1 : -1];
-typedef char particle_definition_effect_offset_assert[
-	offsetof(struct particle_definition, effect) == 0x58 ? 1 : -1];
-typedef char particle_definition_shader_offset_assert[
-	offsetof(struct particle_definition, shader) == 0xB0 ? 1 : -1];
-typedef char particle_definition_size_assert[
-	sizeof(struct particle_definition) == 0x164 ? 1 : -1];
+typedef char particle_datum_size_assert[HALO_LAYOUT_ASSERT_32(sizeof(struct particle_datum) == 0x70)];
+typedef char particle_datum_flags_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct particle_datum, flags) == 0x02)];
+typedef char particle_datum_definition_index_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct particle_datum, definition_index) == 0x04)];
+typedef char particle_datum_object_index_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct particle_datum, object_index) == 0x08)];
+typedef char particle_datum_node_index_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct particle_datum, node_index) == 0x0C)];
+typedef char particle_datum_local_player_index_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct particle_datum, local_player_index) == 0x0F)];
+typedef char particle_datum_age_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct particle_datum, age) == 0x14)];
+typedef char particle_datum_lifespan_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct particle_datum, lifespan) == 0x18)];
+typedef char particle_datum_location_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct particle_datum, location) == 0x28)];
+typedef char particle_datum_position_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct particle_datum, position) == 0x30)];
+typedef char particle_datum_radius_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct particle_datum, radius) == 0x5C)];
+typedef char particle_datum_color_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct particle_datum, color) == 0x60)];
+typedef char particle_definition_radius_lower_bound_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct particle_definition, radius_lower_bound) == 0x74)];
+typedef char particle_definition_radius_upper_bound_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct particle_definition, radius_upper_bound) == 0x78)];
+typedef char particle_definition_effect_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct particle_definition, effect) == 0x58)];
+typedef char particle_definition_shader_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct particle_definition, shader) == 0xB0)];
+typedef char particle_definition_size_assert[HALO_LAYOUT_ASSERT_32(sizeof(struct particle_definition) == 0x164)];
 
 #define particle_get(index) ((struct particle_datum *)datum_get(particle_data, (index)))
 #define particle_definition_get(index) ((struct particle_definition *)tag_get(PARTICLE_TAG, (index)))

@@ -65,11 +65,11 @@ struct sky_light
 	byte pad70[4];
 };
 
-typedef char verify_sky_animations_offset[offsetof(struct sky, animations) == 0xB8 ? 1 : -1];
-typedef char verify_sky_lights_offset[offsetof(struct sky, lights) == 0xC4 ? 1 : -1];
-typedef char verify_sky_animation_size[sizeof(struct sky_animation) == 0x24 ? 1 : -1];
-typedef char verify_sky_light_size[sizeof(struct sky_light) == 0x74 ? 1 : -1];
-typedef char verify_sky_render_lighting_size[sizeof(struct render_lighting) == 0x74 ? 1 : -1];
+typedef char verify_sky_animations_offset[HALO_LAYOUT_ASSERT_32(offsetof(struct sky, animations) == 0xB8)];
+typedef char verify_sky_lights_offset[HALO_LAYOUT_ASSERT_32(offsetof(struct sky, lights) == 0xC4)];
+typedef char verify_sky_animation_size[HALO_LAYOUT_ASSERT_32(sizeof(struct sky_animation) == 0x24)];
+typedef char verify_sky_light_size[HALO_LAYOUT_ASSERT_32(sizeof(struct sky_light) == 0x74)];
+typedef char verify_sky_render_lighting_size[HALO_LAYOUT_ASSERT_32(sizeof(struct render_lighting) == 0x74)];
 
 /* ---------- prototypes */
 

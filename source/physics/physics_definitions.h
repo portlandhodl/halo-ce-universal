@@ -76,12 +76,9 @@ struct physics_definition
 	struct tag_block mass_points;
 };
 
-typedef char mass_point_definition_size_assert[
-	sizeof(struct mass_point_definition) == 0x80 ? 1 : -1];
-typedef char mass_point_definition_position_offset_assert[
-	offsetof(struct mass_point_definition, position) == 0x38 ? 1 : -1];
-typedef char mass_point_definition_radius_offset_assert[
-	offsetof(struct mass_point_definition, radius) == 0x68 ? 1 : -1];
+typedef char mass_point_definition_size_assert[HALO_LAYOUT_ASSERT_32(sizeof(struct mass_point_definition) == 0x80)];
+typedef char mass_point_definition_position_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct mass_point_definition, position) == 0x38)];
+typedef char mass_point_definition_radius_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct mass_point_definition, radius) == 0x68)];
 
 /* ---------- prototypes/EXAMPLE.C */
 

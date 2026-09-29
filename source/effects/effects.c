@@ -391,10 +391,8 @@ struct effect_marker_list
 	real_vector3d const *forwards;
 };
 
-typedef char effect_marker_list_size_assert[
-	sizeof(struct effect_marker_list) == 0x18 ? 1 : -1];
-typedef char effect_marker_list_names_offset_assert[
-	offsetof(struct effect_marker_list, names) == 0x0C ? 1 : -1];
+typedef char effect_marker_list_size_assert[HALO_LAYOUT_ASSERT_32(sizeof(struct effect_marker_list) == 0x18)];
+typedef char effect_marker_list_names_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct effect_marker_list, names) == 0x0C)];
 
 struct effect_part_definition
 {
@@ -418,12 +416,9 @@ struct effect_part_definition
 	unsigned long scale_b_flags;
 };
 
-typedef char effect_part_definition_size_assert[
-	sizeof(struct effect_part_definition) == 0x68 ? 1 : -1];
-typedef char effect_part_definition_reference_offset_assert[
-	offsetof(struct effect_part_definition, reference) == 0x18 ? 1 : -1];
-typedef char effect_part_definition_velocity_offset_assert[
-	offsetof(struct effect_part_definition, velocity_lower_bound) == 0x40 ? 1 : -1];
+typedef char effect_part_definition_size_assert[HALO_LAYOUT_ASSERT_32(sizeof(struct effect_part_definition) == 0x68)];
+typedef char effect_part_definition_reference_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct effect_part_definition, reference) == 0x18)];
+typedef char effect_part_definition_velocity_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct effect_part_definition, velocity_lower_bound) == 0x40)];
 
 struct effect_particles_definition
 {
@@ -462,12 +457,9 @@ struct effect_particles_definition
 	unsigned long scale_b_flags;
 };
 
-typedef char effect_particles_definition_size_assert[
-	sizeof(struct effect_particles_definition) == 0xE8 ? 1 : -1];
-typedef char effect_particles_definition_count_offset_assert[
-	offsetof(struct effect_particles_definition, count_lower_bound) == 0x6C ? 1 : -1];
-typedef char effect_particles_definition_scales_offset_assert[
-	offsetof(struct effect_particles_definition, scale_a_flags) == 0xE0 ? 1 : -1];
+typedef char effect_particles_definition_size_assert[HALO_LAYOUT_ASSERT_32(sizeof(struct effect_particles_definition) == 0xE8)];
+typedef char effect_particles_definition_count_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct effect_particles_definition, count_lower_bound) == 0x6C)];
+typedef char effect_particles_definition_scales_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct effect_particles_definition, scale_a_flags) == 0xE0)];
 
 struct effect_location_definition
 {
@@ -482,30 +474,18 @@ struct effect_location_datum
 	real_matrix4x3 matrix;
 };
 
-typedef char effect_datum_header_size_assert[
-	sizeof(struct effect_datum_header) == 0x4 ? 1 : -1];
-typedef char effects_information_size_assert[
-	sizeof(struct effects_information) == 0x6 ? 1 : -1];
-typedef char effect_datum_location_offset_assert[
-	offsetof(struct effect_datum, location) == 0x10 ? 1 : -1];
-typedef char effect_datum_object_index_offset_assert[
-	offsetof(struct effect_datum, object_index) == 0x3C ? 1 : -1];
-typedef char effect_datum_location_indices_offset_assert[
-	offsetof(struct effect_datum, location_datum_indices) == 0x5C ? 1 : -1];
-typedef char effect_datum_size_assert[
-	sizeof(struct effect_datum) == 0xFC ? 1 : -1];
-typedef char effect_location_datum_matrix_offset_assert[
-	offsetof(struct effect_location_datum, matrix) == 0x08 ? 1 : -1];
-typedef char effect_location_datum_size_assert[
-	sizeof(struct effect_location_datum) == 0x3C ? 1 : -1];
-typedef char effect_definition_size_assert[
-	sizeof(struct effect_definition) == 0x40 ? 1 : -1];
-typedef char effect_definition_locations_offset_assert[
-	offsetof(struct effect_definition, locations) == 0x28 ? 1 : -1];
-typedef char effect_definition_events_offset_assert[
-	offsetof(struct effect_definition, events) == 0x34 ? 1 : -1];
-typedef char effect_event_definition_size_assert[
-	sizeof(struct effect_event_definition) == 0x44 ? 1 : -1];
+typedef char effect_datum_header_size_assert[HALO_LAYOUT_ASSERT_32(sizeof(struct effect_datum_header) == 0x4)];
+typedef char effects_information_size_assert[HALO_LAYOUT_ASSERT_32(sizeof(struct effects_information) == 0x6)];
+typedef char effect_datum_location_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct effect_datum, location) == 0x10)];
+typedef char effect_datum_object_index_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct effect_datum, object_index) == 0x3C)];
+typedef char effect_datum_location_indices_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct effect_datum, location_datum_indices) == 0x5C)];
+typedef char effect_datum_size_assert[HALO_LAYOUT_ASSERT_32(sizeof(struct effect_datum) == 0xFC)];
+typedef char effect_location_datum_matrix_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct effect_location_datum, matrix) == 0x08)];
+typedef char effect_location_datum_size_assert[HALO_LAYOUT_ASSERT_32(sizeof(struct effect_location_datum) == 0x3C)];
+typedef char effect_definition_size_assert[HALO_LAYOUT_ASSERT_32(sizeof(struct effect_definition) == 0x40)];
+typedef char effect_definition_locations_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct effect_definition, locations) == 0x28)];
+typedef char effect_definition_events_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct effect_definition, events) == 0x34)];
+typedef char effect_event_definition_size_assert[HALO_LAYOUT_ASSERT_32(sizeof(struct effect_event_definition) == 0x44)];
 
 /* ---------- prototypes */
 

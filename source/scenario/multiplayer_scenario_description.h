@@ -37,8 +37,7 @@ struct multiplayer_scenario_description
 	struct tag_block scenarios;
 };
 
-typedef char multiplayer_scenario_description_item_path_offset_assert[
-	offsetof(struct multiplayer_scenario_description_item, scenario_tag_path) == 0x20 ? 1 : -1];
+typedef char multiplayer_scenario_description_item_path_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct multiplayer_scenario_description_item, scenario_tag_path) == 0x20)];
 
 /* ---------- prototypes/MULTIPLAYER_SCENARIO_DESCRIPTION.C */
 

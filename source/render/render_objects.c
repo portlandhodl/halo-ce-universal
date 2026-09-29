@@ -208,19 +208,14 @@ struct rasterizer_debug_options
 	boolean draw_first_person_weapon_first;
 };
 
-typedef char render_model_effect_size_assert[
-	sizeof(struct render_model_effect) == 0x28 ? 1 : -1];
-typedef char object_render_data_size_assert[
-	sizeof(struct object_render_data) == 0x48 ? 1 : -1];
-typedef char object_render_state_size_assert[
-	sizeof(struct object_render_state) == 0x100 ? 1 : -1];
+typedef char render_model_effect_size_assert[HALO_LAYOUT_ASSERT_32(sizeof(struct render_model_effect) == 0x28)];
+typedef char object_render_data_size_assert[HALO_LAYOUT_ASSERT_32(sizeof(struct object_render_data) == 0x48)];
+typedef char object_render_state_size_assert[HALO_LAYOUT_ASSERT_32(sizeof(struct object_render_state) == 0x100)];
 #ifdef HALO_LINUX
 /* the native builds render up to MAXIMUM_RENDERED_OBJECTS (objects.h) */
-typedef char render_object_globals_size_assert[
-	sizeof(struct render_object_globals) == 4 + MAXIMUM_RENDERED_OBJECTS * sizeof(long) ? 1 : -1];
+typedef char render_object_globals_size_assert[HALO_LAYOUT_ASSERT_32(sizeof(struct render_object_globals) == 4 + MAXIMUM_RENDERED_OBJECTS * sizeof(long))];
 #else
-typedef char render_object_globals_size_assert[
-	sizeof(struct render_object_globals) == 0x404 ? 1 : -1];
+typedef char render_object_globals_size_assert[HALO_LAYOUT_ASSERT_32(sizeof(struct render_object_globals) == 0x404)];
 #endif
 
 /* ---------- prototypes */

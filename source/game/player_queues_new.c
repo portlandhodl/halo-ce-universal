@@ -204,47 +204,32 @@ struct update_client_globals
 	struct update updates[MAXIMUM_CLIENT_UPDATES];
 };
 
-typedef char player_action_collection_size_assert[
-	sizeof(struct player_action_collection) == 0x80 ? 1 : -1];
+typedef char player_action_collection_size_assert[HALO_LAYOUT_ASSERT_32(sizeof(struct player_action_collection) == 0x80)];
 #ifdef HALO_LINUX
 /* the update arrays follow the session limit (the networking units' copies
 of struct server_update must have the same size) */
-typedef char server_update_size_assert[
-	sizeof(struct server_update) == 4 + MAXIMUM_NUMBER_OF_PLAYERS * 0x20 ? 1 : -1];
-typedef char update_size_assert[
-	sizeof(struct update) == 4 + sizeof(struct server_update) ? 1 : -1];
+typedef char server_update_size_assert[HALO_LAYOUT_ASSERT_32(sizeof(struct server_update) == 4 + MAXIMUM_NUMBER_OF_PLAYERS * 0x20)];
+typedef char update_size_assert[HALO_LAYOUT_ASSERT_32(sizeof(struct update) == 4 + sizeof(struct server_update))];
 #else
-typedef char server_update_size_assert[
-	sizeof(struct server_update) == 0x204 ? 1 : -1];
-typedef char update_size_assert[
-	sizeof(struct update) == 0x208 ? 1 : -1];
+typedef char server_update_size_assert[HALO_LAYOUT_ASSERT_32(sizeof(struct server_update) == 0x204)];
+typedef char update_size_assert[HALO_LAYOUT_ASSERT_32(sizeof(struct update) == 0x208)];
 #endif
-typedef char update_server_queue_datum_size_assert[
-	sizeof(struct update_server_queue_datum) == 0x28 ? 1 : -1];
-typedef char update_client_queue_datum_size_assert[
-	sizeof(struct update_client_queue_datum) == 0x28 ? 1 : -1];
+typedef char update_server_queue_datum_size_assert[HALO_LAYOUT_ASSERT_32(sizeof(struct update_server_queue_datum) == 0x28)];
+typedef char update_client_queue_datum_size_assert[HALO_LAYOUT_ASSERT_32(sizeof(struct update_client_queue_datum) == 0x28)];
 #ifdef HALO_LINUX
-typedef char update_server_globals_size_assert[
-	sizeof(struct update_server_globals) == 0xC + MAXIMUM_SERVER_UPDATES * sizeof(struct update) ? 1 : -1];
+typedef char update_server_globals_size_assert[HALO_LAYOUT_ASSERT_32(sizeof(struct update_server_globals) == 0xC + MAXIMUM_SERVER_UPDATES * sizeof(struct update))];
 #else
-typedef char update_server_globals_size_assert[
-	sizeof(struct update_server_globals) == 0x410C ? 1 : -1];
+typedef char update_server_globals_size_assert[HALO_LAYOUT_ASSERT_32(sizeof(struct update_server_globals) == 0x410C)];
 #endif
-typedef char update_server_globals_queues_offset_assert[
-	offsetof(struct update_server_globals, queues) == 0x8 ? 1 : -1];
+typedef char update_server_globals_queues_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct update_server_globals, queues) == 0x8)];
 #ifdef HALO_LINUX
-typedef char update_client_globals_size_assert[
-	sizeof(struct update_client_globals) == 0x94 + MAXIMUM_CLIENT_UPDATES * sizeof(struct update) ? 1 : -1];
+typedef char update_client_globals_size_assert[HALO_LAYOUT_ASSERT_32(sizeof(struct update_client_globals) == 0x94 + MAXIMUM_CLIENT_UPDATES * sizeof(struct update))];
 #else
-typedef char update_client_globals_size_assert[
-	sizeof(struct update_client_globals) == 0x10494 ? 1 : -1];
+typedef char update_client_globals_size_assert[HALO_LAYOUT_ASSERT_32(sizeof(struct update_client_globals) == 0x10494)];
 #endif
-typedef char update_client_globals_saved_actions_offset_assert[
-	offsetof(struct update_client_globals, saved_action_collection) == 0xC ? 1 : -1];
-typedef char update_client_globals_current_local_player_offset_assert[
-	offsetof(struct update_client_globals, current_local_player) == 0x8C ? 1 : -1];
-typedef char update_client_globals_queues_offset_assert[
-	offsetof(struct update_client_globals, queues) == 0x90 ? 1 : -1];
+typedef char update_client_globals_saved_actions_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct update_client_globals, saved_action_collection) == 0xC)];
+typedef char update_client_globals_current_local_player_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct update_client_globals, current_local_player) == 0x8C)];
+typedef char update_client_globals_queues_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct update_client_globals, queues) == 0x90)];
 
 /* ---------- prototypes */
 

@@ -178,21 +178,23 @@ struct cache_file_structure_bsp_header
 	unsigned long signature;
 };
 
+/* the cache file's own header, exactly its 0x800 bytes on disk (the LP64
+port reads it raw: long32/ulong32, cseries.h) */
 struct cache_file_header
 {
-	unsigned long header_signature;
-	long version;
-	long file_length;
+	ulong32 header_signature;
+	long32 version;
+	long32 file_length;
 	byte reservedC[4];
-	long tag_data_offset;
-	long tag_data_size;
+	long32 tag_data_offset;
+	long32 tag_data_size;
 	byte reserved18[8];
 	char name[0x20];
 	char build[0x20];
 	byte reserved60[4];
-	unsigned long checksum;
+	ulong32 checksum;
 	byte reserved68[0x794];
-	unsigned long footer_signature;
+	ulong32 footer_signature;
 };
 
 struct cache_file_globals
@@ -204,16 +206,96 @@ struct cache_file_globals
 	struct cache_file_structure_bsp_header *structure_bsp_header;
 };
 
-typedef char verify_cache_file_tag_instance_size[
-	sizeof(struct cache_file_tag_instance) == 0x20 ? 1 : -1];
+#ifdef HALO_LINUX64
+/* The tag blob in a cache file is the 32-bit format (docs/linux64.md): its
+pointers are the absolute addresses the blob is loaded at — the port
+reserves the Xbox memory map below 4 GB, so they zero-extend to valid LP64
+pointers — but its structures have the 32-bit layouts. The tag header and
+the instance table get translated to their LP64 layouts here when a map
+loads; a tag's own structure still has the disk layout until the group
+translation layer exists. */
+struct cache_file_tag_instance_32
+{
+	ulong32 group_tag;
+	ulong32 parent_group_tags[2];
+	ulong32 tag_index;
+	ulong32 name;
+	ulong32 base_address;
+	ulong32 unused[2];
+};
 
-typedef char verify_cache_file_tag_header_count_offset[
-	offsetof(struct cache_file_tag_header, tag_count) == 0xC ? 1 : -1];
+struct cache_file_tag_header_32
+{
+	ulong32 tag_instances;
+	long32 scenario_tag_index;
+	ulong32 checksum;
+	long32 tag_count;
+	long32 vertex_buffer_count;
+	ulong32 vertex_buffers;
+	long32 index_buffer_count;
+	ulong32 index_buffers;
+	ulong32 signature;
+};
 
-typedef char verify_cache_file_globals_size[
-	sizeof(struct cache_file_globals) == 0x80C ? 1 : -1];
-typedef char verify_cache_file_header_size[
-	sizeof(struct cache_file_header) == 0x800 ? 1 : -1];
+typedef char verify_cache_file_tag_instance_32_size[HALO_LAYOUT_ASSERT_32(sizeof(struct cache_file_tag_instance_32) == 0x20)];
+
+/* declared with the globals below */
+extern struct cache_file_globals cache_file_globals;
+extern struct cache_file_tag_instance *global_tag_instances;
+
+static struct cache_file_tag_header translated_tag_header;
+static struct cache_file_tag_instance *translated_tag_instances;
+
+static void tag_cache_translate_header_and_instances_64(
+	void *tag_cache_base_address)
+{
+	struct cache_file_tag_header_32 const *blob_header =
+		(struct cache_file_tag_header_32 const *)tag_cache_base_address;
+	struct cache_file_tag_instance_32 const *blob_instances =
+		(struct cache_file_tag_instance_32 const *)(unsigned long)blob_header->tag_instances;
+	long index;
+
+	translated_tag_header.scenario_tag_index = blob_header->scenario_tag_index;
+	translated_tag_header.checksum = blob_header->checksum;
+	translated_tag_header.tag_count = blob_header->tag_count;
+	translated_tag_header.vertex_buffer_count = blob_header->vertex_buffer_count;
+	translated_tag_header.vertex_buffers = (void *)(unsigned long)blob_header->vertex_buffers;
+	translated_tag_header.index_buffer_count = blob_header->index_buffer_count;
+	translated_tag_header.index_buffers = (void *)(unsigned long)blob_header->index_buffers;
+	translated_tag_header.signature = blob_header->signature;
+
+	if (translated_tag_instances)
+	{
+		free(translated_tag_instances);
+	}
+	translated_tag_instances = malloc(blob_header->tag_count * sizeof(struct cache_file_tag_instance));
+	for (index = 0; index < blob_header->tag_count; index++)
+	{
+		struct cache_file_tag_instance_32 const *from = &blob_instances[index];
+		struct cache_file_tag_instance *to = &translated_tag_instances[index];
+
+		to->group_tag = from->group_tag;
+		to->parent_group_tags[0] = from->parent_group_tags[0];
+		to->parent_group_tags[1] = from->parent_group_tags[1];
+		to->tag_index = from->tag_index;
+		to->name = (char *)(unsigned long)from->name;
+		to->base_address = (void *)(unsigned long)from->base_address;
+		to->unused[0] = from->unused[0];
+		to->unused[1] = from->unused[1];
+	}
+	translated_tag_header.tag_instances = translated_tag_instances;
+
+	cache_file_globals.tag_header = &translated_tag_header;
+	global_tag_instances = translated_tag_instances;
+}
+#endif
+
+typedef char verify_cache_file_tag_instance_size[HALO_LAYOUT_ASSERT_32(sizeof(struct cache_file_tag_instance) == 0x20)];
+
+typedef char verify_cache_file_tag_header_count_offset[HALO_LAYOUT_ASSERT_32(offsetof(struct cache_file_tag_header, tag_count) == 0xC)];
+
+typedef char verify_cache_file_globals_size[HALO_LAYOUT_ASSERT_32(sizeof(struct cache_file_globals) == 0x80C)];
+typedef char verify_cache_file_header_size[HALO_LAYOUT_ASSERT_32(sizeof(struct cache_file_header) == 0x800)];
 
 /* ---------- prototypes */
 
@@ -337,6 +419,13 @@ void scenario_tags_unload(
 	tags_header_deregister_vertex_and_index_buffers(cache_file_globals.tag_header);
 	cache_file_globals.tags_loaded = FALSE;
 	global_tag_instances = NULL;
+#ifdef HALO_LINUX64
+	if (translated_tag_instances)
+	{
+		free(translated_tag_instances);
+		translated_tag_instances = NULL;
+	}
+#endif
 
 	return;
 }
@@ -679,6 +768,10 @@ long scenario_tags_load(
 			}
 
 			cache_file_globals.tag_header = tag_cache_base_address;
+#ifdef HALO_LINUX64
+			/* the blob's 32-bit header and instance table, as LP64 copies */
+			tag_cache_translate_header_and_instances_64(tag_cache_base_address);
+#endif
 			match_vassert(
 				"c:\\halo\\SOURCE\\cache\\cache_files.c",
 				0x94,
@@ -697,13 +790,13 @@ long scenario_tags_load(
 			global_tag_instances = cache_file_globals.tag_header->tag_instances;
 			tags_header_register_vertex_and_index_buffers(cache_file_globals.tag_header);
 			cache_file_globals.tags_loaded = TRUE;
-#ifdef HALO_LINUX
-			/* port: a PAL map played as the NTSC maps are (port/linux/game/pal_tags.c) */
-			{
-				extern void pal_tags_loaded(char const *build);
+#if defined(HALO_LINUX) && !defined(HALO_LINUX64)
+		/* port: a PAL map played as the NTSC maps are (port/linux/game/pal_tags.c) */
+		{
+			extern void pal_tags_loaded(char const *build);
 
-				pal_tags_loaded(cache_file_globals.header.build);
-			}
+			pal_tags_loaded(cache_file_globals.header.build);
+		}
 #endif
 			result = cache_file_globals.tag_header->scenario_tag_index;
 		}

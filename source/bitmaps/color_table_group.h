@@ -39,8 +39,7 @@ struct color_table_definition
 	struct tag_block colors;
 };
 
-typedef char verify_color_table_color_size[
-	sizeof(struct color_table_color) == 0x30 ? 1 : -1];
+typedef char verify_color_table_color_size[HALO_LAYOUT_ASSERT_32(sizeof(struct color_table_color) == 0x30)];
 
 /* ---------- prototypes/EXAMPLE.C */
 

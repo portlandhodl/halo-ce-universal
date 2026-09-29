@@ -86,46 +86,26 @@ struct player_control_globals_data
 	struct player_control players[MAXIMUM_NUMBER_OF_LOCAL_PLAYERS];
 };
 
-typedef char player_control_size_assert[
-	sizeof(struct player_control) == 0x40 ? 1 : -1];
-typedef char player_control_unit_index_offset_assert[
-	offsetof(struct player_control, unit_index) == 0x0 ? 1 : -1];
-typedef char player_control_inhibited_action_flags_offset_assert[
-	offsetof(struct player_control, inhibited_button_bit_vector) == 0x8 ? 1 : -1];
-typedef char player_control_desired_yaw_offset_assert[
-	offsetof(struct player_control, desired_angles.yaw) == 0xC ? 1 : -1];
-typedef char player_control_desired_pitch_offset_assert[
-	offsetof(struct player_control, desired_angles.pitch) == 0x10 ? 1 : -1];
-typedef char player_control_desired_weapon_index_offset_assert[
-	offsetof(struct player_control, desired_weapon_index) == 0x20 ? 1 : -1];
-typedef char player_control_desired_grenade_index_offset_assert[
-	offsetof(struct player_control, desired_grenade_index) == 0x22 ? 1 : -1];
-typedef char player_control_zoom_level_offset_assert[
-	offsetof(struct player_control, zoom_level) == 0x24 ? 1 : -1];
-typedef char player_control_target_object_index_offset_assert[
-	offsetof(struct player_control, target_object_index) == 0x28 ? 1 : -1];
-typedef char player_control_autoaim_level_offset_assert[
-	offsetof(struct player_control, autoaim_level) == 0x2C ? 1 : -1];
-typedef char player_control_magnetism_level_offset_assert[
-	offsetof(struct player_control, magnetism_level) == 0x30 ? 1 : -1];
-typedef char player_control_look_acceleration_time_offset_assert[
-	offsetof(struct player_control, look_acceleration_time) == 0x34 ? 1 : -1];
-typedef char player_control_pitch_minimum_offset_assert[
-	offsetof(struct player_control, pitch_minimum) == 0x38 ? 1 : -1];
-typedef char player_control_pitch_maximum_offset_assert[
-	offsetof(struct player_control, pitch_maximum) == 0x3C ? 1 : -1];
-typedef char player_control_unit_camera_info_size_assert[
-	sizeof(struct player_control_unit_camera_info) == 0x18 ? 1 : -1];
-typedef char player_control_globals_size_assert[
-	sizeof(struct player_control_globals_data) == 0x110 ? 1 : -1];
-typedef char player_control_globals_players_offset_assert[
-	offsetof(struct player_control_globals_data, players) == 0x10 ? 1 : -1];
-typedef char player_control_globals_action_test_flags_offset_assert[
-	offsetof(struct player_control_globals_data, action_test_flags) == 0x4 ? 1 : -1];
-typedef char player_control_globals_suppressed_action_flags_offset_assert[
-	offsetof(struct player_control_globals_data, suppressed_action_flags) == 0x8 ? 1 : -1];
-typedef char player_control_globals_flags_offset_assert[
-	offsetof(struct player_control_globals_data, flags) == 0xC ? 1 : -1];
+typedef char player_control_size_assert[HALO_LAYOUT_ASSERT_32(sizeof(struct player_control) == 0x40)];
+typedef char player_control_unit_index_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct player_control, unit_index) == 0x0)];
+typedef char player_control_inhibited_action_flags_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct player_control, inhibited_button_bit_vector) == 0x8)];
+typedef char player_control_desired_yaw_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct player_control, desired_angles.yaw) == 0xC)];
+typedef char player_control_desired_pitch_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct player_control, desired_angles.pitch) == 0x10)];
+typedef char player_control_desired_weapon_index_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct player_control, desired_weapon_index) == 0x20)];
+typedef char player_control_desired_grenade_index_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct player_control, desired_grenade_index) == 0x22)];
+typedef char player_control_zoom_level_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct player_control, zoom_level) == 0x24)];
+typedef char player_control_target_object_index_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct player_control, target_object_index) == 0x28)];
+typedef char player_control_autoaim_level_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct player_control, autoaim_level) == 0x2C)];
+typedef char player_control_magnetism_level_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct player_control, magnetism_level) == 0x30)];
+typedef char player_control_look_acceleration_time_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct player_control, look_acceleration_time) == 0x34)];
+typedef char player_control_pitch_minimum_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct player_control, pitch_minimum) == 0x38)];
+typedef char player_control_pitch_maximum_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct player_control, pitch_maximum) == 0x3C)];
+typedef char player_control_unit_camera_info_size_assert[HALO_LAYOUT_ASSERT_32(sizeof(struct player_control_unit_camera_info) == 0x18)];
+typedef char player_control_globals_size_assert[HALO_LAYOUT_ASSERT_32(sizeof(struct player_control_globals_data) == 0x110)];
+typedef char player_control_globals_players_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct player_control_globals_data, players) == 0x10)];
+typedef char player_control_globals_action_test_flags_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct player_control_globals_data, action_test_flags) == 0x4)];
+typedef char player_control_globals_suppressed_action_flags_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct player_control_globals_data, suppressed_action_flags) == 0x8)];
+typedef char player_control_globals_flags_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct player_control_globals_data, flags) == 0xC)];
 
 /* ---------- prototypes */
 

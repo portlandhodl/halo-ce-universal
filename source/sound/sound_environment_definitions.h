@@ -48,8 +48,7 @@ struct sound_environment_definition
 	byte unused1[16];
 };
 
-typedef char verify_sound_environment_definition_size[
-	sizeof(struct sound_environment_definition) == 0x48 ? 1 : -1];
+typedef char verify_sound_environment_definition_size[HALO_LAYOUT_ASSERT_32(sizeof(struct sound_environment_definition) == 0x48)];
 
 /* ---------- prototypes/EXAMPLE.C */
 

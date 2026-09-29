@@ -62,8 +62,7 @@ struct unit_camera_track
 	long unused[3];
 };
 
-typedef char unit_camera_track_size_assert[
-	sizeof(struct unit_camera_track) == 0x1C ? 1 : -1];
+typedef char unit_camera_track_size_assert[HALO_LAYOUT_ASSERT_32(sizeof(struct unit_camera_track) == 0x1C)];
 
 /* ---------- prototypes */
 

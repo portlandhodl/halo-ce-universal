@@ -58,8 +58,7 @@ struct rendered_particle_datum
 	byte pad;
 };
 
-typedef char rendered_particle_size_assert[
-	sizeof(struct rendered_particle_datum) == 8 ? 1 : -1];
+typedef char rendered_particle_size_assert[HALO_LAYOUT_ASSERT_32(sizeof(struct rendered_particle_datum) == 8)];
 
 /* ---------- prototypes */
 

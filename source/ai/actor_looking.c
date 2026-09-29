@@ -237,34 +237,20 @@ enum
 
 /* ---------- structures */
 
-typedef char actor_looking_ai_debug_printing_offset_must_be_0x9D[
-	offsetof(struct ai_debug_state, print_secondary_looking) == 0x9D ? 1 : -1];
-typedef char actor_looking_actor_vehicle_index_offset_must_be_0x158[
-	offsetof(struct actor_datum, input.vehicle_index) == 0x158 ? 1 : -1];
-typedef char actor_looking_secondary_look_type_offset_must_be_0x544[
-	offsetof(struct actor_datum, control.secondary_look_type) == 0x544 ? 1 : -1];
-typedef char actor_looking_secondary_look_priority_offset_must_be_0x546[
-	offsetof(struct actor_datum, control.secondary_look_priority) == 0x546 ? 1 : -1];
-typedef char actor_looking_secondary_look_timer_offset_must_be_0x548[
-	offsetof(struct actor_datum, control.secondary_look_timer) == 0x548 ? 1 : -1];
-typedef char actor_looking_prop_unit_index_offset_must_be_0x18[
-	offsetof(struct prop_datum, unit_index) == 0x18 ? 1 : -1];
-typedef char actor_looking_prop_state_offset_must_be_0x24[
-	offsetof(struct prop_datum, state) == 0x24 ? 1 : -1];
-typedef char actor_looking_prop_enemy_offset_must_be_0x60[
-	offsetof(struct prop_datum, enemy) == 0x60 ? 1 : -1];
-typedef char actor_looking_prop_dead_ticks_offset_must_be_0x76[
-	offsetof(struct prop_datum, dead_ticks) == 0x76 ? 1 : -1];
-typedef char actor_looking_prop_vehicle_index_offset_must_be_0x110[
-	offsetof(struct prop_datum, vehicle_index) == 0x110 ? 1 : -1];
-typedef char actor_looking_prop_quantized_distance_offset_must_be_0x121[
-	offsetof(struct prop_datum, quantized_distance) == 0x121 ? 1 : -1];
-typedef char actor_looking_prop_quantized_speed_offset_must_be_0x123[
-	offsetof(struct prop_datum, quantized_speed) == 0x123 ? 1 : -1];
-typedef char actor_looking_prop_dead_offset_must_be_0x127[
-	offsetof(struct prop_datum, dead) == 0x127 ? 1 : -1];
-typedef char actor_looking_prop_shooting_offset_must_be_0x12F[
-	offsetof(struct prop_datum, shooting) == 0x12F ? 1 : -1];
+typedef char actor_looking_ai_debug_printing_offset_must_be_0x9D[HALO_LAYOUT_ASSERT_32(offsetof(struct ai_debug_state, print_secondary_looking) == 0x9D)];
+typedef char actor_looking_actor_vehicle_index_offset_must_be_0x158[HALO_LAYOUT_ASSERT_32(offsetof(struct actor_datum, input.vehicle_index) == 0x158)];
+typedef char actor_looking_secondary_look_type_offset_must_be_0x544[HALO_LAYOUT_ASSERT_32(offsetof(struct actor_datum, control.secondary_look_type) == 0x544)];
+typedef char actor_looking_secondary_look_priority_offset_must_be_0x546[HALO_LAYOUT_ASSERT_32(offsetof(struct actor_datum, control.secondary_look_priority) == 0x546)];
+typedef char actor_looking_secondary_look_timer_offset_must_be_0x548[HALO_LAYOUT_ASSERT_32(offsetof(struct actor_datum, control.secondary_look_timer) == 0x548)];
+typedef char actor_looking_prop_unit_index_offset_must_be_0x18[HALO_LAYOUT_ASSERT_32(offsetof(struct prop_datum, unit_index) == 0x18)];
+typedef char actor_looking_prop_state_offset_must_be_0x24[HALO_LAYOUT_ASSERT_32(offsetof(struct prop_datum, state) == 0x24)];
+typedef char actor_looking_prop_enemy_offset_must_be_0x60[HALO_LAYOUT_ASSERT_32(offsetof(struct prop_datum, enemy) == 0x60)];
+typedef char actor_looking_prop_dead_ticks_offset_must_be_0x76[HALO_LAYOUT_ASSERT_32(offsetof(struct prop_datum, dead_ticks) == 0x76)];
+typedef char actor_looking_prop_vehicle_index_offset_must_be_0x110[HALO_LAYOUT_ASSERT_32(offsetof(struct prop_datum, vehicle_index) == 0x110)];
+typedef char actor_looking_prop_quantized_distance_offset_must_be_0x121[HALO_LAYOUT_ASSERT_32(offsetof(struct prop_datum, quantized_distance) == 0x121)];
+typedef char actor_looking_prop_quantized_speed_offset_must_be_0x123[HALO_LAYOUT_ASSERT_32(offsetof(struct prop_datum, quantized_speed) == 0x123)];
+typedef char actor_looking_prop_dead_offset_must_be_0x127[HALO_LAYOUT_ASSERT_32(offsetof(struct prop_datum, dead) == 0x127)];
+typedef char actor_looking_prop_shooting_offset_must_be_0x12F[HALO_LAYOUT_ASSERT_32(offsetof(struct prop_datum, shooting) == 0x12F)];
 
 /* ---------- prototypes */
 

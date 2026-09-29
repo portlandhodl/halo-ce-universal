@@ -259,10 +259,8 @@ struct lens_flare_reflection
 	byte reserved7C[0x4];
 };
 
-typedef char verify_lens_flare_definition_size[
-	sizeof(struct lens_flare_definition) == 0xF0 ? 1 : -1];
-typedef char verify_lens_flare_reflection_size[
-	sizeof(struct lens_flare_reflection) == 0x80 ? 1 : -1];
+typedef char verify_lens_flare_definition_size[HALO_LAYOUT_ASSERT_32(sizeof(struct lens_flare_definition) == 0xF0)];
+typedef char verify_lens_flare_reflection_size[HALO_LAYOUT_ASSERT_32(sizeof(struct lens_flare_reflection) == 0x80)];
 
 struct structure_bsp
 {
@@ -315,28 +313,21 @@ struct rasterizer_lens_flare_submit_parameters
 	long internal__occlusion_pixels;
 };
 
-typedef char verify_structure_cluster_size[
-	sizeof(struct structure_cluster) == 0x68 ? 1 : -1];
-typedef char verify_structure_cluster_lens_flare_marker_count_offset[
-	offsetof(
+typedef char verify_structure_cluster_size[HALO_LAYOUT_ASSERT_32(sizeof(struct structure_cluster) == 0x68)];
+typedef char verify_structure_cluster_lens_flare_marker_count_offset[HALO_LAYOUT_ASSERT_32(offsetof(
 		struct structure_cluster,
-		lens_flare_marker_count) == 0x42 ? 1 : -1];
-typedef char verify_structure_lens_flare_marker_size[
-	sizeof(struct structure_lens_flare_marker) == 0x10 ? 1 : -1];
-typedef char verify_lens_flare_definition_far_fade_distance_offset[
-	offsetof(
+		lens_flare_marker_count) == 0x42)];
+typedef char verify_structure_lens_flare_marker_size[HALO_LAYOUT_ASSERT_32(sizeof(struct structure_lens_flare_marker) == 0x10)];
+typedef char verify_lens_flare_definition_far_fade_distance_offset[HALO_LAYOUT_ASSERT_32(offsetof(
 		struct lens_flare_definition,
-		far_fade_distance) == 0x1C ? 1 : -1];
-typedef char verify_rasterizer_light_submit_parameters_size[
-	sizeof(struct rasterizer_light_submit_parameters) == 0x38 ? 1 : -1];
-typedef char verify_rasterizer_lights_frame_statistics_dynamic_light_count_offset[
-	offsetof(
+		far_fade_distance) == 0x1C)];
+typedef char verify_rasterizer_light_submit_parameters_size[HALO_LAYOUT_ASSERT_32(sizeof(struct rasterizer_light_submit_parameters) == 0x38)];
+typedef char verify_rasterizer_lights_frame_statistics_dynamic_light_count_offset[HALO_LAYOUT_ASSERT_32(offsetof(
 		struct rasterizer_frame_statistics_globals,
-		dynamic_light_count) == 0x148 ? 1 : -1];
-typedef char verify_rasterizer_lights_frame_statistics_lens_flare_count_offset[
-	offsetof(
+		dynamic_light_count) == 0x148)];
+typedef char verify_rasterizer_lights_frame_statistics_lens_flare_count_offset[HALO_LAYOUT_ASSERT_32(offsetof(
 		struct rasterizer_frame_statistics_globals,
-		lens_flare_count) == 0x14C ? 1 : -1];
+		lens_flare_count) == 0x14C)];
 
 /* ---------- prototypes */
 

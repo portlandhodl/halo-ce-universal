@@ -81,28 +81,17 @@ struct rasterizer_cinematic_screen_effect_state
 	real near_clip_distance;
 };
 
-typedef char rasterizer_cinematic_screen_effect_parameters_tint_offset_assert[
-	offsetof(struct rasterizer_cinematic_screen_effect_parameters, filter_desaturation_tint) == 0x14 ? 1 : -1];
-typedef char rasterizer_cinematic_screen_effect_parameters_video_on_offset_assert[
-	offsetof(struct rasterizer_cinematic_screen_effect_parameters, video_on) == 0x23 ? 1 : -1];
-typedef char rasterizer_cinematic_screen_effect_parameters_video_scanline_map_offset_assert[
-	offsetof(struct rasterizer_cinematic_screen_effect_parameters, video_scanline_map) == 0x28 ? 1 : -1];
-typedef char rasterizer_cinematic_screen_effect_parameters_video_noise_map_offset_assert[
-	offsetof(struct rasterizer_cinematic_screen_effect_parameters, video_noise_map) == 0x34 ? 1 : -1];
-typedef char rasterizer_cinematic_screen_effect_state_size_assert[
-	sizeof(struct rasterizer_cinematic_screen_effect_state) == 0x78 ? 1 : -1];
-typedef char rasterizer_cinematic_screen_effect_state_has_control_offset_assert[
-	offsetof(struct rasterizer_cinematic_screen_effect_state, has_control) == 0x38 ? 1 : -1];
-typedef char rasterizer_cinematic_screen_effect_state_initialized_offset_assert[
-	offsetof(struct rasterizer_cinematic_screen_effect_state, initialized) == 0x39 ? 1 : -1];
-typedef char rasterizer_cinematic_screen_effect_state_convolution_radius_offset_assert[
-	offsetof(struct rasterizer_cinematic_screen_effect_state, convolution_radius) == 0x3C ? 1 : -1];
-typedef char rasterizer_cinematic_screen_effect_state_filter_time_offset_assert[
-	offsetof(struct rasterizer_cinematic_screen_effect_state, filter_time) == 0x5C ? 1 : -1];
-typedef char rasterizer_cinematic_screen_effect_state_script_values_offset_assert[
-	offsetof(struct rasterizer_cinematic_screen_effect_state, script_values) == 0x64 ? 1 : -1];
-typedef char rasterizer_cinematic_screen_effect_state_near_clip_distance_offset_assert[
-	offsetof(struct rasterizer_cinematic_screen_effect_state, near_clip_distance) == 0x74 ? 1 : -1];
+typedef char rasterizer_cinematic_screen_effect_parameters_tint_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct rasterizer_cinematic_screen_effect_parameters, filter_desaturation_tint) == 0x14)];
+typedef char rasterizer_cinematic_screen_effect_parameters_video_on_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct rasterizer_cinematic_screen_effect_parameters, video_on) == 0x23)];
+typedef char rasterizer_cinematic_screen_effect_parameters_video_scanline_map_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct rasterizer_cinematic_screen_effect_parameters, video_scanline_map) == 0x28)];
+typedef char rasterizer_cinematic_screen_effect_parameters_video_noise_map_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct rasterizer_cinematic_screen_effect_parameters, video_noise_map) == 0x34)];
+typedef char rasterizer_cinematic_screen_effect_state_size_assert[HALO_LAYOUT_ASSERT_32(sizeof(struct rasterizer_cinematic_screen_effect_state) == 0x78)];
+typedef char rasterizer_cinematic_screen_effect_state_has_control_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct rasterizer_cinematic_screen_effect_state, has_control) == 0x38)];
+typedef char rasterizer_cinematic_screen_effect_state_initialized_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct rasterizer_cinematic_screen_effect_state, initialized) == 0x39)];
+typedef char rasterizer_cinematic_screen_effect_state_convolution_radius_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct rasterizer_cinematic_screen_effect_state, convolution_radius) == 0x3C)];
+typedef char rasterizer_cinematic_screen_effect_state_filter_time_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct rasterizer_cinematic_screen_effect_state, filter_time) == 0x5C)];
+typedef char rasterizer_cinematic_screen_effect_state_script_values_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct rasterizer_cinematic_screen_effect_state, script_values) == 0x64)];
+typedef char rasterizer_cinematic_screen_effect_state_near_clip_distance_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct rasterizer_cinematic_screen_effect_state, near_clip_distance) == 0x74)];
 
 /* ---------- globals */
 

@@ -96,12 +96,9 @@ struct animation
 	struct tag_data data;
 };
 
-typedef char verify_animation_loop_frame_index_offset[
-	offsetof(struct animation, private_loop_frame_index) == 0x2E ? 1 : -1];
-typedef char verify_animation_second_key_frame_index_offset[
-	offsetof(struct animation, private_second_key_frame_index) == 0x36 ? 1 : -1];
-typedef char verify_animation_sound_frame_index_offset[
-	offsetof(struct animation, private_sound_frame_index) == 0x3E ? 1 : -1];
+typedef char verify_animation_loop_frame_index_offset[HALO_LAYOUT_ASSERT_32(offsetof(struct animation, private_loop_frame_index) == 0x2E)];
+typedef char verify_animation_second_key_frame_index_offset[HALO_LAYOUT_ASSERT_32(offsetof(struct animation, private_second_key_frame_index) == 0x36)];
+typedef char verify_animation_sound_frame_index_offset[HALO_LAYOUT_ASSERT_32(offsetof(struct animation, private_sound_frame_index) == 0x3E)];
 
 struct animation_graph_object_overlay
 {

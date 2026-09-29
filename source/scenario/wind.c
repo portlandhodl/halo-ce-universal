@@ -66,8 +66,7 @@ struct wind_state
 	real_vector3d velocity3d;
 };
 
-typedef char wind_state_size_assert[
-	sizeof(struct wind_state) == 0x20 ? 1 : -1];
+typedef char wind_state_size_assert[HALO_LAYOUT_ASSERT_32(sizeof(struct wind_state) == 0x20)];
 
 struct wind_globals
 {
@@ -80,8 +79,7 @@ struct wind_globals
 	long time;
 };
 
-typedef char wind_globals_size_assert[
-	sizeof(struct wind_globals) == 0xD0C ? 1 : -1];
+typedef char wind_globals_size_assert[HALO_LAYOUT_ASSERT_32(sizeof(struct wind_globals) == 0xD0C)];
 
 struct structure_weather_palette_entry
 {
@@ -100,12 +98,9 @@ struct structure_weather_palette_entry
 	long wind_unused[11];
 };
 
-typedef char structure_weather_palette_entry_size_assert[
-	sizeof(struct structure_weather_palette_entry) == 0xF0 ? 1 : -1];
-typedef char structure_weather_palette_entry_wind_offset_assert[
-	offsetof(struct structure_weather_palette_entry, wind) == 0x80 ? 1 : -1];
-typedef char structure_weather_palette_entry_direction_offset_assert[
-	offsetof(struct structure_weather_palette_entry, wind_direction) == 0x90 ? 1 : -1];
+typedef char structure_weather_palette_entry_size_assert[HALO_LAYOUT_ASSERT_32(sizeof(struct structure_weather_palette_entry) == 0xF0)];
+typedef char structure_weather_palette_entry_wind_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct structure_weather_palette_entry, wind) == 0x80)];
+typedef char structure_weather_palette_entry_direction_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct structure_weather_palette_entry, wind_direction) == 0x90)];
 
 /* ---------- prototypes */
 

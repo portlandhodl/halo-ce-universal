@@ -228,13 +228,11 @@ struct game_globals_player_control
 	struct tag_block look_function;
 };
 
-typedef char game_globals_player_control_size_assert[
-	sizeof(struct game_globals_player_control) == 0x80 ? 1 : -1];
-typedef char game_globals_player_control_flipping_angle_offset_assert[
-	offsetof(struct game_globals_player_control, minimum_vehicle_flipping_angle) == 0x70 ? 1 : -1];
+typedef char game_globals_player_control_size_assert[HALO_LAYOUT_ASSERT_32(sizeof(struct game_globals_player_control) == 0x80)];
+typedef char game_globals_player_control_flipping_angle_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct game_globals_player_control, minimum_vehicle_flipping_angle) == 0x70)];
 
-typedef char verify_game_globals_multiplayer_information_size[sizeof(struct game_globals_multiplayer_information) == 0xA0 ? 1 : -1];
-typedef char verify_game_globals_multiplayer_sounds_offset[offsetof(struct game_globals_multiplayer_information, sounds) == 0x5C ? 1 : -1];
+typedef char verify_game_globals_multiplayer_information_size[HALO_LAYOUT_ASSERT_32(sizeof(struct game_globals_multiplayer_information) == 0xA0)];
+typedef char verify_game_globals_multiplayer_sounds_offset[HALO_LAYOUT_ASSERT_32(offsetof(struct game_globals_multiplayer_information, sounds) == 0x5C)];
 
 struct game_globals
 {

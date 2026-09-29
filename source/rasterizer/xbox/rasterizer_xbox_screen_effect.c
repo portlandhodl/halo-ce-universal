@@ -167,28 +167,17 @@ enum
 
 /* ---------- structures */
 
-typedef char rasterizer_screen_effect_debug_options_flashes_offset_assert[
-	offsetof(struct rasterizer_debug_options_definition, screen_flashes) == 0x47 ? 1 : -1];
-typedef char rasterizer_screen_effect_debug_options_effects_offset_assert[
-	offsetof(struct rasterizer_debug_options_definition, screen_effects) == 0x48 ? 1 : -1];
-typedef char rasterizer_screen_effect_parameters_mask_offset_assert[
-	offsetof(struct rasterizer_cinematic_screen_effect_parameters, convolution_mask) == 0x08 ? 1 : -1];
-typedef char rasterizer_screen_effect_parameters_tint_offset_assert[
-	offsetof(struct rasterizer_cinematic_screen_effect_parameters, filter_desaturation_tint) == 0x14 ? 1 : -1];
-typedef char rasterizer_screen_effect_parameters_video_offset_assert[
-	offsetof(struct rasterizer_cinematic_screen_effect_parameters, video_on) == 0x23 ? 1 : -1];
-typedef char rasterizer_screen_effect_parameters_scanline_offset_assert[
-	offsetof(struct rasterizer_cinematic_screen_effect_parameters, video_scanline_map) == 0x28 ? 1 : -1];
-typedef char rasterizer_screen_effect_parameters_noise_offset_assert[
-	offsetof(struct rasterizer_cinematic_screen_effect_parameters, video_noise_map) == 0x34 ? 1 : -1];
-typedef char rasterizer_screen_effect_window_viewport_offset_assert[
-	offsetof(struct rasterizer_window_begin_parameters, camera.viewport_bounds) == 0x34 ? 1 : -1];
-typedef char rasterizer_screen_effect_window_bounds_offset_assert[
-	offsetof(struct rasterizer_window_begin_parameters, camera.window_bounds) == 0x3C ? 1 : -1];
-typedef char rasterizer_screen_effect_window_flash_offset_assert[
-	offsetof(struct rasterizer_window_begin_parameters, screen_flash) == 0x238 ? 1 : -1];
-typedef char rasterizer_screen_effect_pixel_shader_size_assert[
-	sizeof(struct pixel_shader_definition) == 0xF0 ? 1 : -1];
+typedef char rasterizer_screen_effect_debug_options_flashes_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct rasterizer_debug_options_definition, screen_flashes) == 0x47)];
+typedef char rasterizer_screen_effect_debug_options_effects_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct rasterizer_debug_options_definition, screen_effects) == 0x48)];
+typedef char rasterizer_screen_effect_parameters_mask_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct rasterizer_cinematic_screen_effect_parameters, convolution_mask) == 0x08)];
+typedef char rasterizer_screen_effect_parameters_tint_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct rasterizer_cinematic_screen_effect_parameters, filter_desaturation_tint) == 0x14)];
+typedef char rasterizer_screen_effect_parameters_video_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct rasterizer_cinematic_screen_effect_parameters, video_on) == 0x23)];
+typedef char rasterizer_screen_effect_parameters_scanline_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct rasterizer_cinematic_screen_effect_parameters, video_scanline_map) == 0x28)];
+typedef char rasterizer_screen_effect_parameters_noise_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct rasterizer_cinematic_screen_effect_parameters, video_noise_map) == 0x34)];
+typedef char rasterizer_screen_effect_window_viewport_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct rasterizer_window_begin_parameters, camera.viewport_bounds) == 0x34)];
+typedef char rasterizer_screen_effect_window_bounds_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct rasterizer_window_begin_parameters, camera.window_bounds) == 0x3C)];
+typedef char rasterizer_screen_effect_window_flash_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct rasterizer_window_begin_parameters, screen_flash) == 0x238)];
+typedef char rasterizer_screen_effect_pixel_shader_size_assert[HALO_LAYOUT_ASSERT_32(sizeof(struct pixel_shader_definition) == 0xF0)];
 
 /* ---------- globals */
 

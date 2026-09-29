@@ -33,8 +33,7 @@ struct weather_particle_system_definition
 	struct tag_block particle_types;
 };
 
-typedef char weather_particle_system_definition_size_assert[
-	sizeof(struct weather_particle_system_definition) == 0x30 ? 1 : -1];
+typedef char weather_particle_system_definition_size_assert[HALO_LAYOUT_ASSERT_32(sizeof(struct weather_particle_system_definition) == 0x30)];
 
 /* ---------- prototypes/EXAMPLE.C */
 

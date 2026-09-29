@@ -105,18 +105,12 @@ struct scenario_cutscene_title
 	byte unused50[0x10];
 };
 
-typedef char verify_scenario_cutscene_title_size[
-	sizeof(struct scenario_cutscene_title) == 0x60 ? 1 : -1];
-typedef char verify_scenario_cutscene_title_name_offset[
-	offsetof(struct scenario_cutscene_title, name) == 0x04 ? 1 : -1];
-typedef char verify_scenario_cutscene_title_bounds_offset[
-	offsetof(struct scenario_cutscene_title, bounds) == 0x28 ? 1 : -1];
-typedef char verify_scenario_cutscene_title_fade_offset[
-	offsetof(struct scenario_cutscene_title, fade_in_time) == 0x44 ? 1 : -1];
-typedef char verify_hud_global_single_player_font_offset[
-	offsetof(struct hud_globals_definition, messaging.single_player_font.index) == 0x54 ? 1 : -1];
-typedef char verify_hud_global_default_title_bounds_offset[
-	offsetof(struct hud_globals_definition, defaults.default_title_bounds) == 0x2DC ? 1 : -1];
+typedef char verify_scenario_cutscene_title_size[HALO_LAYOUT_ASSERT_32(sizeof(struct scenario_cutscene_title) == 0x60)];
+typedef char verify_scenario_cutscene_title_name_offset[HALO_LAYOUT_ASSERT_32(offsetof(struct scenario_cutscene_title, name) == 0x04)];
+typedef char verify_scenario_cutscene_title_bounds_offset[HALO_LAYOUT_ASSERT_32(offsetof(struct scenario_cutscene_title, bounds) == 0x28)];
+typedef char verify_scenario_cutscene_title_fade_offset[HALO_LAYOUT_ASSERT_32(offsetof(struct scenario_cutscene_title, fade_in_time) == 0x44)];
+typedef char verify_hud_global_single_player_font_offset[HALO_LAYOUT_ASSERT_32(offsetof(struct hud_globals_definition, messaging.single_player_font.index) == 0x54)];
+typedef char verify_hud_global_default_title_bounds_offset[HALO_LAYOUT_ASSERT_32(offsetof(struct hud_globals_definition, defaults.default_title_bounds) == 0x2DC)];
 
 /* ---------- prototypes */
 

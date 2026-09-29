@@ -46,10 +46,8 @@ struct texture_page
 	struct data_array *textures;
 };
 
-typedef char texture_page_texture_size_assert[
-	sizeof(struct texture_page_texture) == 0xC ? 1 : -1];
-typedef char texture_page_size_assert[
-	sizeof(struct texture_page) == 0x1C ? 1 : -1];
+typedef char texture_page_texture_size_assert[HALO_LAYOUT_ASSERT_32(sizeof(struct texture_page_texture) == 0xC)];
+typedef char texture_page_size_assert[HALO_LAYOUT_ASSERT_32(sizeof(struct texture_page) == 0x1C)];
 
 /* ---------- prototypes/TEXTURE_PAGE.C */
 

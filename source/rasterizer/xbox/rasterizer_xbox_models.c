@@ -458,166 +458,98 @@ struct shader_environment_definition
 	struct shader_environment_properties environment;
 };
 
-typedef char verify_rasterizer_models_draw_models_offset[
-	offsetof(struct rasterizer_debug_options, draw_models) == 0x0C
-		? 1 : -1];
-typedef char verify_rasterizer_models_active_camouflage_offset[
-	offsetof(
+typedef char verify_rasterizer_models_draw_models_offset[HALO_LAYOUT_ASSERT_32(offsetof(struct rasterizer_debug_options, draw_models) == 0x0C)];
+typedef char verify_rasterizer_models_active_camouflage_offset[HALO_LAYOUT_ASSERT_32(offsetof(
 		struct rasterizer_debug_options,
-		active_camouflage) == 0x41 ? 1 : -1];
-typedef char verify_rasterizer_model_parameters_skinning_offset[
-	offsetof(struct rasterizer_model_begin_parameters, skinning) == 0x08
-		? 1 : -1];
-typedef char verify_rasterizer_model_parameters_lighting_offset[
-	offsetof(struct rasterizer_model_begin_parameters, lighting) == 0x10
-		? 1 : -1];
-typedef char verify_rasterizer_model_parameters_effect_offset[
-	offsetof(struct rasterizer_model_begin_parameters, effect) == 0x8C
-		? 1 : -1];
-typedef char verify_rasterizer_models_window_fog_offset[
-	offsetof(struct rasterizer_window_begin_parameters, fog) == 0x1E8
-		? 1 : -1];
-typedef char verify_rasterizer_models_statistics_skinning_offset[
-	offsetof(
+		active_camouflage) == 0x41)];
+typedef char verify_rasterizer_model_parameters_skinning_offset[HALO_LAYOUT_ASSERT_32(offsetof(struct rasterizer_model_begin_parameters, skinning) == 0x08)];
+typedef char verify_rasterizer_model_parameters_lighting_offset[HALO_LAYOUT_ASSERT_32(offsetof(struct rasterizer_model_begin_parameters, lighting) == 0x10)];
+typedef char verify_rasterizer_model_parameters_effect_offset[HALO_LAYOUT_ASSERT_32(offsetof(struct rasterizer_model_begin_parameters, effect) == 0x8C)];
+typedef char verify_rasterizer_models_window_fog_offset[HALO_LAYOUT_ASSERT_32(offsetof(struct rasterizer_window_begin_parameters, fog) == 0x1E8)];
+typedef char verify_rasterizer_models_statistics_skinning_offset[HALO_LAYOUT_ASSERT_32(offsetof(
 		struct rasterizer_models_frame_statistics,
-		skinning_work) == 0x150 ? 1 : -1];
-typedef char verify_rasterizer_models_statistics_pushbuffer_offset[
-	offsetof(
+		skinning_work) == 0x150)];
+typedef char verify_rasterizer_models_statistics_pushbuffer_offset[HALO_LAYOUT_ASSERT_32(offsetof(
 		struct rasterizer_models_frame_statistics,
-		pushbuffer_words) == 0x15C ? 1 : -1];
-typedef char verify_rasterizer_models_statistics_vertex_offset[
-	offsetof(
+		pushbuffer_words) == 0x15C)];
+typedef char verify_rasterizer_models_statistics_vertex_offset[HALO_LAYOUT_ASSERT_32(offsetof(
 		struct rasterizer_models_frame_statistics,
-		model_vertex_count) == 0xD8 ? 1 : -1];
-typedef char verify_rasterizer_model_parameters_position_offset[
-	offsetof(struct rasterizer_model_begin_parameters, centroid) == 0xB4
-		? 1 : -1];
-typedef char verify_rasterizer_model_parameters_texture_scale_offset[
-	offsetof(struct rasterizer_model_begin_parameters, base_map_scale) == 0xC4
-		? 1 : -1];
-typedef char verify_rasterizer_model_lighting_reflection_tint_offset[
-	offsetof(struct rasterizer_model_begin_parameters, lighting.reflection_tint_color)
-		== 0x5C ? 1 : -1];
-typedef char verify_rasterizer_model_parameters_effect_source_offset[
-	offsetof(
+		model_vertex_count) == 0xD8)];
+typedef char verify_rasterizer_model_parameters_position_offset[HALO_LAYOUT_ASSERT_32(offsetof(struct rasterizer_model_begin_parameters, centroid) == 0xB4)];
+typedef char verify_rasterizer_model_parameters_texture_scale_offset[HALO_LAYOUT_ASSERT_32(offsetof(struct rasterizer_model_begin_parameters, base_map_scale) == 0xC4)];
+typedef char verify_rasterizer_model_lighting_reflection_tint_offset[HALO_LAYOUT_ASSERT_32(offsetof(struct rasterizer_model_begin_parameters, lighting.reflection_tint_color)
+		== 0x5C)];
+typedef char verify_rasterizer_model_parameters_effect_source_offset[HALO_LAYOUT_ASSERT_32(offsetof(
 		struct rasterizer_model_begin_parameters,
-		effect.source_object_index) == 0x98 ? 1 : -1];
-typedef char verify_transparent_geometry_group_size[
-	sizeof(struct transparent_geometry_group) == 0xA0 ? 1 : -1];
-typedef char verify_transparent_geometry_group_z_sort_offset[
-	offsetof(struct transparent_geometry_group, z_sort) == 0x70 ? 1 : -1];
-typedef char verify_transparent_geometry_group_plane_offset[
-	offsetof(struct transparent_geometry_group, plane) == 0x80 ? 1 : -1];
-typedef char verify_transparent_geometry_group_cortana_hack_offset[
-	offsetof(struct transparent_geometry_group, cortana_hack) == 0x9D
-		? 1 : -1];
-typedef char verify_rasterizer_models_statistics_transparent_offset[
-	offsetof(
+		effect.source_object_index) == 0x98)];
+typedef char verify_transparent_geometry_group_size[HALO_LAYOUT_ASSERT_32(sizeof(struct transparent_geometry_group) == 0xA0)];
+typedef char verify_transparent_geometry_group_z_sort_offset[HALO_LAYOUT_ASSERT_32(offsetof(struct transparent_geometry_group, z_sort) == 0x70)];
+typedef char verify_transparent_geometry_group_plane_offset[HALO_LAYOUT_ASSERT_32(offsetof(struct transparent_geometry_group, plane) == 0x80)];
+typedef char verify_transparent_geometry_group_cortana_hack_offset[HALO_LAYOUT_ASSERT_32(offsetof(struct transparent_geometry_group, cortana_hack) == 0x9D)];
+typedef char verify_rasterizer_models_statistics_transparent_offset[HALO_LAYOUT_ASSERT_32(offsetof(
 		struct rasterizer_models_frame_statistics,
-		transparent_model_vertex_count) == 0xE4 ? 1 : -1];
-typedef char verify_rasterizer_model_pixel_shader_size[
-	sizeof(struct pixel_shader_definition) == 0xF0 ? 1 : -1];
-typedef char verify_shader_environment_base_map_offset[
-	offsetof(struct shader_environment_definition, environment.diffuse.base_map)
-		== 0x88 ? 1 : -1];
-typedef char verify_shader_environment_detail_function_offset[
-	offsetof(
+		transparent_model_vertex_count) == 0xE4)];
+typedef char verify_rasterizer_model_pixel_shader_size[HALO_LAYOUT_ASSERT_32(sizeof(struct pixel_shader_definition) == 0xF0)];
+typedef char verify_shader_environment_base_map_offset[HALO_LAYOUT_ASSERT_32(offsetof(struct shader_environment_definition, environment.diffuse.base_map)
+		== 0x88)];
+typedef char verify_shader_environment_detail_function_offset[HALO_LAYOUT_ASSERT_32(offsetof(
 		struct shader_environment_definition,
-		environment.diffuse.detail_map_function) == 0xB0 ? 1 : -1];
-typedef char verify_shader_environment_bump_map_offset[
-	offsetof(struct shader_environment_definition, environment.diffuse.bump_map)
-		== 0x128 ? 1 : -1];
-typedef char verify_shader_environment_specular_offset[
-	offsetof(
+		environment.diffuse.detail_map_function) == 0xB0)];
+typedef char verify_shader_environment_bump_map_offset[HALO_LAYOUT_ASSERT_32(offsetof(struct shader_environment_definition, environment.diffuse.bump_map)
+		== 0x128)];
+typedef char verify_shader_environment_specular_offset[HALO_LAYOUT_ASSERT_32(offsetof(
 		struct shader_environment_definition,
-		environment.specular.view_perpendicular_color) == 0x2A8 ? 1 : -1];
-typedef char verify_shader_environment_reflection_offset[
-	offsetof(
+		environment.specular.view_perpendicular_color) == 0x2A8)];
+typedef char verify_shader_environment_reflection_offset[HALO_LAYOUT_ASSERT_32(offsetof(
 		struct shader_environment_definition,
-		environment.reflection.view_perpendicular_brightness) == 0x2F4 ? 1 : -1];
-typedef char verify_shader_environment_cube_map_offset[
-	offsetof(
+		environment.reflection.view_perpendicular_brightness) == 0x2F4)];
+typedef char verify_shader_environment_cube_map_offset[HALO_LAYOUT_ASSERT_32(offsetof(
 		struct shader_environment_definition,
-		environment.reflection.cube_map) == 0x324 ? 1 : -1];
+		environment.reflection.cube_map) == 0x324)];
 
-typedef char verify_rasterizer_models_debug_options_zbias_offset[
-	offsetof(struct rasterizer_debug_options, zbias) == 0x54
-		? 1 : -1];
-typedef char verify_rasterizer_model_parameters_effect_shader_offset[
-	offsetof(struct rasterizer_model_begin_parameters, effect.shader) == 0xA8
-		? 1 : -1];
-typedef char verify_rasterizer_model_parameters_effect_animation_offset[
-	offsetof(struct rasterizer_model_begin_parameters, effect.animation) == 0xAC
-		? 1 : -1];
-typedef char verify_rasterizer_models_statistics_vertex_shader_work_offset[
-	offsetof(
+typedef char verify_rasterizer_models_debug_options_zbias_offset[HALO_LAYOUT_ASSERT_32(offsetof(struct rasterizer_debug_options, zbias) == 0x54)];
+typedef char verify_rasterizer_model_parameters_effect_shader_offset[HALO_LAYOUT_ASSERT_32(offsetof(struct rasterizer_model_begin_parameters, effect.shader) == 0xA8)];
+typedef char verify_rasterizer_model_parameters_effect_animation_offset[HALO_LAYOUT_ASSERT_32(offsetof(struct rasterizer_model_begin_parameters, effect.animation) == 0xAC)];
+typedef char verify_rasterizer_models_statistics_vertex_shader_work_offset[HALO_LAYOUT_ASSERT_32(offsetof(
 		struct rasterizer_models_frame_statistics,
-		vertex_shader_work) == 0x158 ? 1 : -1];
-typedef char verify_rasterizer_models_statistics_vertex_shader_accum_offset[
-	offsetof(
+		vertex_shader_work) == 0x158)];
+typedef char verify_rasterizer_models_statistics_vertex_shader_accum_offset[HALO_LAYOUT_ASSERT_32(offsetof(
 		struct rasterizer_models_frame_statistics,
-		vertex_shader_work_accumulated) == 0x168 ? 1 : -1];
-typedef char verify_shader_plasma_intensity_exponent_source_offset[
-	offsetof(
+		vertex_shader_work_accumulated) == 0x168)];
+typedef char verify_shader_plasma_intensity_exponent_source_offset[HALO_LAYOUT_ASSERT_32(offsetof(
 		struct shader_transparent_plasma_definition,
-		intensity_exponent_source) == 0x2C ? 1 : -1];
-typedef char verify_shader_model_translucency_offset[
-	offsetof(struct shader_model_definition, model.translucency) == 0x38
-		? 1 : -1];
-typedef char verify_shader_model_change_color_source_offset[
-	offsetof(struct shader_model_definition, model.change_color_source) == 0x4C
-		? 1 : -1];
-typedef char verify_shader_model_self_illumination_flags_offset[
-	offsetof(
+		intensity_exponent_source) == 0x2C)];
+typedef char verify_shader_model_translucency_offset[HALO_LAYOUT_ASSERT_32(offsetof(struct shader_model_definition, model.translucency) == 0x38)];
+typedef char verify_shader_model_change_color_source_offset[HALO_LAYOUT_ASSERT_32(offsetof(struct shader_model_definition, model.change_color_source) == 0x4C)];
+typedef char verify_shader_model_self_illumination_flags_offset[HALO_LAYOUT_ASSERT_32(offsetof(
 		struct shader_model_definition,
-		model.self_illumination_flags) == 0x6C ? 1 : -1];
-typedef char verify_shader_model_self_illumination_period_offset[
-	offsetof(
+		model.self_illumination_flags) == 0x6C)];
+typedef char verify_shader_model_self_illumination_period_offset[HALO_LAYOUT_ASSERT_32(offsetof(
 		struct shader_model_definition,
-		model.self_illumination_animation_period) == 0x74 ? 1 : -1];
-typedef char verify_shader_model_self_illumination_upper_bound_offset[
-	offsetof(
+		model.self_illumination_animation_period) == 0x74)];
+typedef char verify_shader_model_self_illumination_upper_bound_offset[HALO_LAYOUT_ASSERT_32(offsetof(
 		struct shader_model_definition,
-		model.self_illumination_animation_color_upper_bound) == 0x84 ? 1 : -1];
-typedef char verify_shader_model_map_u_scale_offset[
-	offsetof(struct shader_model_definition, model.map_u_scale) == 0x9C
-		? 1 : -1];
-typedef char verify_shader_model_base_map_offset[
-	offsetof(struct shader_model_definition, model.base_map.index) == 0xB0
-		? 1 : -1];
-typedef char verify_shader_model_multipurpose_map_offset[
-	offsetof(struct shader_model_definition, model.multipurpose_map.index) ==
-		0xC8 ? 1 : -1];
-typedef char verify_shader_model_detail_function_offset[
-	offsetof(struct shader_model_definition, model.detail_function) == 0xD4
-		? 1 : -1];
-typedef char verify_shader_model_detail_map_scale_offset[
-	offsetof(struct shader_model_definition, model.detail_map_scale) == 0xD8
-		? 1 : -1];
-typedef char verify_shader_model_detail_map_offset[
-	offsetof(struct shader_model_definition, model.detail_map.index) == 0xE8
-		? 1 : -1];
-typedef char verify_shader_model_detail_map_v_scale_offset[
-	offsetof(struct shader_model_definition, model.detail_map_v_scale) == 0xEC
-		? 1 : -1];
-typedef char verify_shader_model_texture_animation_offset[
-	offsetof(struct shader_model_definition, model.texture_animation) == 0xFC
-		? 1 : -1];
-typedef char verify_shader_model_reflection_falloff_offset[
-	offsetof(
+		model.self_illumination_animation_color_upper_bound) == 0x84)];
+typedef char verify_shader_model_map_u_scale_offset[HALO_LAYOUT_ASSERT_32(offsetof(struct shader_model_definition, model.map_u_scale) == 0x9C)];
+typedef char verify_shader_model_base_map_offset[HALO_LAYOUT_ASSERT_32(offsetof(struct shader_model_definition, model.base_map.index) == 0xB0)];
+typedef char verify_shader_model_multipurpose_map_offset[HALO_LAYOUT_ASSERT_32(offsetof(struct shader_model_definition, model.multipurpose_map.index) ==
+		0xC8)];
+typedef char verify_shader_model_detail_function_offset[HALO_LAYOUT_ASSERT_32(offsetof(struct shader_model_definition, model.detail_function) == 0xD4)];
+typedef char verify_shader_model_detail_map_scale_offset[HALO_LAYOUT_ASSERT_32(offsetof(struct shader_model_definition, model.detail_map_scale) == 0xD8)];
+typedef char verify_shader_model_detail_map_offset[HALO_LAYOUT_ASSERT_32(offsetof(struct shader_model_definition, model.detail_map.index) == 0xE8)];
+typedef char verify_shader_model_detail_map_v_scale_offset[HALO_LAYOUT_ASSERT_32(offsetof(struct shader_model_definition, model.detail_map_v_scale) == 0xEC)];
+typedef char verify_shader_model_texture_animation_offset[HALO_LAYOUT_ASSERT_32(offsetof(struct shader_model_definition, model.texture_animation) == 0xFC)];
+typedef char verify_shader_model_reflection_falloff_offset[HALO_LAYOUT_ASSERT_32(offsetof(
 		struct shader_model_definition,
-		model.reflection_falloff_distance) == 0x13C ? 1 : -1];
-typedef char verify_shader_model_perpendicular_brightness_offset[
-	offsetof(
+		model.reflection_falloff_distance) == 0x13C)];
+typedef char verify_shader_model_perpendicular_brightness_offset[HALO_LAYOUT_ASSERT_32(offsetof(
 		struct shader_model_definition,
-		model.perpendicular_brightness) == 0x144 ? 1 : -1];
-typedef char verify_shader_model_parallel_brightness_offset[
-	offsetof(struct shader_model_definition, model.parallel_brightness) ==
-		0x154 ? 1 : -1];
-typedef char verify_shader_model_reflection_cube_map_offset[
-	offsetof(
+		model.perpendicular_brightness) == 0x144)];
+typedef char verify_shader_model_parallel_brightness_offset[HALO_LAYOUT_ASSERT_32(offsetof(struct shader_model_definition, model.parallel_brightness) ==
+		0x154)];
+typedef char verify_shader_model_reflection_cube_map_offset[HALO_LAYOUT_ASSERT_32(offsetof(
 		struct shader_model_definition,
-		model.reflection_cube_map.index) == 0x170 ? 1 : -1];
+		model.reflection_cube_map.index) == 0x170)];
 
 /* ---------- globals */
 

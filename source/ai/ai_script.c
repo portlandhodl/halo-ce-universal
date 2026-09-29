@@ -583,8 +583,7 @@ struct ai_script_globals_data
 	struct ai_script_vehicle_enterable_data enterable_vehicles[MAXIMUM_AI_ENTERABLE_VEHICLES];
 };
 
-typedef char ai_script_squad_iterator_size_assert[
-	sizeof(struct ai_script_squad_iterator) == 0x14 ? 1 : -1];
+typedef char ai_script_squad_iterator_size_assert[HALO_LAYOUT_ASSERT_32(sizeof(struct ai_script_squad_iterator) == 0x14)];
 
 struct actor_iterator
 {
@@ -617,34 +616,20 @@ struct ai_script_conversation_definition
 	byte unknown[84];
 };
 
-typedef char ai_script_actor_iterator_size_assert[
-	sizeof(struct actor_iterator) == 0x1C ? 1 : -1];
-typedef char ai_script_actor_reference_iterator_size_assert[
-	sizeof(struct ai_script_actor_reference_iterator) == 0x18 ? 1 : -1];
-typedef char ai_script_actor_reference_iterator_actor_index_offset_assert[
-	offsetof(struct ai_script_actor_reference_iterator, actor_index) == 0x10 ? 1 : -1];
-typedef char ai_script_vehicle_enterable_size_assert[
-	sizeof(struct ai_script_vehicle_enterable) == 0xC ? 1 : -1];
-typedef char ai_script_vehicle_enterable_radius_offset_assert[
-	offsetof(struct ai_script_vehicle_enterable, radius) == 0x4 ? 1 : -1];
-typedef char ai_script_vehicle_enterable_team_offset_assert[
-	offsetof(struct ai_script_vehicle_enterable, team_bitmask) == 0x8 ? 1 : -1];
-typedef char ai_script_vehicle_enterable_actor_type_offset_assert[
-	offsetof(struct ai_script_vehicle_enterable, actor_type_bitmask) == 0xA ? 1 : -1];
-typedef char ai_script_vehicle_enterable_data_size_assert[
-	sizeof(struct ai_script_vehicle_enterable_data) == 0x28 ? 1 : -1];
-typedef char ai_script_globals_enterable_vehicle_count_offset_assert[
-	offsetof(struct ai_script_globals_data, enterable_vehicle_count) == 0x3B6 ? 1 : -1];
-typedef char ai_script_globals_enterable_vehicles_offset_assert[
-	offsetof(struct ai_script_globals_data, enterable_vehicles) == 0x3B8 ? 1 : -1];
-typedef char ai_script_platoon_iterator_size_assert[
-	sizeof(struct ai_script_platoon_iterator) == 0xC ? 1 : -1];
-typedef char ai_script_vehicle_candidate_size_assert[
-	sizeof(struct ai_script_vehicle_candidate) == 0xC ? 1 : -1];
-typedef char ai_script_vehicle_candidate_distance_offset_assert[
-	offsetof(struct ai_script_vehicle_candidate, distance_squared) == 0x4 ? 1 : -1];
-typedef char ai_script_vehicle_candidate_state_offset_assert[
-	offsetof(struct ai_script_vehicle_candidate, already_going_to_vehicle) == 0x8 ? 1 : -1];
+typedef char ai_script_actor_iterator_size_assert[HALO_LAYOUT_ASSERT_32(sizeof(struct actor_iterator) == 0x1C)];
+typedef char ai_script_actor_reference_iterator_size_assert[HALO_LAYOUT_ASSERT_32(sizeof(struct ai_script_actor_reference_iterator) == 0x18)];
+typedef char ai_script_actor_reference_iterator_actor_index_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct ai_script_actor_reference_iterator, actor_index) == 0x10)];
+typedef char ai_script_vehicle_enterable_size_assert[HALO_LAYOUT_ASSERT_32(sizeof(struct ai_script_vehicle_enterable) == 0xC)];
+typedef char ai_script_vehicle_enterable_radius_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct ai_script_vehicle_enterable, radius) == 0x4)];
+typedef char ai_script_vehicle_enterable_team_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct ai_script_vehicle_enterable, team_bitmask) == 0x8)];
+typedef char ai_script_vehicle_enterable_actor_type_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct ai_script_vehicle_enterable, actor_type_bitmask) == 0xA)];
+typedef char ai_script_vehicle_enterable_data_size_assert[HALO_LAYOUT_ASSERT_32(sizeof(struct ai_script_vehicle_enterable_data) == 0x28)];
+typedef char ai_script_globals_enterable_vehicle_count_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct ai_script_globals_data, enterable_vehicle_count) == 0x3B6)];
+typedef char ai_script_globals_enterable_vehicles_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct ai_script_globals_data, enterable_vehicles) == 0x3B8)];
+typedef char ai_script_platoon_iterator_size_assert[HALO_LAYOUT_ASSERT_32(sizeof(struct ai_script_platoon_iterator) == 0xC)];
+typedef char ai_script_vehicle_candidate_size_assert[HALO_LAYOUT_ASSERT_32(sizeof(struct ai_script_vehicle_candidate) == 0xC)];
+typedef char ai_script_vehicle_candidate_distance_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct ai_script_vehicle_candidate, distance_squared) == 0x4)];
+typedef char ai_script_vehicle_candidate_state_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct ai_script_vehicle_candidate, already_going_to_vehicle) == 0x8)];
 /* ---------- prototypes */
 
 static long ai_scripting_assess_status(

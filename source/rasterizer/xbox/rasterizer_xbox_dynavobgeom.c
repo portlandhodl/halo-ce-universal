@@ -197,16 +197,11 @@ struct transparent_geometry_group
 	byte pad9E[2];
 };
 
-typedef char transparent_geometry_group_size_assert[
-	sizeof(struct transparent_geometry_group) == 0xA0 ? 1 : -1];
-typedef char transparent_geometry_group_model_base_map_scale_offset_assert[
-	offsetof(struct transparent_geometry_group, model_base_map_scale) == 0x3C ? 1 : -1];
-typedef char transparent_geometry_group_z_sort_offset_assert[
-	offsetof(struct transparent_geometry_group, z_sort) == 0x70 ? 1 : -1];
-typedef char transparent_geometry_group_plane_offset_assert[
-	offsetof(struct transparent_geometry_group, plane) == 0x80 ? 1 : -1];
-typedef char transparent_geometry_group_cortana_hack_offset_assert[
-	offsetof(struct transparent_geometry_group, cortana_hack) == 0x9D ? 1 : -1];
+typedef char transparent_geometry_group_size_assert[HALO_LAYOUT_ASSERT_32(sizeof(struct transparent_geometry_group) == 0xA0)];
+typedef char transparent_geometry_group_model_base_map_scale_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct transparent_geometry_group, model_base_map_scale) == 0x3C)];
+typedef char transparent_geometry_group_z_sort_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct transparent_geometry_group, z_sort) == 0x70)];
+typedef char transparent_geometry_group_plane_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct transparent_geometry_group, plane) == 0x80)];
+typedef char transparent_geometry_group_cortana_hack_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct transparent_geometry_group, cortana_hack) == 0x9D)];
 
 struct rasterizer_meter_parameters
 {
@@ -221,14 +216,11 @@ struct rasterizer_meter_parameters
 	real gradient;
 };
 
-typedef char rasterizer_dynamic_geometry_pixel_shader_size_assert[
-	sizeof(struct pixel_shader_definition) == 0xF0 ? 1 : -1];
+typedef char rasterizer_dynamic_geometry_pixel_shader_size_assert[HALO_LAYOUT_ASSERT_32(sizeof(struct pixel_shader_definition) == 0xF0)];
 
-typedef char rasterizer_dynamic_geometry_viewport_bounds_offset_assert[
-	offsetof(struct rasterizer_window_begin_parameters, camera.viewport_bounds) == 0x34 ? 1 : -1];
+typedef char rasterizer_dynamic_geometry_viewport_bounds_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct rasterizer_window_begin_parameters, camera.viewport_bounds) == 0x34)];
 
-typedef char rasterizer_dynamic_geometry_camera_offset_assert[
-	offsetof(struct rasterizer_window_begin_parameters, camera) == 0x8 ? 1 : -1];
+typedef char rasterizer_dynamic_geometry_camera_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct rasterizer_window_begin_parameters, camera) == 0x8)];
 /* ---------- prototypes */
 
 static void submit_screen_vertex(

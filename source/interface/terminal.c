@@ -320,7 +320,9 @@ void terminal_printf(
 	...)
 {
 	real_argb_color default_terminal_printf_color;
-	char *arglist;
+	/* va_list, as everywhere else: on LP64 (HALO_LINUX64) it is not a char
+	pointer, and va_start writes more than a pointer */
+	va_list arglist;
 
 	va_start(arglist, format);
 

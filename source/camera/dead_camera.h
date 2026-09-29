@@ -32,8 +32,7 @@ struct dead_camera
 	real switch_timer;
 };
 
-typedef char dead_camera_size_assert[
-	sizeof(struct dead_camera) == 0x30 ? 1 : -1];
+typedef char dead_camera_size_assert[HALO_LAYOUT_ASSERT_32(sizeof(struct dead_camera) == 0x30)];
 
 struct camera_control;
 struct dead_camera_command;

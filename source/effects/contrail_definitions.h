@@ -104,12 +104,9 @@ struct contrail_definition
 	struct tag_block states;
 };
 
-typedef char verify_contrail_point_state_size[
-	sizeof(struct contrail_point_state) == 0x68 ? 1 : -1];
-typedef char verify_contrail_definition_size[
-	sizeof(struct contrail_definition) == 0x144 ? 1 : -1];
-typedef char verify_contrail_definition_states_offset[
-	offsetof(struct contrail_definition, states) == 0x138 ? 1 : -1];
+typedef char verify_contrail_point_state_size[HALO_LAYOUT_ASSERT_32(sizeof(struct contrail_point_state) == 0x68)];
+typedef char verify_contrail_definition_size[HALO_LAYOUT_ASSERT_32(sizeof(struct contrail_definition) == 0x144)];
+typedef char verify_contrail_definition_states_offset[HALO_LAYOUT_ASSERT_32(offsetof(struct contrail_definition, states) == 0x138)];
 
 /* ---------- prototypes/EXAMPLE.C */
 

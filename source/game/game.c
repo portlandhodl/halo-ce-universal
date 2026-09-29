@@ -208,21 +208,14 @@ struct game_runtime_globals_prefix
 	struct game_options options;
 };
 
-typedef char verify_game_options_size[
-	sizeof(struct game_options) == 0x10C ? 1 : -1];
-typedef char verify_game_options_code_version_offset[
-	offsetof(struct game_options, code_version) == 0x4 ? 1 : -1];
-typedef char verify_game_options_difficulty_offset[
-	offsetof(struct game_options, difficulty) == 0x6 ? 1 : -1];
-typedef char verify_game_options_random_seed_offset[
-	offsetof(struct game_options, random_seed) == 0x8 ? 1 : -1];
-typedef char verify_game_options_map_name_offset[
-	offsetof(struct game_options, map_name) == 0xC ? 1 : -1];
-typedef char verify_game_runtime_globals_players_are_double_speed_offset[
-	offsetof(struct game_runtime_globals_prefix, players_are_double_speed) == 0x2 ? 1 : -1];
-typedef char verify_game_runtime_globals_difficulty_offset[
-	offsetof(struct game_runtime_globals_prefix, options) +
-		offsetof(struct game_options, difficulty) == 0xE ? 1 : -1];
+typedef char verify_game_options_size[HALO_LAYOUT_ASSERT_32(sizeof(struct game_options) == 0x10C)];
+typedef char verify_game_options_code_version_offset[HALO_LAYOUT_ASSERT_32(offsetof(struct game_options, code_version) == 0x4)];
+typedef char verify_game_options_difficulty_offset[HALO_LAYOUT_ASSERT_32(offsetof(struct game_options, difficulty) == 0x6)];
+typedef char verify_game_options_random_seed_offset[HALO_LAYOUT_ASSERT_32(offsetof(struct game_options, random_seed) == 0x8)];
+typedef char verify_game_options_map_name_offset[HALO_LAYOUT_ASSERT_32(offsetof(struct game_options, map_name) == 0xC)];
+typedef char verify_game_runtime_globals_players_are_double_speed_offset[HALO_LAYOUT_ASSERT_32(offsetof(struct game_runtime_globals_prefix, players_are_double_speed) == 0x2)];
+typedef char verify_game_runtime_globals_difficulty_offset[HALO_LAYOUT_ASSERT_32(offsetof(struct game_runtime_globals_prefix, options) +
+		offsetof(struct game_options, difficulty) == 0xE)];
 
 /* ---------- prototypes */
 

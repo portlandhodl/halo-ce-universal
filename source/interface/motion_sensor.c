@@ -184,14 +184,10 @@ struct motion_sensor_globals_definition
 	byte pad;
 };
 
-typedef char motion_sensor_blip_size_assert[
-	sizeof(struct motion_sensor_blip) == 4 ? 1 : -1];
-typedef char motion_sensor_datum_size_assert[
-	sizeof(struct motion_sensor_datum) == 0x84 ? 1 : -1];
-typedef char motion_sensor_player_size_assert[
-	sizeof(struct motion_sensor_player) == 0x568 ? 1 : -1];
-typedef char motion_sensor_globals_size_assert[
-	sizeof(struct motion_sensor_globals_definition) == 0x15A8 ? 1 : -1];
+typedef char motion_sensor_blip_size_assert[HALO_LAYOUT_ASSERT_32(sizeof(struct motion_sensor_blip) == 4)];
+typedef char motion_sensor_datum_size_assert[HALO_LAYOUT_ASSERT_32(sizeof(struct motion_sensor_datum) == 0x84)];
+typedef char motion_sensor_player_size_assert[HALO_LAYOUT_ASSERT_32(sizeof(struct motion_sensor_player) == 0x568)];
+typedef char motion_sensor_globals_size_assert[HALO_LAYOUT_ASSERT_32(sizeof(struct motion_sensor_globals_definition) == 0x15A8)];
 
 /* ---------- prototypes */
 

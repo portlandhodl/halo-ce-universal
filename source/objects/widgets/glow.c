@@ -256,26 +256,16 @@ struct glow_definition
 	struct tag_reference texture;
 };
 
-typedef char glow_datum_definition_index_offset_assert[
-	offsetof(struct glow_datum, definition_index) == 0x224 ? 1 : -1];
-typedef char glow_datum_bitmap_dimension_offset_assert[
-	offsetof(struct glow_datum, bitmap_dimension) == 0x228 ? 1 : -1];
-typedef char glow_datum_number_of_particles_offset_assert[
-	offsetof(struct glow_datum, number_of_particles) == 0x24C ? 1 : -1];
-typedef char glow_datum_size_assert[
-	sizeof(struct glow_datum) == 0x25C ? 1 : -1];
-typedef char glow_particle_size_assert[
-	sizeof(struct glow_particle) == 0x64 ? 1 : -1];
-typedef char glow_definition_flags_offset_assert[
-	offsetof(struct glow_definition, flags) == 0x28 ? 1 : -1];
-typedef char glow_definition_color_lower_bound_offset_assert[
-	offsetof(struct glow_definition, color_lower_bound) == 0xB4 ? 1 : -1];
-typedef char glow_definition_texture_offset_assert[
-	offsetof(struct glow_definition, texture) == 0x144 ? 1 : -1];
-typedef char glow_definition_size_assert[
-	sizeof(struct glow_definition) == 0x154 ? 1 : -1];
-typedef char bitmap_group_sequences_offset_assert[
-	offsetof(struct bitmap_group, sequences) == 0x54 ? 1 : -1];
+typedef char glow_datum_definition_index_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct glow_datum, definition_index) == 0x224)];
+typedef char glow_datum_bitmap_dimension_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct glow_datum, bitmap_dimension) == 0x228)];
+typedef char glow_datum_number_of_particles_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct glow_datum, number_of_particles) == 0x24C)];
+typedef char glow_datum_size_assert[HALO_LAYOUT_ASSERT_32(sizeof(struct glow_datum) == 0x25C)];
+typedef char glow_particle_size_assert[HALO_LAYOUT_ASSERT_32(sizeof(struct glow_particle) == 0x64)];
+typedef char glow_definition_flags_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct glow_definition, flags) == 0x28)];
+typedef char glow_definition_color_lower_bound_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct glow_definition, color_lower_bound) == 0xB4)];
+typedef char glow_definition_texture_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct glow_definition, texture) == 0x144)];
+typedef char glow_definition_size_assert[HALO_LAYOUT_ASSERT_32(sizeof(struct glow_definition) == 0x154)];
+typedef char bitmap_group_sequences_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct bitmap_group, sequences) == 0x54)];
 /* ---------- prototypes */
 
 static void glow_trailing_particle_update_color(

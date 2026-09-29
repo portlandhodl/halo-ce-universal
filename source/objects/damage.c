@@ -297,52 +297,30 @@ struct game_globals_falling_damage
 	real runtime_maximum_damage_velocity;
 };
 
-typedef char damage_region_size_assert[
-	sizeof(struct damage_region) == 0x54 ? 1 : -1];
-typedef char game_globals_falling_damage_size_assert[
-	sizeof(struct game_globals_falling_damage) == 0x98 ? 1 : -1];
-typedef char game_globals_falling_damage_effect_offset_assert[
-	offsetof(struct game_globals_falling_damage, falling_damage) +
-		offsetof(struct tag_reference, index) == 0x1C ? 1 : -1];
+typedef char damage_region_size_assert[HALO_LAYOUT_ASSERT_32(sizeof(struct damage_region) == 0x54)];
+typedef char game_globals_falling_damage_size_assert[HALO_LAYOUT_ASSERT_32(sizeof(struct game_globals_falling_damage) == 0x98)];
+typedef char game_globals_falling_damage_effect_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct game_globals_falling_damage, falling_damage) +
+		offsetof(struct tag_reference, index) == 0x1C)];
 
-typedef char object_deplete_body_definition_index_offset_assert[
-	offsetof(struct object_datum, definition_index) == 0x00 ? 1 : -1];
-typedef char object_deplete_body_type_offset_assert[
-	offsetof(struct object_datum, object) + offsetof(struct _object_datum, type) == 0x64 ? 1 : -1];
-typedef char object_deplete_body_damage_flags_offset_assert[
-	offsetof(struct object_datum, object) + offsetof(struct _object_datum, damage_flags) == 0xB6 ? 1 : -1];
-typedef char object_deplete_body_next_object_offset_assert[
-	offsetof(struct object_datum, object) + offsetof(struct _object_datum, next_object_index) == 0xC4 ? 1 : -1];
-typedef char object_deplete_body_first_child_offset_assert[
-	offsetof(struct object_datum, object) + offsetof(struct _object_datum, first_child_object_index) == 0xC8 ? 1 : -1];
-typedef char object_deplete_body_player_index_offset_assert[
-	offsetof(struct unit_datum, unit) + offsetof(struct _unit_datum, player_index) == 0x1C8 ? 1 : -1];
-typedef char object_deplete_body_parent_seat_offset_assert[
-	offsetof(struct unit_datum, unit) + offsetof(struct _unit_datum, parent_seat_index) == 0x2A0 ? 1 : -1];
-typedef char object_deplete_body_collision_model_offset_assert[
-	offsetof(struct object_definition, object) + offsetof(struct _object_definition, collision_model) + offsetof(struct tag_reference, index) == 0x7C ? 1 : -1];
-typedef char object_deplete_body_effect_offset_assert[
-	offsetof(struct collision_model, resistance) + offsetof(struct damage_resistance, body_depleted_effect) + offsetof(struct tag_reference, index) == 0xB4 ? 1 : -1];
-typedef char object_destroy_effect_offset_assert[
-	offsetof(struct collision_model, resistance) + offsetof(struct damage_resistance, body_destroyed_effect) + offsetof(struct tag_reference, index) == 0xC8 ? 1 : -1];
-typedef char object_destroy_region_regions_destroyed_flags_offset_assert[
-	offsetof(struct object_datum, object) + offsetof(struct _object_datum, regions_destroyed_flags) == 0x124 ? 1 : -1];
-typedef char object_destroy_region_regions_block_offset_assert[
-	offsetof(struct collision_model, resistance) + offsetof(struct damage_resistance, regions) == 0x240 ? 1 : -1];
-typedef char object_destroy_region_flags_offset_assert[
-	offsetof(struct damage_region, flags) == 0x20 ? 1 : -1];
-typedef char object_destroy_region_destroyed_effect_offset_assert[
-	offsetof(struct damage_region, destroyed_effect) + offsetof(struct tag_reference, index) == 0x44 ? 1 : -1];
-typedef char object_damage_body_region_damage_offset_assert[
-	offsetof(struct object_datum, object) + offsetof(struct _object_datum, region_damage) == 0x128 ? 1 : -1];
-typedef char object_damage_body_damage_threshold_offset_assert[
-	offsetof(struct damage_region, damage_threshold) == 0x28 ? 1 : -1];
-typedef char object_damage_body_driver_offset_assert[
-	offsetof(struct unit_datum, unit) + offsetof(struct _unit_datum, driver_object_index) == 0x2D4 ? 1 : -1];
-typedef char object_damage_body_localized_effect_offset_assert[
-	offsetof(struct damage_resistance, localized_damage_effect) + offsetof(struct tag_reference, index) == 0x7C ? 1 : -1];
-typedef char object_damage_body_body_destroyed_threshold_offset_assert[
-	offsetof(struct damage_resistance, body_destroyed_threshold) == 0xB8 ? 1 : -1];
+typedef char object_deplete_body_definition_index_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct object_datum, definition_index) == 0x00)];
+typedef char object_deplete_body_type_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct object_datum, object) + offsetof(struct _object_datum, type) == 0x64)];
+typedef char object_deplete_body_damage_flags_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct object_datum, object) + offsetof(struct _object_datum, damage_flags) == 0xB6)];
+typedef char object_deplete_body_next_object_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct object_datum, object) + offsetof(struct _object_datum, next_object_index) == 0xC4)];
+typedef char object_deplete_body_first_child_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct object_datum, object) + offsetof(struct _object_datum, first_child_object_index) == 0xC8)];
+typedef char object_deplete_body_player_index_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct unit_datum, unit) + offsetof(struct _unit_datum, player_index) == 0x1C8)];
+typedef char object_deplete_body_parent_seat_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct unit_datum, unit) + offsetof(struct _unit_datum, parent_seat_index) == 0x2A0)];
+typedef char object_deplete_body_collision_model_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct object_definition, object) + offsetof(struct _object_definition, collision_model) + offsetof(struct tag_reference, index) == 0x7C)];
+typedef char object_deplete_body_effect_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct collision_model, resistance) + offsetof(struct damage_resistance, body_depleted_effect) + offsetof(struct tag_reference, index) == 0xB4)];
+typedef char object_destroy_effect_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct collision_model, resistance) + offsetof(struct damage_resistance, body_destroyed_effect) + offsetof(struct tag_reference, index) == 0xC8)];
+typedef char object_destroy_region_regions_destroyed_flags_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct object_datum, object) + offsetof(struct _object_datum, regions_destroyed_flags) == 0x124)];
+typedef char object_destroy_region_regions_block_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct collision_model, resistance) + offsetof(struct damage_resistance, regions) == 0x240)];
+typedef char object_destroy_region_flags_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct damage_region, flags) == 0x20)];
+typedef char object_destroy_region_destroyed_effect_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct damage_region, destroyed_effect) + offsetof(struct tag_reference, index) == 0x44)];
+typedef char object_damage_body_region_damage_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct object_datum, object) + offsetof(struct _object_datum, region_damage) == 0x128)];
+typedef char object_damage_body_damage_threshold_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct damage_region, damage_threshold) == 0x28)];
+typedef char object_damage_body_driver_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct unit_datum, unit) + offsetof(struct _unit_datum, driver_object_index) == 0x2D4)];
+typedef char object_damage_body_localized_effect_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct damage_resistance, localized_damage_effect) + offsetof(struct tag_reference, index) == 0x7C)];
+typedef char object_damage_body_body_destroyed_threshold_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct damage_resistance, body_destroyed_threshold) == 0xB8)];
 
 /* ---------- prototypes */
 

@@ -209,8 +209,7 @@ struct animation_graph_sound_reference
 	long unused;
 };
 
-typedef char verify_animation_graph_sound_reference_size[
-	sizeof(struct animation_graph_sound_reference) == 0x14 ? 1 : -1];
+typedef char verify_animation_graph_sound_reference_size[HALO_LAYOUT_ASSERT_32(sizeof(struct animation_graph_sound_reference) == 0x14)];
 
 struct animation_graph_first_person_weapon_animations
 {
@@ -218,8 +217,7 @@ struct animation_graph_first_person_weapon_animations
 	struct tag_block animations;		// animation_graph_animation_index
 };
 
-typedef char verify_animation_graph_first_person_weapon_animations_size[
-	sizeof(struct animation_graph_first_person_weapon_animations) == 0x1C ? 1 : -1];
+typedef char verify_animation_graph_first_person_weapon_animations_size[HALO_LAYOUT_ASSERT_32(sizeof(struct animation_graph_first_person_weapon_animations) == 0x1C)];
 
 /* Only the leading name is consumed here; the remaining bytes preserve the January layout. */
 struct animation_graph_node
@@ -228,8 +226,7 @@ struct animation_graph_node
 	byte reserved0020[0x20];
 };
 
-typedef char verify_animation_graph_node_size[
-	sizeof(struct animation_graph_node) == 0x40 ? 1 : -1];
+typedef char verify_animation_graph_node_size[HALO_LAYOUT_ASSERT_32(sizeof(struct animation_graph_node) == 0x40)];
 
 /* TU-private rendering packet layout, also recovered independently by the rendering owners. */
 struct render_model_effect
@@ -244,8 +241,7 @@ struct render_model_effect
 	byte reserved0020[8];			/* render_animation modifier_animation */
 };
 
-typedef char verify_render_model_effect_size[
-	sizeof(struct render_model_effect) == 0x28 ? 1 : -1];
+typedef char verify_render_model_effect_size[HALO_LAYOUT_ASSERT_32(sizeof(struct render_model_effect) == 0x28)];
 
 struct first_person_weapon
 {
@@ -296,44 +292,26 @@ struct first_person_weapon
 	byte reserved1e9e[2];
 };
 
-typedef char verify_first_person_weapon_size[
-	sizeof(struct first_person_weapon) == 0x1EA0 ? 1 : -1];
-typedef char verify_first_person_weapon_node_matrices_offset[
-	offsetof(struct first_person_weapon, node_matrices) == 0x108C ? 1 : -1];
-typedef char verify_first_person_weapon_rendered_offset[
-	offsetof(struct first_person_weapon, rendered) == 0x50 ? 1 : -1];
-typedef char verify_first_person_weapon_node_orientations_offset[
-	offsetof(struct first_person_weapon, node_orientations) == 0x8C ? 1 : -1];
-typedef char verify_first_person_weapon_node_remapping_table_offset[
-	offsetof(struct first_person_weapon, weapon_node_remapping_table) == 0x1D8E ? 1 : -1];
-typedef char verify_first_person_weapon_shotgun_empty_offset[
-	offsetof(struct first_person_weapon, shotgun_empty) == 0x1E90 ? 1 : -1];
-typedef char verify_first_person_weapon_current_sound_index_offset[
-	offsetof(struct first_person_weapon, current_sound_index) == 0x1E98 ? 1 : -1];
-typedef char verify_first_person_weapon_current_sound_state_offset[
-	offsetof(struct first_person_weapon, current_sound_state) == 0x1E9C ? 1 : -1];
-typedef char verify_weapon_first_person_animations_index_offset[
-	offsetof(
+typedef char verify_first_person_weapon_size[HALO_LAYOUT_ASSERT_32(sizeof(struct first_person_weapon) == 0x1EA0)];
+typedef char verify_first_person_weapon_node_matrices_offset[HALO_LAYOUT_ASSERT_32(offsetof(struct first_person_weapon, node_matrices) == 0x108C)];
+typedef char verify_first_person_weapon_rendered_offset[HALO_LAYOUT_ASSERT_32(offsetof(struct first_person_weapon, rendered) == 0x50)];
+typedef char verify_first_person_weapon_node_orientations_offset[HALO_LAYOUT_ASSERT_32(offsetof(struct first_person_weapon, node_orientations) == 0x8C)];
+typedef char verify_first_person_weapon_node_remapping_table_offset[HALO_LAYOUT_ASSERT_32(offsetof(struct first_person_weapon, weapon_node_remapping_table) == 0x1D8E)];
+typedef char verify_first_person_weapon_shotgun_empty_offset[HALO_LAYOUT_ASSERT_32(offsetof(struct first_person_weapon, shotgun_empty) == 0x1E90)];
+typedef char verify_first_person_weapon_current_sound_index_offset[HALO_LAYOUT_ASSERT_32(offsetof(struct first_person_weapon, current_sound_index) == 0x1E98)];
+typedef char verify_first_person_weapon_current_sound_state_offset[HALO_LAYOUT_ASSERT_32(offsetof(struct first_person_weapon, current_sound_state) == 0x1E9C)];
+typedef char verify_weapon_first_person_animations_index_offset[HALO_LAYOUT_ASSERT_32(offsetof(
 		struct weapon_definition,
-		weapon.interface_definition.first_person_animations.index) == 0x478 ? 1 : -1];
-typedef char verify_weapon_flags_offset[
-	offsetof(struct weapon_datum, weapon.flags) == 0x1DC ? 1 : -1];
-typedef char verify_weapon_type_offset[
-	offsetof(struct weapon_definition, weapon.weapon_type) == 0x4E2 ? 1 : -1];
-typedef char verify_animation_graph_first_person_weapon_animations_offset[
-	offsetof(struct animation_graph, first_person_weapon_animations) == 0x48 ? 1 : -1];
-typedef char verify_unit_flags_offset[
-	offsetof(struct unit_datum, unit.flags) == 0x1B4 ? 1 : -1];
-typedef char verify_unit_active_camouflage_offset[
-	offsetof(struct unit_datum, unit.active_camouflage) == 0x32C ? 1 : -1];
-typedef char verify_object_outgoing_function_values_offset[
-	offsetof(struct object_datum, object.outgoing_function_values) == 0xE4 ? 1 : -1];
-typedef char verify_object_outgoing_change_colors_offset[
-	offsetof(struct object_datum, object.outgoing_change_colors) == 0x168 ? 1 : -1];
-typedef char verify_game_globals_first_person_interface_offset[
-	offsetof(struct game_globals, first_person_interface) == 0x17C ? 1 : -1];
-typedef char verify_animation_graph_nodes_offset[
-	offsetof(struct animation_graph, nodes) == 0x68 ? 1 : -1];
+		weapon.interface_definition.first_person_animations.index) == 0x478)];
+typedef char verify_weapon_flags_offset[HALO_LAYOUT_ASSERT_32(offsetof(struct weapon_datum, weapon.flags) == 0x1DC)];
+typedef char verify_weapon_type_offset[HALO_LAYOUT_ASSERT_32(offsetof(struct weapon_definition, weapon.weapon_type) == 0x4E2)];
+typedef char verify_animation_graph_first_person_weapon_animations_offset[HALO_LAYOUT_ASSERT_32(offsetof(struct animation_graph, first_person_weapon_animations) == 0x48)];
+typedef char verify_unit_flags_offset[HALO_LAYOUT_ASSERT_32(offsetof(struct unit_datum, unit.flags) == 0x1B4)];
+typedef char verify_unit_active_camouflage_offset[HALO_LAYOUT_ASSERT_32(offsetof(struct unit_datum, unit.active_camouflage) == 0x32C)];
+typedef char verify_object_outgoing_function_values_offset[HALO_LAYOUT_ASSERT_32(offsetof(struct object_datum, object.outgoing_function_values) == 0xE4)];
+typedef char verify_object_outgoing_change_colors_offset[HALO_LAYOUT_ASSERT_32(offsetof(struct object_datum, object.outgoing_change_colors) == 0x168)];
+typedef char verify_game_globals_first_person_interface_offset[HALO_LAYOUT_ASSERT_32(offsetof(struct game_globals, first_person_interface) == 0x17C)];
+typedef char verify_animation_graph_nodes_offset[HALO_LAYOUT_ASSERT_32(offsetof(struct animation_graph, nodes) == 0x68)];
 
 /* ---------- prototypes */
 

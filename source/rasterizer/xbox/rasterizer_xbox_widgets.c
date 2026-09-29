@@ -145,8 +145,7 @@ struct transparent_geometry_group
 	byte reserved9E[2];
 };
 
-typedef char transparent_geometry_group_size_assert[
-	sizeof(struct transparent_geometry_group) == 0xA0 ? 1 : -1];
+typedef char transparent_geometry_group_size_assert[HALO_LAYOUT_ASSERT_32(sizeof(struct transparent_geometry_group) == 0xA0)];
 
 
 struct rasterizer_debug_options
@@ -159,10 +158,8 @@ struct rasterizer_debug_options
 	byte reserved58[0x10];
 };
 
-typedef char rasterizer_debug_options_size_assert[
-	sizeof(struct rasterizer_debug_options) == 0x68 ? 1 : -1];
-typedef char rasterizer_debug_options_zbias_offset_assert[
-	offsetof(struct rasterizer_debug_options, zbias) == 0x54 ? 1 : -1];
+typedef char rasterizer_debug_options_size_assert[HALO_LAYOUT_ASSERT_32(sizeof(struct rasterizer_debug_options) == 0x68)];
+typedef char rasterizer_debug_options_zbias_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct rasterizer_debug_options, zbias) == 0x54)];
 
 struct pixel_shader_definition
 {

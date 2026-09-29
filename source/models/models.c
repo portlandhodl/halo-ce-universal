@@ -196,8 +196,8 @@ struct model_geometry_part
 	struct vertex_buffer vertex_buffer;
 };
 
-typedef char verify_model_shader_reference_size[sizeof(struct model_shader_reference) == 0x20 ? 1 : -1];
-typedef char verify_model_geometry_part_size[sizeof(struct model_geometry_part) == 0x68 ? 1 : -1];
+typedef char verify_model_shader_reference_size[HALO_LAYOUT_ASSERT_32(sizeof(struct model_shader_reference) == 0x20)];
+typedef char verify_model_geometry_part_size[HALO_LAYOUT_ASSERT_32(sizeof(struct model_geometry_part) == 0x68)];
 
 struct shader_model_definition
 {
@@ -246,8 +246,8 @@ struct rasterizer_model_begin_parameters
 	real_vector2d base_map_scale;
 };
 
-typedef char verify_render_model_effect_size[sizeof(struct render_model_effect) == 0x28 ? 1 : -1];
-typedef char verify_rasterizer_model_begin_parameters_size[sizeof(struct rasterizer_model_begin_parameters) == 0xCC ? 1 : -1];
+typedef char verify_render_model_effect_size[HALO_LAYOUT_ASSERT_32(sizeof(struct render_model_effect) == 0x28)];
+typedef char verify_rasterizer_model_begin_parameters_size[HALO_LAYOUT_ASSERT_32(sizeof(struct rasterizer_model_begin_parameters) == 0xCC)];
 
 struct rasterizer_debug_options
 {
@@ -256,7 +256,7 @@ struct rasterizer_debug_options
 	byte trailing[0x5E];
 };
 
-typedef char verify_rasterizer_debug_options_size[sizeof(struct rasterizer_debug_options) == 0x68 ? 1 : -1];
+typedef char verify_rasterizer_debug_options_size[HALO_LAYOUT_ASSERT_32(sizeof(struct rasterizer_debug_options) == 0x68)];
 
 /* ---------- prototypes */
 

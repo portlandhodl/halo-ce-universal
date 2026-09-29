@@ -193,10 +193,8 @@ struct leaf_map_polygon
 	real_point2d vertices[MAXIMUM_LEAF_FACE_VERTICES];
 };
 
-typedef char map_leaf_face_size_assert[
-	sizeof(struct map_leaf_face) == 0x10 ? 1 : -1];
-typedef char map_leaf_size_assert[
-	sizeof(struct map_leaf) == 0x18 ? 1 : -1];
+typedef char map_leaf_face_size_assert[HALO_LAYOUT_ASSERT_32(sizeof(struct map_leaf_face) == 0x10)];
+typedef char map_leaf_size_assert[HALO_LAYOUT_ASSERT_32(sizeof(struct map_leaf) == 0x18)];
 
 /* ---------- prototypes */
 

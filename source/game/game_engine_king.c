@@ -173,10 +173,8 @@ struct model_vertex_compressed
 	short node_weight;
 };
 
-typedef char verify_model_vertex_uncompressed_size[
-	sizeof(struct model_vertex_uncompressed) == 0x44 ? 1 : -1];
-typedef char verify_model_vertex_compressed_size[
-	sizeof(struct model_vertex_compressed) == 0x20 ? 1 : -1];
+typedef char verify_model_vertex_uncompressed_size[HALO_LAYOUT_ASSERT_32(sizeof(struct model_vertex_uncompressed) == 0x44)];
+typedef char verify_model_vertex_compressed_size[HALO_LAYOUT_ASSERT_32(sizeof(struct model_vertex_compressed) == 0x20)];
 
 /* January-local render packet layouts used by render_dynamic_quad. */
 struct rasterizer_model_skinning
@@ -207,14 +205,11 @@ struct rasterizer_model_begin_parameters
 	real_vector2d base_map_scale;
 };
 
-typedef char verify_rasterizer_model_begin_parameters_size[
-	sizeof(struct rasterizer_model_begin_parameters) == 0xCC ? 1 : -1];
+typedef char verify_rasterizer_model_begin_parameters_size[HALO_LAYOUT_ASSERT_32(sizeof(struct rasterizer_model_begin_parameters) == 0xCC)];
 
 /* January scenario flag layout consumed by the King map scan. */
-typedef char verify_scenario_netgame_flag_size[
-	sizeof(struct scenario_netgame_flag) == 0x94 ? 1 : -1];
-typedef char verify_scenario_netgame_flags_offset[
-	offsetof(struct scenario, netgame_flags) == 0x378 ? 1 : -1];
+typedef char verify_scenario_netgame_flag_size[HALO_LAYOUT_ASSERT_32(sizeof(struct scenario_netgame_flag) == 0x94)];
+typedef char verify_scenario_netgame_flags_offset[HALO_LAYOUT_ASSERT_32(offsetof(struct scenario, netgame_flags) == 0x378)];
 
 /* ---------- prototypes */
 

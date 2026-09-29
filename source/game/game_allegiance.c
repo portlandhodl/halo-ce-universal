@@ -92,10 +92,8 @@ struct game_allegiance_globals
 	unsigned long friendly_bitvector[4];
 };
 
-typedef char game_allegiance_record_size_assert[
-	sizeof(struct game_allegiance_record) == 0x12 ? 1 : -1];
-typedef char game_allegiance_globals_size_assert[
-	sizeof(struct game_allegiance_globals) == 0xB4 ? 1 : -1];
+typedef char game_allegiance_record_size_assert[HALO_LAYOUT_ASSERT_32(sizeof(struct game_allegiance_record) == 0x12)];
+typedef char game_allegiance_globals_size_assert[HALO_LAYOUT_ASSERT_32(sizeof(struct game_allegiance_globals) == 0xB4)];
 typedef struct game_allegiance_globals game_allegiance_globals_type;
 
 /* ---------- globals */

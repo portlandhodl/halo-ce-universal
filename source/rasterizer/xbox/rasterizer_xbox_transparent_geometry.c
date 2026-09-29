@@ -403,27 +403,20 @@ struct rasterizer_transparent_geometry_debug_options_prefix
 	byte reserved8A[2];
 };
 
-typedef char rasterizer_transparent_geometry_debug_options_index_offset_assert[
-	offsetof(struct rasterizer_transparent_geometry_debug_options_prefix,
-		transparent_geometry_index) == 0x32 ? 1 : -1];
-typedef char rasterizer_transparent_geometry_debug_options_zbias_offset_assert[
-	offsetof(struct rasterizer_transparent_geometry_debug_options_prefix,
-		zbias) == 0x54 ? 1 : -1];
-typedef char rasterizer_transparent_geometry_debug_options_intensity_offset_assert[
-	offsetof(struct rasterizer_transparent_geometry_debug_options_prefix,
-		transparent_geometry_intensity) == 0x6C ? 1 : -1];
-typedef char rasterizer_transparent_geometry_debug_options_counter_offset_assert[
-	offsetof(struct rasterizer_transparent_geometry_debug_options_prefix,
-		transparent_pixel_counter_active) == 0x88 ? 1 : -1];
-typedef char rasterizer_transparent_geometry_debug_options_fog_offset_assert[
-	offsetof(struct rasterizer_transparent_geometry_debug_options_prefix,
-		draw_environment_fog) == 0x1C ? 1 : -1];
-typedef char rasterizer_transparent_geometry_debug_options_zsprites_offset_assert[
-	offsetof(struct rasterizer_transparent_geometry_debug_options_prefix,
-		zsprites) == 0x60 ? 1 : -1];
-typedef char rasterizer_transparent_geometry_debug_options_values_offset_assert[
-	offsetof(struct rasterizer_transparent_geometry_debug_options_prefix,
-		debug_shader_values) == 0x70 ? 1 : -1];
+typedef char rasterizer_transparent_geometry_debug_options_index_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct rasterizer_transparent_geometry_debug_options_prefix,
+		transparent_geometry_index) == 0x32)];
+typedef char rasterizer_transparent_geometry_debug_options_zbias_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct rasterizer_transparent_geometry_debug_options_prefix,
+		zbias) == 0x54)];
+typedef char rasterizer_transparent_geometry_debug_options_intensity_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct rasterizer_transparent_geometry_debug_options_prefix,
+		transparent_geometry_intensity) == 0x6C)];
+typedef char rasterizer_transparent_geometry_debug_options_counter_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct rasterizer_transparent_geometry_debug_options_prefix,
+		transparent_pixel_counter_active) == 0x88)];
+typedef char rasterizer_transparent_geometry_debug_options_fog_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct rasterizer_transparent_geometry_debug_options_prefix,
+		draw_environment_fog) == 0x1C)];
+typedef char rasterizer_transparent_geometry_debug_options_zsprites_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct rasterizer_transparent_geometry_debug_options_prefix,
+		zsprites) == 0x60)];
+typedef char rasterizer_transparent_geometry_debug_options_values_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct rasterizer_transparent_geometry_debug_options_prefix,
+		debug_shader_values) == 0x70)];
 
 struct pixel_shader_definition
 {
@@ -466,10 +459,8 @@ struct shader_transparent_generic_map
 	struct shader_texture_animation map_animation;
 };
 
-typedef char shader_transparent_generic_map_size_assert[
-	sizeof(struct shader_transparent_generic_map) == 0x64 ? 1 : -1];
-typedef char shader_transparent_generic_map_animation_offset_assert[
-	offsetof(struct shader_transparent_generic_map, map_animation) == 0x2C ? 1 : -1];
+typedef char shader_transparent_generic_map_size_assert[HALO_LAYOUT_ASSERT_32(sizeof(struct shader_transparent_generic_map) == 0x64)];
+typedef char shader_transparent_generic_map_animation_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct shader_transparent_generic_map, map_animation) == 0x2C)];
 
 struct shader_transparent_generic_stage
 {
@@ -483,8 +474,7 @@ struct shader_transparent_generic_stage
 	byte reserved_after_constant_color1[68];
 };
 
-typedef char shader_transparent_generic_stage_size_assert[
-	sizeof(struct shader_transparent_generic_stage) == 0x70 ? 1 : -1];
+typedef char shader_transparent_generic_stage_size_assert[HALO_LAYOUT_ASSERT_32(sizeof(struct shader_transparent_generic_stage) == 0x70)];
 
 struct shader_transparent_generic
 {
@@ -508,8 +498,7 @@ struct shader_transparent_generic_definition
 	struct shader_transparent_generic generic;
 };
 
-typedef char shader_transparent_generic_maps_offset_assert[
-	offsetof(struct shader_transparent_generic_definition, generic.maps) == 0x54 ? 1 : -1];
+typedef char shader_transparent_generic_maps_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct shader_transparent_generic_definition, generic.maps) == 0x54)];
 
 struct shader_transparent_chicago_map
 {
@@ -529,10 +518,8 @@ struct shader_transparent_chicago_map
 	struct shader_texture_animation map_animation;
 };
 
-typedef char shader_transparent_chicago_map_size_assert[
-	sizeof(struct shader_transparent_chicago_map) == 0xDC ? 1 : -1];
-typedef char shader_transparent_chicago_map_u_scale_offset_assert[
-	offsetof(struct shader_transparent_chicago_map, map_u_scale) == 0x54 ? 1 : -1];
+typedef char shader_transparent_chicago_map_size_assert[HALO_LAYOUT_ASSERT_32(sizeof(struct shader_transparent_chicago_map) == 0xDC)];
+typedef char shader_transparent_chicago_map_u_scale_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct shader_transparent_chicago_map, map_u_scale) == 0x54)];
 
 struct shader_transparent_chicago
 {
@@ -557,8 +544,7 @@ struct shader_transparent_chicago_definition
 	struct shader_transparent_chicago chicago;
 };
 
-typedef char shader_transparent_chicago_extra_flags_offset_assert[
-	offsetof(struct shader_transparent_chicago_definition, chicago.extra_flags) == 0x60 ? 1 : -1];
+typedef char shader_transparent_chicago_extra_flags_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct shader_transparent_chicago_definition, chicago.extra_flags) == 0x60)];
 
 struct shader_transparent_glass_definition
 {
@@ -587,10 +573,8 @@ struct shader_transparent_glass_definition
 	byte reserved_after_diffuse_detail_map[100];
 };
 
-typedef char shader_transparent_glass_reflection_type_offset_assert[
-	offsetof(struct shader_transparent_glass_definition, reflection_type) == 0x8A ? 1 : -1];
-typedef char shader_transparent_glass_diffuse_detail_map_offset_assert[
-	offsetof(struct shader_transparent_glass_definition, diffuse_detail_map) == 0x16C ? 1 : -1];
+typedef char shader_transparent_glass_reflection_type_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct shader_transparent_glass_definition, reflection_type) == 0x8A)];
+typedef char shader_transparent_glass_diffuse_detail_map_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct shader_transparent_glass_definition, diffuse_detail_map) == 0x16C)];
 
 struct shader_transparent_meter_definition
 {
@@ -617,10 +601,8 @@ struct shader_transparent_meter_definition
 	byte reserved_after_flash_extension_source[32];
 };
 
-typedef char shader_transparent_meter_gradient_min_color_offset_assert[
-	offsetof(struct shader_transparent_meter_definition, gradient_min_color) == 0x7C ? 1 : -1];
-typedef char shader_transparent_meter_brightness_source_offset_assert[
-	offsetof(struct shader_transparent_meter_definition, meter_brightness_source) == 0xD8 ? 1 : -1];
+typedef char shader_transparent_meter_gradient_min_color_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct shader_transparent_meter_definition, gradient_min_color) == 0x7C)];
+typedef char shader_transparent_meter_brightness_source_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct shader_transparent_meter_definition, meter_brightness_source) == 0xD8)];
 
 struct rasterizer_model_skinning_parameters
 {
@@ -674,27 +656,17 @@ struct transparent_geometry_group
 	byte reserved9E[2];
 };
 
-typedef char transparent_geometry_group_size_assert[
-	sizeof(struct transparent_geometry_group) == 0xA0 ? 1 : -1];
-typedef char transparent_geometry_group_triangle_buffer_offset_assert[
-	offsetof(struct transparent_geometry_group, triangle_buffer) == 0x48 ? 1 : -1];
-typedef char transparent_geometry_group_vertex_buffer_offset_assert[
-	offsetof(struct transparent_geometry_group, vertex_buffer) == 0x58 ? 1 : -1];
-typedef char transparent_geometry_group_effect_type_offset_assert[
-	offsetof(struct transparent_geometry_group, effect_type) == 0x14 ? 1 : -1];
-typedef char transparent_geometry_group_effect_intensity_offset_assert[
-	offsetof(struct transparent_geometry_group, effect_intensity) == 0x18 ? 1 : -1];
-typedef char transparent_geometry_group_node_matrices_offset_assert[
-	offsetof(struct transparent_geometry_group, node_matrices) == 0x60 ? 1 : -1];
-typedef char transparent_geometry_group_lighting_offset_assert[
-	offsetof(struct transparent_geometry_group, lighting) == 0x68 ? 1 : -1];
-typedef char transparent_geometry_group_centroid_offset_assert[
-	offsetof(struct transparent_geometry_group, centroid) == 0x74 ? 1 : -1];
-typedef char transparent_geometry_group_sorted_index_offset_assert[
-	offsetof(struct transparent_geometry_group, sorted_index) == 0x90 ? 1 : -1];
-typedef char transparent_geometry_group_active_camouflage_offset_assert[
-	offsetof(struct transparent_geometry_group,
-		active_camouflage_transparent_source_object_index) == 0x98 ? 1 : -1];
+typedef char transparent_geometry_group_size_assert[HALO_LAYOUT_ASSERT_32(sizeof(struct transparent_geometry_group) == 0xA0)];
+typedef char transparent_geometry_group_triangle_buffer_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct transparent_geometry_group, triangle_buffer) == 0x48)];
+typedef char transparent_geometry_group_vertex_buffer_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct transparent_geometry_group, vertex_buffer) == 0x58)];
+typedef char transparent_geometry_group_effect_type_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct transparent_geometry_group, effect_type) == 0x14)];
+typedef char transparent_geometry_group_effect_intensity_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct transparent_geometry_group, effect_intensity) == 0x18)];
+typedef char transparent_geometry_group_node_matrices_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct transparent_geometry_group, node_matrices) == 0x60)];
+typedef char transparent_geometry_group_lighting_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct transparent_geometry_group, lighting) == 0x68)];
+typedef char transparent_geometry_group_centroid_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct transparent_geometry_group, centroid) == 0x74)];
+typedef char transparent_geometry_group_sorted_index_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct transparent_geometry_group, sorted_index) == 0x90)];
+typedef char transparent_geometry_group_active_camouflage_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct transparent_geometry_group,
+		active_camouflage_transparent_source_object_index) == 0x98)];
 
 struct rasterizer_xbox_transparent_geometry_globals
 {
@@ -705,8 +677,7 @@ struct rasterizer_xbox_transparent_geometry_globals
 	unsigned long transparent_pixel_count;
 };
 
-typedef char rasterizer_xbox_transparent_geometry_globals_size_assert[
-	sizeof(struct rasterizer_xbox_transparent_geometry_globals) == 16 ? 1 : -1];
+typedef char rasterizer_xbox_transparent_geometry_globals_size_assert[HALO_LAYOUT_ASSERT_32(sizeof(struct rasterizer_xbox_transparent_geometry_globals) == 16)];
 
 /* ---------- globals */
 

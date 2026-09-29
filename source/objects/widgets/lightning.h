@@ -35,10 +35,8 @@ struct lightning_datum
 	long definition_index;
 };
 
-typedef char lightning_globals_size_assert[
-	sizeof(struct lightning_globals) == 0x4 ? 1 : -1];
-typedef char lightning_datum_size_assert[
-	sizeof(struct lightning_datum) == 0x8 ? 1 : -1];
+typedef char lightning_globals_size_assert[HALO_LAYOUT_ASSERT_32(sizeof(struct lightning_globals) == 0x4)];
+typedef char lightning_datum_size_assert[HALO_LAYOUT_ASSERT_32(sizeof(struct lightning_datum) == 0x8)];
 
 /* ---------- prototypes/LIGHTNING.C */
 

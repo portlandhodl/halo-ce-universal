@@ -78,14 +78,10 @@ struct observer_command
 	real parameter_timers[NUMBER_OF_OBSERVER_COMMAND_PARAMETERS];
 };
 
-typedef char observer_command_size_assert[
-	sizeof(struct observer_command) == 0x68 ? 1 : -1];
-typedef char observer_command_parameters_offset_assert[
-	offsetof(struct observer_command, parameters) == 0x04 ? 1 : -1];
-typedef char observer_command_parameter_flags_offset_assert[
-	offsetof(struct observer_command, parameter_flags) == 0x4C ? 1 : -1];
-typedef char observer_command_parameter_timers_offset_assert[
-	offsetof(struct observer_command, parameter_timers) == 0x54 ? 1 : -1];
+typedef char observer_command_size_assert[HALO_LAYOUT_ASSERT_32(sizeof(struct observer_command) == 0x68)];
+typedef char observer_command_parameters_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct observer_command, parameters) == 0x04)];
+typedef char observer_command_parameter_flags_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct observer_command, parameter_flags) == 0x4C)];
+typedef char observer_command_parameter_timers_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct observer_command, parameter_timers) == 0x54)];
 
 /* ---------- prototypes/OBSERVER.C */
 

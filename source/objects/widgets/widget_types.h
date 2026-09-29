@@ -70,8 +70,7 @@ struct widget_type_definition
 	widget_type_render_proc render_proc;
 };
 
-typedef char widget_type_definition_size_assert[
-	sizeof(struct widget_type_definition) == 0x28 ? 1 : -1];
+typedef char widget_type_definition_size_assert[HALO_LAYOUT_ASSERT_32(sizeof(struct widget_type_definition) == 0x28)];
 
 /* ---------- prototypes/EXAMPLE.C */
 

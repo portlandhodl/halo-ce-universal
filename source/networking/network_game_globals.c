@@ -139,8 +139,7 @@ struct player_action_collection
 	struct player_action actions[MAXIMUM_LOCAL_PLAYERS];
 };
 
-typedef char network_player_action_collection_size_assert[
-	sizeof(struct player_action_collection) == 0x80 ? 1 : -1];
+typedef char network_player_action_collection_size_assert[HALO_LAYOUT_ASSERT_32(sizeof(struct player_action_collection) == 0x80)];
 
 #pragma pack(push, 2)
 struct player_action_collection_definition
@@ -164,10 +163,8 @@ struct player_action_packet_definition_storage
 	short __padding9a;
 };
 
-typedef char player_action_collection_definition_size_assert[
-	sizeof(struct player_action_collection_definition) == 0x16 ? 1 : -1];
-typedef char player_action_packet_definition_storage_size_assert[
-	sizeof(struct player_action_packet_definition_storage) == 0x9C ? 1 : -1];
+typedef char player_action_collection_definition_size_assert[HALO_LAYOUT_ASSERT_32(sizeof(struct player_action_collection_definition) == 0x16)];
+typedef char player_action_packet_definition_storage_size_assert[HALO_LAYOUT_ASSERT_32(sizeof(struct player_action_packet_definition_storage) == 0x9C)];
 
 struct client_game_update_message
 {
@@ -205,18 +202,13 @@ struct network_game
 	long number_of_games_played;
 };
 
-typedef char network_machine_index_offset_assert[
-	offsetof(struct network_machine, machine_index) == 0x40 ? 1 : -1];
+typedef char network_machine_index_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct network_machine, machine_index) == 0x40)];
 #ifdef HALO_LINUX
-typedef char network_game_players_offset_assert[
-	offsetof(struct network_game, players) == HALO_PORT_NETWORK_GAME_PLAYERS_OFFSET ? 1 : -1];
-typedef char network_game_random_seed_offset_assert[
-	offsetof(struct network_game, random_seed) == HALO_PORT_NETWORK_GAME_RANDOM_SEED_OFFSET ? 1 : -1];
+typedef char network_game_players_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct network_game, players) == HALO_PORT_NETWORK_GAME_PLAYERS_OFFSET)];
+typedef char network_game_random_seed_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct network_game, random_seed) == HALO_PORT_NETWORK_GAME_RANDOM_SEED_OFFSET)];
 #else
-typedef char network_game_players_offset_assert[
-	offsetof(struct network_game, players) == 0x226 ? 1 : -1];
-typedef char network_game_random_seed_offset_assert[
-	offsetof(struct network_game, random_seed) == 0x428 ? 1 : -1];
+typedef char network_game_players_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct network_game, players) == 0x226)];
+typedef char network_game_random_seed_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct network_game, random_seed) == 0x428)];
 #endif
 
 struct network_game_globals
@@ -230,8 +222,7 @@ struct network_game_globals
 	unsigned long last_client_update_time;
 };
 
-typedef char network_game_globals_size_assert[
-	sizeof(struct network_game_globals) == 0x10 ? 1 : -1];
+typedef char network_game_globals_size_assert[HALO_LAYOUT_ASSERT_32(sizeof(struct network_game_globals) == 0x10)];
 
 /* ---------- prototypes */
 

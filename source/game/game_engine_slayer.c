@@ -135,8 +135,7 @@ struct slayer_globals
 
 /* January's layout; the port's arrays are larger */
 #ifndef HALO_LINUX
-typedef char verify_slayer_globals_size[
-	sizeof(struct slayer_globals) == 0x80 ? 1 : -1];
+typedef char verify_slayer_globals_size[HALO_LAYOUT_ASSERT_32(sizeof(struct slayer_globals) == 0x80)];
 #endif
 
 /* ---------- prototypes */

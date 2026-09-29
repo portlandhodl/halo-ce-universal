@@ -123,22 +123,14 @@ struct pixel_shader_definition
 	unsigned long final_combiner_constants;
 };
 
-typedef char plasma_group_size_assert[
-	sizeof(struct rasterizer_transparent_geometry_group_plasma) == 0x70 ? 1 : -1];
-typedef char plasma_group_shader_offset_assert[
-	offsetof(struct rasterizer_transparent_geometry_group_plasma, shader) == 0xC ? 1 : -1];
-typedef char plasma_group_runtime_offset_assert[
-	offsetof(struct rasterizer_transparent_geometry_group_plasma, runtime_parameters) == 0x6C ? 1 : -1];
-typedef char plasma_primary_period_offset_assert[
-	offsetof(struct shader_transparent_plasma_definition, primary_noise_map_animation_period) == 0x98 ? 1 : -1];
-typedef char plasma_primary_bitmap_offset_assert[
-	offsetof(struct shader_transparent_plasma_definition, primary_noise_map) == 0xB8 ? 1 : -1];
-typedef char plasma_secondary_period_offset_assert[
-	offsetof(struct shader_transparent_plasma_definition, secondary_noise_map_animation_period) == 0xE0 ? 1 : -1];
-typedef char plasma_secondary_bitmap_offset_assert[
-	offsetof(struct shader_transparent_plasma_definition, secondary_noise_map) == 0x100 ? 1 : -1];
-typedef char pixel_shader_definition_size_assert[
-	sizeof(struct pixel_shader_definition) == 0xF0 ? 1 : -1];
+typedef char plasma_group_size_assert[HALO_LAYOUT_ASSERT_32(sizeof(struct rasterizer_transparent_geometry_group_plasma) == 0x70)];
+typedef char plasma_group_shader_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct rasterizer_transparent_geometry_group_plasma, shader) == 0xC)];
+typedef char plasma_group_runtime_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct rasterizer_transparent_geometry_group_plasma, runtime_parameters) == 0x6C)];
+typedef char plasma_primary_period_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct shader_transparent_plasma_definition, primary_noise_map_animation_period) == 0x98)];
+typedef char plasma_primary_bitmap_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct shader_transparent_plasma_definition, primary_noise_map) == 0xB8)];
+typedef char plasma_secondary_period_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct shader_transparent_plasma_definition, secondary_noise_map_animation_period) == 0xE0)];
+typedef char plasma_secondary_bitmap_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct shader_transparent_plasma_definition, secondary_noise_map) == 0x100)];
+typedef char pixel_shader_definition_size_assert[HALO_LAYOUT_ASSERT_32(sizeof(struct pixel_shader_definition) == 0xF0)];
 
 /* ---------- prototypes */
 

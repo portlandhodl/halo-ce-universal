@@ -376,30 +376,18 @@ struct weapon_hud_crosshair_item
 	long unused[8];
 };
 
-typedef char weapon_hud_state_size_assert[
-	sizeof(struct weapon_hud_state) == 0x28 ? 1 : -1];
-typedef char crosshair_state_size_assert[
-	sizeof(struct crosshair_state) == 0x4 ? 1 : -1];
-typedef char crosshair_hud_state_size_assert[
-	sizeof(struct crosshair_hud_state) == 0x50 ? 1 : -1];
-typedef char weapon_hud_globals_script_flags_offset_assert[
-	offsetof(struct weapon_hud_globals, script_flags) == 0x1E0 ? 1 : -1];
-typedef char weapon_hud_globals_size_assert[
-	sizeof(struct weapon_hud_globals) == 0x1E4 ? 1 : -1];
-typedef char weapon_interface_state_size_assert[
-	sizeof(struct weapon_interface_state) == 0x20 ? 1 : -1];
-typedef char number_hud_element_definition_size_assert[
-	sizeof(struct number_hud_element_definition) == 0x54 ? 1 : -1];
-typedef char grenade_hud_interface_definition_size_assert[
-	sizeof(struct grenade_hud_interface_definition) == 0x1F8 ? 1 : -1];
-typedef char weapon_hud_interface_definition_size_assert[
-	sizeof(struct weapon_hud_interface_definition) == 0x17C ? 1 : -1];
-typedef char weapon_hud_crosshairs_element_size_assert[
-	sizeof(struct weapon_hud_crosshairs_element) == 0x68 ? 1 : -1];
-typedef char weapon_hud_crosshair_item_size_assert[
-	sizeof(struct weapon_hud_crosshair_item) == 0x6C ? 1 : -1];
-typedef char hud_weapon_globals_default_weapon_hud_index_offset_assert[
-	offsetof(struct hud_globals_definition, defaults.default_weapon_hud.index) == 0x2CC ? 1 : -1];
+typedef char weapon_hud_state_size_assert[HALO_LAYOUT_ASSERT_32(sizeof(struct weapon_hud_state) == 0x28)];
+typedef char crosshair_state_size_assert[HALO_LAYOUT_ASSERT_32(sizeof(struct crosshair_state) == 0x4)];
+typedef char crosshair_hud_state_size_assert[HALO_LAYOUT_ASSERT_32(sizeof(struct crosshair_hud_state) == 0x50)];
+typedef char weapon_hud_globals_script_flags_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct weapon_hud_globals, script_flags) == 0x1E0)];
+typedef char weapon_hud_globals_size_assert[HALO_LAYOUT_ASSERT_32(sizeof(struct weapon_hud_globals) == 0x1E4)];
+typedef char weapon_interface_state_size_assert[HALO_LAYOUT_ASSERT_32(sizeof(struct weapon_interface_state) == 0x20)];
+typedef char number_hud_element_definition_size_assert[HALO_LAYOUT_ASSERT_32(sizeof(struct number_hud_element_definition) == 0x54)];
+typedef char grenade_hud_interface_definition_size_assert[HALO_LAYOUT_ASSERT_32(sizeof(struct grenade_hud_interface_definition) == 0x1F8)];
+typedef char weapon_hud_interface_definition_size_assert[HALO_LAYOUT_ASSERT_32(sizeof(struct weapon_hud_interface_definition) == 0x17C)];
+typedef char weapon_hud_crosshairs_element_size_assert[HALO_LAYOUT_ASSERT_32(sizeof(struct weapon_hud_crosshairs_element) == 0x68)];
+typedef char weapon_hud_crosshair_item_size_assert[HALO_LAYOUT_ASSERT_32(sizeof(struct weapon_hud_crosshair_item) == 0x6C)];
+typedef char hud_weapon_globals_default_weapon_hud_index_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct hud_globals_definition, defaults.default_weapon_hud.index) == 0x2CC)];
 
 /* ---------- prototypes */
 

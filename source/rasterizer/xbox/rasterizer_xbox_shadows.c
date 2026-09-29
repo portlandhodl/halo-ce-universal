@@ -212,32 +212,20 @@ struct shader_model_definition
 	struct shader_texture_animation animation;
 };
 
-typedef char verify_rasterizer_shadows_draw_shadows_offset[
-	offsetof(
+typedef char verify_rasterizer_shadows_draw_shadows_offset[HALO_LAYOUT_ASSERT_32(offsetof(
 		struct rasterizer_shadows_debug_options_prefix,
-		draw_environment_shadows) == 0x12 ? 1 : -1];
-typedef char verify_rasterizer_shadows_model_shadow_count_offset[
-	offsetof(
+		draw_environment_shadows) == 0x12)];
+typedef char verify_rasterizer_shadows_model_shadow_count_offset[HALO_LAYOUT_ASSERT_32(offsetof(
 		struct rasterizer_frame_statistics_globals,
-		model_shadow_count) == 0xF4 ? 1 : -1];
-typedef char verify_rasterizer_shadows_model_parameters_size[
-	sizeof(struct rasterizer_model_begin_parameters) == 0xCC ? 1 : -1];
-typedef char verify_rasterizer_shadows_model_base_map_scale_offset[
-	offsetof(struct rasterizer_model_begin_parameters, base_map_scale) == 0xC4
-		? 1 : -1];
-typedef char verify_rasterizer_shadows_model_animation_offset[
-	offsetof(struct rasterizer_model_begin_parameters, animation) == 0x84
-		? 1 : -1];
-typedef char verify_rasterizer_shadows_shader_model_flags_offset[
-	offsetof(struct shader_model_definition, flags) == 0x28 ? 1 : -1];
-typedef char verify_rasterizer_shadows_shader_model_map_scale_offset[
-	offsetof(struct shader_model_definition, map_scale) == 0x9C ? 1 : -1];
-typedef char verify_rasterizer_shadows_shader_model_base_map_offset[
-	offsetof(struct shader_model_definition, base_map) == 0xA4 ? 1 : -1];
-typedef char verify_rasterizer_shadows_shader_model_detail_scale_offset[
-	offsetof(struct shader_model_definition, detail_map_scale) == 0xD8 ? 1 : -1];
-typedef char verify_rasterizer_shadows_shader_model_animation_offset[
-	offsetof(struct shader_model_definition, animation) == 0xFC ? 1 : -1];
+		model_shadow_count) == 0xF4)];
+typedef char verify_rasterizer_shadows_model_parameters_size[HALO_LAYOUT_ASSERT_32(sizeof(struct rasterizer_model_begin_parameters) == 0xCC)];
+typedef char verify_rasterizer_shadows_model_base_map_scale_offset[HALO_LAYOUT_ASSERT_32(offsetof(struct rasterizer_model_begin_parameters, base_map_scale) == 0xC4)];
+typedef char verify_rasterizer_shadows_model_animation_offset[HALO_LAYOUT_ASSERT_32(offsetof(struct rasterizer_model_begin_parameters, animation) == 0x84)];
+typedef char verify_rasterizer_shadows_shader_model_flags_offset[HALO_LAYOUT_ASSERT_32(offsetof(struct shader_model_definition, flags) == 0x28)];
+typedef char verify_rasterizer_shadows_shader_model_map_scale_offset[HALO_LAYOUT_ASSERT_32(offsetof(struct shader_model_definition, map_scale) == 0x9C)];
+typedef char verify_rasterizer_shadows_shader_model_base_map_offset[HALO_LAYOUT_ASSERT_32(offsetof(struct shader_model_definition, base_map) == 0xA4)];
+typedef char verify_rasterizer_shadows_shader_model_detail_scale_offset[HALO_LAYOUT_ASSERT_32(offsetof(struct shader_model_definition, detail_map_scale) == 0xD8)];
+typedef char verify_rasterizer_shadows_shader_model_animation_offset[HALO_LAYOUT_ASSERT_32(offsetof(struct shader_model_definition, animation) == 0xFC)];
 
 /* ---------- prototypes */
 

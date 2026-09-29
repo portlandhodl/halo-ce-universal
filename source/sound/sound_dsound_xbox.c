@@ -125,17 +125,12 @@ struct sound_channel
 	LPDIRECTSOUNDSTREAM stream;
 };
 
-typedef char sound_channel_gain_offset_assert[
-	offsetof(struct sound_channel, gain) == 0x3C ? 1 : -1];
-typedef char sound_channel_sample_offset_offset_assert[
-	offsetof(struct sound_channel, sample_offset) == 0x64 ? 1 : -1];
-typedef char sound_channel_type_flags_offset_assert[
-	offsetof(struct sound_channel, type_flags) == 0x38 ? 1 : -1];
-typedef char sound_channel_stream_offset_assert[
-	offsetof(struct sound_channel, stream) == 0x70 ? 1 : -1];
+typedef char sound_channel_gain_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct sound_channel, gain) == 0x3C)];
+typedef char sound_channel_sample_offset_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct sound_channel, sample_offset) == 0x64)];
+typedef char sound_channel_type_flags_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct sound_channel, type_flags) == 0x38)];
+typedef char sound_channel_stream_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct sound_channel, stream) == 0x70)];
 
-typedef char sound_channel_size_assert[
-	sizeof(struct sound_channel) == 0x74 ? 1 : -1];
+typedef char sound_channel_size_assert[HALO_LAYOUT_ASSERT_32(sizeof(struct sound_channel) == 0x74)];
 
 struct dsound_globals
 {
@@ -161,14 +156,10 @@ struct dsound_globals
 	real pause_gain;
 };
 
-typedef char dsound_globals_type_first_channel_index_offset_assert[
-	offsetof(struct dsound_globals, type_first_channel_index) == 0x7808 ? 1 : -1];
-typedef char dsound_globals_direct_sound_offset_assert[
-	offsetof(struct dsound_globals, direct_sound) == 0x789C ? 1 : -1];
-typedef char dsound_globals_paused_offset_assert[
-	offsetof(struct dsound_globals, paused) == 0x78C4 ? 1 : -1];
-typedef char dsound_globals_pause_gain_offset_assert[
-	offsetof(struct dsound_globals, pause_gain) == 0x78C8 ? 1 : -1];
+typedef char dsound_globals_type_first_channel_index_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct dsound_globals, type_first_channel_index) == 0x7808)];
+typedef char dsound_globals_direct_sound_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct dsound_globals, direct_sound) == 0x789C)];
+typedef char dsound_globals_paused_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct dsound_globals, paused) == 0x78C4)];
+typedef char dsound_globals_pause_gain_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct dsound_globals, pause_gain) == 0x78C8)];
 
 struct sound_platform_definition
 {
@@ -211,8 +202,7 @@ struct sound_platform_definition
 	real direct_path_gain;
 };
 
-typedef char sound_platform_definition_direct_path_gain_offset_assert[
-	offsetof(struct sound_platform_definition, direct_path_gain) == 0x38 ? 1 : -1];
+typedef char sound_platform_definition_direct_path_gain_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct sound_platform_definition, direct_path_gain) == 0x38)];
 
 /* ---------- prototypes */
 

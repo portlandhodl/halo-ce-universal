@@ -198,22 +198,14 @@ struct weapon_interface_state
 	struct weapon_interface_magazine_state magazines[2];
 };
 
-typedef char hud_scripted_globals_size_assert[
-	sizeof(struct hud_scripted_globals) == 0x4 ? 1 : -1];
-typedef char hud_scripted_globals_show_hud_help_text_offset_assert[
-	offsetof(struct hud_scripted_globals, show_hud_help_text) == 0x1 ? 1 : -1];
-typedef char hud_globals_hud_item_messages_index_offset_assert[
-	offsetof(struct hud_globals_definition, messaging.hud_item_messages.index) == 0xA0 ? 1 : -1];
-typedef char hud_globals_loading_begin_index_offset_assert[
-	offsetof(struct hud_globals_definition, loading_begin_index) == 0x3D8 ? 1 : -1];
-typedef char hud_globals_checkpoint_sound_index_offset_assert[
-	offsetof(struct hud_globals_definition, checkpoint_sound.index) == 0x3EC ? 1 : -1];
-typedef char icon_hud_element_definition_size_assert[
-	sizeof(struct icon_hud_element_definition) == 0x10 ? 1 : -1];
-typedef char weapon_hud_interface_definition_messaging_icon_offset_assert[
-	offsetof(struct weapon_hud_interface_definition, messaging_icon) == 0x13C ? 1 : -1];
-typedef char weapon_interface_state_size_assert[
-	sizeof(struct weapon_interface_state) == 0x20 ? 1 : -1];
+typedef char hud_scripted_globals_size_assert[HALO_LAYOUT_ASSERT_32(sizeof(struct hud_scripted_globals) == 0x4)];
+typedef char hud_scripted_globals_show_hud_help_text_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct hud_scripted_globals, show_hud_help_text) == 0x1)];
+typedef char hud_globals_hud_item_messages_index_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct hud_globals_definition, messaging.hud_item_messages.index) == 0xA0)];
+typedef char hud_globals_loading_begin_index_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct hud_globals_definition, loading_begin_index) == 0x3D8)];
+typedef char hud_globals_checkpoint_sound_index_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct hud_globals_definition, checkpoint_sound.index) == 0x3EC)];
+typedef char icon_hud_element_definition_size_assert[HALO_LAYOUT_ASSERT_32(sizeof(struct icon_hud_element_definition) == 0x10)];
+typedef char weapon_hud_interface_definition_messaging_icon_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct weapon_hud_interface_definition, messaging_icon) == 0x13C)];
+typedef char weapon_interface_state_size_assert[HALO_LAYOUT_ASSERT_32(sizeof(struct weapon_interface_state) == 0x20)];
 
 /* ---------- prototypes */
 

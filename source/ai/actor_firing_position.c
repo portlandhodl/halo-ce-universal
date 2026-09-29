@@ -248,61 +248,34 @@ struct firing_position_post_evaluator
 		struct firing_position *firing_position);
 };
 
-typedef char actor_firing_position_definition_size_assert[
-	sizeof(struct firing_position_definition) == 0x18 ? 1 : -1];
-typedef char actor_firing_position_evaluation_context_size_assert[
-	sizeof(struct firing_position_evaluation_context) == 0x670 ? 1 : -1];
-typedef char actor_firing_position_size_assert[
-	sizeof(struct firing_position) == 0x3C ? 1 : -1];
-typedef char actor_firing_position_context_rejected_offset_assert[
-	offsetof(struct firing_position_evaluation_context, allow_rejected_positions) == 0x14 ? 1 : -1];
-typedef char actor_firing_position_context_avoid_count_offset_assert[
-	offsetof(struct firing_position_evaluation_context, avoid_point_count) == 0x50 ? 1 : -1];
-typedef char actor_firing_position_context_attack_vectors_offset_assert[
-	offsetof(struct firing_position_evaluation_context, attack_vectors) == 0x25C ? 1 : -1];
-typedef char actor_firing_position_context_target_offset_assert[
-	offsetof(struct firing_position_evaluation_context, has_target) == 0x5FC ? 1 : -1];
-typedef char actor_firing_position_context_bound_offset_assert[
-	offsetof(struct firing_position_evaluation_context, post_evaluation_bound) == 0x660 ? 1 : -1];
-typedef char actor_firing_position_valid_offset_assert[
-	offsetof(struct firing_position, valid) == 0x30 ? 1 : -1];
-typedef char actor_firing_position_evaluation_offset_assert[
-	offsetof(struct firing_position, evaluation) == 0x38 ? 1 : -1];
-typedef char actor_firing_position_scenario_encounters_offset_assert[
-	offsetof(struct scenario, ai_encounters) == 0x42C ? 1 : -1];
-typedef char actor_firing_position_encounter_squads_offset_assert[
-	offsetof(struct encounter_definition, squads) == 0x80 ? 1 : -1];
-typedef char actor_firing_position_encounter_firing_positions_offset_assert[
-	offsetof(struct encounter_definition, firing_positions) == 0x98 ? 1 : -1];
-typedef char actor_firing_position_encounter_size_assert[
-	sizeof(struct encounter_definition) == 0xB0 ? 1 : -1];
-typedef char actor_firing_position_squad_groups_offset_assert[
-	offsetof(struct squad_definition, firing_position_groups) == 0x54 ? 1 : -1];
-typedef char actor_firing_position_squad_size_assert[
-	sizeof(struct squad_definition) == 0xE8 ? 1 : -1];
-typedef char actor_firing_position_actor_encounter_offset_assert[
-	offsetof(struct actor_datum, meta.encounter_index) == 0x34 ? 1 : -1];
-typedef char actor_firing_position_actor_squad_offset_assert[
-	offsetof(struct actor_datum, meta.squad_index) == 0x3A ? 1 : -1];
-typedef char actor_firing_position_actor_searching_offset_assert[
-	offsetof(struct actor_datum, state.searching) == 0x98 ? 1 : -1];
-typedef char actor_firing_position_actor_defending_offset_assert[
-	offsetof(struct actor_datum, emotions.currently_defending) == 0x374 ? 1 : -1];
-typedef char actor_discarded_firing_position_size_assert[
-	sizeof(struct actor_discarded_firing_position) == 4 ? 1 : -1];
-typedef char actor_firing_position_discard_cursor_offset_assert[
-	offsetof(struct actor_datum, firing_positions.next_discarded_firing_positions_entry) == 0x3C6 ? 1 : -1];
-typedef char actor_firing_position_discard_ring_offset_assert[
-	offsetof(struct actor_datum, firing_positions.discarded_firing_positions) == 0x3C8 ? 1 : -1];
-typedef char actor_firing_position_discard_index_offset_assert[
-	offsetof(struct actor_datum, firing_positions.discarded_firing_positions) +
-		offsetof(struct actor_discarded_firing_position, index) == 0x3CA ? 1 : -1];
-typedef char actor_firing_position_last_discard_valid_offset_assert[
-	offsetof(struct actor_datum, firing_positions.last_discarded_firing_position_valid) == 0x3D8 ? 1 : -1];
-typedef char actor_firing_position_last_discard_temporary_offset_assert[
-	offsetof(struct actor_datum, firing_positions.last_discarded_firing_position_temporary) == 0x3D9 ? 1 : -1];
-typedef char actor_firing_position_last_discard_point_offset_assert[
-	offsetof(struct actor_datum, firing_positions.last_discarded_firing_position) == 0x3DC ? 1 : -1];
+typedef char actor_firing_position_definition_size_assert[HALO_LAYOUT_ASSERT_32(sizeof(struct firing_position_definition) == 0x18)];
+typedef char actor_firing_position_evaluation_context_size_assert[HALO_LAYOUT_ASSERT_32(sizeof(struct firing_position_evaluation_context) == 0x670)];
+typedef char actor_firing_position_size_assert[HALO_LAYOUT_ASSERT_32(sizeof(struct firing_position) == 0x3C)];
+typedef char actor_firing_position_context_rejected_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct firing_position_evaluation_context, allow_rejected_positions) == 0x14)];
+typedef char actor_firing_position_context_avoid_count_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct firing_position_evaluation_context, avoid_point_count) == 0x50)];
+typedef char actor_firing_position_context_attack_vectors_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct firing_position_evaluation_context, attack_vectors) == 0x25C)];
+typedef char actor_firing_position_context_target_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct firing_position_evaluation_context, has_target) == 0x5FC)];
+typedef char actor_firing_position_context_bound_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct firing_position_evaluation_context, post_evaluation_bound) == 0x660)];
+typedef char actor_firing_position_valid_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct firing_position, valid) == 0x30)];
+typedef char actor_firing_position_evaluation_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct firing_position, evaluation) == 0x38)];
+typedef char actor_firing_position_scenario_encounters_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct scenario, ai_encounters) == 0x42C)];
+typedef char actor_firing_position_encounter_squads_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct encounter_definition, squads) == 0x80)];
+typedef char actor_firing_position_encounter_firing_positions_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct encounter_definition, firing_positions) == 0x98)];
+typedef char actor_firing_position_encounter_size_assert[HALO_LAYOUT_ASSERT_32(sizeof(struct encounter_definition) == 0xB0)];
+typedef char actor_firing_position_squad_groups_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct squad_definition, firing_position_groups) == 0x54)];
+typedef char actor_firing_position_squad_size_assert[HALO_LAYOUT_ASSERT_32(sizeof(struct squad_definition) == 0xE8)];
+typedef char actor_firing_position_actor_encounter_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct actor_datum, meta.encounter_index) == 0x34)];
+typedef char actor_firing_position_actor_squad_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct actor_datum, meta.squad_index) == 0x3A)];
+typedef char actor_firing_position_actor_searching_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct actor_datum, state.searching) == 0x98)];
+typedef char actor_firing_position_actor_defending_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct actor_datum, emotions.currently_defending) == 0x374)];
+typedef char actor_discarded_firing_position_size_assert[HALO_LAYOUT_ASSERT_32(sizeof(struct actor_discarded_firing_position) == 4)];
+typedef char actor_firing_position_discard_cursor_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct actor_datum, firing_positions.next_discarded_firing_positions_entry) == 0x3C6)];
+typedef char actor_firing_position_discard_ring_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct actor_datum, firing_positions.discarded_firing_positions) == 0x3C8)];
+typedef char actor_firing_position_discard_index_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct actor_datum, firing_positions.discarded_firing_positions) +
+		offsetof(struct actor_discarded_firing_position, index) == 0x3CA)];
+typedef char actor_firing_position_last_discard_valid_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct actor_datum, firing_positions.last_discarded_firing_position_valid) == 0x3D8)];
+typedef char actor_firing_position_last_discard_temporary_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct actor_datum, firing_positions.last_discarded_firing_position_temporary) == 0x3D9)];
+typedef char actor_firing_position_last_discard_point_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct actor_datum, firing_positions.last_discarded_firing_position) == 0x3DC)];
 
 /* ---------- prototypes */
 

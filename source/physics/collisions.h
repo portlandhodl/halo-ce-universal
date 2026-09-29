@@ -101,16 +101,11 @@ struct collision_result
 	short material_index;
 };
 
-typedef char collision_result_size_assert[
-	sizeof(struct collision_result) == 0x50 ? 1 : -1];
-typedef char collision_result_location_offset_assert[
-	offsetof(struct collision_result, location) == 0x0C ? 1 : -1];
-typedef char collision_result_point_offset_assert[
-	offsetof(struct collision_result, point) == 0x18 ? 1 : -1];
-typedef char collision_result_plane_offset_assert[
-	offsetof(struct collision_result, plane) == 0x24 ? 1 : -1];
-typedef char collision_result_material_type_offset_assert[
-	offsetof(struct collision_result, material_type) == 0x34 ? 1 : -1];
+typedef char collision_result_size_assert[HALO_LAYOUT_ASSERT_32(sizeof(struct collision_result) == 0x50)];
+typedef char collision_result_location_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct collision_result, location) == 0x0C)];
+typedef char collision_result_point_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct collision_result, point) == 0x18)];
+typedef char collision_result_plane_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct collision_result, plane) == 0x24)];
+typedef char collision_result_material_type_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct collision_result, material_type) == 0x34)];
 
 /* ---------- prototypes/COLLISIONS.C */
 

@@ -114,10 +114,9 @@ struct game_globals_multiplayer_sound_view
 	struct tag_block multiplayer_information;
 };
 
-typedef char verify_multiplayer_sound_queue_size[sizeof(struct multiplayer_sound_queue) == 0x2C ? 1 : -1];
-typedef char verify_multiplayer_sound_queue_count_size[sizeof(struct multiplayer_sound_queue_count) == sizeof(long) ? 1 : -1];
-typedef char verify_game_globals_multiplayer_information_offset[
-	offsetof(struct game_globals_multiplayer_sound_view, multiplayer_information) == 0x164 ? 1 : -1];
+typedef char verify_multiplayer_sound_queue_size[HALO_LAYOUT_ASSERT_32(sizeof(struct multiplayer_sound_queue) == 0x2C)];
+typedef char verify_multiplayer_sound_queue_count_size[HALO_LAYOUT_ASSERT_32(sizeof(struct multiplayer_sound_queue_count) == sizeof(long))];
+typedef char verify_game_globals_multiplayer_information_offset[HALO_LAYOUT_ASSERT_32(offsetof(struct game_globals_multiplayer_sound_view, multiplayer_information) == 0x164)];
 
 /* ---------- prototypes */
 

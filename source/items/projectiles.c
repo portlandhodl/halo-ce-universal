@@ -290,26 +290,11 @@ struct projectile_runtime_datum
 	struct _projectile_runtime_datum projectile;
 };
 
-typedef char projectile_runtime_arming_time_delta_offset_assert[
-	offsetof(struct projectile_runtime_datum, projectile.arming_time_delta) == 0x1FC
-		? 1
-		: -1];
-typedef char projectile_runtime_odometer_offset_assert[
-	offsetof(struct projectile_runtime_datum, projectile.odometer) == 0x200
-		? 1
-		: -1];
-typedef char projectile_runtime_deceleration_offset_assert[
-	offsetof(struct projectile_runtime_datum, projectile.deceleration) == 0x20C
-		? 1
-		: -1];
-typedef char projectile_runtime_rotation_axis_offset_assert[
-	offsetof(struct projectile_runtime_datum, projectile.rotation_axis) == 0x214
-		? 1
-		: -1];
-typedef char projectile_runtime_rotation_cosine_offset_assert[
-	offsetof(struct projectile_runtime_datum, projectile.rotation_cosine) == 0x224
-		? 1
-		: -1];
+typedef char projectile_runtime_arming_time_delta_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct projectile_runtime_datum, projectile.arming_time_delta) == 0x1FC)];
+typedef char projectile_runtime_odometer_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct projectile_runtime_datum, projectile.odometer) == 0x200)];
+typedef char projectile_runtime_deceleration_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct projectile_runtime_datum, projectile.deceleration) == 0x20C)];
+typedef char projectile_runtime_rotation_axis_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct projectile_runtime_datum, projectile.rotation_axis) == 0x214)];
+typedef char projectile_runtime_rotation_cosine_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct projectile_runtime_datum, projectile.rotation_cosine) == 0x224)];
 
 /* ---------- prototypes */
 

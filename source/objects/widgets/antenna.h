@@ -82,14 +82,10 @@ struct antenna_datum
 	struct antenna_vertex_datum vertices[MAXIMUM_ANTENNA_VERTICES + 1];
 };
 
-typedef char antenna_vertex_definition_size_assert[
-	sizeof(struct antenna_vertex_definition) == 0x80 ? 1 : -1];
-typedef char antenna_definition_size_assert[
-	sizeof(struct antenna_definition) == 0xD0 ? 1 : -1];
-typedef char antenna_vertex_datum_size_assert[
-	sizeof(struct antenna_vertex_datum) == 0x20 ? 1 : -1];
-typedef char antenna_datum_size_assert[
-	sizeof(struct antenna_datum) == 0x2BC ? 1 : -1];
+typedef char antenna_vertex_definition_size_assert[HALO_LAYOUT_ASSERT_32(sizeof(struct antenna_vertex_definition) == 0x80)];
+typedef char antenna_definition_size_assert[HALO_LAYOUT_ASSERT_32(sizeof(struct antenna_definition) == 0xD0)];
+typedef char antenna_vertex_datum_size_assert[HALO_LAYOUT_ASSERT_32(sizeof(struct antenna_vertex_datum) == 0x20)];
+typedef char antenna_datum_size_assert[HALO_LAYOUT_ASSERT_32(sizeof(struct antenna_datum) == 0x2BC)];
 
 /* ---------- prototypes/ANTENNA.C */
 

@@ -195,8 +195,7 @@ static wchar_t *const fallback_multiplayer_game_text_strings[] =
 };
 
 /* indices 36 to 183 */
-typedef char fallback_multiplayer_game_text_string_count_check[
-	NUMBEROF(fallback_multiplayer_game_text_strings) == 184 - FIRST_FALLBACK_MULTIPLAYER_GAME_TEXT_STRING ? 1 : -1];
+typedef char fallback_multiplayer_game_text_string_count_check[HALO_LAYOUT_ASSERT_32(NUMBEROF(fallback_multiplayer_game_text_strings) == 184 - FIRST_FALLBACK_MULTIPLAYER_GAME_TEXT_STRING)];
 
 /* the built-in string for a string list too short to hold string_index,
 or NULL */

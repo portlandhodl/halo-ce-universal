@@ -2877,21 +2877,17 @@ struct rasterizer_xbox_rasterizer_globals
 	byte reserved60[8];
 };
 
-typedef char verify_rasterizer_xbox_rasterizer_globals_size[
-	sizeof(struct rasterizer_xbox_rasterizer_globals) ==
-		sizeof(struct rasterizer_globals_definition) ? 1 : -1];
-typedef char verify_rasterizer_xbox_push_buffer_size_offset[
-	offsetof(
+typedef char verify_rasterizer_xbox_rasterizer_globals_size[HALO_LAYOUT_ASSERT_32(sizeof(struct rasterizer_xbox_rasterizer_globals) ==
+		sizeof(struct rasterizer_globals_definition))];
+typedef char verify_rasterizer_xbox_push_buffer_size_offset[HALO_LAYOUT_ASSERT_32(offsetof(
 		struct rasterizer_xbox_rasterizer_globals,
-		push_buffer_size) == 0x38 ? 1 : -1];
-typedef char verify_rasterizer_xbox_refresh_rate_offset[
-	offsetof(
+		push_buffer_size) == 0x38)];
+typedef char verify_rasterizer_xbox_refresh_rate_offset[HALO_LAYOUT_ASSERT_32(offsetof(
 		struct rasterizer_xbox_rasterizer_globals,
-		refresh_rate) == 0x40 ? 1 : -1];
-typedef char verify_rasterizer_xbox_default_2d_hardware_format_offset[
-	offsetof(
+		refresh_rate) == 0x40)];
+typedef char verify_rasterizer_xbox_default_2d_hardware_format_offset[HALO_LAYOUT_ASSERT_32(offsetof(
 		struct rasterizer_xbox_rasterizer_globals,
-		default_2d_hardware_format) == 0x54 ? 1 : -1];
+		default_2d_hardware_format) == 0x54)];
 
 boolean _rasterizer_initialize(
 	void)

@@ -98,74 +98,40 @@ struct ps_particle_datum
 	struct particle_system_type_particle_state_interpolated_randomized_variables transition_randomized_variables;
 };
 
-typedef char particle_type_size_assert[
-	sizeof(struct particle_type) == 0x40 ? 1 : -1];
-typedef char particle_type_state_index_offset_assert[
-	offsetof(struct particle_type, state_index) == 0x0 ? 1 : -1];
-typedef char particle_type_transition_state_index_offset_assert[
-	offsetof(struct particle_type, transition_state_index) == 0x2 ? 1 : -1];
-typedef char particle_type_time_left_in_state_offset_assert[
-	offsetof(struct particle_type, time_left_in_state) == 0x4 ? 1 : -1];
-typedef char particle_type_state_length_offset_assert[
-	offsetof(struct particle_type, state_length) == 0x8 ? 1 : -1];
-typedef char particle_type_states_moving_forward_offset_assert[
-	offsetof(struct particle_type, states_moving_forward) == 0x38 ? 1 : -1];
-typedef char particle_type_variables_offset_assert[
-	offsetof(struct particle_type, variables) == 0xC ? 1 : -1];
-typedef char particle_type_fractional_particle_count_offset_assert[
-	offsetof(struct particle_type, fractional_particle_count) == 0x34 ? 1 : -1];
-typedef char particle_type_particle_count_offset_assert[
-	offsetof(struct particle_type, particle_count) == 0x3A ? 1 : -1];
-typedef char particle_type_first_particle_index_offset_assert[
-	offsetof(struct particle_type, first_particle_index) == 0x3C ? 1 : -1];
-typedef char particle_system_datum_size_assert[
-	sizeof(struct particle_system_datum) == 0x158 ? 1 : -1];
-typedef char particle_system_datum_flags_offset_assert[
-	offsetof(struct particle_system_datum, flags) == 0x4 ? 1 : -1];
-typedef char particle_system_datum_definition_index_offset_assert[
-	offsetof(struct particle_system_datum, definition_index) == 0x8 ? 1 : -1];
-typedef char particle_system_datum_object_index_offset_assert[
-	offsetof(struct particle_system_datum, object_index) == 0xC ? 1 : -1];
-typedef char particle_system_datum_scale_offset_assert[
-	offsetof(struct particle_system_datum, scale) == 0x14 ? 1 : -1];
-typedef char particle_system_datum_position_offset_assert[
-	offsetof(struct particle_system_datum, position) == 0x20 ? 1 : -1];
-typedef char particle_system_datum_location_offset_assert[
-	offsetof(struct particle_system_datum, location) == 0x18 ? 1 : -1];
-typedef char particle_system_datum_velocity_offset_assert[
-	offsetof(struct particle_system_datum, velocity) == 0x2C ? 1 : -1];
-typedef char particle_system_datum_color_offset_assert[
-	offsetof(struct particle_system_datum, color) == 0x38 ? 1 : -1];
-typedef char particle_system_datum_lighting_offset_assert[
-	offsetof(struct particle_system_datum, lighting) == 0x48 ? 1 : -1];
-typedef char particle_system_datum_types_offset_assert[
-	offsetof(struct particle_system_datum, types) == 0x58 ? 1 : -1];
-typedef char particle_system_datum_physics_state_offset_assert[
-	offsetof(struct particle_system_datum, physics_state) == 0x54 ? 1 : -1];
-typedef char ps_particle_datum_size_assert[
-	sizeof(struct ps_particle_datum) == 0x80 ? 1 : -1];
-typedef char ps_particle_datum_next_particle_index_offset_assert[
-	offsetof(struct ps_particle_datum, next_particle_index) == 0x4 ? 1 : -1];
-typedef char ps_particle_datum_state_index_offset_assert[
-	offsetof(struct ps_particle_datum, state_index) == 0x8 ? 1 : -1];
-typedef char ps_particle_datum_transition_state_index_offset_assert[
-	offsetof(struct ps_particle_datum, transition_state_index) == 0xA ? 1 : -1];
-typedef char ps_particle_datum_time_left_in_state_offset_assert[
-	offsetof(struct ps_particle_datum, time_left_in_state) == 0xC ? 1 : -1];
-typedef char ps_particle_datum_state_length_offset_assert[
-	offsetof(struct ps_particle_datum, state_length) == 0x10 ? 1 : -1];
-typedef char ps_particle_datum_location_offset_assert[
-	offsetof(struct ps_particle_datum, location) == 0x14 ? 1 : -1];
-typedef char ps_particle_datum_position_offset_assert[
-	offsetof(struct ps_particle_datum, position) == 0x1C ? 1 : -1];
-typedef char ps_particle_datum_velocity_offset_assert[
-	offsetof(struct ps_particle_datum, velocity) == 0x28 ? 1 : -1];
-typedef char ps_particle_datum_axis_offset_assert[
-	offsetof(struct ps_particle_datum, axis) == 0x34 ? 1 : -1];
-typedef char ps_particle_datum_randomized_variables_offset_assert[
-	offsetof(struct ps_particle_datum, randomized_variables) == 0x48 ? 1 : -1];
-typedef char ps_particle_datum_transition_randomized_variables_offset_assert[
-	offsetof(struct ps_particle_datum, transition_randomized_variables) == 0x64 ? 1 : -1];
+typedef char particle_type_size_assert[HALO_LAYOUT_ASSERT_32(sizeof(struct particle_type) == 0x40)];
+typedef char particle_type_state_index_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct particle_type, state_index) == 0x0)];
+typedef char particle_type_transition_state_index_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct particle_type, transition_state_index) == 0x2)];
+typedef char particle_type_time_left_in_state_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct particle_type, time_left_in_state) == 0x4)];
+typedef char particle_type_state_length_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct particle_type, state_length) == 0x8)];
+typedef char particle_type_states_moving_forward_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct particle_type, states_moving_forward) == 0x38)];
+typedef char particle_type_variables_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct particle_type, variables) == 0xC)];
+typedef char particle_type_fractional_particle_count_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct particle_type, fractional_particle_count) == 0x34)];
+typedef char particle_type_particle_count_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct particle_type, particle_count) == 0x3A)];
+typedef char particle_type_first_particle_index_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct particle_type, first_particle_index) == 0x3C)];
+typedef char particle_system_datum_size_assert[HALO_LAYOUT_ASSERT_32(sizeof(struct particle_system_datum) == 0x158)];
+typedef char particle_system_datum_flags_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct particle_system_datum, flags) == 0x4)];
+typedef char particle_system_datum_definition_index_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct particle_system_datum, definition_index) == 0x8)];
+typedef char particle_system_datum_object_index_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct particle_system_datum, object_index) == 0xC)];
+typedef char particle_system_datum_scale_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct particle_system_datum, scale) == 0x14)];
+typedef char particle_system_datum_position_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct particle_system_datum, position) == 0x20)];
+typedef char particle_system_datum_location_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct particle_system_datum, location) == 0x18)];
+typedef char particle_system_datum_velocity_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct particle_system_datum, velocity) == 0x2C)];
+typedef char particle_system_datum_color_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct particle_system_datum, color) == 0x38)];
+typedef char particle_system_datum_lighting_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct particle_system_datum, lighting) == 0x48)];
+typedef char particle_system_datum_types_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct particle_system_datum, types) == 0x58)];
+typedef char particle_system_datum_physics_state_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct particle_system_datum, physics_state) == 0x54)];
+typedef char ps_particle_datum_size_assert[HALO_LAYOUT_ASSERT_32(sizeof(struct ps_particle_datum) == 0x80)];
+typedef char ps_particle_datum_next_particle_index_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct ps_particle_datum, next_particle_index) == 0x4)];
+typedef char ps_particle_datum_state_index_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct ps_particle_datum, state_index) == 0x8)];
+typedef char ps_particle_datum_transition_state_index_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct ps_particle_datum, transition_state_index) == 0xA)];
+typedef char ps_particle_datum_time_left_in_state_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct ps_particle_datum, time_left_in_state) == 0xC)];
+typedef char ps_particle_datum_state_length_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct ps_particle_datum, state_length) == 0x10)];
+typedef char ps_particle_datum_location_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct ps_particle_datum, location) == 0x14)];
+typedef char ps_particle_datum_position_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct ps_particle_datum, position) == 0x1C)];
+typedef char ps_particle_datum_velocity_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct ps_particle_datum, velocity) == 0x28)];
+typedef char ps_particle_datum_axis_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct ps_particle_datum, axis) == 0x34)];
+typedef char ps_particle_datum_randomized_variables_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct ps_particle_datum, randomized_variables) == 0x48)];
+typedef char ps_particle_datum_transition_randomized_variables_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct ps_particle_datum, transition_randomized_variables) == 0x64)];
 
 /* ---------- prototypes/PARTICLE_SYSTEMS.C */
 

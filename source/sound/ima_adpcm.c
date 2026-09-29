@@ -43,8 +43,7 @@ struct bungie_ima_adpcm_header_byte_swap_data
 	struct byte_swap_definition definition;
 };
 
-typedef char verify_bungie_ima_adpcm_header_byte_swap_data_size[
-	sizeof(struct bungie_ima_adpcm_header_byte_swap_data) == 0x2C ? 1 : -1];
+typedef char verify_bungie_ima_adpcm_header_byte_swap_data_size[HALO_LAYOUT_ASSERT_32(sizeof(struct bungie_ima_adpcm_header_byte_swap_data) == 0x2C)];
 
 /* ---------- prototypes */
 

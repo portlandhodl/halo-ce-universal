@@ -101,20 +101,13 @@ struct collision_plane
 	short material_index;
 };
 
-typedef char collision_feature_size_assert[
-	sizeof(struct collision_feature) == 0x0C ? 1 : -1];
-typedef char collision_sphere_size_assert[
-	sizeof(struct collision_sphere) == 0x1C ? 1 : -1];
-typedef char collision_cylinder_size_assert[
-	sizeof(struct collision_cylinder) == 0x28 ? 1 : -1];
-typedef char collision_prism_size_assert[
-	sizeof(struct collision_prism) == 0x68 ? 1 : -1];
-typedef char collision_feature_list_spheres_offset_assert[
-	offsetof(struct collision_feature_list, spheres) == 0x08 ? 1 : -1];
-typedef char collision_feature_list_cylinders_offset_assert[
-	offsetof(struct collision_feature_list, cylinders) == 0x1C08 ? 1 : -1];
-typedef char collision_feature_list_prisms_offset_assert[
-	offsetof(struct collision_feature_list, prisms) == 0x4408 ? 1 : -1];
+typedef char collision_feature_size_assert[HALO_LAYOUT_ASSERT_32(sizeof(struct collision_feature) == 0x0C)];
+typedef char collision_sphere_size_assert[HALO_LAYOUT_ASSERT_32(sizeof(struct collision_sphere) == 0x1C)];
+typedef char collision_cylinder_size_assert[HALO_LAYOUT_ASSERT_32(sizeof(struct collision_cylinder) == 0x28)];
+typedef char collision_prism_size_assert[HALO_LAYOUT_ASSERT_32(sizeof(struct collision_prism) == 0x68)];
+typedef char collision_feature_list_spheres_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct collision_feature_list, spheres) == 0x08)];
+typedef char collision_feature_list_cylinders_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct collision_feature_list, cylinders) == 0x1C08)];
+typedef char collision_feature_list_prisms_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct collision_feature_list, prisms) == 0x4408)];
 
 /* ---------- prototypes/COLLISION_FEATURES.C */
 

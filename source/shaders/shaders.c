@@ -215,28 +215,17 @@ struct numeric_countdown_timer_state
 	long previous_game_time;
 };
 
-typedef char shader_transparent_flags_offset[
-	offsetof(struct shader_transparent_generic_definition, flags) == 0x29 ? 1 : -1];
-typedef char shader_glass_reflection_type_offset[
-	offsetof(struct shader_glass_definition, reflection_type) == 0x8A ? 1 : -1];
-typedef char shader_effect_secondary_map_offset[
-	offsetof(struct shader_effect_permutation_definition, secondary_map) == 0x4C ? 1 : -1];
-typedef char shader_effect_secondary_map_anchor_offset[
-	offsetof(struct shader_effect_permutation_definition, secondary_map_anchor) == 0x5C ? 1 : -1];
-typedef char shader_model_translucency_offset[
-	offsetof(struct shader_model_definition, translucency) == 0x38 ? 1 : -1];
-typedef char shader_environment_diffuse_offset[
-	offsetof(struct shader_environment_definition, diffuse) == 0x6C ? 1 : -1];
-typedef char shader_environment_u_animation_period_offset[
-	offsetof(struct shader_environment_definition, diffuse.u_animation_period) == 0x154 ? 1 : -1];
-typedef char shader_environment_v_animation_period_offset[
-	offsetof(struct shader_environment_definition, diffuse.v_animation_period) == 0x160 ? 1 : -1];
-typedef char shader_environment_reflection_flags_offset[
-	offsetof(struct shader_environment_definition, reflection_flags) == 0x2D0 ? 1 : -1];
-typedef char shader_texture_animation_size[
-	sizeof(struct shader_texture_animation) == 0x38 ? 1 : -1];
-typedef char render_animation_size[
-	sizeof(struct render_animation) == 0x8 ? 1 : -1];
+typedef char shader_transparent_flags_offset[HALO_LAYOUT_ASSERT_32(offsetof(struct shader_transparent_generic_definition, flags) == 0x29)];
+typedef char shader_glass_reflection_type_offset[HALO_LAYOUT_ASSERT_32(offsetof(struct shader_glass_definition, reflection_type) == 0x8A)];
+typedef char shader_effect_secondary_map_offset[HALO_LAYOUT_ASSERT_32(offsetof(struct shader_effect_permutation_definition, secondary_map) == 0x4C)];
+typedef char shader_effect_secondary_map_anchor_offset[HALO_LAYOUT_ASSERT_32(offsetof(struct shader_effect_permutation_definition, secondary_map_anchor) == 0x5C)];
+typedef char shader_model_translucency_offset[HALO_LAYOUT_ASSERT_32(offsetof(struct shader_model_definition, translucency) == 0x38)];
+typedef char shader_environment_diffuse_offset[HALO_LAYOUT_ASSERT_32(offsetof(struct shader_environment_definition, diffuse) == 0x6C)];
+typedef char shader_environment_u_animation_period_offset[HALO_LAYOUT_ASSERT_32(offsetof(struct shader_environment_definition, diffuse.u_animation_period) == 0x154)];
+typedef char shader_environment_v_animation_period_offset[HALO_LAYOUT_ASSERT_32(offsetof(struct shader_environment_definition, diffuse.v_animation_period) == 0x160)];
+typedef char shader_environment_reflection_flags_offset[HALO_LAYOUT_ASSERT_32(offsetof(struct shader_environment_definition, reflection_flags) == 0x2D0)];
+typedef char shader_texture_animation_size[HALO_LAYOUT_ASSERT_32(sizeof(struct shader_texture_animation) == 0x38)];
+typedef char render_animation_size[HALO_LAYOUT_ASSERT_32(sizeof(struct render_animation) == 0x8)];
 
 /* ---------- prototypes */
 

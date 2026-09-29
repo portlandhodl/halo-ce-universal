@@ -84,36 +84,21 @@ struct profile_section
 	__int64 peak_elapsed_timebase;
 };
 
-typedef char profile_section_size_assert[
-	sizeof(struct profile_section) == 0x5F8 ? 1 : -1];
-typedef char profile_section_recent_call_count_offset_assert[
-	offsetof(struct profile_section, recent_call_count) == 0x18 ? 1 : -1];
-typedef char profile_section_reserved1C_offset_assert[
-	offsetof(struct profile_section, reserved1C) == 0x1C ? 1 : -1];
-typedef char profile_section_recent_elapsed_timebase_offset_assert[
-	offsetof(struct profile_section, recent_elapsed_timebase) == 0x20 ? 1 : -1];
-typedef char profile_section_frame_call_count_history_offset_assert[
-	offsetof(struct profile_section, frame_call_count_history) == 0x28 ? 1 : -1];
-typedef char profile_section_frame_elapsed_timebase_history_offset_assert[
-	offsetof(struct profile_section, frame_elapsed_timebase_history) == 0x208 ? 1 : -1];
-typedef char profile_section_sample_count_offset_assert[
-	offsetof(struct profile_section, sample_count) == 0x5C8 ? 1 : -1];
-typedef char profile_section_frame_call_count_offset_assert[
-	offsetof(struct profile_section, frame_call_count) == 0x5CC ? 1 : -1];
-typedef char profile_section_frame_elapsed_timebase_offset_assert[
-	offsetof(struct profile_section, frame_elapsed_timebase) == 0x5D0 ? 1 : -1];
-typedef char profile_section_total_call_count_offset_assert[
-	offsetof(struct profile_section, total_call_count) == 0x5D8 ? 1 : -1];
-typedef char profile_section_reserved5DC_offset_assert[
-	offsetof(struct profile_section, reserved5DC) == 0x5DC ? 1 : -1];
-typedef char profile_section_total_elapsed_timebase_offset_assert[
-	offsetof(struct profile_section, total_elapsed_timebase) == 0x5E0 ? 1 : -1];
-typedef char profile_section_peak_call_count_offset_assert[
-	offsetof(struct profile_section, peak_call_count) == 0x5E8 ? 1 : -1];
-typedef char profile_section_reserved5EC_offset_assert[
-	offsetof(struct profile_section, reserved5EC) == 0x5EC ? 1 : -1];
-typedef char profile_section_peak_elapsed_timebase_offset_assert[
-	offsetof(struct profile_section, peak_elapsed_timebase) == 0x5F0 ? 1 : -1];
+typedef char profile_section_size_assert[HALO_LAYOUT_ASSERT_32(sizeof(struct profile_section) == 0x5F8)];
+typedef char profile_section_recent_call_count_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct profile_section, recent_call_count) == 0x18)];
+typedef char profile_section_reserved1C_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct profile_section, reserved1C) == 0x1C)];
+typedef char profile_section_recent_elapsed_timebase_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct profile_section, recent_elapsed_timebase) == 0x20)];
+typedef char profile_section_frame_call_count_history_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct profile_section, frame_call_count_history) == 0x28)];
+typedef char profile_section_frame_elapsed_timebase_history_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct profile_section, frame_elapsed_timebase_history) == 0x208)];
+typedef char profile_section_sample_count_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct profile_section, sample_count) == 0x5C8)];
+typedef char profile_section_frame_call_count_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct profile_section, frame_call_count) == 0x5CC)];
+typedef char profile_section_frame_elapsed_timebase_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct profile_section, frame_elapsed_timebase) == 0x5D0)];
+typedef char profile_section_total_call_count_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct profile_section, total_call_count) == 0x5D8)];
+typedef char profile_section_reserved5DC_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct profile_section, reserved5DC) == 0x5DC)];
+typedef char profile_section_total_elapsed_timebase_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct profile_section, total_elapsed_timebase) == 0x5E0)];
+typedef char profile_section_peak_call_count_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct profile_section, peak_call_count) == 0x5E8)];
+typedef char profile_section_reserved5EC_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct profile_section, reserved5EC) == 0x5EC)];
+typedef char profile_section_peak_elapsed_timebase_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct profile_section, peak_elapsed_timebase) == 0x5F0)];
 
 /* ---------- prototypes/PROFILE.C */
 

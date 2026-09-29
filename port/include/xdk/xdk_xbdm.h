@@ -33,10 +33,10 @@ typedef struct _DMN_MODLOAD
 {
 	char Name[260];
 	void *BaseAddress;
-	unsigned long Size;
-	unsigned long TimeStamp;
-	unsigned long CheckSum;
-	unsigned long Flags;
+	HALO_ULONG32 Size;
+	HALO_ULONG32 TimeStamp;
+	HALO_ULONG32 CheckSum;
+	HALO_ULONG32 Flags;
 } DMN_MODLOAD, *PDMN_MODLOAD;
 
 /* A section of a loaded module, as DmWalkModuleSections reports it.
@@ -47,7 +47,7 @@ typedef struct _DMN_SECTIONLOAD
 {
 	char Name[260];
 	void *BaseAddress;
-	unsigned long Size;
+	HALO_ULONG32 Size;
 	unsigned short Index;
 	unsigned short Flags;
 } DMN_SECTIONLOAD, *PDMN_SECTIONLOAD;

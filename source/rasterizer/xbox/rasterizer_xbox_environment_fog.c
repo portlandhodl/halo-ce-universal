@@ -399,32 +399,19 @@ struct transparent_geometry_group
 	byte pad9E[2];
 };
 
-typedef char rasterizer_environment_fog_window_parameters_fog_offset_assert[
-	offsetof(struct rasterizer_window_begin_parameters, fog) == 0x1E8 ? 1 : -1];
-typedef char rasterizer_environment_fog_window_parameters_field_of_view_offset_assert[
-	offsetof(struct rasterizer_window_begin_parameters, camera.vertical_field_of_view) == 0x30 ? 1 : -1];
-typedef char rasterizer_environment_fog_window_parameters_viewport_offset_assert[
-	offsetof(struct rasterizer_window_begin_parameters, camera.viewport_bounds) == 0x34 ? 1 : -1];
-typedef char rasterizer_environment_fog_window_parameters_camera_matrix_offset_assert[
-	offsetof(struct rasterizer_window_begin_parameters, frustum.world_to_view) == 0x6C ? 1 : -1];
-typedef char rasterizer_environment_fog_pixel_shader_size_assert[
-	sizeof(struct pixel_shader_definition) == 0xF0 ? 1 : -1];
-typedef char rasterizer_environment_fog_screen_window_size_assert[
-	sizeof(struct rasterizer_environment_fog_screen_window) == 0x4C ? 1 : -1];
-typedef char rasterizer_environment_fog_screen_window_layers_offset_assert[
-	offsetof(struct rasterizer_environment_fog_screen_window, layers) == 0xC ? 1 : -1];
-typedef char rasterizer_environment_fog_screen_window_wind_offset_assert[
-	offsetof(struct rasterizer_environment_fog_screen_window, wind) == 0x2C ? 1 : -1];
-typedef char rasterizer_environment_fog_chicago_map_scale_offset_assert[
-	offsetof(struct shader_transparent_chicago_definition, map_u_scale) == 0x9C ? 1 : -1];
-typedef char rasterizer_environment_fog_model_skinning_size_assert[
-	sizeof(struct rasterizer_model_skinning_parameters) == 0x8 ? 1 : -1];
-typedef char rasterizer_environment_fog_model_map_scale_offset_assert[
-	offsetof(struct rasterizer_model_begin_parameters, base_map_scale) == 0xC4 ? 1 : -1];
-typedef char rasterizer_environment_fog_transparent_group_size_assert[
-	sizeof(struct transparent_geometry_group) == 0xA0 ? 1 : -1];
-typedef char rasterizer_environment_fog_transparent_group_map_scale_offset_assert[
-	offsetof(struct transparent_geometry_group, model_base_map_scale) == 0x3C ? 1 : -1];
+typedef char rasterizer_environment_fog_window_parameters_fog_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct rasterizer_window_begin_parameters, fog) == 0x1E8)];
+typedef char rasterizer_environment_fog_window_parameters_field_of_view_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct rasterizer_window_begin_parameters, camera.vertical_field_of_view) == 0x30)];
+typedef char rasterizer_environment_fog_window_parameters_viewport_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct rasterizer_window_begin_parameters, camera.viewport_bounds) == 0x34)];
+typedef char rasterizer_environment_fog_window_parameters_camera_matrix_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct rasterizer_window_begin_parameters, frustum.world_to_view) == 0x6C)];
+typedef char rasterizer_environment_fog_pixel_shader_size_assert[HALO_LAYOUT_ASSERT_32(sizeof(struct pixel_shader_definition) == 0xF0)];
+typedef char rasterizer_environment_fog_screen_window_size_assert[HALO_LAYOUT_ASSERT_32(sizeof(struct rasterizer_environment_fog_screen_window) == 0x4C)];
+typedef char rasterizer_environment_fog_screen_window_layers_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct rasterizer_environment_fog_screen_window, layers) == 0xC)];
+typedef char rasterizer_environment_fog_screen_window_wind_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct rasterizer_environment_fog_screen_window, wind) == 0x2C)];
+typedef char rasterizer_environment_fog_chicago_map_scale_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct shader_transparent_chicago_definition, map_u_scale) == 0x9C)];
+typedef char rasterizer_environment_fog_model_skinning_size_assert[HALO_LAYOUT_ASSERT_32(sizeof(struct rasterizer_model_skinning_parameters) == 0x8)];
+typedef char rasterizer_environment_fog_model_map_scale_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct rasterizer_model_begin_parameters, base_map_scale) == 0xC4)];
+typedef char rasterizer_environment_fog_transparent_group_size_assert[HALO_LAYOUT_ASSERT_32(sizeof(struct transparent_geometry_group) == 0xA0)];
+typedef char rasterizer_environment_fog_transparent_group_map_scale_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct transparent_geometry_group, model_base_map_scale) == 0x3C)];
 
 /* ---------- globals */
 

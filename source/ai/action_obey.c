@@ -352,14 +352,10 @@ enum
 	NUMBER_OF_UNIT_ANIMATION_IMPULSES = 14,
 };
 
-typedef char action_obey_simple_control_size_assert[
-	sizeof(struct obey_individual_simple_control) == 0x24 ? 1 : -1];
-typedef char action_obey_complex_control_size_assert[
-	sizeof(struct obey_individual_complex_control) == 0x58 ? 1 : -1];
-typedef char action_obey_state_size_assert[
-	sizeof(struct obey_state_data) == 0x84 ? 1 : -1];
-typedef char action_obey_state_offset_assert[
-	offsetof(struct actor_datum, state.action_data.obey) == 0x9C ? 1 : -1];
+typedef char action_obey_simple_control_size_assert[HALO_LAYOUT_ASSERT_32(sizeof(struct obey_individual_simple_control) == 0x24)];
+typedef char action_obey_complex_control_size_assert[HALO_LAYOUT_ASSERT_32(sizeof(struct obey_individual_complex_control) == 0x58)];
+typedef char action_obey_state_size_assert[HALO_LAYOUT_ASSERT_32(sizeof(struct obey_state_data) == 0x84)];
+typedef char action_obey_state_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct actor_datum, state.action_data.obey) == 0x9C)];
 
 /* ---------- prototypes */
 

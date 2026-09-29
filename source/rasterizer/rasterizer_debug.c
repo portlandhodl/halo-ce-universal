@@ -134,12 +134,9 @@ struct rasterizer_debug_options_prefix
 	boolean debug_geometry;
 };
 
-typedef char rasterizer_debug_data_size_assert[
-	sizeof(struct rasterizer_debug_data) == 0x21 ? 1 : -1];
-typedef char rasterizer_debug_primitive_size_assert[
-	sizeof(struct rasterizer_debug_primitive) == 0x3C ? 1 : -1];
-typedef char rasterizer_debug_options_debug_geometry_offset_assert[
-	offsetof(struct rasterizer_debug_options_prefix, debug_geometry) == 0x25 ? 1 : -1];
+typedef char rasterizer_debug_data_size_assert[HALO_LAYOUT_ASSERT_32(sizeof(struct rasterizer_debug_data) == 0x21)];
+typedef char rasterizer_debug_primitive_size_assert[HALO_LAYOUT_ASSERT_32(sizeof(struct rasterizer_debug_primitive) == 0x3C)];
+typedef char rasterizer_debug_options_debug_geometry_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct rasterizer_debug_options_prefix, debug_geometry) == 0x25)];
 
 /* ---------- prototypes */
 

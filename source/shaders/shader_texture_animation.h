@@ -34,8 +34,7 @@ struct shader_texture_animation
 	real_point2d r_center;
 };
 
-typedef char verify_shader_texture_animation_size[
-	sizeof(struct shader_texture_animation) == 0x38 ? 1 : -1];
+typedef char verify_shader_texture_animation_size[HALO_LAYOUT_ASSERT_32(sizeof(struct shader_texture_animation) == 0x38)];
 
 /* ---------- public code */
 

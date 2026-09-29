@@ -286,21 +286,23 @@ enum decompressor_timer
 
 /* ---------- structures */
 
+/* the cache file's own header, exactly its 0x800 bytes on disk (the LP64
+port reads it raw: long32/ulong32, cseries.h) */
 struct cache_file_header
 {
-	unsigned long header_signature;
-	long version;
-	long size;
+	ulong32 header_signature;
+	long32 version;
+	long32 size;
 	byte reservedC[4];
-	long tag_data_offset;
-	long tag_data_size;
+	long32 tag_data_offset;
+	long32 tag_data_size;
 	byte reserved18[8];
 	char name[0x20];
 	char build[0x20];
 	byte reserved60[4];
-	unsigned long checksum;
+	ulong32 checksum;
 	byte reserved68[0x794];
-	unsigned long footer_signature;
+	ulong32 footer_signature;
 };
 
 struct cache_copy_read_request
@@ -370,38 +372,22 @@ struct decompressor_runtime_globals
 	struct simple_decompressor_definition self;
 };
 
-typedef char verify_cache_file_header_size[
-	sizeof(struct cache_file_header) == 0x800 ? 1 : -1];
-typedef char verify_simple_decompressor_zlib_stream_offset[
-	offsetof(struct simple_decompressor_definition, zlib_stream) == 0x908 ? 1 : -1];
-typedef char verify_simple_decompressor_copy_stop_event_offset[
-	offsetof(struct simple_decompressor_definition, copy_stop_event) == 0x950 ? 1 : -1];
-typedef char verify_simple_decompressor_copy_complete_event_offset[
-	offsetof(struct simple_decompressor_definition, copy_complete_event) == 0x954 ? 1 : -1];
-typedef char verify_simple_decompressor_copy_thread_offset[
-	offsetof(struct simple_decompressor_definition, copy_thread) == 0x95C ? 1 : -1];
-typedef char verify_simple_decompressor_blocking_offset[
-	offsetof(struct simple_decompressor_definition, blocking) == 0x988 ? 1 : -1];
-typedef char verify_simple_decompressor_overlapped_offset[
-	offsetof(struct simple_decompressor_definition, overlapped) == 0x99C ? 1 : -1];
-typedef char verify_simple_decompressor_read_requests_offset[
-	offsetof(struct simple_decompressor_definition, read_requests) == 0xA78 ? 1 : -1];
-typedef char verify_simple_decompressor_read_progress_offset[
-	offsetof(struct simple_decompressor_definition, read_progress) == 0xAA0 ? 1 : -1];
-typedef char verify_simple_decompressor_current_request_offset[
-	offsetof(struct simple_decompressor_definition, current_request) == 0xAAC ? 1 : -1];
-typedef char verify_simple_decompressor_overlapped_timers_offset[
-	offsetof(struct simple_decompressor_definition, overlapped_timer_starts) == 0xAC8 ? 1 : -1];
-typedef char verify_simple_decompressor_size[
-	sizeof(struct simple_decompressor_definition) == 0xB50 ? 1 : -1];
-typedef char verify_decompressor_runtime_globals_times_offset[
-	offsetof(struct decompressor_runtime_globals, times) == 0x100 ? 1 : -1];
-typedef char verify_decompressor_runtime_globals_timer_starts_offset[
-	offsetof(struct decompressor_runtime_globals, timer_starts) == 0x128 ? 1 : -1];
-typedef char verify_decompressor_runtime_globals_self_offset[
-	offsetof(struct decompressor_runtime_globals, self) == 0x170 ? 1 : -1];
-typedef char verify_decompressor_runtime_globals_size[
-	sizeof(struct decompressor_runtime_globals) == 0xCC0 ? 1 : -1];
+typedef char verify_cache_file_header_size[HALO_LAYOUT_ASSERT_32(sizeof(struct cache_file_header) == 0x800)];
+typedef char verify_simple_decompressor_zlib_stream_offset[HALO_LAYOUT_ASSERT_32(offsetof(struct simple_decompressor_definition, zlib_stream) == 0x908)];
+typedef char verify_simple_decompressor_copy_stop_event_offset[HALO_LAYOUT_ASSERT_32(offsetof(struct simple_decompressor_definition, copy_stop_event) == 0x950)];
+typedef char verify_simple_decompressor_copy_complete_event_offset[HALO_LAYOUT_ASSERT_32(offsetof(struct simple_decompressor_definition, copy_complete_event) == 0x954)];
+typedef char verify_simple_decompressor_copy_thread_offset[HALO_LAYOUT_ASSERT_32(offsetof(struct simple_decompressor_definition, copy_thread) == 0x95C)];
+typedef char verify_simple_decompressor_blocking_offset[HALO_LAYOUT_ASSERT_32(offsetof(struct simple_decompressor_definition, blocking) == 0x988)];
+typedef char verify_simple_decompressor_overlapped_offset[HALO_LAYOUT_ASSERT_32(offsetof(struct simple_decompressor_definition, overlapped) == 0x99C)];
+typedef char verify_simple_decompressor_read_requests_offset[HALO_LAYOUT_ASSERT_32(offsetof(struct simple_decompressor_definition, read_requests) == 0xA78)];
+typedef char verify_simple_decompressor_read_progress_offset[HALO_LAYOUT_ASSERT_32(offsetof(struct simple_decompressor_definition, read_progress) == 0xAA0)];
+typedef char verify_simple_decompressor_current_request_offset[HALO_LAYOUT_ASSERT_32(offsetof(struct simple_decompressor_definition, current_request) == 0xAAC)];
+typedef char verify_simple_decompressor_overlapped_timers_offset[HALO_LAYOUT_ASSERT_32(offsetof(struct simple_decompressor_definition, overlapped_timer_starts) == 0xAC8)];
+typedef char verify_simple_decompressor_size[HALO_LAYOUT_ASSERT_32(sizeof(struct simple_decompressor_definition) == 0xB50)];
+typedef char verify_decompressor_runtime_globals_times_offset[HALO_LAYOUT_ASSERT_32(offsetof(struct decompressor_runtime_globals, times) == 0x100)];
+typedef char verify_decompressor_runtime_globals_timer_starts_offset[HALO_LAYOUT_ASSERT_32(offsetof(struct decompressor_runtime_globals, timer_starts) == 0x128)];
+typedef char verify_decompressor_runtime_globals_self_offset[HALO_LAYOUT_ASSERT_32(offsetof(struct decompressor_runtime_globals, self) == 0x170)];
+typedef char verify_decompressor_runtime_globals_size[HALO_LAYOUT_ASSERT_32(sizeof(struct decompressor_runtime_globals) == 0xCC0)];
 
 /* ---------- prototypes */
 

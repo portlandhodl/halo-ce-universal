@@ -137,16 +137,11 @@ struct actor_iterator
 	long next_actor_index;
 };
 
-typedef char ai_debug_enterable_vehicle_size_assert[
-	sizeof(struct ai_debug_enterable_vehicle) == 0x28 ? 1 : -1];
-typedef char ai_debug_globals_spatial_effect_offset_assert[
-	offsetof(struct ai_debug_globals_view, spatial_effect) == 0x134 ? 1 : -1];
-typedef char ai_debug_globals_enterable_vehicle_offset_assert[
-	offsetof(struct ai_debug_globals_view, enterable_vehicle) == 0x3B8 ? 1 : -1];
-typedef char ai_debug_globals_size_assert[
-	sizeof(struct ai_debug_globals_view) == 0x8DC ? 1 : -1];
-typedef char ai_debug_actor_iterator_size_assert[
-	sizeof(struct actor_iterator) == 0x1C ? 1 : -1];
+typedef char ai_debug_enterable_vehicle_size_assert[HALO_LAYOUT_ASSERT_32(sizeof(struct ai_debug_enterable_vehicle) == 0x28)];
+typedef char ai_debug_globals_spatial_effect_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct ai_debug_globals_view, spatial_effect) == 0x134)];
+typedef char ai_debug_globals_enterable_vehicle_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct ai_debug_globals_view, enterable_vehicle) == 0x3B8)];
+typedef char ai_debug_globals_size_assert[HALO_LAYOUT_ASSERT_32(sizeof(struct ai_debug_globals_view) == 0x8DC)];
+typedef char ai_debug_actor_iterator_size_assert[HALO_LAYOUT_ASSERT_32(sizeof(struct actor_iterator) == 0x1C)];
 
 
 /* ---------- prototypes */

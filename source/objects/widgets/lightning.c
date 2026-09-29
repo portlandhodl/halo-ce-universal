@@ -129,28 +129,17 @@ struct lightning_vertex
 	pixel32 color;
 };
 
-typedef char lightning_marker_definition_size_assert[
-	sizeof(struct lightning_marker_definition) == 0xE4 ? 1 : -1];
-typedef char lightning_definition_size_assert[
-	sizeof(struct lightning_definition) == 0x108 ? 1 : -1];
-typedef char intermediate_lightning_point_size_assert[
-	sizeof(struct intermediate_lightning_point) == 0x24 ? 1 : -1];
-typedef char lightning_vertex_size_assert[
-	sizeof(struct lightning_vertex) == 0x18 ? 1 : -1];
-typedef char lightning_marker_definition_random_position_bounds_offset_assert[
-	offsetof(struct lightning_marker_definition, random_position_bounds) == 0x74 ? 1 : -1];
-typedef char lightning_marker_definition_thickness_offset_assert[
-	offsetof(struct lightning_marker_definition, thickness) == 0x84 ? 1 : -1];
-typedef char lightning_definition_jitter_scale_source_offset_assert[
-	offsetof(struct lightning_definition, jitter_scale_source) == 0x2C ? 1 : -1];
-typedef char lightning_definition_map_offset_assert[
-	offsetof(struct lightning_definition, map) == 0x34 ? 1 : -1];
-typedef char lightning_definition_markers_offset_assert[
-	offsetof(struct lightning_definition, markers) == 0x98 ? 1 : -1];
-typedef char lightning_definition_shaders_offset_assert[
-	offsetof(struct lightning_definition, shaders) == 0xA4 ? 1 : -1];
-typedef char intermediate_lightning_point_valid_offset_assert[
-	offsetof(struct intermediate_lightning_point, valid) == 0x20 ? 1 : -1];
+typedef char lightning_marker_definition_size_assert[HALO_LAYOUT_ASSERT_32(sizeof(struct lightning_marker_definition) == 0xE4)];
+typedef char lightning_definition_size_assert[HALO_LAYOUT_ASSERT_32(sizeof(struct lightning_definition) == 0x108)];
+typedef char intermediate_lightning_point_size_assert[HALO_LAYOUT_ASSERT_32(sizeof(struct intermediate_lightning_point) == 0x24)];
+typedef char lightning_vertex_size_assert[HALO_LAYOUT_ASSERT_32(sizeof(struct lightning_vertex) == 0x18)];
+typedef char lightning_marker_definition_random_position_bounds_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct lightning_marker_definition, random_position_bounds) == 0x74)];
+typedef char lightning_marker_definition_thickness_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct lightning_marker_definition, thickness) == 0x84)];
+typedef char lightning_definition_jitter_scale_source_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct lightning_definition, jitter_scale_source) == 0x2C)];
+typedef char lightning_definition_map_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct lightning_definition, map) == 0x34)];
+typedef char lightning_definition_markers_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct lightning_definition, markers) == 0x98)];
+typedef char lightning_definition_shaders_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct lightning_definition, shaders) == 0xA4)];
+typedef char intermediate_lightning_point_valid_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct intermediate_lightning_point, valid) == 0x20)];
 
 /* ---------- prototypes */
 

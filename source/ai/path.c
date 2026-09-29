@@ -193,37 +193,22 @@ struct path_edge
 	real_vector3d edge_vector;
 };
 
-typedef char path_edge_size_assert[
-	sizeof(struct path_edge) == 0x20 ? 1 : -1];
+typedef char path_edge_size_assert[HALO_LAYOUT_ASSERT_32(sizeof(struct path_edge) == 0x20)];
 
-typedef char path_input_size_assert[
-	sizeof(struct path_input) == 0x48 ? 1 : -1];
-typedef char path_input_ignore_broken_surfaces_offset_assert[
-	offsetof(struct path_input, ignore_broken_surfaces) == 0x4 ? 1 : -1];
-typedef char path_input_ignore_source_object_index_offset_assert[
-	offsetof(struct path_input, ignore_source_object_index) == 0x8 ? 1 : -1];
-typedef char path_input_ignore_target_object_index_offset_assert[
-	offsetof(struct path_input, ignore_target_object_index) == 0xC ? 1 : -1];
-typedef char path_input_start_valid_offset_assert[
-	offsetof(struct path_input, start_valid) == 0x10 ? 1 : -1];
-typedef char path_input_start_point_offset_assert[
-	offsetof(struct path_input, start_point) == 0x14 ? 1 : -1];
-typedef char path_input_start_surface_index_offset_assert[
-	offsetof(struct path_input, start_surface_index) == 0x20 ? 1 : -1];
-typedef char path_state_destination_valid_offset_assert[
-	offsetof(struct path_state, destination_valid) == 0x4C ? 1 : -1];
-typedef char path_state_destination_offset_assert[
-	offsetof(struct path_state, destination) == 0x50 ? 1 : -1];
-typedef char path_state_debug_offset_assert[
-	offsetof(struct path_state, debug) == 0x48 ? 1 : -1];
-typedef char path_state_structure_offset_assert[
-	offsetof(struct path_state, structure) == 0x64 ? 1 : -1];
-typedef char path_destination_surface_index_offset_assert[
-	offsetof(struct path_destination, surface_index) == 0xC ? 1 : -1];
-typedef char path_destination_target_radius_offset_assert[
-	offsetof(struct path_destination, target_radius) == 0x10 ? 1 : -1];
-typedef char path_node_surface_index_offset_assert[
-	offsetof(struct path_node, surface_index) == 0x8 ? 1 : -1];
+typedef char path_input_size_assert[HALO_LAYOUT_ASSERT_32(sizeof(struct path_input) == 0x48)];
+typedef char path_input_ignore_broken_surfaces_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct path_input, ignore_broken_surfaces) == 0x4)];
+typedef char path_input_ignore_source_object_index_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct path_input, ignore_source_object_index) == 0x8)];
+typedef char path_input_ignore_target_object_index_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct path_input, ignore_target_object_index) == 0xC)];
+typedef char path_input_start_valid_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct path_input, start_valid) == 0x10)];
+typedef char path_input_start_point_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct path_input, start_point) == 0x14)];
+typedef char path_input_start_surface_index_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct path_input, start_surface_index) == 0x20)];
+typedef char path_state_destination_valid_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct path_state, destination_valid) == 0x4C)];
+typedef char path_state_destination_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct path_state, destination) == 0x50)];
+typedef char path_state_debug_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct path_state, debug) == 0x48)];
+typedef char path_state_structure_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct path_state, structure) == 0x64)];
+typedef char path_destination_surface_index_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct path_destination, surface_index) == 0xC)];
+typedef char path_destination_target_radius_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct path_destination, target_radius) == 0x10)];
+typedef char path_node_surface_index_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct path_node, surface_index) == 0x8)];
 
 /* ---------- prototypes */
 

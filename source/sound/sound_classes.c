@@ -133,8 +133,7 @@ struct sound_class_runtime
 	short pad;
 };
 
-typedef char verify_sound_class_definition_size[
-	sizeof(struct sound_class_definition) == 0x2C ? 1 : -1];
+typedef char verify_sound_class_definition_size[HALO_LAYOUT_ASSERT_32(sizeof(struct sound_class_definition) == 0x2C)];
 
 /* ---------- prototypes */
 

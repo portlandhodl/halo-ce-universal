@@ -318,11 +318,9 @@ struct decal_definition
 	long unused104[2];
 };
 
-typedef char decal_definition_size_check[
-	sizeof(struct decal_definition) == 0x10C ? 1 : -1];
+typedef char decal_definition_size_check[HALO_LAYOUT_ASSERT_32(sizeof(struct decal_definition) == 0x10C)];
 
-typedef char decal_definition_map_index_offset_check[
-	offsetof(struct decal_definition, shader.map.index) == 0xE4 ? 1 : -1];
+typedef char decal_definition_map_index_offset_check[HALO_LAYOUT_ASSERT_32(offsetof(struct decal_definition, shader.map.index) == 0xE4)];
 
 struct decal_vertex
 {
@@ -341,8 +339,7 @@ struct decal_geometry
 	long decal_surface_indices[MAXIMUM_DECAL_SURFACE_QUEUE_SIZE];
 };
 
-typedef char decal_geometry_size_check[
-	sizeof(struct decal_geometry) == 0x7804 ? 1 : -1];
+typedef char decal_geometry_size_check[HALO_LAYOUT_ASSERT_32(sizeof(struct decal_geometry) == 0x7804)];
 
 struct decal_projection
 {
@@ -358,8 +355,7 @@ struct decal_projection
 	real texture_scale;
 };
 
-typedef char decal_projection_size_check[
-	sizeof(struct decal_projection) == 0x8C ? 1 : -1];
+typedef char decal_projection_size_check[HALO_LAYOUT_ASSERT_32(sizeof(struct decal_projection) == 0x8C)];
 
 struct decal_render_vertex
 {
@@ -404,8 +400,7 @@ struct decal_datum
 	long next_decal_index;
 };
 
-typedef char decal_size_check[
-	sizeof(struct decal_datum) == 0x38 ? 1 : -1];
+typedef char decal_size_check[HALO_LAYOUT_ASSERT_32(sizeof(struct decal_datum) == 0x38)];
 
 struct decal_globals
 {

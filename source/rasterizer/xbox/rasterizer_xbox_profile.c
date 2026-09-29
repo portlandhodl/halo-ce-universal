@@ -177,12 +177,9 @@ struct rasterizer_profile_globals
 	const char *profile_names[NUMBER_OF_RASTERIZER_PROFILES];
 };
 
-typedef char rasterizer_profile_globals_size_assert[
-	sizeof(struct rasterizer_profile_globals) == 124 ? 1 : -1];
-typedef char rasterizer_profile_globals_window_index_offset_assert[
-	offsetof(struct rasterizer_profile_globals, window_index) == 4 ? 1 : -1];
-typedef char rasterizer_profile_globals_profile_names_offset_assert[
-	offsetof(struct rasterizer_profile_globals, profile_names) == 8 ? 1 : -1];
+typedef char rasterizer_profile_globals_size_assert[HALO_LAYOUT_ASSERT_32(sizeof(struct rasterizer_profile_globals) == 124)];
+typedef char rasterizer_profile_globals_window_index_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct rasterizer_profile_globals, window_index) == 4)];
+typedef char rasterizer_profile_globals_profile_names_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct rasterizer_profile_globals, profile_names) == 8)];
 
 struct rasterizer_profile_elapsed_state
 {
@@ -192,12 +189,9 @@ struct rasterizer_profile_elapsed_state
 	volatile __int64 elapsed_times[NUMBER_OF_RASTERIZER_PROFILES];
 };
 
-typedef char rasterizer_profile_elapsed_state_size_assert[
-	sizeof(struct rasterizer_profile_elapsed_state) == 592 ? 1 : -1];
-typedef char rasterizer_profile_elapsed_state_pushbuffer_offset_assert[
-	offsetof(struct rasterizer_profile_elapsed_state, pushbuffer_elapsed_times) == 128 ? 1 : -1];
-typedef char rasterizer_profile_elapsed_state_elapsed_offset_assert[
-	offsetof(struct rasterizer_profile_elapsed_state, elapsed_times) == 360 ? 1 : -1];
+typedef char rasterizer_profile_elapsed_state_size_assert[HALO_LAYOUT_ASSERT_32(sizeof(struct rasterizer_profile_elapsed_state) == 592)];
+typedef char rasterizer_profile_elapsed_state_pushbuffer_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct rasterizer_profile_elapsed_state, pushbuffer_elapsed_times) == 128)];
+typedef char rasterizer_profile_elapsed_state_elapsed_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct rasterizer_profile_elapsed_state, elapsed_times) == 360)];
 
 struct rasterizer_profile_frame_state
 {
@@ -209,12 +203,10 @@ struct rasterizer_profile_frame_state
 	short pad16;
 };
 
-typedef char rasterizer_profile_frame_state_size_assert[
-	sizeof(struct rasterizer_profile_frame_state) == 24 ? 1 : -1];
-typedef char rasterizer_profile_frame_state_last_callback_index_offset_assert[
-	offsetof(
+typedef char rasterizer_profile_frame_state_size_assert[HALO_LAYOUT_ASSERT_32(sizeof(struct rasterizer_profile_frame_state) == 24)];
+typedef char rasterizer_profile_frame_state_last_callback_index_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(
 		struct rasterizer_profile_frame_state,
-		last_callback_index) == 20 ? 1 : -1];
+		last_callback_index) == 20)];
 
 struct rasterizer_profile_state
 {
@@ -224,8 +216,7 @@ struct rasterizer_profile_state
 	byte reserved06[6];
 };
 
-typedef char rasterizer_profile_state_size_assert[
-	sizeof(struct rasterizer_profile_state) == 12 ? 1 : -1];
+typedef char rasterizer_profile_state_size_assert[HALO_LAYOUT_ASSERT_32(sizeof(struct rasterizer_profile_state) == 12)];
 
 /* ---------- prototypes */
 

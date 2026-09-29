@@ -138,47 +138,36 @@ struct xbox_sound_cache_globals
 	unsigned long last_allocation_failure_time;
 };
 
-typedef char verify_xbox_cache_sound_loaded_offset[
-	offsetof(
+typedef char verify_xbox_cache_sound_loaded_offset[HALO_LAYOUT_ASSERT_32(offsetof(
 		struct xbox_cache_sound_datum,
-		loaded) == 0x2 ? 1 : -1];
-typedef char verify_xbox_cache_sound_initialized_offset[
-	offsetof(
+		loaded) == 0x2)];
+typedef char verify_xbox_cache_sound_initialized_offset[HALO_LAYOUT_ASSERT_32(offsetof(
 		struct xbox_cache_sound_datum,
-		initialized) == 0x3 ? 1 : -1];
+		initialized) == 0x3)];
 
-typedef char verify_xbox_cache_sound_hardware_reference_count_offset[
-	offsetof(
+typedef char verify_xbox_cache_sound_hardware_reference_count_offset[HALO_LAYOUT_ASSERT_32(offsetof(
 		struct xbox_cache_sound_datum,
-		hardware_reference_count) == 0x5 ? 1 : -1];
-typedef char verify_xbox_cache_sound_software_reference_count_offset[
-	offsetof(
+		hardware_reference_count) == 0x5)];
+typedef char verify_xbox_cache_sound_software_reference_count_offset[HALO_LAYOUT_ASSERT_32(offsetof(
 		struct xbox_cache_sound_datum,
-		software_reference_count) == 0x4 ? 1 : -1];
-typedef char verify_xbox_cache_sound_sound_offset[
-	offsetof(
+		software_reference_count) == 0x4)];
+typedef char verify_xbox_cache_sound_sound_offset[HALO_LAYOUT_ASSERT_32(offsetof(
 		struct xbox_cache_sound_datum,
-		sound) == 0x8 ? 1 : -1];
-typedef char verify_xbox_cache_sound_datum_size[
-	sizeof(struct xbox_cache_sound_datum) == 0xC ? 1 : -1];
-typedef char verify_xbox_sound_cache_sounds_offset[
-	offsetof(
+		sound) == 0x8)];
+typedef char verify_xbox_cache_sound_datum_size[HALO_LAYOUT_ASSERT_32(sizeof(struct xbox_cache_sound_datum) == 0xC)];
+typedef char verify_xbox_sound_cache_sounds_offset[HALO_LAYOUT_ASSERT_32(offsetof(
 		struct xbox_sound_cache_globals,
-		cache_sounds) == 0x100 ? 1 : -1];
-typedef char verify_xbox_sound_cache_base_address_offset[
-	offsetof(
+		cache_sounds) == 0x100)];
+typedef char verify_xbox_sound_cache_base_address_offset[HALO_LAYOUT_ASSERT_32(offsetof(
 		struct xbox_sound_cache_globals,
-		base_address) == 0x104 ? 1 : -1];
-typedef char verify_xbox_sound_cache_cache_offset[
-	offsetof(
+		base_address) == 0x104)];
+typedef char verify_xbox_sound_cache_cache_offset[HALO_LAYOUT_ASSERT_32(offsetof(
 		struct xbox_sound_cache_globals,
-		cache) == 0x108 ? 1 : -1];
-typedef char verify_xbox_sound_cache_last_allocation_failure_time_offset[
-	offsetof(
+		cache) == 0x108)];
+typedef char verify_xbox_sound_cache_last_allocation_failure_time_offset[HALO_LAYOUT_ASSERT_32(offsetof(
 		struct xbox_sound_cache_globals,
-		last_allocation_failure_time) == 0x10C ? 1 : -1];
-typedef char verify_xbox_sound_cache_globals_size[
-	sizeof(struct xbox_sound_cache_globals) == 0x110 ? 1 : -1];
+		last_allocation_failure_time) == 0x10C)];
+typedef char verify_xbox_sound_cache_globals_size[HALO_LAYOUT_ASSERT_32(sizeof(struct xbox_sound_cache_globals) == 0x110)];
 
 /* ---------- prototypes */
 

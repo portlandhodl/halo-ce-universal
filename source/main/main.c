@@ -555,73 +555,40 @@ struct _main_globals
 	byte reserved61C[4];
 };
 
-typedef char main_hud_globals_font_tag_index_offset_assert[
-	offsetof(struct hud_globals_definition, messaging.single_player_font.index) == 0x54 ? 1 : -1];
+typedef char main_hud_globals_font_tag_index_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct hud_globals_definition, messaging.single_player_font.index) == 0x54)];
 
-typedef char main_globals_size_assert[
-	sizeof(struct _main_globals) == 0x620 ? 1 : -1];
-typedef char main_globals_frame_start_milliseconds_offset_assert[
-	offsetof(struct _main_globals, frame_start_milliseconds) == 0x00 ? 1 : -1];
-typedef char main_globals_rasterizer_target_index_offset_assert[
-	offsetof(struct _main_globals, rasterizer_target_index) == 0x08 ? 1 : -1];
-typedef char main_globals_rasterizer_initial_index_offset_assert[
-	offsetof(struct _main_globals, rasterizer_initial_index) == 0x10 ? 1 : -1];
-typedef char main_globals_rasterizer_throttle_start_index_offset_assert[
-	offsetof(struct _main_globals, rasterizer_throttle_start_index) == 0x18 ? 1 : -1];
-typedef char main_globals_rasterizer_throttle_end_index_offset_assert[
-	offsetof(struct _main_globals, rasterizer_throttle_end_index) == 0x20 ? 1 : -1];
-typedef char main_globals_seconds_elapsed_offset_assert[
-	offsetof(struct _main_globals, seconds_elapsed) == 0x28 ? 1 : -1];
-typedef char main_globals_connection_offset_assert[
-	offsetof(struct _main_globals, connection) == 0x2C ? 1 : -1];
-typedef char main_globals_movie_offset_assert[
-	offsetof(struct _main_globals, movie) == 0x30 ? 1 : -1];
-typedef char main_globals_defer_map_change_offset_assert[
-	offsetof(struct _main_globals, defer_map_change) == 0x45 ? 1 : -1];
-typedef char main_globals_reset_map_offset_assert[
-	offsetof(struct _main_globals, reset_map) == 0x44 ? 1 : -1];
-typedef char main_globals_revert_map_offset_assert[
-	offsetof(struct _main_globals, revert_map) == 0x46 ? 1 : -1];
-typedef char main_globals_skip_cinematic_offset_assert[
-	offsetof(struct _main_globals, skip_cinematic) == 0x47 ? 1 : -1];
-typedef char main_globals_saving_map_offset_assert[
-	offsetof(struct _main_globals, saving_map) == 0x48 ? 1 : -1];
-typedef char main_globals_save_map_safely_offset_assert[
-	offsetof(struct _main_globals, save_map_safely) == 0x49 ? 1 : -1];
-typedef char main_globals_won_map_offset_assert[
-	offsetof(struct _main_globals, won_map) == 0x5A ? 1 : -1];
-typedef char main_globals_halt_time_scale_offset_assert[
-	offsetof(struct _main_globals, halt_time_scale) == 0x66 ? 1 : -1];
-typedef char main_globals_respawn_timer_offset_assert[
-	offsetof(struct _main_globals, respawn_timer) == 0x6E ? 1 : -1];
-typedef char main_globals_loss_timer_offset_assert[
-	offsetof(struct _main_globals, loss_timer) == 0x6C ? 1 : -1];
-typedef char main_globals_allow_persistent_storage_offset_assert[
-	offsetof(struct _main_globals, allow_persistent_storage) == 0x74 ? 1 : -1];
-typedef char main_globals_soloplayer_map_name_offset_assert[
-	offsetof(struct _main_globals, soloplayer_map_name) == 0x75 ? 1 : -1];
-typedef char main_globals_multiplayer_map_name_offset_assert[
-	offsetof(struct _main_globals, multiplayer_map_name) == 0x175 ? 1 : -1];
-typedef char main_globals_core_name_offset_assert[
-	offsetof(struct _main_globals, core_name) == 0x375 ? 1 : -1];
-typedef char main_globals_vblank_interval_current_offset_assert[
-	offsetof(struct _main_globals, vblank_interval_current) == 0x3B6 ? 1 : -1];
-typedef char main_globals_vblank_interval_requested_offset_assert[
-	offsetof(struct _main_globals, vblank_interval_requested) == 0x3B8 ? 1 : -1];
-typedef char main_globals_vblank_interval_held_offset_assert[
-	offsetof(struct _main_globals, vblank_interval_held) == 0x3BA ? 1 : -1];
-typedef char main_globals_vblank_failure_counts_offset_assert[
-	offsetof(struct _main_globals, vblank_failure_counts) == 0x3BC ? 1 : -1];
-typedef char main_globals_vblank_last_failure_indices_offset_assert[
-	offsetof(struct _main_globals, vblank_last_failure_indices) == 0x3C8 ? 1 : -1];
-typedef char main_globals_d3d_flip_count_offset_assert[
-	offsetof(struct _main_globals, d3d_flip_count) == 0x3F8 ? 1 : -1];
-typedef char main_globals_vblank_flip_delta_index_offset_assert[
-	offsetof(struct _main_globals, vblank_flip_delta_index) == 0x3FC ? 1 : -1];
-typedef char main_globals_vblank_flip_deltas_offset_assert[
-	offsetof(struct _main_globals, vblank_flip_deltas) == 0x3FE ? 1 : -1];
-typedef char main_globals_vblank_debug_string_offset_assert[
-	offsetof(struct _main_globals, vblank_debug_string) == 0x41C ? 1 : -1];
+typedef char main_globals_size_assert[HALO_LAYOUT_ASSERT_32(sizeof(struct _main_globals) == 0x620)];
+typedef char main_globals_frame_start_milliseconds_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct _main_globals, frame_start_milliseconds) == 0x00)];
+typedef char main_globals_rasterizer_target_index_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct _main_globals, rasterizer_target_index) == 0x08)];
+typedef char main_globals_rasterizer_initial_index_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct _main_globals, rasterizer_initial_index) == 0x10)];
+typedef char main_globals_rasterizer_throttle_start_index_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct _main_globals, rasterizer_throttle_start_index) == 0x18)];
+typedef char main_globals_rasterizer_throttle_end_index_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct _main_globals, rasterizer_throttle_end_index) == 0x20)];
+typedef char main_globals_seconds_elapsed_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct _main_globals, seconds_elapsed) == 0x28)];
+typedef char main_globals_connection_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct _main_globals, connection) == 0x2C)];
+typedef char main_globals_movie_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct _main_globals, movie) == 0x30)];
+typedef char main_globals_defer_map_change_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct _main_globals, defer_map_change) == 0x45)];
+typedef char main_globals_reset_map_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct _main_globals, reset_map) == 0x44)];
+typedef char main_globals_revert_map_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct _main_globals, revert_map) == 0x46)];
+typedef char main_globals_skip_cinematic_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct _main_globals, skip_cinematic) == 0x47)];
+typedef char main_globals_saving_map_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct _main_globals, saving_map) == 0x48)];
+typedef char main_globals_save_map_safely_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct _main_globals, save_map_safely) == 0x49)];
+typedef char main_globals_won_map_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct _main_globals, won_map) == 0x5A)];
+typedef char main_globals_halt_time_scale_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct _main_globals, halt_time_scale) == 0x66)];
+typedef char main_globals_respawn_timer_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct _main_globals, respawn_timer) == 0x6E)];
+typedef char main_globals_loss_timer_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct _main_globals, loss_timer) == 0x6C)];
+typedef char main_globals_allow_persistent_storage_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct _main_globals, allow_persistent_storage) == 0x74)];
+typedef char main_globals_soloplayer_map_name_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct _main_globals, soloplayer_map_name) == 0x75)];
+typedef char main_globals_multiplayer_map_name_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct _main_globals, multiplayer_map_name) == 0x175)];
+typedef char main_globals_core_name_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct _main_globals, core_name) == 0x375)];
+typedef char main_globals_vblank_interval_current_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct _main_globals, vblank_interval_current) == 0x3B6)];
+typedef char main_globals_vblank_interval_requested_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct _main_globals, vblank_interval_requested) == 0x3B8)];
+typedef char main_globals_vblank_interval_held_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct _main_globals, vblank_interval_held) == 0x3BA)];
+typedef char main_globals_vblank_failure_counts_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct _main_globals, vblank_failure_counts) == 0x3BC)];
+typedef char main_globals_vblank_last_failure_indices_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct _main_globals, vblank_last_failure_indices) == 0x3C8)];
+typedef char main_globals_d3d_flip_count_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct _main_globals, d3d_flip_count) == 0x3F8)];
+typedef char main_globals_vblank_flip_delta_index_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct _main_globals, vblank_flip_delta_index) == 0x3FC)];
+typedef char main_globals_vblank_flip_deltas_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct _main_globals, vblank_flip_deltas) == 0x3FE)];
+typedef char main_globals_vblank_debug_string_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct _main_globals, vblank_debug_string) == 0x41C)];
 
 struct game_options
 {
@@ -632,8 +599,7 @@ struct game_options
 	char map_name[256];
 };
 
-typedef char game_options_size_assert[
-	sizeof(struct game_options) == 0x10C ? 1 : -1];
+typedef char game_options_size_assert[HALO_LAYOUT_ASSERT_32(sizeof(struct game_options) == 0x10C)];
 
 #pragma pack(push, 1)
 struct _screenshot_and_framerate_globals
@@ -651,8 +617,7 @@ struct _screenshot_and_framerate_globals
 };
 #pragma pack(pop)
 
-typedef char screenshot_and_framerate_globals_size_assert[
-	sizeof(struct _screenshot_and_framerate_globals) == 0x38B ? 1 : -1];
+typedef char screenshot_and_framerate_globals_size_assert[HALO_LAYOUT_ASSERT_32(sizeof(struct _screenshot_and_framerate_globals) == 0x38B)];
 
 #ifdef HALO_LINUX
 void network_test_update(boolean main_menu_loaded, real seconds);

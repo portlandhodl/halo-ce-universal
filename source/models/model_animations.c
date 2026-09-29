@@ -203,10 +203,8 @@ struct compressed_quaternion_6byte
 	word words[3];
 };
 
-typedef char verify_compressed_quaternion_8byte_size[
-	sizeof(struct compressed_quaternion_8byte) == 0x08 ? 1 : -1];
-typedef char verify_compressed_quaternion_6byte_size[
-	sizeof(struct compressed_quaternion_6byte) == 0x06 ? 1 : -1];
+typedef char verify_compressed_quaternion_8byte_size[HALO_LAYOUT_ASSERT_32(sizeof(struct compressed_quaternion_8byte) == 0x08)];
+typedef char verify_compressed_quaternion_6byte_size[HALO_LAYOUT_ASSERT_32(sizeof(struct compressed_quaternion_6byte) == 0x06)];
 
 struct animation_frame_info_dx_dy
 {
@@ -229,12 +227,9 @@ struct animation_frame_info_dx_dy_dz_dyaw
 	real dyaw;
 };
 
-typedef char verify_animation_frame_info_dx_dy_size[
-	sizeof(struct animation_frame_info_dx_dy) == 0x08 ? 1 : -1];
-typedef char verify_animation_frame_info_dx_dy_dyaw_size[
-	sizeof(struct animation_frame_info_dx_dy_dyaw) == 0x0C ? 1 : -1];
-typedef char verify_animation_frame_info_dx_dy_dz_dyaw_size[
-	sizeof(struct animation_frame_info_dx_dy_dz_dyaw) == 0x10 ? 1 : -1];
+typedef char verify_animation_frame_info_dx_dy_size[HALO_LAYOUT_ASSERT_32(sizeof(struct animation_frame_info_dx_dy) == 0x08)];
+typedef char verify_animation_frame_info_dx_dy_dyaw_size[HALO_LAYOUT_ASSERT_32(sizeof(struct animation_frame_info_dx_dy_dyaw) == 0x0C)];
+typedef char verify_animation_frame_info_dx_dy_dz_dyaw_size[HALO_LAYOUT_ASSERT_32(sizeof(struct animation_frame_info_dx_dy_dz_dyaw) == 0x10)];
 struct compressed_animation_header
 {
 	long rotation_keyframe_frame_indices_offset;
@@ -265,8 +260,7 @@ struct animation_graph_node
 	long pad1;
 };
 
-typedef char verify_animation_graph_node_size[
-	sizeof(struct animation_graph_node) == 0x40 ? 1 : -1];
+typedef char verify_animation_graph_node_size[HALO_LAYOUT_ASSERT_32(sizeof(struct animation_graph_node) == 0x40)];
 
 /* No shared header declares this block element yet; first_person_weapons.c keeps the same copy. */
 struct animation_graph_sound_reference
@@ -275,11 +269,9 @@ struct animation_graph_sound_reference
 	long unused;
 };
 
-typedef char verify_animation_graph_sound_reference_size[
-	sizeof(struct animation_graph_sound_reference) == 0x14 ? 1 : -1];
+typedef char verify_animation_graph_sound_reference_size[HALO_LAYOUT_ASSERT_32(sizeof(struct animation_graph_sound_reference) == 0x14)];
 
-typedef char verify_compressed_animation_header_rotation_node_headers_offset[
-	offsetof(struct compressed_animation_header, rotation_node_headers) == 0x2C ? 1 : -1];
+typedef char verify_compressed_animation_header_rotation_node_headers_offset[HALO_LAYOUT_ASSERT_32(offsetof(struct compressed_animation_header, rotation_node_headers) == 0x2C)];
 
 /* ---------- prototypes */
 

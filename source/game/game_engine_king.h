@@ -63,14 +63,10 @@ struct king_globals
 
 /* January's layout; the port's per-player arrays are larger */
 #ifndef HALO_LINUX
-typedef char verify_king_globals_size[
-	sizeof(struct king_globals) == 0x1AC ? 1 : -1];
-typedef char verify_king_globals_on_the_hill_offset[
-	offsetof(struct king_globals, on_the_hill) == 0x80 ? 1 : -1];
-typedef char verify_king_globals_convex_hull_offset[
-	offsetof(struct king_globals, convex_hull) == 0x124 ? 1 : -1];
-typedef char verify_king_globals_hill_id_offset[
-	offsetof(struct king_globals, hill_id) == 0x1A4 ? 1 : -1];
+typedef char verify_king_globals_size[HALO_LAYOUT_ASSERT_32(sizeof(struct king_globals) == 0x1AC)];
+typedef char verify_king_globals_on_the_hill_offset[HALO_LAYOUT_ASSERT_32(offsetof(struct king_globals, on_the_hill) == 0x80)];
+typedef char verify_king_globals_convex_hull_offset[HALO_LAYOUT_ASSERT_32(offsetof(struct king_globals, convex_hull) == 0x124)];
+typedef char verify_king_globals_hill_id_offset[HALO_LAYOUT_ASSERT_32(offsetof(struct king_globals, hill_id) == 0x1A4)];
 #endif
 
 /* ---------- prototypes/GAME_ENGINE_KING.C */

@@ -484,46 +484,26 @@ struct encounter_ai_globals_prefix
 	long first_encounterless_actor_index;
 };
 
-typedef char encounter_iterator_size_assert[
-	sizeof(struct encounter_iterator) == 0x18 ? 1 : -1];
-typedef char encounter_iterator_index_offset_assert[
-	offsetof(struct encounter_iterator, index) == 0x10 ? 1 : -1];
-typedef char encounter_iterator_active_only_offset_assert[
-	offsetof(struct encounter_iterator, active_only) == 0x14 ? 1 : -1];
-typedef char encounter_actor_iterator_size_assert[
-	sizeof(struct encounter_actor_iterator) == 0xC ? 1 : -1];
-typedef char encounter_actor_iterator_index_offset_assert[
-	offsetof(struct encounter_actor_iterator, index) == 0x4 ? 1 : -1];
-typedef char encounter_actor_iterator_next_index_offset_assert[
-	offsetof(struct encounter_actor_iterator, next_index) == 0x8 ? 1 : -1];
-typedef char actor_iterator_size_assert[
-	sizeof(struct actor_iterator) == 0x1C ? 1 : -1];
-typedef char actor_iterator_iterated_encounterless_offset_assert[
-	offsetof(struct actor_iterator, iterated_encounterless_list) == 0x10 ? 1 : -1];
-typedef char actor_iterator_active_only_offset_assert[
-	offsetof(struct actor_iterator, active_only) == 0x11 ? 1 : -1];
-typedef char actor_iterator_index_offset_assert[
-	offsetof(struct actor_iterator, index) == 0x14 ? 1 : -1];
-typedef char actor_iterator_next_index_offset_assert[
-	offsetof(struct actor_iterator, next_index) == 0x18 ? 1 : -1];
-typedef char encounter_ai_globals_initialized_offset_assert[
-	offsetof(struct encounter_ai_globals_prefix, ai_initialized_for_map) == 0x1 ? 1 : -1];
-typedef char encounter_ai_globals_encounterless_actor_offset_assert[
-	offsetof(struct encounter_ai_globals_prefix, first_encounterless_actor_index) == 0x8 ? 1 : -1];
-typedef char encounter_datum_active_offset_assert[
-	offsetof(struct encounter_datum, active) == 0xD ? 1 : -1];
-typedef char encounter_datum_status_dirty_offset_assert[
-	offsetof(struct encounter_datum, status_dirty) == 0x28 ? 1 : -1];
-typedef char encounter_datum_first_actor_index_offset_assert[
-	offsetof(struct encounter_datum, first_actor_index) == 0x14 ? 1 : -1];
-typedef char encounter_datum_blind_offset_assert[
-	offsetof(struct encounter_datum, blind) == 0x40 ? 1 : -1];
-typedef char encounter_datum_deaf_offset_assert[
-	offsetof(struct encounter_datum, deaf) == 0x41 ? 1 : -1];
-typedef char actor_datum_next_actor_index_offset_assert[
-	offsetof(struct actor_datum, meta.next_actor_index) == 0x2C ? 1 : -1];
-typedef char pursuit_datum_size_assert[
-	sizeof(struct pursuit_datum) == 0x28 ? 1 : -1];
+typedef char encounter_iterator_size_assert[HALO_LAYOUT_ASSERT_32(sizeof(struct encounter_iterator) == 0x18)];
+typedef char encounter_iterator_index_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct encounter_iterator, index) == 0x10)];
+typedef char encounter_iterator_active_only_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct encounter_iterator, active_only) == 0x14)];
+typedef char encounter_actor_iterator_size_assert[HALO_LAYOUT_ASSERT_32(sizeof(struct encounter_actor_iterator) == 0xC)];
+typedef char encounter_actor_iterator_index_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct encounter_actor_iterator, index) == 0x4)];
+typedef char encounter_actor_iterator_next_index_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct encounter_actor_iterator, next_index) == 0x8)];
+typedef char actor_iterator_size_assert[HALO_LAYOUT_ASSERT_32(sizeof(struct actor_iterator) == 0x1C)];
+typedef char actor_iterator_iterated_encounterless_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct actor_iterator, iterated_encounterless_list) == 0x10)];
+typedef char actor_iterator_active_only_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct actor_iterator, active_only) == 0x11)];
+typedef char actor_iterator_index_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct actor_iterator, index) == 0x14)];
+typedef char actor_iterator_next_index_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct actor_iterator, next_index) == 0x18)];
+typedef char encounter_ai_globals_initialized_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct encounter_ai_globals_prefix, ai_initialized_for_map) == 0x1)];
+typedef char encounter_ai_globals_encounterless_actor_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct encounter_ai_globals_prefix, first_encounterless_actor_index) == 0x8)];
+typedef char encounter_datum_active_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct encounter_datum, active) == 0xD)];
+typedef char encounter_datum_status_dirty_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct encounter_datum, status_dirty) == 0x28)];
+typedef char encounter_datum_first_actor_index_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct encounter_datum, first_actor_index) == 0x14)];
+typedef char encounter_datum_blind_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct encounter_datum, blind) == 0x40)];
+typedef char encounter_datum_deaf_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct encounter_datum, deaf) == 0x41)];
+typedef char actor_datum_next_actor_index_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct actor_datum, meta.next_actor_index) == 0x2C)];
+typedef char pursuit_datum_size_assert[HALO_LAYOUT_ASSERT_32(sizeof(struct pursuit_datum) == 0x28)];
 
 /* ---------- prototypes */
 

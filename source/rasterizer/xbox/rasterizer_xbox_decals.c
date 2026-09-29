@@ -273,8 +273,7 @@ struct decal_datum
 	long next_decal_index;
 };
 
-typedef char verify_decal_datum_size[
-	sizeof(struct decal_datum) == 0x38 ? 1 : -1];
+typedef char verify_decal_datum_size[HALO_LAYOUT_ASSERT_32(sizeof(struct decal_datum) == 0x38)];
 
 /* Only the fields the rasterizer touches are recovered; the complete decal
    tag definition is not yet authenticated. */
@@ -292,14 +291,12 @@ struct decal_definition
 	struct decal_shader_definition shader;
 };
 
-typedef char verify_decal_definition_framebuffer_blend_function_offset[
-	offsetof(
+typedef char verify_decal_definition_framebuffer_blend_function_offset[HALO_LAYOUT_ASSERT_32(offsetof(
 		struct decal_definition,
-		shader.framebuffer_blend_function) == 0xc0 ? 1 : -1];
-typedef char verify_decal_definition_map_index_offset[
-	offsetof(
+		shader.framebuffer_blend_function) == 0xc0)];
+typedef char verify_decal_definition_map_index_offset[HALO_LAYOUT_ASSERT_32(offsetof(
 		struct decal_definition,
-		shader.map.index) == 0xe4 ? 1 : -1];
+		shader.map.index) == 0xe4)];
 
 /* ---------- prototypes */
 

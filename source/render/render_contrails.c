@@ -63,8 +63,7 @@ struct contrail_vertex
 	pixel32 color;
 };
 
-typedef char verify_contrail_vertex_size[
-	sizeof(struct contrail_vertex) == 0x18 ? 1 : -1];
+typedef char verify_contrail_vertex_size[HALO_LAYOUT_ASSERT_32(sizeof(struct contrail_vertex) == 0x18)];
 
 /* ---------- prototypes */
 

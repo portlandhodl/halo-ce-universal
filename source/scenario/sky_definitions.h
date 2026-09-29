@@ -31,8 +31,7 @@ struct sky_atmospheric_fog
 	real opaque_distance;
 };
 
-typedef char sky_atmospheric_fog_size_assert[
-	sizeof(struct sky_atmospheric_fog) == 0x20 ? 1 : -1];
+typedef char sky_atmospheric_fog_size_assert[HALO_LAYOUT_ASSERT_32(sizeof(struct sky_atmospheric_fog) == 0x20)];
 
 struct sky
 {
@@ -42,10 +41,8 @@ struct sky
 	struct tag_reference indoor_fog_screen;
 };
 
-typedef char sky_indoor_fog_offset_assert[
-	offsetof(struct sky, indoor_fog) == 0x78 ? 1 : -1];
-typedef char sky_indoor_fog_screen_offset_assert[
-	offsetof(struct sky, indoor_fog_screen) == 0x98 ? 1 : -1];
+typedef char sky_indoor_fog_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct sky, indoor_fog) == 0x78)];
+typedef char sky_indoor_fog_screen_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct sky, indoor_fog_screen) == 0x98)];
 
 /* ---------- prototypes/EXAMPLE.C */
 

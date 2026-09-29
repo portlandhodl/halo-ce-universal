@@ -50,8 +50,7 @@ struct scenario_conversation_definition
 	byte __unknown2c[0x48];
 };
 
-typedef char scenario_conversation_definition_size_assert[
-	sizeof(struct scenario_conversation_definition) == 0x74 ? 1 : -1];
+typedef char scenario_conversation_definition_size_assert[HALO_LAYOUT_ASSERT_32(sizeof(struct scenario_conversation_definition) == 0x74)];
 
 /* ---------- prototypes */
 

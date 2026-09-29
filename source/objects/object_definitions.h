@@ -80,8 +80,7 @@ struct object_definition_widget
 	long unused[4];
 };
 
-typedef char object_definition_widget_size_assert[
-	sizeof(struct object_definition_widget) == 0x20 ? 1 : -1];
+typedef char object_definition_widget_size_assert[HALO_LAYOUT_ASSERT_32(sizeof(struct object_definition_widget) == 0x20)];
 
 struct object_function_definition
 {

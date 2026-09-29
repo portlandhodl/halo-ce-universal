@@ -304,32 +304,19 @@ typedef void (__stdcall *rad_memory_free_proc)(
 typedef void *(__stdcall *bink_sound_system_open_proc)(
 	unsigned long param);
 
-typedef char bink_playback_globals_size_assert[
-	sizeof(struct bink_playback_globals) == 0xD8 ? 1 : -1];
-typedef char bink_playback_globals_flags_offset_assert[
-	offsetof(struct bink_playback_globals, flags) == 4 ? 1 : -1];
-typedef char bink_playback_globals_bink_offset_assert[
-	offsetof(struct bink_playback_globals, bink) == 8 ? 1 : -1];
-typedef char bink_playback_globals_needs_decode_offset_assert[
-	offsetof(struct bink_playback_globals, needs_decode) == 1 ? 1 : -1];
-typedef char bink_playback_globals_texture_offset_assert[
-	offsetof(struct bink_playback_globals, texture) == 0x20 ? 1 : -1];
-typedef char bink_playback_globals_rendered_frame_count_offset_assert[
-	offsetof(struct bink_playback_globals, rendered_frame_count) == 0x30 ? 1 : -1];
-typedef char bink_playback_globals_screen_geometry_offset_assert[
-	offsetof(struct bink_playback_globals, screen_geometry) == 0x40 ? 1 : -1];
-typedef char bink_playback_globals_memory_pool_base_offset_assert[
-	offsetof(struct bink_playback_globals, memory_pool_base) == 0xCC ? 1 : -1];
-typedef char bink_summary_size_assert[
-	sizeof(BINKSUMMARY) == 0x7C ? 1 : -1];
-typedef char bink_summary_skipped_frames_offset_assert[
-	offsetof(BINKSUMMARY, SkippedFrames) == 0x28 ? 1 : -1];
-typedef char bink_summary_skipped_blits_offset_assert[
-	offsetof(BINKSUMMARY, SkippedBlits) == 0x2C ? 1 : -1];
-typedef char bink_realtime_size_assert[
-	sizeof(BINKREALTIME) == 0x38 ? 1 : -1];
-typedef char bink_realtime_frames_offset_assert[
-	offsetof(BINKREALTIME, Frames) == 0x0C ? 1 : -1];
+typedef char bink_playback_globals_size_assert[HALO_LAYOUT_ASSERT_32(sizeof(struct bink_playback_globals) == 0xD8)];
+typedef char bink_playback_globals_flags_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct bink_playback_globals, flags) == 4)];
+typedef char bink_playback_globals_bink_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct bink_playback_globals, bink) == 8)];
+typedef char bink_playback_globals_needs_decode_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct bink_playback_globals, needs_decode) == 1)];
+typedef char bink_playback_globals_texture_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct bink_playback_globals, texture) == 0x20)];
+typedef char bink_playback_globals_rendered_frame_count_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct bink_playback_globals, rendered_frame_count) == 0x30)];
+typedef char bink_playback_globals_screen_geometry_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct bink_playback_globals, screen_geometry) == 0x40)];
+typedef char bink_playback_globals_memory_pool_base_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct bink_playback_globals, memory_pool_base) == 0xCC)];
+typedef char bink_summary_size_assert[HALO_LAYOUT_ASSERT_32(sizeof(BINKSUMMARY) == 0x7C)];
+typedef char bink_summary_skipped_frames_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(BINKSUMMARY, SkippedFrames) == 0x28)];
+typedef char bink_summary_skipped_blits_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(BINKSUMMARY, SkippedBlits) == 0x2C)];
+typedef char bink_realtime_size_assert[HALO_LAYOUT_ASSERT_32(sizeof(BINKREALTIME) == 0x38)];
+typedef char bink_realtime_frames_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(BINKREALTIME, Frames) == 0x0C)];
 
 /* ---------- prototypes */
 

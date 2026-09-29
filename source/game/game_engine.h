@@ -139,7 +139,7 @@ struct game_variant
 	word flags;
 };
 
-typedef char verify_game_variant_size[sizeof(struct game_variant) == 0x68 ? 1 : -1];
+typedef char verify_game_variant_size[HALO_LAYOUT_ASSERT_32(sizeof(struct game_variant) == 0x68)];
 
 struct game_engine
 {
@@ -216,21 +216,14 @@ struct game_engine
 		long player_index);
 };
 
-typedef char verify_game_engine_size[sizeof(struct game_engine) == 0x88 ? 1 : -1];
-typedef char verify_game_engine_player_update_each_tick_offset[
-	offsetof(struct game_engine, player_update_each_tick) == 0x34 ? 1 : -1];
-typedef char verify_game_engine_objective_weapon_update_offset[
-	offsetof(struct game_engine, objective_weapon_update) == 0x38 ? 1 : -1];
-typedef char verify_game_engine_format_player_score_offset[
-	offsetof(struct game_engine, format_player_score) == 0x4C ? 1 : -1];
-typedef char verify_game_engine_format_score_name_offset[
-	offsetof(struct game_engine, format_score_name) == 0x50 ? 1 : -1];
-typedef char verify_game_engine_format_team_name_offset[
-	offsetof(struct game_engine, format_team_name) == 0x54 ? 1 : -1];
-typedef char verify_game_engine_format_message_offset[
-	offsetof(struct game_engine, format_message) == 0x64 ? 1 : -1];
-typedef char verify_game_engine_player_update_offset[
-	offsetof(struct game_engine, player_update) == 0x70 ? 1 : -1];
+typedef char verify_game_engine_size[HALO_LAYOUT_ASSERT_32(sizeof(struct game_engine) == 0x88)];
+typedef char verify_game_engine_player_update_each_tick_offset[HALO_LAYOUT_ASSERT_32(offsetof(struct game_engine, player_update_each_tick) == 0x34)];
+typedef char verify_game_engine_objective_weapon_update_offset[HALO_LAYOUT_ASSERT_32(offsetof(struct game_engine, objective_weapon_update) == 0x38)];
+typedef char verify_game_engine_format_player_score_offset[HALO_LAYOUT_ASSERT_32(offsetof(struct game_engine, format_player_score) == 0x4C)];
+typedef char verify_game_engine_format_score_name_offset[HALO_LAYOUT_ASSERT_32(offsetof(struct game_engine, format_score_name) == 0x50)];
+typedef char verify_game_engine_format_team_name_offset[HALO_LAYOUT_ASSERT_32(offsetof(struct game_engine, format_team_name) == 0x54)];
+typedef char verify_game_engine_format_message_offset[HALO_LAYOUT_ASSERT_32(offsetof(struct game_engine, format_message) == 0x64)];
+typedef char verify_game_engine_player_update_offset[HALO_LAYOUT_ASSERT_32(offsetof(struct game_engine, player_update) == 0x70)];
 
 /* ---------- prototypes/GAME_ENGINE.C */
 

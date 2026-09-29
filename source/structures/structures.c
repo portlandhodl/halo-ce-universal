@@ -192,35 +192,24 @@ struct structure_planar_fog_definition
 	struct fog_screen screen;
 };
 
-typedef char verify_structure_fog_plane_render_size[
-	sizeof(struct structure_fog_plane_render) == 0x20 ? 1 : -1];
-typedef char verify_structure_cluster_graph_size[
-	sizeof(struct structure_cluster_graph) == 0x68 ? 1 : -1];
-typedef char verify_structure_cluster_graph_portal_indices_offset[
-	offsetof(struct structure_cluster_graph, portal_indices) == 0x5C ? 1 : -1];
-typedef char verify_structure_cluster_portal_size[
-	sizeof(struct structure_cluster_portal) == 0x40 ? 1 : -1];
-typedef char verify_structure_surface_reference_size[
-	sizeof(struct structure_surface_reference) == 0x8 ? 1 : -1];
-typedef char verify_environment_vertex_compressed_size[
-	sizeof(struct environment_vertex_compressed) == 0x20 ? 1 : -1];
-typedef char verify_structure_planar_fog_definition_screen_offset[
-	offsetof(struct structure_planar_fog_definition, screen) == 0x84 ? 1 : -1];
+typedef char verify_structure_fog_plane_render_size[HALO_LAYOUT_ASSERT_32(sizeof(struct structure_fog_plane_render) == 0x20)];
+typedef char verify_structure_cluster_graph_size[HALO_LAYOUT_ASSERT_32(sizeof(struct structure_cluster_graph) == 0x68)];
+typedef char verify_structure_cluster_graph_portal_indices_offset[HALO_LAYOUT_ASSERT_32(offsetof(struct structure_cluster_graph, portal_indices) == 0x5C)];
+typedef char verify_structure_cluster_portal_size[HALO_LAYOUT_ASSERT_32(sizeof(struct structure_cluster_portal) == 0x40)];
+typedef char verify_structure_surface_reference_size[HALO_LAYOUT_ASSERT_32(sizeof(struct structure_surface_reference) == 0x8)];
+typedef char verify_environment_vertex_compressed_size[HALO_LAYOUT_ASSERT_32(sizeof(struct environment_vertex_compressed) == 0x20)];
+typedef char verify_structure_planar_fog_definition_screen_offset[HALO_LAYOUT_ASSERT_32(offsetof(struct structure_planar_fog_definition, screen) == 0x84)];
 
-typedef char verify_structure_cluster_marker_initialized_offset[
-	offsetof(
+typedef char verify_structure_cluster_marker_initialized_offset[HALO_LAYOUT_ASSERT_32(offsetof(
 		struct structure_runtime_globals,
-		cluster_marker_initialized) == 0x1 ? 1 : -1];
-typedef char verify_structure_cluster_marker_offset[
-	offsetof(
+		cluster_marker_initialized) == 0x1)];
+typedef char verify_structure_cluster_marker_offset[HALO_LAYOUT_ASSERT_32(offsetof(
 		struct structure_runtime_globals,
-		cluster_marker) == 0x4 ? 1 : -1];
-typedef char verify_structure_cluster_magic_numbers_offset[
-	offsetof(
+		cluster_marker) == 0x4)];
+typedef char verify_structure_cluster_magic_numbers_offset[HALO_LAYOUT_ASSERT_32(offsetof(
 		struct structure_runtime_globals,
-		cluster_magic_numbers) == 0x8 ? 1 : -1];
-typedef char verify_structure_runtime_globals_size[
-	sizeof(struct structure_runtime_globals) == 0x808 ? 1 : -1];
+		cluster_magic_numbers) == 0x8)];
+typedef char verify_structure_runtime_globals_size[HALO_LAYOUT_ASSERT_32(sizeof(struct structure_runtime_globals) == 0x808)];
 
 /* ---------- prototypes */
 

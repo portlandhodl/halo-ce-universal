@@ -207,8 +207,7 @@ enum multiplayer_game_text
 
 /* ---------- structures */
 
-typedef char verify_scenario_netgame_flag_size[
-	sizeof(struct scenario_netgame_flag) == 0x94 ? 1 : -1];
+typedef char verify_scenario_netgame_flag_size[HALO_LAYOUT_ASSERT_32(sizeof(struct scenario_netgame_flag) == 0x94)];
 
 struct race_globals
 {
@@ -224,10 +223,8 @@ struct race_globals
 
 /* January's layout; the port's per-player arrays are larger */
 #ifndef HALO_LINUX
-typedef char verify_race_globals_size[
-	sizeof(struct race_globals) == 0xD0 ? 1 : -1];
-typedef char verify_race_globals_vehicles_have_been_added_offset[
-	offsetof(struct race_globals, vehicles_have_been_added) == 0xCC ? 1 : -1];
+typedef char verify_race_globals_size[HALO_LAYOUT_ASSERT_32(sizeof(struct race_globals) == 0xD0)];
+typedef char verify_race_globals_vehicles_have_been_added_offset[HALO_LAYOUT_ASSERT_32(offsetof(struct race_globals, vehicles_have_been_added) == 0xCC)];
 #endif
 
 /* ---------- prototypes */

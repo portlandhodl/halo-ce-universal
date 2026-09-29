@@ -30,12 +30,9 @@ struct structure_test_ray2d_result
 	long edge_index;
 };
 
-typedef char path_collision_result_size_assert[
-	sizeof(struct path_collision_result) == 0x1C ? 1 : -1];
-typedef char path_collision_result_point_offset_assert[
-	offsetof(struct path_collision_result, point) == 0x04 ? 1 : -1];
-typedef char path_collision_result_t_offset_assert[
-	offsetof(struct path_collision_result, t) == 0x18 ? 1 : -1];
+typedef char path_collision_result_size_assert[HALO_LAYOUT_ASSERT_32(sizeof(struct path_collision_result) == 0x1C)];
+typedef char path_collision_result_point_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct path_collision_result, point) == 0x04)];
+typedef char path_collision_result_t_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct path_collision_result, t) == 0x18)];
 
 /* ---------- public code */
 

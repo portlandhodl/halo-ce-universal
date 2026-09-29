@@ -495,8 +495,7 @@ struct hs_tokenizer
 	char *cursor;
 };
 
-typedef char verify_hs_syntax_node_size[
-	sizeof(struct hs_syntax_node) == 0x14 ? 1 : -1];
+typedef char verify_hs_syntax_node_size[HALO_LAYOUT_ASSERT_32(sizeof(struct hs_syntax_node) == 0x14)];
 
 struct hud_message_text_definition
 {
@@ -507,22 +506,14 @@ struct hud_message_text_definition
 typedef boolean (*hs_primitive_parser)(
 	long expression_index);
 
-typedef char verify_hs_compile_initialized_offset[
-	offsetof(struct hs_compile_globals, initialized) == 0x00 ? 1 : -1];
-typedef char verify_hs_compile_compiled_source_size_offset[
-	offsetof(struct hs_compile_globals, compiled_source_size) == 0x04 ? 1 : -1];
-typedef char verify_hs_compile_compiled_source_offset[
-	offsetof(struct hs_compile_globals, compiled_source) == 0x08 ? 1 : -1];
-typedef char verify_hs_compile_string_constant_buffer_offset[
-	offsetof(struct hs_compile_globals, string_constant_buffer) == 0x0C ? 1 : -1];
-typedef char verify_hs_compile_error_since_initialize_offset[
-	offsetof(struct hs_compile_globals, error_since_initialize) == 0x18 ? 1 : -1];
-typedef char verify_hs_compile_error_offset[
-	offsetof(struct hs_compile_globals, error) == 0x1C ? 1 : -1];
-typedef char verify_hs_compile_compiling_scenario_offset[
-	offsetof(struct hs_compile_globals, compiling_scenario) == 0x125 ? 1 : -1];
-typedef char verify_hs_compile_globals_size[
-	sizeof(struct hs_compile_globals) == 0x12C ? 1 : -1];
+typedef char verify_hs_compile_initialized_offset[HALO_LAYOUT_ASSERT_32(offsetof(struct hs_compile_globals, initialized) == 0x00)];
+typedef char verify_hs_compile_compiled_source_size_offset[HALO_LAYOUT_ASSERT_32(offsetof(struct hs_compile_globals, compiled_source_size) == 0x04)];
+typedef char verify_hs_compile_compiled_source_offset[HALO_LAYOUT_ASSERT_32(offsetof(struct hs_compile_globals, compiled_source) == 0x08)];
+typedef char verify_hs_compile_string_constant_buffer_offset[HALO_LAYOUT_ASSERT_32(offsetof(struct hs_compile_globals, string_constant_buffer) == 0x0C)];
+typedef char verify_hs_compile_error_since_initialize_offset[HALO_LAYOUT_ASSERT_32(offsetof(struct hs_compile_globals, error_since_initialize) == 0x18)];
+typedef char verify_hs_compile_error_offset[HALO_LAYOUT_ASSERT_32(offsetof(struct hs_compile_globals, error) == 0x1C)];
+typedef char verify_hs_compile_compiling_scenario_offset[HALO_LAYOUT_ASSERT_32(offsetof(struct hs_compile_globals, compiling_scenario) == 0x125)];
+typedef char verify_hs_compile_globals_size[HALO_LAYOUT_ASSERT_32(sizeof(struct hs_compile_globals) == 0x12C)];
 
 /* ---------- prototypes */
 

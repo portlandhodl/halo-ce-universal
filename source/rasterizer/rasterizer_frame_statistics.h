@@ -104,36 +104,28 @@ struct rasterizer_frame_statistics_globals
 	byte reserved16C[4];
 };
 
-typedef char rasterizer_frame_statistics_globals_size_assert[
-	sizeof(struct rasterizer_frame_statistics_globals) == 0x170 ? 1 : -1];
-typedef char rasterizer_frame_statistics_environment_fog_screen_dynamic_vertex_count_offset_assert[
-	offsetof(
+typedef char rasterizer_frame_statistics_globals_size_assert[HALO_LAYOUT_ASSERT_32(sizeof(struct rasterizer_frame_statistics_globals) == 0x170)];
+typedef char rasterizer_frame_statistics_environment_fog_screen_dynamic_vertex_count_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(
 		struct rasterizer_frame_statistics_globals,
-		environment_fog_screen_dynamic_vertex_count) == 0xB8 ? 1 : -1];
-typedef char rasterizer_frame_statistics_environment_fog_screen_dynamic_triangle_count_offset_assert[
-	offsetof(
+		environment_fog_screen_dynamic_vertex_count) == 0xB8)];
+typedef char rasterizer_frame_statistics_environment_fog_screen_dynamic_triangle_count_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(
 		struct rasterizer_frame_statistics_globals,
-		environment_fog_screen_dynamic_triangle_count) == 0xBC ? 1 : -1];
-typedef char rasterizer_frame_statistics_environment_fog_screen_dynamic_draw_count_offset_assert[
-	offsetof(
+		environment_fog_screen_dynamic_triangle_count) == 0xBC)];
+typedef char rasterizer_frame_statistics_environment_fog_screen_dynamic_draw_count_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(
 		struct rasterizer_frame_statistics_globals,
-		environment_fog_screen_dynamic_draw_count) == 0xC0 ? 1 : -1];
-typedef char rasterizer_frame_statistics_environment_fog_screen_model_count_offset_assert[
-	offsetof(
+		environment_fog_screen_dynamic_draw_count) == 0xC0)];
+typedef char rasterizer_frame_statistics_environment_fog_screen_model_count_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(
 		struct rasterizer_frame_statistics_globals,
-		environment_fog_screen_model_count) == 0xC4 ? 1 : -1];
-typedef char rasterizer_frame_statistics_environment_fog_screen_static_vertex_count_offset_assert[
-	offsetof(
+		environment_fog_screen_model_count) == 0xC4)];
+typedef char rasterizer_frame_statistics_environment_fog_screen_static_vertex_count_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(
 		struct rasterizer_frame_statistics_globals,
-		environment_fog_screen_static_vertex_count) == 0xC8 ? 1 : -1];
-typedef char rasterizer_frame_statistics_environment_fog_screen_static_triangle_count_offset_assert[
-	offsetof(
+		environment_fog_screen_static_vertex_count) == 0xC8)];
+typedef char rasterizer_frame_statistics_environment_fog_screen_static_triangle_count_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(
 		struct rasterizer_frame_statistics_globals,
-		environment_fog_screen_static_triangle_count) == 0xCC ? 1 : -1];
-typedef char rasterizer_frame_statistics_environment_fog_screen_static_draw_count_offset_assert[
-	offsetof(
+		environment_fog_screen_static_triangle_count) == 0xCC)];
+typedef char rasterizer_frame_statistics_environment_fog_screen_static_draw_count_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(
 		struct rasterizer_frame_statistics_globals,
-		environment_fog_screen_static_draw_count) == 0xD0 ? 1 : -1];
+		environment_fog_screen_static_draw_count) == 0xD0)];
 
 extern struct rasterizer_frame_statistics_globals rasterizer_frame_statistics;
 

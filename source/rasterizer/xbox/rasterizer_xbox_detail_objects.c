@@ -229,34 +229,20 @@ struct pixel_shader_definition
 	unsigned long final_combiner_constants;
 };
 
-typedef char detail_objects_enabled_offset_assert[
-	offsetof(struct detail_objects_debug_options, detail_objects) == 0x24 ? 1 : -1];
-typedef char detail_objects_multiplier_offset_assert[
-	offsetof(struct detail_objects_debug_options, detail_objects_offset_multiplier) == 0x50 ? 1 : -1];
-typedef char detail_objects_pixel_shader_size_assert[
-	sizeof(struct pixel_shader_definition) == 0xF0 ? 1 : -1];
-typedef char detail_object_size_assert[
-	sizeof(struct detail_object) == 0x6 ? 1 : -1];
-typedef char detail_object_vertex_size_assert[
-	sizeof(struct detail_object_vertex) == 0x8 ? 1 : -1];
-typedef char detail_object_type_definition_size_assert[
-	sizeof(struct detail_object_type_definition) == 0x60 ? 1 : -1];
-typedef char detail_object_collection_definition_size_assert[
-	sizeof(struct detail_object_collection_definition) == 0x80 ? 1 : -1];
-typedef char detail_object_bitmap_group_sprite_size_assert[
-	sizeof(struct detail_object_bitmap_group_sprite) == 0x20 ? 1 : -1];
-typedef char detail_object_bitmap_group_sequence_size_assert[
-	sizeof(struct detail_object_bitmap_group_sequence) == 0x40 ? 1 : -1];
-typedef char detail_object_palette_entry_size_assert[
-	sizeof(struct scenario_detail_object_collection_palette_entry) == 0x30 ? 1 : -1];
-typedef char structure_detail_object_data_size_assert[
-	sizeof(struct structure_detail_object_data) == 0x40 ? 1 : -1];
-typedef char detail_object_cell_data_size_assert[
-	sizeof(struct detail_object_cell_data) == 0x18 ? 1 : -1];
-typedef char detail_object_layer_data_size_assert[
-	sizeof(struct detail_object_layer_data) == 0x8 ? 1 : -1];
-typedef char detail_object_view_data_size_assert[
-	sizeof(struct detail_object_view_data) == 0x8 ? 1 : -1];
+typedef char detail_objects_enabled_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct detail_objects_debug_options, detail_objects) == 0x24)];
+typedef char detail_objects_multiplier_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct detail_objects_debug_options, detail_objects_offset_multiplier) == 0x50)];
+typedef char detail_objects_pixel_shader_size_assert[HALO_LAYOUT_ASSERT_32(sizeof(struct pixel_shader_definition) == 0xF0)];
+typedef char detail_object_size_assert[HALO_LAYOUT_ASSERT_32(sizeof(struct detail_object) == 0x6)];
+typedef char detail_object_vertex_size_assert[HALO_LAYOUT_ASSERT_32(sizeof(struct detail_object_vertex) == 0x8)];
+typedef char detail_object_type_definition_size_assert[HALO_LAYOUT_ASSERT_32(sizeof(struct detail_object_type_definition) == 0x60)];
+typedef char detail_object_collection_definition_size_assert[HALO_LAYOUT_ASSERT_32(sizeof(struct detail_object_collection_definition) == 0x80)];
+typedef char detail_object_bitmap_group_sprite_size_assert[HALO_LAYOUT_ASSERT_32(sizeof(struct detail_object_bitmap_group_sprite) == 0x20)];
+typedef char detail_object_bitmap_group_sequence_size_assert[HALO_LAYOUT_ASSERT_32(sizeof(struct detail_object_bitmap_group_sequence) == 0x40)];
+typedef char detail_object_palette_entry_size_assert[HALO_LAYOUT_ASSERT_32(sizeof(struct scenario_detail_object_collection_palette_entry) == 0x30)];
+typedef char structure_detail_object_data_size_assert[HALO_LAYOUT_ASSERT_32(sizeof(struct structure_detail_object_data) == 0x40)];
+typedef char detail_object_cell_data_size_assert[HALO_LAYOUT_ASSERT_32(sizeof(struct detail_object_cell_data) == 0x18)];
+typedef char detail_object_layer_data_size_assert[HALO_LAYOUT_ASSERT_32(sizeof(struct detail_object_layer_data) == 0x8)];
+typedef char detail_object_view_data_size_assert[HALO_LAYOUT_ASSERT_32(sizeof(struct detail_object_view_data) == 0x8)];
 
 /* ---------- prototypes */
 

@@ -29,10 +29,8 @@ struct bungie_ima_adpcm_state
 	short step_size_index;
 };
 
-typedef char verify_bungie_ima_adpcm_header_size[
-	sizeof(struct bungie_ima_adpcm_header) == 0x8 ? 1 : -1];
-typedef char verify_bungie_ima_adpcm_state_size[
-	sizeof(struct bungie_ima_adpcm_state) == 0xC ? 1 : -1];
+typedef char verify_bungie_ima_adpcm_header_size[HALO_LAYOUT_ASSERT_32(sizeof(struct bungie_ima_adpcm_header) == 0x8)];
+typedef char verify_bungie_ima_adpcm_state_size[HALO_LAYOUT_ASSERT_32(sizeof(struct bungie_ima_adpcm_state) == 0xC)];
 
 /* ---------- prototypes/IMA_ADPCM.C */
 

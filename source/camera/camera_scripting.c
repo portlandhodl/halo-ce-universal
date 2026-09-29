@@ -126,10 +126,8 @@ struct scripted_camera_globals
 	short animation_index;
 };
 
-typedef char scripted_camera_command_size_assert[
-	sizeof(struct scripted_camera_command) == 0x68 ? 1 : -1];
-typedef char scripted_camera_globals_size_assert[
-	sizeof(struct scripted_camera_globals) == 0x40 ? 1 : -1];
+typedef char scripted_camera_command_size_assert[HALO_LAYOUT_ASSERT_32(sizeof(struct scripted_camera_command) == 0x68)];
+typedef char scripted_camera_globals_size_assert[HALO_LAYOUT_ASSERT_32(sizeof(struct scripted_camera_globals) == 0x40)];
 
 /* ---------- prototypes */
 

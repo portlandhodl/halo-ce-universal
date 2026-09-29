@@ -70,6 +70,21 @@ static void segv_handler(int signal_number, siginfo_t *information, void *contex
 		void *frames[48];
 		int count, length;
 
+#ifdef __x86_64__
+		/* the LP64 port (linux64): the machine state has the 64-bit names */
+		length = snprintf(line, sizeof(line), "halo-linux: segmentation fault at %p, rip %016lx rbp %016lx rsp %016lx\n",
+			information->si_addr, (unsigned long)ucontext->uc_mcontext.gregs[REG_RIP],
+			(unsigned long)ucontext->uc_mcontext.gregs[REG_RBP], (unsigned long)ucontext->uc_mcontext.gregs[REG_RSP]);
+		write(STDERR_FILENO, line, (size_t)length);
+		{
+			/* the return address a call through a bad pointer left behind */
+			const unsigned long *stack = (const unsigned long *)ucontext->uc_mcontext.gregs[REG_RSP];
+
+			length = snprintf(line, sizeof(line), "halo-linux: stack %016lx %016lx %016lx %016lx %016lx %016lx\n",
+				stack[0], stack[1], stack[2], stack[3], stack[4], stack[5]);
+			write(STDERR_FILENO, line, (size_t)length);
+		}
+#else
 		length = snprintf(line, sizeof(line), "halo-linux: segmentation fault at %p, eip %08x ebp %08x esp %08x\n",
 			information->si_addr, (unsigned)ucontext->uc_mcontext.gregs[REG_EIP],
 			(unsigned)ucontext->uc_mcontext.gregs[REG_EBP], (unsigned)ucontext->uc_mcontext.gregs[REG_ESP]);
@@ -82,6 +97,7 @@ static void segv_handler(int signal_number, siginfo_t *information, void *contex
 				stack[0], stack[1], stack[2], stack[3], stack[4], stack[5]);
 			write(STDERR_FILENO, line, (size_t)length);
 		}
+#endif
 		count = backtrace(frames, 48);
 		backtrace_symbols_fd(frames, count, STDERR_FILENO);
 	}

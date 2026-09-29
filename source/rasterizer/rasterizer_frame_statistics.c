@@ -191,28 +191,22 @@ struct rasterizer_frame_statistics_private_globals_definition
 	unsigned long fps_sample_times[MAXIMUM_FPS_SAMPLE_COUNT];
 };
 
-typedef char verify_rasterizer_frame_statistics_temp_buffer_offset[
-	offsetof(
+typedef char verify_rasterizer_frame_statistics_temp_buffer_offset[HALO_LAYOUT_ASSERT_32(offsetof(
 		struct rasterizer_frame_statistics_private_globals_definition,
-		temp_buffer) == 0x740 ? 1 : -1];
-typedef char verify_rasterizer_frame_statistics_accumulation_time_offset[
-	offsetof(
+		temp_buffer) == 0x740)];
+typedef char verify_rasterizer_frame_statistics_accumulation_time_offset[HALO_LAYOUT_ASSERT_32(offsetof(
 		struct rasterizer_frame_statistics_private_globals_definition,
-		fps_accumulation_time) == 0x748 ? 1 : -1];
-typedef char verify_rasterizer_frame_statistics_accumulation_frame_index_offset[
-	offsetof(
+		fps_accumulation_time) == 0x748)];
+typedef char verify_rasterizer_frame_statistics_accumulation_frame_index_offset[HALO_LAYOUT_ASSERT_32(offsetof(
 		struct rasterizer_frame_statistics_private_globals_definition,
-		fps_accumulation_frame_index) == 0x750 ? 1 : -1];
-typedef char verify_rasterizer_frame_statistics_profile_log_file_offset[
-	offsetof(
+		fps_accumulation_frame_index) == 0x750)];
+typedef char verify_rasterizer_frame_statistics_profile_log_file_offset[HALO_LAYOUT_ASSERT_32(offsetof(
 		struct rasterizer_frame_statistics_private_globals_definition,
-		profile_log_file) == 0x758 ? 1 : -1];
-typedef char verify_rasterizer_frame_statistics_fps_sample_times_offset[
-	offsetof(
+		profile_log_file) == 0x758)];
+typedef char verify_rasterizer_frame_statistics_fps_sample_times_offset[HALO_LAYOUT_ASSERT_32(offsetof(
 		struct rasterizer_frame_statistics_private_globals_definition,
-		fps_sample_times) == 0x760 ? 1 : -1];
-typedef char verify_rasterizer_frame_statistics_private_globals_size[
-	sizeof(struct rasterizer_frame_statistics_private_globals_definition) == 0x850 ? 1 : -1];
+		fps_sample_times) == 0x760)];
+typedef char verify_rasterizer_frame_statistics_private_globals_size[HALO_LAYOUT_ASSERT_32(sizeof(struct rasterizer_frame_statistics_private_globals_definition) == 0x850)];
 
 /* ---------- prototypes */
 

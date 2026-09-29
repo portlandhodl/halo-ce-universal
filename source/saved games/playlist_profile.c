@@ -117,13 +117,10 @@ struct playlist_profile_data
 };
 #pragma pack(pop)
 
-typedef char verify_playlist_profile_building_functions_size[
-	sizeof(((struct playlist_profile_data *)0)->
-		default_variant_building_functions) == 0x68 ? 1 : -1];
-typedef char verify_playlist_profile_first_time_offset[
-	offsetof(struct playlist_profile_data, first_time) == 0x68 ? 1 : -1];
-typedef char verify_playlist_profile_data_size[
-	sizeof(struct playlist_profile_data) == 0x69 ? 1 : -1];
+typedef char verify_playlist_profile_building_functions_size[HALO_LAYOUT_ASSERT_32(sizeof(((struct playlist_profile_data *)0)->
+		default_variant_building_functions) == 0x68)];
+typedef char verify_playlist_profile_first_time_offset[HALO_LAYOUT_ASSERT_32(offsetof(struct playlist_profile_data, first_time) == 0x68)];
+typedef char verify_playlist_profile_data_size[HALO_LAYOUT_ASSERT_32(sizeof(struct playlist_profile_data) == 0x69)];
 
 struct playlist_profile_write_request
 {
@@ -131,10 +128,8 @@ struct playlist_profile_write_request
 	struct game_variant variant;
 };
 
-typedef char verify_playlist_profile_request_variant_offset[
-	offsetof(struct playlist_profile_write_request, variant) == 0x4 ? 1 : -1];
-typedef char verify_playlist_profile_request_size[
-	sizeof(struct playlist_profile_write_request) == 0x6C ? 1 : -1];
+typedef char verify_playlist_profile_request_variant_offset[HALO_LAYOUT_ASSERT_32(offsetof(struct playlist_profile_write_request, variant) == 0x4)];
+typedef char verify_playlist_profile_request_size[HALO_LAYOUT_ASSERT_32(sizeof(struct playlist_profile_write_request) == 0x6C)];
 
 struct playlist_profile_runtime_globals_prefix
 {
@@ -145,18 +140,14 @@ struct playlist_profile_runtime_globals_prefix
 	byte pad;
 };
 
-typedef char verify_playlist_profile_thread_offset[
-	offsetof(struct playlist_profile_runtime_globals_prefix, thread) == 0x6C ? 1 : -1];
-typedef char verify_playlist_profile_default_count_offset[
-	offsetof(
+typedef char verify_playlist_profile_thread_offset[HALO_LAYOUT_ASSERT_32(offsetof(struct playlist_profile_runtime_globals_prefix, thread) == 0x6C)];
+typedef char verify_playlist_profile_default_count_offset[HALO_LAYOUT_ASSERT_32(offsetof(
 		struct playlist_profile_runtime_globals_prefix,
-		number_of_default_profiles) == 0x70 ? 1 : -1];
-typedef char verify_playlist_profile_initialized_offset[
-	offsetof(
+		number_of_default_profiles) == 0x70)];
+typedef char verify_playlist_profile_initialized_offset[HALO_LAYOUT_ASSERT_32(offsetof(
 		struct playlist_profile_runtime_globals_prefix,
-		initialized) == 0x72 ? 1 : -1];
-typedef char verify_playlist_profile_globals_size[
-	sizeof(struct playlist_profile_runtime_globals_prefix) == 0x74 ? 1 : -1];
+		initialized) == 0x72)];
+typedef char verify_playlist_profile_globals_size[HALO_LAYOUT_ASSERT_32(sizeof(struct playlist_profile_runtime_globals_prefix) == 0x74)];
 
 /* ---------- prototypes */
 

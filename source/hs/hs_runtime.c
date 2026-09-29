@@ -428,8 +428,7 @@ struct hs_thread_datum
 	byte stack_data[0x200];
 };
 
-typedef char hs_thread_datum_size_assert[
-	sizeof(struct hs_thread_datum) == 0x218 ? 1 : -1];
+typedef char hs_thread_datum_size_assert[HALO_LAYOUT_ASSERT_32(sizeof(struct hs_thread_datum) == 0x218)];
 
 /* ---------- prototypes */
 

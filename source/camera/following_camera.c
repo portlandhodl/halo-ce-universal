@@ -102,13 +102,10 @@ struct unit_camera_track
 	long unused[3];
 };
 
-typedef char camera_track_control_point_size_assert[
-	sizeof(struct camera_track_control_point) == 0x3C ? 1 : -1];
+typedef char camera_track_control_point_size_assert[HALO_LAYOUT_ASSERT_32(sizeof(struct camera_track_control_point) == 0x3C)];
 
-typedef char camera_track_definition_control_points_offset_assert[
-	offsetof(struct camera_track_definition, control_points) == 0x4 ? 1 : -1];
-typedef char unit_camera_track_size_assert[
-	sizeof(struct unit_camera_track) == 0x1C ? 1 : -1];
+typedef char camera_track_definition_control_points_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct camera_track_definition, control_points) == 0x4)];
+typedef char unit_camera_track_size_assert[HALO_LAYOUT_ASSERT_32(sizeof(struct unit_camera_track) == 0x1C)];
 
 /* ---------- prototypes */
 

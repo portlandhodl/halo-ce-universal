@@ -330,8 +330,7 @@ struct scenario_conversation_action_definition
 	byte __unknown22[0x52];
 };
 
-typedef char scenario_conversation_action_definition_size_assert[
-	sizeof(struct scenario_conversation_action_definition) == 0x74 ? 1 : -1];
+typedef char scenario_conversation_action_definition_size_assert[HALO_LAYOUT_ASSERT_32(sizeof(struct scenario_conversation_action_definition) == 0x74)];
 
 /* Only the January-proven field consumed by this translation unit is named. */
 struct ai_vehicle_enterable
@@ -380,39 +379,23 @@ struct vehicle_definition
 	real ai_strafing_stop_range;
 };
 
-typedef char ai_globals_action_vehicle_size_assert[
-	sizeof(struct ai_vehicle_enterable) == 0x28 ? 1 : -1];
-typedef char ai_globals_action_grenades_enabled_offset_assert[
-	offsetof(struct ai_globals_action_data, grenades_enabled) == 0x3B4 ? 1 : -1];
-typedef char ai_globals_action_enterable_vehicles_offset_assert[
-	offsetof(struct ai_globals_action_data, enterable_vehicles) == 0x3B8 ? 1 : -1];
-typedef char ai_globals_action_data_size_assert[
-	sizeof(struct ai_globals_action_data) == 0x8B8 ? 1 : -1];
-typedef char actions_prop_enemy_offset_assert[
-	offsetof(struct prop_datum, enemy) == 0x60 ? 1 : -1];
-typedef char actions_prop_dead_offset_assert[
-	offsetof(struct prop_datum, dead) == 0x127 ? 1 : -1];
-typedef char actions_actor_moving_offset_assert[
-	offsetof(struct actor_datum, control.moving) == 0x504 ? 1 : -1];
-typedef char actions_unit_dive_distance_offset_assert[
-	(offsetof(struct unit_definition, unit) +
-		offsetof(struct _unit_definition, dive_distance)) == 0x238 ? 1 : -1];
-typedef char actions_vehicle_charge_repeat_offset_assert[
-	offsetof(struct vehicle_definition, ai_charge_repeat_time) == 0x390 ? 1 : -1];
-typedef char actions_vehicle_strafing_stop_offset_assert[
-	offsetof(struct vehicle_definition, ai_strafing_stop_range) == 0x394 ? 1 : -1];
-typedef char actions_actor_debug_cover_offset_assert[
-	offsetof(struct actor_debug_info, field_B8) == 0xB8 ? 1 : -1];
-typedef char actions_actor_debug_grenade_offset_assert[
-	offsetof(struct actor_debug_info, grenade_eval_time) == 0x150 ? 1 : -1];
-typedef char actions_actor_debug_danger_offset_assert[
-	offsetof(struct actor_debug_info, danger_avoidance_time) == 0x168 ? 1 : -1];
-typedef char actions_actor_debug_dive_offset_assert[
-	offsetof(struct actor_debug_info, dive_decision_time) == 0x184 ? 1 : -1];
-typedef char actions_actor_debug_info_size_assert[
-	sizeof(struct actor_debug_info) == 0x657C ? 1 : -1];
-typedef char firing_position_evaluation_context_size_assert[
-	sizeof(struct firing_position_evaluation_context) == 0x670 ? 1 : -1];
+typedef char ai_globals_action_vehicle_size_assert[HALO_LAYOUT_ASSERT_32(sizeof(struct ai_vehicle_enterable) == 0x28)];
+typedef char ai_globals_action_grenades_enabled_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct ai_globals_action_data, grenades_enabled) == 0x3B4)];
+typedef char ai_globals_action_enterable_vehicles_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct ai_globals_action_data, enterable_vehicles) == 0x3B8)];
+typedef char ai_globals_action_data_size_assert[HALO_LAYOUT_ASSERT_32(sizeof(struct ai_globals_action_data) == 0x8B8)];
+typedef char actions_prop_enemy_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct prop_datum, enemy) == 0x60)];
+typedef char actions_prop_dead_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct prop_datum, dead) == 0x127)];
+typedef char actions_actor_moving_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct actor_datum, control.moving) == 0x504)];
+typedef char actions_unit_dive_distance_offset_assert[HALO_LAYOUT_ASSERT_32((offsetof(struct unit_definition, unit) +
+		offsetof(struct _unit_definition, dive_distance)) == 0x238)];
+typedef char actions_vehicle_charge_repeat_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct vehicle_definition, ai_charge_repeat_time) == 0x390)];
+typedef char actions_vehicle_strafing_stop_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct vehicle_definition, ai_strafing_stop_range) == 0x394)];
+typedef char actions_actor_debug_cover_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct actor_debug_info, field_B8) == 0xB8)];
+typedef char actions_actor_debug_grenade_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct actor_debug_info, grenade_eval_time) == 0x150)];
+typedef char actions_actor_debug_danger_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct actor_debug_info, danger_avoidance_time) == 0x168)];
+typedef char actions_actor_debug_dive_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct actor_debug_info, dive_decision_time) == 0x184)];
+typedef char actions_actor_debug_info_size_assert[HALO_LAYOUT_ASSERT_32(sizeof(struct actor_debug_info) == 0x657C)];
+typedef char firing_position_evaluation_context_size_assert[HALO_LAYOUT_ASSERT_32(sizeof(struct firing_position_evaluation_context) == 0x670)];
 
 /* ---------- prototypes */
 

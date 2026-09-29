@@ -62,9 +62,7 @@ struct vehicle_datum
 	struct _vehicle_datum vehicle;
 };
 
-typedef char vehicle_datum_vehicle_offset_assert[
-	offsetof(struct vehicle_datum, vehicle) == 0x424 ? 1 : -1];
-typedef char vehicle_datum_size_assert[
-	sizeof(struct vehicle_datum) == 0x47C ? 1 : -1];
+typedef char vehicle_datum_vehicle_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct vehicle_datum, vehicle) == 0x424)];
+typedef char vehicle_datum_size_assert[HALO_LAYOUT_ASSERT_32(sizeof(struct vehicle_datum) == 0x47C)];
 
 #endif // __VEHICLE_DATUM_H

@@ -62,8 +62,7 @@ struct dead_camera_command
 	real orientation_timer;
 };
 
-typedef char dead_camera_command_size_assert[
-	sizeof(struct dead_camera_command) == 0x68 ? 1 : -1];
+typedef char dead_camera_command_size_assert[HALO_LAYOUT_ASSERT_32(sizeof(struct dead_camera_command) == 0x68)];
 
 struct dead_camera_constants
 {

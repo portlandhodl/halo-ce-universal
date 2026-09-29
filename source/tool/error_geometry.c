@@ -179,10 +179,8 @@ struct error_geometry_globals
 	real_matrix4x3 transform;
 };
 
-typedef char verify_error_geometry_globals_size[
-	sizeof(struct error_geometry_globals) == 0x74 ? 1 : -1];
-typedef char verify_error_geometry_transform_offset[
-	offsetof(struct error_geometry_globals, transform) == 0x40 ? 1 : -1];
+typedef char verify_error_geometry_globals_size[HALO_LAYOUT_ASSERT_32(sizeof(struct error_geometry_globals) == 0x74)];
+typedef char verify_error_geometry_transform_offset[HALO_LAYOUT_ASSERT_32(offsetof(struct error_geometry_globals, transform) == 0x40)];
 
 /* ---------- prototypes */
 

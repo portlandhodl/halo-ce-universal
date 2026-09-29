@@ -64,10 +64,8 @@ struct bitmap_group_sequence
 	struct tag_block sprites;
 };
 
-typedef char bitmap_group_sprite_size_assert[
-	sizeof(struct bitmap_group_sprite) == 0x20 ? 1 : -1];
-typedef char bitmap_group_sequence_size_assert[
-	sizeof(struct bitmap_group_sequence) == 0x40 ? 1 : -1];
+typedef char bitmap_group_sprite_size_assert[HALO_LAYOUT_ASSERT_32(sizeof(struct bitmap_group_sprite) == 0x20)];
+typedef char bitmap_group_sequence_size_assert[HALO_LAYOUT_ASSERT_32(sizeof(struct bitmap_group_sequence) == 0x40)];
 
 struct bitmap_group
 {

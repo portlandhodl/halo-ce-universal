@@ -72,15 +72,10 @@ struct rasterizer_model_begin_parameters
 	real_vector2d base_map_scale;
 };
 
-typedef char verify_model_vertex_uncompressed_size[
-	sizeof(struct model_vertex_uncompressed) == 0x44 ? 1 : -1];
-typedef char verify_model_vertex_compressed_size[
-	sizeof(struct model_vertex_compressed) == 0x20 ? 1 : -1];
-typedef char verify_rasterizer_model_skinning_size[
-	sizeof(struct rasterizer_model_skinning) == 0x08 ? 1 : -1];
-typedef char verify_render_model_effect_size[
-	sizeof(struct render_model_effect) == 0x28 ? 1 : -1];
-typedef char verify_rasterizer_model_begin_parameters_size[
-	sizeof(struct rasterizer_model_begin_parameters) == 0xCC ? 1 : -1];
+typedef char verify_model_vertex_uncompressed_size[HALO_LAYOUT_ASSERT_32(sizeof(struct model_vertex_uncompressed) == 0x44)];
+typedef char verify_model_vertex_compressed_size[HALO_LAYOUT_ASSERT_32(sizeof(struct model_vertex_compressed) == 0x20)];
+typedef char verify_rasterizer_model_skinning_size[HALO_LAYOUT_ASSERT_32(sizeof(struct rasterizer_model_skinning) == 0x08)];
+typedef char verify_render_model_effect_size[HALO_LAYOUT_ASSERT_32(sizeof(struct render_model_effect) == 0x28)];
+typedef char verify_rasterizer_model_begin_parameters_size[HALO_LAYOUT_ASSERT_32(sizeof(struct rasterizer_model_begin_parameters) == 0xCC)];
 
 #endif // __RASTERIZER_MODEL_TYPES_H

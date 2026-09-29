@@ -373,26 +373,16 @@ struct lights_globals
 	short pad34E;
 };
 
-typedef char verify_lights_game_globals_size[
-	sizeof(struct lights_game_globals) == 0x4 ? 1 : -1];
-typedef char verify_light_datum_flags_offset[
-	offsetof(struct light_datum, flags) == 0x2 ? 1 : -1];
-typedef char verify_light_datum_cluster_reference_offset[
-	offsetof(struct light_datum, cluster_reference) == 0x10 ? 1 : -1];
-typedef char verify_light_definition_lens_flare_offset[
-	offsetof(struct point_light_definition, lens_flare) == 0xAC ? 1 : -1];
-typedef char verify_light_definition_color_offset[
-	offsetof(struct point_light_definition, color_interpolation_flags) == 0x34 ? 1 : -1];
-typedef char verify_light_definition_transition_duration_offset[
-	offsetof(struct point_light_definition, transition_duration) == 0xF4 ? 1 : -1];
-typedef char verify_light_definition_falloff_function_offset[
-	offsetof(struct point_light_definition, falloff_function) == 0xFA ? 1 : -1];
-typedef char verify_light_datum_size[
-	sizeof(struct light_datum) == 0x7C ? 1 : -1];
-typedef char verify_rasterizer_light_submit_parameters_size[
-	sizeof(struct rasterizer_light_submit_parameters) == 0x38 ? 1 : -1];
-typedef char verify_lights_globals_size[
-	sizeof(struct lights_globals) == 0x350 ? 1 : -1];
+typedef char verify_lights_game_globals_size[HALO_LAYOUT_ASSERT_32(sizeof(struct lights_game_globals) == 0x4)];
+typedef char verify_light_datum_flags_offset[HALO_LAYOUT_ASSERT_32(offsetof(struct light_datum, flags) == 0x2)];
+typedef char verify_light_datum_cluster_reference_offset[HALO_LAYOUT_ASSERT_32(offsetof(struct light_datum, cluster_reference) == 0x10)];
+typedef char verify_light_definition_lens_flare_offset[HALO_LAYOUT_ASSERT_32(offsetof(struct point_light_definition, lens_flare) == 0xAC)];
+typedef char verify_light_definition_color_offset[HALO_LAYOUT_ASSERT_32(offsetof(struct point_light_definition, color_interpolation_flags) == 0x34)];
+typedef char verify_light_definition_transition_duration_offset[HALO_LAYOUT_ASSERT_32(offsetof(struct point_light_definition, transition_duration) == 0xF4)];
+typedef char verify_light_definition_falloff_function_offset[HALO_LAYOUT_ASSERT_32(offsetof(struct point_light_definition, falloff_function) == 0xFA)];
+typedef char verify_light_datum_size[HALO_LAYOUT_ASSERT_32(sizeof(struct light_datum) == 0x7C)];
+typedef char verify_rasterizer_light_submit_parameters_size[HALO_LAYOUT_ASSERT_32(sizeof(struct rasterizer_light_submit_parameters) == 0x38)];
+typedef char verify_lights_globals_size[HALO_LAYOUT_ASSERT_32(sizeof(struct lights_globals) == 0x350)];
 
 /* ---------- prototypes */
 

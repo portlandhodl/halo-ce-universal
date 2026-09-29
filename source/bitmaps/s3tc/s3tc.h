@@ -48,18 +48,12 @@ struct s3tc_block_alpha3
 	struct s3tc_block_rgb rgb;
 };
 
-typedef char s3tc_color_size_assert[
-	sizeof(struct s3tc_color) == 0x4 ? 1 : -1];
-typedef char s3tc_block_rgb_size_assert[
-	sizeof(struct s3tc_block_rgb) == 0x8 ? 1 : -1];
-typedef char s3tc_block_alpha4_rgb_offset_assert[
-	offsetof(struct s3tc_block_alpha4, rgb) == 0x8 ? 1 : -1];
-typedef char s3tc_block_alpha4_size_assert[
-	sizeof(struct s3tc_block_alpha4) == 0x10 ? 1 : -1];
-typedef char s3tc_block_alpha3_rgb_offset_assert[
-	offsetof(struct s3tc_block_alpha3, rgb) == 0x8 ? 1 : -1];
-typedef char s3tc_block_alpha3_size_assert[
-	sizeof(struct s3tc_block_alpha3) == 0x10 ? 1 : -1];
+typedef char s3tc_color_size_assert[HALO_LAYOUT_ASSERT_32(sizeof(struct s3tc_color) == 0x4)];
+typedef char s3tc_block_rgb_size_assert[HALO_LAYOUT_ASSERT_32(sizeof(struct s3tc_block_rgb) == 0x8)];
+typedef char s3tc_block_alpha4_rgb_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct s3tc_block_alpha4, rgb) == 0x8)];
+typedef char s3tc_block_alpha4_size_assert[HALO_LAYOUT_ASSERT_32(sizeof(struct s3tc_block_alpha4) == 0x10)];
+typedef char s3tc_block_alpha3_rgb_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct s3tc_block_alpha3, rgb) == 0x8)];
+typedef char s3tc_block_alpha3_size_assert[HALO_LAYOUT_ASSERT_32(sizeof(struct s3tc_block_alpha3) == 0x10)];
 
 /* ---------- prototypes/S3TC.C */
 

@@ -979,12 +979,9 @@ struct interface_tag_references_definition
 	byte unused[48];
 };
 
-typedef char verify_icon_hud_element_definition_size[
-	sizeof(struct icon_hud_element_definition) == 0x10 ? 1 : -1];
-typedef char verify_hud_globals_button_icons_offset[
-	offsetof(struct hud_globals_definition, messaging.button_icons) == 0xC4 ? 1 : -1];
-typedef char verify_interface_tag_references_definition_size[
-	sizeof(struct interface_tag_references_definition) == 0x130 ? 1 : -1];
+typedef char verify_icon_hud_element_definition_size[HALO_LAYOUT_ASSERT_32(sizeof(struct icon_hud_element_definition) == 0x10)];
+typedef char verify_hud_globals_button_icons_offset[HALO_LAYOUT_ASSERT_32(offsetof(struct hud_globals_definition, messaging.button_icons) == 0xC4)];
+typedef char verify_interface_tag_references_definition_size[HALO_LAYOUT_ASSERT_32(sizeof(struct interface_tag_references_definition) == 0x130)];
 /* narrow views of the 'DeLa' widget definition tag and of the three block
 elements this file walks; only the members this file reaches are named and
 every other span is left explicitly unknown */
@@ -1068,56 +1065,31 @@ struct ui_widget_definition
 	struct tag_block child_widgets;
 };
 
-typedef char verify_ui_widget_game_data_input_reference_size[
-	sizeof(struct ui_widget_game_data_input_reference) == 0x24 ? 1 : -1];
-typedef char verify_ui_widget_search_and_replace_reference_size[
-	sizeof(struct ui_widget_search_and_replace_reference) == 0x22 ? 1 : -1];
-typedef char verify_ui_widget_child_reference_size[
-	sizeof(struct ui_widget_child_reference) == 0x50 ? 1 : -1];
-typedef char verify_ui_widget_conditional_reference_size[
-	sizeof(struct ui_widget_conditional_reference) == 0x50 ? 1 : -1];
-typedef char verify_ui_widget_event_handler_reference_size[
-	sizeof(struct ui_widget_event_handler_reference) == 0x48 ? 1 : -1];
-typedef char verify_ui_widget_definition_bounds_offset[
-	offsetof(struct ui_widget_definition, bounds) == 0x24 ? 1 : -1];
-typedef char verify_ui_widget_definition_flags_offset[
-	offsetof(struct ui_widget_definition, flags) == 0x2C ? 1 : -1];
-typedef char verify_ui_widget_definition_game_data_inputs_offset[
-	offsetof(struct ui_widget_definition, game_data_inputs) == 0x48 ? 1 : -1];
-typedef char verify_ui_widget_definition_search_and_replace_offset[
-	offsetof(struct ui_widget_definition, search_and_replace_functions) == 0x60 ? 1 : -1];
-typedef char verify_ui_widget_definition_text_font_offset[
-	offsetof(struct ui_widget_definition, text_font) == 0xFC ? 1 : -1];
-typedef char verify_ui_widget_definition_text_color_offset[
-	offsetof(struct ui_widget_definition, text_color) == 0x10C ? 1 : -1];
-typedef char verify_ui_widget_definition_justification_offset[
-	offsetof(struct ui_widget_definition, justification) == 0x11C ? 1 : -1];
-typedef char verify_ui_widget_definition_text_box_flags_offset[
-	offsetof(struct ui_widget_definition, text_box_flags) == 0x11E ? 1 : -1];
-typedef char verify_ui_widget_definition_string_list_index_offset[
-	offsetof(struct ui_widget_definition, string_list_index) == 0x12E ? 1 : -1];
-typedef char verify_ui_widget_definition_horizontal_offset_offset[
-	offsetof(struct ui_widget_definition, horizontal_offset) == 0x130 ? 1 : -1];
-typedef char verify_ui_widget_definition_list_header_bitmap_offset[
-	offsetof(struct ui_widget_definition, list_header_bitmap) == 0x154 ? 1 : -1];
-typedef char verify_ui_widget_definition_list_header_bounds_offset[
-	offsetof(struct ui_widget_definition, list_header_bounds) == 0x174 ? 1 : -1];
-typedef char verify_ui_widget_definition_event_handlers_offset[
-	offsetof(struct ui_widget_definition, event_handlers) == 0x54 ? 1 : -1];
-typedef char verify_ui_widget_definition_background_bitmap_offset[
-	offsetof(struct ui_widget_definition, background_bitmap) == 0x38 ? 1 : -1];
-typedef char verify_ui_widget_definition_text_label_string_list_offset[
-	offsetof(struct ui_widget_definition, text_label_string_list) == 0xEC ? 1 : -1];
-typedef char verify_ui_widget_definition_list_flags_offset[
-	offsetof(struct ui_widget_definition, list_flags) == 0x150 ? 1 : -1];
-typedef char verify_ui_widget_definition_extended_description_offset[
-	offsetof(struct ui_widget_definition, extended_description_widget) == 0x1A4 ? 1 : -1];
-typedef char verify_ui_widget_definition_conditional_widgets_offset[
-	offsetof(struct ui_widget_definition, conditional_widgets) == 0x2D4 ? 1 : -1];
-typedef char verify_ui_widget_definition_child_widgets_offset[
-	offsetof(struct ui_widget_definition, child_widgets) == 0x3E0 ? 1 : -1];
-typedef char verify_ui_widget_definition_size[
-	sizeof(struct ui_widget_definition) == 0x3EC ? 1 : -1];
+typedef char verify_ui_widget_game_data_input_reference_size[HALO_LAYOUT_ASSERT_32(sizeof(struct ui_widget_game_data_input_reference) == 0x24)];
+typedef char verify_ui_widget_search_and_replace_reference_size[HALO_LAYOUT_ASSERT_32(sizeof(struct ui_widget_search_and_replace_reference) == 0x22)];
+typedef char verify_ui_widget_child_reference_size[HALO_LAYOUT_ASSERT_32(sizeof(struct ui_widget_child_reference) == 0x50)];
+typedef char verify_ui_widget_conditional_reference_size[HALO_LAYOUT_ASSERT_32(sizeof(struct ui_widget_conditional_reference) == 0x50)];
+typedef char verify_ui_widget_event_handler_reference_size[HALO_LAYOUT_ASSERT_32(sizeof(struct ui_widget_event_handler_reference) == 0x48)];
+typedef char verify_ui_widget_definition_bounds_offset[HALO_LAYOUT_ASSERT_32(offsetof(struct ui_widget_definition, bounds) == 0x24)];
+typedef char verify_ui_widget_definition_flags_offset[HALO_LAYOUT_ASSERT_32(offsetof(struct ui_widget_definition, flags) == 0x2C)];
+typedef char verify_ui_widget_definition_game_data_inputs_offset[HALO_LAYOUT_ASSERT_32(offsetof(struct ui_widget_definition, game_data_inputs) == 0x48)];
+typedef char verify_ui_widget_definition_search_and_replace_offset[HALO_LAYOUT_ASSERT_32(offsetof(struct ui_widget_definition, search_and_replace_functions) == 0x60)];
+typedef char verify_ui_widget_definition_text_font_offset[HALO_LAYOUT_ASSERT_32(offsetof(struct ui_widget_definition, text_font) == 0xFC)];
+typedef char verify_ui_widget_definition_text_color_offset[HALO_LAYOUT_ASSERT_32(offsetof(struct ui_widget_definition, text_color) == 0x10C)];
+typedef char verify_ui_widget_definition_justification_offset[HALO_LAYOUT_ASSERT_32(offsetof(struct ui_widget_definition, justification) == 0x11C)];
+typedef char verify_ui_widget_definition_text_box_flags_offset[HALO_LAYOUT_ASSERT_32(offsetof(struct ui_widget_definition, text_box_flags) == 0x11E)];
+typedef char verify_ui_widget_definition_string_list_index_offset[HALO_LAYOUT_ASSERT_32(offsetof(struct ui_widget_definition, string_list_index) == 0x12E)];
+typedef char verify_ui_widget_definition_horizontal_offset_offset[HALO_LAYOUT_ASSERT_32(offsetof(struct ui_widget_definition, horizontal_offset) == 0x130)];
+typedef char verify_ui_widget_definition_list_header_bitmap_offset[HALO_LAYOUT_ASSERT_32(offsetof(struct ui_widget_definition, list_header_bitmap) == 0x154)];
+typedef char verify_ui_widget_definition_list_header_bounds_offset[HALO_LAYOUT_ASSERT_32(offsetof(struct ui_widget_definition, list_header_bounds) == 0x174)];
+typedef char verify_ui_widget_definition_event_handlers_offset[HALO_LAYOUT_ASSERT_32(offsetof(struct ui_widget_definition, event_handlers) == 0x54)];
+typedef char verify_ui_widget_definition_background_bitmap_offset[HALO_LAYOUT_ASSERT_32(offsetof(struct ui_widget_definition, background_bitmap) == 0x38)];
+typedef char verify_ui_widget_definition_text_label_string_list_offset[HALO_LAYOUT_ASSERT_32(offsetof(struct ui_widget_definition, text_label_string_list) == 0xEC)];
+typedef char verify_ui_widget_definition_list_flags_offset[HALO_LAYOUT_ASSERT_32(offsetof(struct ui_widget_definition, list_flags) == 0x150)];
+typedef char verify_ui_widget_definition_extended_description_offset[HALO_LAYOUT_ASSERT_32(offsetof(struct ui_widget_definition, extended_description_widget) == 0x1A4)];
+typedef char verify_ui_widget_definition_conditional_widgets_offset[HALO_LAYOUT_ASSERT_32(offsetof(struct ui_widget_definition, conditional_widgets) == 0x2D4)];
+typedef char verify_ui_widget_definition_child_widgets_offset[HALO_LAYOUT_ASSERT_32(offsetof(struct ui_widget_definition, child_widgets) == 0x3E0)];
+typedef char verify_ui_widget_definition_size[HALO_LAYOUT_ASSERT_32(sizeof(struct ui_widget_definition) == 0x3EC)];
 
 struct ui_widget_deferred_error
 {
@@ -1181,60 +1153,46 @@ struct ui_widget_bss_prefix
 	unsigned long dpad_event_times[MAXIMUM_NUMBER_OF_LOCAL_PLAYERS][NUMBER_OF_DPAD_DIRECTIONS];
 };
 
-typedef char verify_ui_widget_fade_to_black_offset[
-	offsetof(
+typedef char verify_ui_widget_fade_to_black_offset[HALO_LAYOUT_ASSERT_32(offsetof(
 		struct ui_widget_runtime_globals_prefix,
-		fade_to_black) == 0x2C ? 1 : -1];
-typedef char verify_ui_widget_pause_disabled_ticks_offset[
-	offsetof(
+		fade_to_black) == 0x2C)];
+typedef char verify_ui_widget_pause_disabled_ticks_offset[HALO_LAYOUT_ASSERT_32(offsetof(
 		struct ui_widget_runtime_globals_prefix,
-		pause_disabled_ticks) == 0x24 ? 1 : -1];
-typedef char verify_ui_widget_main_menu_deferred_error_code_offset[
-	offsetof(
+		pause_disabled_ticks) == 0x24)];
+typedef char verify_ui_widget_main_menu_deferred_error_code_offset[HALO_LAYOUT_ASSERT_32(offsetof(
 		struct ui_widget_runtime_globals_prefix,
-		main_menu_deferred_error_code) == 0x28 ? 1 : -1];
-typedef char verify_ui_widget_deferred_dashboard_error_code_offset[
-	offsetof(
+		main_menu_deferred_error_code) == 0x28)];
+typedef char verify_ui_widget_deferred_dashboard_error_code_offset[HALO_LAYOUT_ASSERT_32(offsetof(
 		struct ui_widget_runtime_globals_prefix,
-		deferred_dashboard_error_code) == 0x48 ? 1 : -1];
-typedef char verify_ui_widget_deferred_dashboard_optional_offset[
-	offsetof(
+		deferred_dashboard_error_code) == 0x48)];
+typedef char verify_ui_widget_deferred_dashboard_optional_offset[HALO_LAYOUT_ASSERT_32(offsetof(
 		struct ui_widget_runtime_globals_prefix,
-		deferred_dashboard_optional) == 0x4A ? 1 : -1];
-typedef char verify_ui_widget_initialization_thread_offset[
-	offsetof(
+		deferred_dashboard_optional) == 0x4A)];
+typedef char verify_ui_widget_initialization_thread_offset[HALO_LAYOUT_ASSERT_32(offsetof(
 		struct ui_widget_runtime_globals_prefix,
-		initialization_thread) == 0x5C ? 1 : -1];
-typedef char verify_ui_widget_initialized_offset[
-	offsetof(
+		initialization_thread) == 0x5C)];
+typedef char verify_ui_widget_initialized_offset[HALO_LAYOUT_ASSERT_32(offsetof(
 		struct ui_widget_runtime_globals_prefix,
-		initialized) == 0x62 ? 1 : -1];
-typedef char verify_ui_widget_debug_show_path_offset[
-	offsetof(
+		initialized) == 0x62)];
+typedef char verify_ui_widget_debug_show_path_offset[HALO_LAYOUT_ASSERT_32(offsetof(
 		struct ui_widget_runtime_globals_prefix,
-		debug_show_path) == 0x64 ? 1 : -1];
-typedef char verify_ui_widget_processing_inhibited_offset[
-	offsetof(
+		debug_show_path) == 0x64)];
+typedef char verify_ui_widget_processing_inhibited_offset[HALO_LAYOUT_ASSERT_32(offsetof(
 		struct ui_widget_runtime_globals_prefix,
-		processing_inhibited) == 0x65 ? 1 : -1];
-typedef char verify_ui_widget_main_menu_music_active_offset[
-	offsetof(
+		processing_inhibited) == 0x65)];
+typedef char verify_ui_widget_main_menu_music_active_offset[HALO_LAYOUT_ASSERT_32(offsetof(
 		struct ui_widget_runtime_globals_prefix,
-		main_menu_music_active) == 0x66 ? 1 : -1];
-typedef char verify_ui_widget_runtime_globals_prefix_size[
-	sizeof(struct ui_widget_runtime_globals_prefix) == 0x68 ? 1 : -1];
-typedef char verify_ui_widget_globals_offset[
-	offsetof(
+		main_menu_music_active) == 0x66)];
+typedef char verify_ui_widget_runtime_globals_prefix_size[HALO_LAYOUT_ASSERT_32(sizeof(struct ui_widget_runtime_globals_prefix) == 0x68)];
+typedef char verify_ui_widget_globals_offset[HALO_LAYOUT_ASSERT_32(offsetof(
 		struct ui_widget_bss_prefix,
-		widget_globals) == 0x800 ? 1 : -1];
-typedef char verify_ui_widget_main_menu_active_offset[
-	offsetof(
+		widget_globals) == 0x800)];
+typedef char verify_ui_widget_main_menu_active_offset[HALO_LAYOUT_ASSERT_32(offsetof(
 		struct ui_widget_bss_prefix,
-		we_are_at_the_main_menu) == 0x868 ? 1 : -1];
-typedef char verify_ui_widget_dpad_event_times_offset[
-	offsetof(
+		we_are_at_the_main_menu) == 0x868)];
+typedef char verify_ui_widget_dpad_event_times_offset[HALO_LAYOUT_ASSERT_32(offsetof(
 		struct ui_widget_bss_prefix,
-		dpad_event_times) == 0x870 ? 1 : -1];
+		dpad_event_times) == 0x870)];
 
 struct widget_animation_data
 {
@@ -1292,21 +1250,14 @@ struct widget_instance
 	struct widget_animation_data animation;
 };
 
-typedef char verify_widget_instance_size[
-	sizeof(struct widget_instance) == 0x58 ? 1 : -1];
-typedef char verify_widget_instance_animation_offset[
-	offsetof(struct widget_instance, animation) == 0x50 ? 1 : -1];
+typedef char verify_widget_instance_size[HALO_LAYOUT_ASSERT_32(sizeof(struct widget_instance) == 0x58)];
+typedef char verify_widget_instance_animation_offset[HALO_LAYOUT_ASSERT_32(offsetof(struct widget_instance, animation) == 0x50)];
 
-typedef char verify_widget_instance_creation_time_offset[
-	offsetof(struct widget_instance, creation_time) == 0x18 ? 1 : -1];
-typedef char verify_widget_instance_alpha_modifier_offset[
-	offsetof(struct widget_instance, alpha_modifier) == 0x24 ? 1 : -1];
-typedef char verify_widget_instance_next_offset[
-	offsetof(struct widget_instance, next) == 0x2C ? 1 : -1];
-typedef char verify_widget_instance_focused_child_offset[
-	offsetof(struct widget_instance, focused_child) == 0x38 ? 1 : -1];
-typedef char verify_widget_instance_text_box_string_list_index_offset[
-	offsetof(struct widget_instance, parameters.text_box.string_list_index) == 0x40 ? 1 : -1];
+typedef char verify_widget_instance_creation_time_offset[HALO_LAYOUT_ASSERT_32(offsetof(struct widget_instance, creation_time) == 0x18)];
+typedef char verify_widget_instance_alpha_modifier_offset[HALO_LAYOUT_ASSERT_32(offsetof(struct widget_instance, alpha_modifier) == 0x24)];
+typedef char verify_widget_instance_next_offset[HALO_LAYOUT_ASSERT_32(offsetof(struct widget_instance, next) == 0x2C)];
+typedef char verify_widget_instance_focused_child_offset[HALO_LAYOUT_ASSERT_32(offsetof(struct widget_instance, focused_child) == 0x38)];
+typedef char verify_widget_instance_text_box_string_list_index_offset[HALO_LAYOUT_ASSERT_32(offsetof(struct widget_instance, parameters.text_box.string_list_index) == 0x40)];
 
 /* ---------- prototypes */
 

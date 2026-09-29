@@ -35,8 +35,7 @@ struct leaf_portal
 	struct tag_block vertices;			// real_point3d
 };
 
-typedef char leaf_portal_size_assert[
-	sizeof(struct leaf_portal) == 0x18 ? 1 : -1];
+typedef char leaf_portal_size_assert[HALO_LAYOUT_ASSERT_32(sizeof(struct leaf_portal) == 0x18)];
 
 /* ---------- prototypes/LEAF_MAP.C */
 

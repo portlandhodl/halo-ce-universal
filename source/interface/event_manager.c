@@ -66,10 +66,8 @@ struct event_manager_globals
 	long previous_stick_axes[NUMBER_OF_GAMEPAD_STICKS][2][MAXIMUM_GAMEPADS];
 };
 
-typedef char verify_event_manager_state_size[
-	sizeof(struct event_manager_state) == 0x108 ? 1 : -1];
-typedef char verify_event_manager_globals_size[
-	sizeof(struct event_manager_globals) == 0x168 ? 1 : -1];
+typedef char verify_event_manager_state_size[HALO_LAYOUT_ASSERT_32(sizeof(struct event_manager_state) == 0x108)];
+typedef char verify_event_manager_globals_size[HALO_LAYOUT_ASSERT_32(sizeof(struct event_manager_globals) == 0x168)];
 
 /* ---------- prototypes */
 

@@ -218,42 +218,32 @@ struct texture_cache_debug_options
 	boolean list;
 };
 
-typedef char verify_xbox_texture_cache_textures_offset[
-	offsetof(
+typedef char verify_xbox_texture_cache_textures_offset[HALO_LAYOUT_ASSERT_32(offsetof(
 		struct xbox_texture_cache_globals,
-		textures) == 0 ? 1 : -1];
-typedef char verify_xbox_texture_cache_base_address_offset[
-	offsetof(
+		textures) == 0)];
+typedef char verify_xbox_texture_cache_base_address_offset[HALO_LAYOUT_ASSERT_32(offsetof(
 		struct xbox_texture_cache_globals,
-		base_address) == 0x4 ? 1 : -1];
-typedef char verify_xbox_texture_cache_cache_offset[
-	offsetof(
+		base_address) == 0x4)];
+typedef char verify_xbox_texture_cache_cache_offset[HALO_LAYOUT_ASSERT_32(offsetof(
 		struct xbox_texture_cache_globals,
-		cache) == 0x8 ? 1 : -1];
-typedef char verify_xbox_texture_cache_stolen_memory_offset[
-	offsetof(
+		cache) == 0x8)];
+typedef char verify_xbox_texture_cache_stolen_memory_offset[HALO_LAYOUT_ASSERT_32(offsetof(
 		struct xbox_texture_cache_globals,
-		stolen_memory) == 0xC ? 1 : -1];
-typedef char verify_xbox_texture_cache_globals_size[
-	sizeof(struct xbox_texture_cache_globals) == 0x10 ? 1 : -1];
-typedef char verify_xbox_texture_cache_texture_loaded_offset[
-	offsetof(
+		stolen_memory) == 0xC)];
+typedef char verify_xbox_texture_cache_globals_size[HALO_LAYOUT_ASSERT_32(sizeof(struct xbox_texture_cache_globals) == 0x10)];
+typedef char verify_xbox_texture_cache_texture_loaded_offset[HALO_LAYOUT_ASSERT_32(offsetof(
 		struct xbox_texture_cache_texture,
-		loaded) == 0x4 ? 1 : -1];
-typedef char verify_xbox_texture_cache_texture_used_offset[
-	offsetof(
+		loaded) == 0x4)];
+typedef char verify_xbox_texture_cache_texture_used_offset[HALO_LAYOUT_ASSERT_32(offsetof(
 		struct xbox_texture_cache_texture,
-		used) == 0x5 ? 1 : -1];
-typedef char verify_xbox_texture_cache_texture_bitmap_offset[
-	offsetof(
+		used) == 0x5)];
+typedef char verify_xbox_texture_cache_texture_bitmap_offset[HALO_LAYOUT_ASSERT_32(offsetof(
 		struct xbox_texture_cache_texture,
-		bitmap) == 0x8 ? 1 : -1];
-typedef char verify_xbox_texture_cache_texture_hardware_format_offset[
-	offsetof(
+		bitmap) == 0x8)];
+typedef char verify_xbox_texture_cache_texture_hardware_format_offset[HALO_LAYOUT_ASSERT_32(offsetof(
 		struct xbox_texture_cache_texture,
-		hardware_format) == 0xC ? 1 : -1];
-typedef char verify_xbox_texture_cache_texture_size[
-	sizeof(struct xbox_texture_cache_texture) == 0x20 ? 1 : -1];
+		hardware_format) == 0xC)];
+typedef char verify_xbox_texture_cache_texture_size[HALO_LAYOUT_ASSERT_32(sizeof(struct xbox_texture_cache_texture) == 0x20)];
 /* ---------- prototypes */
 
 static boolean texture_cache_locked_block_proc(

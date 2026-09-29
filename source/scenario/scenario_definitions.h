@@ -123,10 +123,8 @@ struct player_starting_location
 	byte unused1C[0x18];
 };
 
-typedef char player_starting_location_size_assert[
-	sizeof(struct player_starting_location) == 0x34 ? 1 : -1];
-typedef char player_starting_location_game_types_offset_assert[
-	offsetof(struct player_starting_location, game_types) == 0x14 ? 1 : -1];
+typedef char player_starting_location_size_assert[HALO_LAYOUT_ASSERT_32(sizeof(struct player_starting_location) == 0x34)];
+typedef char player_starting_location_game_types_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct player_starting_location, game_types) == 0x14)];
 
 struct scenario_cutscene_camera_point
 {
@@ -153,8 +151,7 @@ struct scenario_structure_bsp_reference
 	struct tag_reference structure_bsp;
 };
 
-typedef char scenario_structure_bsp_reference_size_assert[
-	sizeof(struct scenario_structure_bsp_reference) == 0x20 ? 1 : -1];
+typedef char scenario_structure_bsp_reference_size_assert[HALO_LAYOUT_ASSERT_32(sizeof(struct scenario_structure_bsp_reference) == 0x20)];
 
 struct scenario_trigger_volume
 {
@@ -175,8 +172,7 @@ struct scenario_trigger_volume
 	};
 };
 
-typedef char scenario_trigger_volume_size_assert[
-	sizeof(struct scenario_trigger_volume) == 0x60 ? 1 : -1];
+typedef char scenario_trigger_volume_size_assert[HALO_LAYOUT_ASSERT_32(sizeof(struct scenario_trigger_volume) == 0x60)];
 
 struct scenario_starting_profile_weapon
 {
@@ -196,8 +192,7 @@ struct scenario_starting_profile
 	byte pad[22];
 };
 
-typedef char scenario_starting_profile_size_assert[
-	sizeof(struct scenario_starting_profile) == 0x68 ? 1 : -1];
+typedef char scenario_starting_profile_size_assert[HALO_LAYOUT_ASSERT_32(sizeof(struct scenario_starting_profile) == 0x68)];
 
 struct encounter_player_starting_location
 {

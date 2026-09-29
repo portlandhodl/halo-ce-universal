@@ -37,28 +37,21 @@ def compile_launcher(sln: Any) -> str:
 # The optimisation level of every unit, and of link-time optimisation.
 OPTIMISATION = "-O2"
 
-# Flags shared by the game and the XDK-facing half of the platform layer.
-# They reproduce the MSVC/Xbox ABI the source was written against:
+# Flags shared by the game and the XDK-facing half of the platform layer,
+# on every x86 target. They reproduce the MSVC/Xbox ABI the source was
+# written against:
 #  - 16-bit wchar_t (UTF-16 strings in tag data and saved games),
-#  - MSVC struct layout for 64-bit members (-malign-double),
 #  - __declspec, __int64 and calling conventions,
 #  - C89 with tentative definitions shared between units (-fcommon),
-#  - small structures and unions returned in EAX:EDX, as Win32 does
-#    (hs_runtime.c calls union-returning converters through pointers typed
-#    as returning long),
 #  - no optimisations that assume the absence of MSVC-tolerated UB.
 LINUX_ABI_FLAGS = [
-    "--target=i686-linux-gnu",
-    "-m32",
     "-fms-extensions",
     "-fshort-wchar",
-    "-malign-double",
     "-fcommon",
     "-fno-pic",
     "-fno-strict-aliasing",
     "-fwrapv",
     "-fno-delete-null-pointer-checks",
-    "-freg-struct-return",
     # the game keeps EBP frames (MSVC /Oy-): get_return_eip and the stack
     # walker follow the frame chain
     "-fno-omit-frame-pointer",
@@ -77,6 +70,23 @@ LINUX_ABI_FLAGS = [
         "wcsncpy", "wcscat", "wcsncat", "wmemchr", "wmemcmp", "wmemcpy",
         "wmemmove", "wmemset",
     )),
+]
+
+# The x86 targets of the native Linux build:
+#  - linux:   the shipped port, 32-bit x86, as the Xbox (game data has 32-bit
+#             pointers). -malign-double gives the MSVC struct layout for
+#             64-bit members; -freg-struct-return returns small structures
+#             and unions in EAX:EDX, as Win32 does (hs_runtime.c calls
+#             union-returning converters through pointers typed as returning
+#             long).
+#  - linux64: the experimental true 64-bit (LP64) port. x86-64 aligns 64-bit
+#             members as -malign-double does and returns small aggregates in
+#             registers already, so neither flag applies. The prefix header
+#             (halo_linux_prefix.h) defines HALO_LINUX64 for it. Game data
+#             keeps its 32-bit format on disk; see docs/linux64.md.
+LINUX_TARGETS = [
+    ("linux", "i686-linux-gnu", ["-m32", "-malign-double", "-freg-struct-return"]),
+    ("linux64", "x86_64-linux-gnu", []),
 ]
 
 # The game is compiled with glibc restricted to ISO C so that POSIX names
@@ -139,10 +149,9 @@ PLATFORM_FLAGS = [
 
 # Platform files named posix_*.c talk to glibc only. They are built with the
 # host's native ABI (no -malign-double, no 16-bit wchar_t, no XDK headers) so
-# glibc structures such as struct stat have their real layout.
+# glibc structures such as struct stat have their real layout. The target
+# triple is prepended per target in generate_linux_build.
 POSIX_FLAGS = [
-    "--target=i686-linux-gnu",
-    "-m32",
     "-std=gnu11",
     "-D_GNU_SOURCE",
     "-D_FILE_OFFSET_BITS=64",
@@ -276,41 +285,16 @@ def generate_linux_build(n: Writer, sln: Any) -> None:
         # a checkout without the port (or a test fixture): nothing to emit
         return
     config = _load_port_config()
-    build_dir: Path = sln.build_dir / "linux"
-    obj_dir = build_dir / "obj"
-    output = build_dir / "halo"
     cc = sln.linux_cc or "clang"
     prefix_header = PORT_DIR / "include" / "halo_linux_prefix.h"
-    semantics_header = build_dir / "halo_msvc_semantics.h"
-    platform_semantics_header = build_dir / "platform_msvc_semantics.h"
 
-    n.comment("Native Linux build (ninja linux)")
+    n.comment("Native Linux builds (ninja linux, ninja linux64)")
     n.variable("linux_cc", cc)
     n.rule(
         name="linux_msvc_semantics",
         command="$python tools/linux_msvc_semantics.py --output $out $scan",
         description="LINUX MSVC SEMANTICS $out",
         restat=True,
-    )
-    game_headers = sorted(
-        p for p in Path("source").rglob("*") if p.suffix in (".c", ".h")
-    )
-    # The game sees its own tags and inline functions and those of the SDK
-    # declarations (port/include/xdk); the platform layer only includes the
-    # SDK declarations and so only needs their inline functions.
-    n.build(
-        outputs=semantics_header,
-        rule="linux_msvc_semantics",
-        implicit=[Path("tools/linux_msvc_semantics.py"), *xdk_headers(), *game_headers],
-        variables={
-            "scan": f"--all-inlines --tags source --inlines source --inlines {XDK_INCLUDE}"
-        },
-    )
-    n.build(
-        outputs=platform_semantics_header,
-        rule="linux_msvc_semantics",
-        implicit=[Path("tools/linux_msvc_semantics.py"), *xdk_headers()],
-        variables={"scan": f"--inlines {XDK_INCLUDE}"},
     )
     n.rule(
         name="linux_cc",
@@ -337,7 +321,46 @@ def generate_linux_build(n: Writer, sln: Any) -> None:
         pool="console",
     )
 
-    abi = " ".join(LINUX_ABI_FLAGS + [march_flag(sln)] + (["-DHALO_RELEASE"] if getattr(sln, "port_release", False) else []))
+    for target_name, target_triple, target_abi_extra in LINUX_TARGETS:
+        _generate_linux_target(n, sln, config, prefix_header,
+                               target_name, target_triple, target_abi_extra)
+
+
+def _generate_linux_target(n: Writer, sln: Any, config: Dict[str, Any],
+                           prefix_header: Path, target_name: str,
+                           target_triple: str, target_abi_extra: List[str]) -> None:
+    """The build of one x86 target of LINUX_TARGETS (`ninja <target_name>`)."""
+    cc = sln.linux_cc or "clang"
+    is_32 = target_name == "linux"
+    build_dir: Path = sln.build_dir / target_name
+    obj_dir = build_dir / "obj"
+    output = build_dir / "halo"
+    semantics_header = build_dir / "halo_msvc_semantics.h"
+    platform_semantics_header = build_dir / "platform_msvc_semantics.h"
+
+    game_headers = sorted(
+        p for p in Path("source").rglob("*") if p.suffix in (".c", ".h")
+    )
+    # The game sees its own tags and inline functions and those of the SDK
+    # declarations (port/include/xdk); the platform layer only includes the
+    # SDK declarations and so only needs their inline functions.
+    n.build(
+        outputs=semantics_header,
+        rule="linux_msvc_semantics",
+        implicit=[Path("tools/linux_msvc_semantics.py"), *xdk_headers(), *game_headers],
+        variables={
+            "scan": f"--all-inlines --tags source --inlines source --inlines {XDK_INCLUDE}"
+        },
+    )
+    n.build(
+        outputs=platform_semantics_header,
+        rule="linux_msvc_semantics",
+        implicit=[Path("tools/linux_msvc_semantics.py"), *xdk_headers()],
+        variables={"scan": f"--inlines {XDK_INCLUDE}"},
+    )
+
+    abi = " ".join([f"--target={target_triple}"] + LINUX_ABI_FLAGS + target_abi_extra
+                   + [march_flag(sln)] + (["-DHALO_RELEASE"] if getattr(sln, "port_release", False) else []))
     port_include = PORT_DIR / "include"
     sdk_flags = f"-idirafter {XDK_INCLUDE}"
     excluded = set(config.get("exclude_sources", []))
@@ -412,7 +435,8 @@ def generate_linux_build(n: Writer, sln: Any) -> None:
             "-Isource -Isource/cseries",
             sdk_flags,
         ])
-        posix_cflags = " ".join(POSIX_FLAGS + [march_flag(sln), f"-I{platform_dir}"])
+        posix_cflags = " ".join([f"--target={target_triple}"] + POSIX_FLAGS
+                                + [march_flag(sln), f"-I{platform_dir}"])
         mbedtls_include = f"-I{MBEDTLS_DIR / 'include'}"
         for source in sorted(platform_dir.glob("*.c")):
             if source.name == "posix_update.c":
@@ -430,13 +454,13 @@ def generate_linux_build(n: Writer, sln: Any) -> None:
         # wcslen, which linux_link_check.py rejects: the game's wchar_t is
         # 16-bit)
         for source in sorted((MBEDTLS_DIR / "library").glob("*.c")):
-            add_object(source, " ".join(POSIX_FLAGS + [march_flag(sln), mbedtls_include,
+            add_object(source, " ".join([f"--target={target_triple}"] + POSIX_FLAGS + [march_flag(sln), mbedtls_include,
                                                        f"-I{MBEDTLS_DIR / 'library'}", "-fno-builtin-wcslen",
                                                        "-w"]), posix=True)
         # internet play's UPnP (port/third_party/miniupnpc), with the host's
         # ABI as posix_upnp.c, which uses it
         for source in miniupnpc_sources():
-            add_object(source, " ".join(POSIX_FLAGS + [march_flag(sln), *MINIUPNPC_DEFINES,
+            add_object(source, " ".join([f"--target={target_triple}"] + POSIX_FLAGS + [march_flag(sln), *MINIUPNPC_DEFINES,
                                                        f"-I{MINIUPNPC_DIR / 'include'}", f"-I{MINIUPNPC_DIR / 'src'}",
                                                        "-fno-builtin-wcslen", "-w"]), posix=True)
         # the settings file's parser (port/third_party/tomlc17), with the
@@ -454,7 +478,7 @@ def generate_linux_build(n: Writer, sln: Any) -> None:
             rule="linux_link",
             inputs=objects,
             variables={
-                "ldflags": " ".join(["--target=i686-linux-gnu", "-m32", "-no-pie", "-g", *extra_ldflags]),
+                "ldflags": " ".join([f"--target={target_triple}", "-no-pie", "-g", *extra_ldflags]),
                 "libs": libs,
             },
             implicit=[Path("tools/linux_link_check.py")],
@@ -463,9 +487,10 @@ def generate_linux_build(n: Writer, sln: Any) -> None:
     # Profile-guided optimisation: with the committed profile, or with
     # --pgo=train one that an instrumented build records while playing
     # (tools/pgo_train.py). A profile is trained once: code changed since
-    # simply goes without, and deleting it trains a new one.
-    profile = pgo_profile(sln, LINUX_PROFILE, [], cc)
-    if pgo_mode(sln) == "train" and profile == LINUX_PROFILE:
+    # simply goes without, and deleting it trains a new one. Only the 32-bit
+    # build has profiles; the LP64 port is unprofiled for now.
+    profile = pgo_profile(sln, LINUX_PROFILE, [], cc) if is_32 else None
+    if is_32 and pgo_mode(sln) == "train" and profile == LINUX_PROFILE:
         instrumented = build_dir / "pgo-generate" / "halo"
         emit(build_dir / "pgo-generate" / "obj", instrumented, ["-fprofile-generate"], ["-fprofile-generate"], [])
         n.build(
@@ -480,5 +505,5 @@ def generate_linux_build(n: Writer, sln: Any) -> None:
     cflags, ldflags = lto_flags(sln, build_dir / "thinlto-cache")
     cflags += profile_use_flags(profile)
     emit(obj_dir, output, cflags, ldflags, [profile] if profile else [])
-    n.build(outputs="linux", rule="phony", inputs=output)
+    n.build(outputs=target_name, rule="phony", inputs=output)
     n.newline()

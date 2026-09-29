@@ -795,8 +795,7 @@ struct unit_acceleration_plan
 	real deceleration;
 	real deceleration_time;
 };
-typedef char unit_acceleration_plan_size_check[
-	sizeof(struct unit_acceleration_plan) == 0x20 ? 1 : -1];
+typedef char unit_acceleration_plan_size_check[HALO_LAYOUT_ASSERT_32(sizeof(struct unit_acceleration_plan) == 0x20)];
 
 struct unit_control_data
 {
@@ -814,8 +813,7 @@ struct unit_control_data
 	real_vector3d looking_vector;
 };
 
-typedef char unit_control_data_size_assert[
-	sizeof(struct unit_control_data) == 0x40 ? 1 : -1];
+typedef char unit_control_data_size_assert[HALO_LAYOUT_ASSERT_32(sizeof(struct unit_control_data) == 0x40)];
 
 struct unit_animation_update_data
 {
@@ -823,8 +821,7 @@ struct unit_animation_update_data
 	boolean crouching;
 };
 
-typedef char unit_animation_update_data_size_assert[
-	sizeof(struct unit_animation_update_data) == 0x2 ? 1 : -1];
+typedef char unit_animation_update_data_size_assert[HALO_LAYOUT_ASSERT_32(sizeof(struct unit_animation_update_data) == 0x2)];
 
 struct unit_initial_weapon
 {
@@ -832,8 +829,7 @@ struct unit_initial_weapon
 	long unused[5];
 };
 
-typedef char unit_initial_weapon_size_assert[
-	sizeof(struct unit_initial_weapon) == 0x24 ? 1 : -1];
+typedef char unit_initial_weapon_size_assert[HALO_LAYOUT_ASSERT_32(sizeof(struct unit_initial_weapon) == 0x24)];
 
 /* This tag-block element layout is carried locally because this bounded wave
  * does not own the shared game-globals header. */
@@ -845,10 +841,8 @@ struct game_globals_falling_damage
 	struct tag_reference flaming_death_damage_effect;
 	byte unused1[0x1C];
 };
-typedef char game_globals_falling_damage_size_check[
-	sizeof(struct game_globals_falling_damage) == 0x98 ? 1 : -1];
-typedef char game_globals_flaming_death_offset_check[
-	offsetof(struct game_globals_falling_damage, flaming_death_damage_effect) == 0x6C ? 1 : -1];
+typedef char game_globals_falling_damage_size_check[HALO_LAYOUT_ASSERT_32(sizeof(struct game_globals_falling_damage) == 0x98)];
+typedef char game_globals_flaming_death_offset_check[HALO_LAYOUT_ASSERT_32(offsetof(struct game_globals_falling_damage, flaming_death_damage_effect) == 0x6C)];
 
 /* ---------- prototypes */
 
@@ -4547,8 +4541,7 @@ struct scenario_unit_datum
 	real body_vitality;
 	unsigned long flags;
 };
-typedef char scenario_unit_datum_size_check[
-	sizeof(struct scenario_unit_datum) == 0x08 ? 1 : -1];
+typedef char scenario_unit_datum_size_check[HALO_LAYOUT_ASSERT_32(sizeof(struct scenario_unit_datum) == 0x08)];
 
 void unit_place(
 	long unit_index,

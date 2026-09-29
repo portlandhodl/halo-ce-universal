@@ -178,6 +178,18 @@ typedef byte boolean;
 
 typedef unsigned long tag;
 
+/* Explicit 32-bit integers for the disk and wire formats (cache file
+headers, tag data, saved games). On the Xbox and the 32-bit ports they are
+simply long; the LP64 port (HALO_LINUX64, docs/linux64.md) keeps them 32-bit
+where a format fixes the width. */
+#ifdef HALO_LINUX64
+typedef int long32;
+typedef unsigned int ulong32;
+#else
+typedef long long32;
+typedef unsigned long ulong32;
+#endif
+
 /* ---------- prototypes/CSERIES.C */
 
 void cseries_initialize(void);

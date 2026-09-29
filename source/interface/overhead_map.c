@@ -46,16 +46,16 @@ struct overhead_map_globals
 	long reserved2c;
 };
 
-typedef char verify_overhead_map_globals_size[sizeof(struct overhead_map_globals) == 0x30 ? 1 : -1];
-typedef char verify_overhead_map_enabled_offset[offsetof(struct overhead_map_globals, enabled) == 0x00 ? 1 : -1];
-typedef char verify_overhead_map_bitmap_bounds_offset[offsetof(struct overhead_map_globals, bitmap_bounds) == 0x02 ? 1 : -1];
-typedef char verify_overhead_map_throttle_updates_offset[offsetof(struct overhead_map_globals, throttle_updates) == 0x0A ? 1 : -1];
-typedef char verify_overhead_map_render_target_dirty_offset[offsetof(struct overhead_map_globals, render_target_dirty) == 0x0B ? 1 : -1];
-typedef char verify_overhead_map_render_bounds_offset[offsetof(struct overhead_map_globals, render_bounds) == 0x0C ? 1 : -1];
-typedef char verify_overhead_map_viewport_size_offset[offsetof(struct overhead_map_globals, viewport_size) == 0x14 ? 1 : -1];
-typedef char verify_overhead_map_bitmap_origin_offset[offsetof(struct overhead_map_globals, bitmap_origin) == 0x1C ? 1 : -1];
-typedef char verify_overhead_map_last_update_offset[offsetof(struct overhead_map_globals, last_render_bounds_update_time) == 0x20 ? 1 : -1];
-typedef char verify_overhead_map_bitmap_offset[offsetof(struct overhead_map_globals, bitmap) == 0x28 ? 1 : -1];
+typedef char verify_overhead_map_globals_size[HALO_LAYOUT_ASSERT_32(sizeof(struct overhead_map_globals) == 0x30)];
+typedef char verify_overhead_map_enabled_offset[HALO_LAYOUT_ASSERT_32(offsetof(struct overhead_map_globals, enabled) == 0x00)];
+typedef char verify_overhead_map_bitmap_bounds_offset[HALO_LAYOUT_ASSERT_32(offsetof(struct overhead_map_globals, bitmap_bounds) == 0x02)];
+typedef char verify_overhead_map_throttle_updates_offset[HALO_LAYOUT_ASSERT_32(offsetof(struct overhead_map_globals, throttle_updates) == 0x0A)];
+typedef char verify_overhead_map_render_target_dirty_offset[HALO_LAYOUT_ASSERT_32(offsetof(struct overhead_map_globals, render_target_dirty) == 0x0B)];
+typedef char verify_overhead_map_render_bounds_offset[HALO_LAYOUT_ASSERT_32(offsetof(struct overhead_map_globals, render_bounds) == 0x0C)];
+typedef char verify_overhead_map_viewport_size_offset[HALO_LAYOUT_ASSERT_32(offsetof(struct overhead_map_globals, viewport_size) == 0x14)];
+typedef char verify_overhead_map_bitmap_origin_offset[HALO_LAYOUT_ASSERT_32(offsetof(struct overhead_map_globals, bitmap_origin) == 0x1C)];
+typedef char verify_overhead_map_last_update_offset[HALO_LAYOUT_ASSERT_32(offsetof(struct overhead_map_globals, last_render_bounds_update_time) == 0x20)];
+typedef char verify_overhead_map_bitmap_offset[HALO_LAYOUT_ASSERT_32(offsetof(struct overhead_map_globals, bitmap) == 0x28)];
 
 /* ---------- prototypes */
 

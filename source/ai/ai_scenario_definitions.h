@@ -353,18 +353,12 @@ struct actor_starting_location
 	short command_list_index;
 };
 
-typedef char actor_starting_location_size_assert[
-	sizeof(struct actor_starting_location) == 0x1C ? 1 : -1];
-typedef char actor_starting_location_noncombat_sequence_id_offset_assert[
-	offsetof(struct actor_starting_location, noncombat_sequence_id) == 0x12 ? 1 : -1];
-typedef char actor_starting_location_default_state_offset_assert[
-	offsetof(struct actor_starting_location, default_state) == 0x14 ? 1 : -1];
-typedef char actor_starting_location_initial_state_offset_assert[
-	offsetof(struct actor_starting_location, initial_state) == 0x16 ? 1 : -1];
-typedef char actor_starting_location_actor_variant_index_offset_assert[
-	offsetof(struct actor_starting_location, actor_variant_index) == 0x18 ? 1 : -1];
-typedef char actor_starting_location_command_list_index_offset_assert[
-	offsetof(struct actor_starting_location, command_list_index) == 0x1A ? 1 : -1];
+typedef char actor_starting_location_size_assert[HALO_LAYOUT_ASSERT_32(sizeof(struct actor_starting_location) == 0x1C)];
+typedef char actor_starting_location_noncombat_sequence_id_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct actor_starting_location, noncombat_sequence_id) == 0x12)];
+typedef char actor_starting_location_default_state_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct actor_starting_location, default_state) == 0x14)];
+typedef char actor_starting_location_initial_state_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct actor_starting_location, initial_state) == 0x16)];
+typedef char actor_starting_location_actor_variant_index_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct actor_starting_location, actor_variant_index) == 0x18)];
+typedef char actor_starting_location_command_list_index_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct actor_starting_location, command_list_index) == 0x1A)];
 
 struct platoon_rule
 {
@@ -373,10 +367,8 @@ struct platoon_rule
 	long pad;
 };
 
-typedef char platoon_rule_size_assert[
-	sizeof(struct platoon_rule) == 8 ? 1 : -1];
-typedef char platoon_rule_platoon_index_offset_assert[
-	offsetof(struct platoon_rule, platoon_index) == 2 ? 1 : -1];
+typedef char platoon_rule_size_assert[HALO_LAYOUT_ASSERT_32(sizeof(struct platoon_rule) == 8)];
+typedef char platoon_rule_platoon_index_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct platoon_rule, platoon_index) == 2)];
 
 struct platoon_definition
 {
@@ -389,14 +381,10 @@ struct platoon_definition
 	unsigned char reserved[0x68];
 };
 
-typedef char platoon_definition_size_assert[
-	sizeof(struct platoon_definition) == 0xAC ? 1 : -1];
-typedef char platoon_definition_flags_offset_assert[
-	offsetof(struct platoon_definition, flags) == 0x20 ? 1 : -1];
-typedef char platoon_definition_attacking_defending_rule_offset_assert[
-	offsetof(struct platoon_definition, attacking_defending_rule) == 0x30 ? 1 : -1];
-typedef char platoon_definition_maneuvering_rule_offset_assert[
-	offsetof(struct platoon_definition, maneuvering_rule) == 0x3C ? 1 : -1];
+typedef char platoon_definition_size_assert[HALO_LAYOUT_ASSERT_32(sizeof(struct platoon_definition) == 0xAC)];
+typedef char platoon_definition_flags_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct platoon_definition, flags) == 0x20)];
+typedef char platoon_definition_attacking_defending_rule_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct platoon_definition, attacking_defending_rule) == 0x30)];
+typedef char platoon_definition_maneuvering_rule_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct platoon_definition, maneuvering_rule) == 0x3C)];
 
 struct ai_command_definition
 {

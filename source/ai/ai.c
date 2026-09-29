@@ -414,83 +414,46 @@ struct encounter_iterator
 	boolean active_only;
 };
 
-typedef char ai_globals_active_offset_assert[
-	offsetof(struct ai_globals_data, ai_active) == 0x0 ? 1 : -1];
-typedef char ai_globals_initialized_offset_assert[
-	offsetof(struct ai_globals_data, ai_initialized_for_map) == 0x1 ? 1 : -1];
-typedef char ai_globals_first_encounterless_actor_offset_assert[
-	offsetof(struct ai_globals_data, first_encounterless_actor_index) == 0x8 ? 1 : -1];
-typedef char ai_globals_dialogue_offset_assert[
-	offsetof(struct ai_globals_data, dialogue_triggers_enabled) == 0x10 ? 1 : -1];
-typedef char ai_globals_last_chatter_time_offset_assert[
-	offsetof(struct ai_globals_data, last_chatter_time) == 0x14 ? 1 : -1];
-typedef char ai_globals_spatial_effects_offset_assert[
-	offsetof(struct ai_globals_data, spatial_effects) == 0x134 ? 1 : -1];
-typedef char ai_spatial_effect_size_assert[
-	sizeof(struct ai_spatial_effect) == 0x14 ? 1 : -1];
-typedef char ai_globals_grenades_offset_assert[
-	offsetof(struct ai_globals_data, grenades_enabled) == 0x3B4 ? 1 : -1];
-typedef char ai_globals_mounted_weapon_count_offset_assert[
-	offsetof(struct ai_globals_data, mounted_weapon_unit_count) == 0x8B8 ? 1 : -1];
-typedef char ai_globals_size_assert[
-	sizeof(struct ai_globals_data) == 0x8DC ? 1 : -1];
-typedef char ai_potentially_releasable_storage_size_assert[
-	sizeof(struct potentially_releasable_storage) == 0xC04 ? 1 : -1];
-typedef char ai_unit_actor_index_offset_assert[
-	offsetof(struct unit_datum, unit.actor_index) == 0x1A4 ? 1 : -1];
-typedef char ai_actor_last_vehicle_exit_forced_offset_assert[
-	offsetof(struct actor_datum, emotions.last_vehicle_exit_forced) == 0x38C ? 1 : -1];
-typedef char ai_actor_iterator_size_assert[
-	sizeof(struct actor_iterator) == 0x1C ? 1 : -1];
-typedef char ai_actor_iterator_index_offset_assert[
-	offsetof(struct actor_iterator, index) == 0x14 ? 1 : -1];
-typedef char ai_encounter_iterator_size_assert[
-	sizeof(struct encounter_iterator) == 0x18 ? 1 : -1];
-typedef char ai_encounter_iterator_index_offset_assert[
-	offsetof(struct encounter_iterator, index) == 0x10 ? 1 : -1];
-typedef char ai_encounter_actor_iterator_size_assert[
-	sizeof(struct encounter_actor_iterator) == 0xC ? 1 : -1];
-typedef char ai_encounter_actor_iterator_index_offset_assert[
-	offsetof(struct encounter_actor_iterator, index) == 0x4 ? 1 : -1];
-typedef char ai_line_of_fire_pill_size_assert[
-	sizeof(struct line_of_fire_pill) == 0x28 ? 1 : -1];
-typedef char ai_line_of_fire_pill_width_offset_assert[
-	offsetof(struct line_of_fire_pill, width) == 0x24 ? 1 : -1];
-typedef char ai_profile_collision_test_count_offset_assert[
-	offsetof(struct ai_profile_globals, meters) +
-		_ai_meter_collisions * sizeof(struct ai_meter) == 0xB34 ? 1 : -1];
-typedef char ai_profile_lineofsight_test_count_offset_assert[
-	offsetof(struct ai_profile_globals, meters) +
-		_ai_meter_line_of_sight * sizeof(struct ai_meter) == 0xBBC ? 1 : -1];
-typedef char ai_profile_lineoffire_test_count_offset_assert[
-	offsetof(struct ai_profile_globals, meters) +
-		_ai_meter_line_of_fire * sizeof(struct ai_meter) == 0xC44 ? 1 : -1];
-typedef char ai_actor_squad_index_offset_assert[
-	offsetof(struct actor_datum, meta.squad_index) == 0x3A ? 1 : -1];
-typedef char ai_actor_platoon_index_offset_assert[
-	offsetof(struct actor_datum, meta.platoon_index) == 0x3C ? 1 : -1];
-typedef char ai_actor_team_index_offset_assert[
-	offsetof(struct actor_datum, meta.team_index) == 0x3E ? 1 : -1];
-typedef char ai_unit_player_index_offset_assert[
-	offsetof(struct unit_datum, unit.player_index) == 0x1C8 ? 1 : -1];
-typedef char ai_unit_team_index_offset_assert[
-	offsetof(struct unit_datum, object.owner_team_index) == 0x68 ? 1 : -1];
-typedef char ai_prop_iterator_size_assert[
-	sizeof(struct prop_iterator) == 0x8 ? 1 : -1];
-typedef char ai_prop_iterator_index_offset_assert[
-	offsetof(struct prop_iterator, index) == 0x0 ? 1 : -1];
-typedef char ai_prop_team_index_offset_assert[
-	offsetof(struct prop_datum, team_index) == 0x12 ? 1 : -1];
-typedef char ai_prop_unit_index_offset_assert[
-	offsetof(struct prop_datum, unit_index) == 0x18 ? 1 : -1];
-typedef char ai_prop_target_weight_offset_assert[
-	offsetof(struct prop_datum, target_weight) == 0x50 ? 1 : -1];
-typedef char ai_prop_enemy_offset_assert[
-	offsetof(struct prop_datum, enemy) == 0x60 ? 1 : -1];
-typedef char ai_prop_ally_offset_assert[
-	offsetof(struct prop_datum, ally) == 0x61 ? 1 : -1];
-typedef char ai_prop_unopposable_enemy_offset_assert[
-	offsetof(struct prop_datum, unopposable_enemy) == 0xA4 ? 1 : -1];
+typedef char ai_globals_active_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct ai_globals_data, ai_active) == 0x0)];
+typedef char ai_globals_initialized_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct ai_globals_data, ai_initialized_for_map) == 0x1)];
+typedef char ai_globals_first_encounterless_actor_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct ai_globals_data, first_encounterless_actor_index) == 0x8)];
+typedef char ai_globals_dialogue_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct ai_globals_data, dialogue_triggers_enabled) == 0x10)];
+typedef char ai_globals_last_chatter_time_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct ai_globals_data, last_chatter_time) == 0x14)];
+typedef char ai_globals_spatial_effects_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct ai_globals_data, spatial_effects) == 0x134)];
+typedef char ai_spatial_effect_size_assert[HALO_LAYOUT_ASSERT_32(sizeof(struct ai_spatial_effect) == 0x14)];
+typedef char ai_globals_grenades_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct ai_globals_data, grenades_enabled) == 0x3B4)];
+typedef char ai_globals_mounted_weapon_count_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct ai_globals_data, mounted_weapon_unit_count) == 0x8B8)];
+typedef char ai_globals_size_assert[HALO_LAYOUT_ASSERT_32(sizeof(struct ai_globals_data) == 0x8DC)];
+typedef char ai_potentially_releasable_storage_size_assert[HALO_LAYOUT_ASSERT_32(sizeof(struct potentially_releasable_storage) == 0xC04)];
+typedef char ai_unit_actor_index_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct unit_datum, unit.actor_index) == 0x1A4)];
+typedef char ai_actor_last_vehicle_exit_forced_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct actor_datum, emotions.last_vehicle_exit_forced) == 0x38C)];
+typedef char ai_actor_iterator_size_assert[HALO_LAYOUT_ASSERT_32(sizeof(struct actor_iterator) == 0x1C)];
+typedef char ai_actor_iterator_index_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct actor_iterator, index) == 0x14)];
+typedef char ai_encounter_iterator_size_assert[HALO_LAYOUT_ASSERT_32(sizeof(struct encounter_iterator) == 0x18)];
+typedef char ai_encounter_iterator_index_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct encounter_iterator, index) == 0x10)];
+typedef char ai_encounter_actor_iterator_size_assert[HALO_LAYOUT_ASSERT_32(sizeof(struct encounter_actor_iterator) == 0xC)];
+typedef char ai_encounter_actor_iterator_index_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct encounter_actor_iterator, index) == 0x4)];
+typedef char ai_line_of_fire_pill_size_assert[HALO_LAYOUT_ASSERT_32(sizeof(struct line_of_fire_pill) == 0x28)];
+typedef char ai_line_of_fire_pill_width_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct line_of_fire_pill, width) == 0x24)];
+typedef char ai_profile_collision_test_count_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct ai_profile_globals, meters) +
+		_ai_meter_collisions * sizeof(struct ai_meter) == 0xB34)];
+typedef char ai_profile_lineofsight_test_count_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct ai_profile_globals, meters) +
+		_ai_meter_line_of_sight * sizeof(struct ai_meter) == 0xBBC)];
+typedef char ai_profile_lineoffire_test_count_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct ai_profile_globals, meters) +
+		_ai_meter_line_of_fire * sizeof(struct ai_meter) == 0xC44)];
+typedef char ai_actor_squad_index_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct actor_datum, meta.squad_index) == 0x3A)];
+typedef char ai_actor_platoon_index_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct actor_datum, meta.platoon_index) == 0x3C)];
+typedef char ai_actor_team_index_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct actor_datum, meta.team_index) == 0x3E)];
+typedef char ai_unit_player_index_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct unit_datum, unit.player_index) == 0x1C8)];
+typedef char ai_unit_team_index_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct unit_datum, object.owner_team_index) == 0x68)];
+typedef char ai_prop_iterator_size_assert[HALO_LAYOUT_ASSERT_32(sizeof(struct prop_iterator) == 0x8)];
+typedef char ai_prop_iterator_index_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct prop_iterator, index) == 0x0)];
+typedef char ai_prop_team_index_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct prop_datum, team_index) == 0x12)];
+typedef char ai_prop_unit_index_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct prop_datum, unit_index) == 0x18)];
+typedef char ai_prop_target_weight_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct prop_datum, target_weight) == 0x50)];
+typedef char ai_prop_enemy_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct prop_datum, enemy) == 0x60)];
+typedef char ai_prop_ally_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct prop_datum, ally) == 0x61)];
+typedef char ai_prop_unopposable_enemy_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct prop_datum, unopposable_enemy) == 0xA4)];
 
 /* ---------- prototypes */
 

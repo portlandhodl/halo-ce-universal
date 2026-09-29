@@ -209,8 +209,7 @@ enum
 
 /* ---------- structures */
 
-typedef char verify_scenario_netgame_flag_size[
-	sizeof(struct scenario_netgame_flag) == 0x94 ? 1 : -1];
+typedef char verify_scenario_netgame_flag_size[HALO_LAYOUT_ASSERT_32(sizeof(struct scenario_netgame_flag) == 0x94)];
 
 struct ctf_globals
 {
@@ -225,10 +224,8 @@ struct ctf_globals
 	long next_flag_failure_time;
 };
 
-typedef char verify_ctf_globals_scores_offset[
-	offsetof(struct ctf_globals, scores) == 0x10 ? 1 : -1];
-typedef char verify_ctf_globals_size[
-	sizeof(struct ctf_globals) == 0x30 ? 1 : -1];
+typedef char verify_ctf_globals_scores_offset[HALO_LAYOUT_ASSERT_32(offsetof(struct ctf_globals, scores) == 0x10)];
+typedef char verify_ctf_globals_size[HALO_LAYOUT_ASSERT_32(sizeof(struct ctf_globals) == 0x30)];
 
 /* ---------- prototypes */
 

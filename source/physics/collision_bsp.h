@@ -68,10 +68,8 @@ struct collision_surface_test_line2d_result
 	long exit_surface_index;
 };
 
-typedef char collision_surface_test_line2d_result_size_assert[
-	sizeof(struct collision_surface_test_line2d_result) == 0x18 ? 1 : -1];
-typedef char collision_surface_test_line2d_result_exit_t_offset_assert[
-	offsetof(struct collision_surface_test_line2d_result, exit_t) == 0x0C ? 1 : -1];
+typedef char collision_surface_test_line2d_result_size_assert[HALO_LAYOUT_ASSERT_32(sizeof(struct collision_surface_test_line2d_result) == 0x18)];
+typedef char collision_surface_test_line2d_result_exit_t_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct collision_surface_test_line2d_result, exit_t) == 0x0C)];
 
 struct collision_bsp_test_sphere_result
 {

@@ -908,8 +908,7 @@ symbols in this file:
 
 /* ---------- structures */
 
-typedef char verify_hs_external_global_definition_size[
-	sizeof(struct hs_external_global_definition) == 0xC ? 1 : -1];
+typedef char verify_hs_external_global_definition_size[HALO_LAYOUT_ASSERT_32(sizeof(struct hs_external_global_definition) == 0xC)];
 
 /* ---------- prototypes */
 

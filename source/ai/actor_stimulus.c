@@ -163,38 +163,22 @@ enum
 
 /* ---------- structures */
 
-typedef char actor_stimulus_data_size_assert[
-	sizeof(struct actor_stimulus_data) == 0x64 ? 1 : -1];
-typedef char actor_stimuli_offset_assert[
-	offsetof(struct actor_datum, stimuli) == 0x2EC ? 1 : -1];
-typedef char actor_stimulus_vehicle_eviction_offset_assert[
-	offsetof(struct actor_datum, stimuli.vehicle_eviction) == 0x2ED ? 1 : -1];
-typedef char actor_stimulus_was_surprised_offset_assert[
-	offsetof(struct actor_datum, stimuli.was_surprised) == 0x2F0 ? 1 : -1];
-typedef char actor_stimulus_suspicion_combat_status_offset_assert[
-	offsetof(struct actor_datum, stimuli.suspicion_combat_status) == 0x34A ? 1 : -1];
-typedef char actor_stimulus_suspicion_timer_offset_assert[
-	offsetof(struct actor_datum, stimuli.suspicion_timer) == 0x34C ? 1 : -1];
-typedef char actor_stimulus_actor_mode_offset_assert[
-	offsetof(struct actor_datum, state.mode) == 0x6A ? 1 : -1];
-typedef char actor_stimulus_actor_unit_index_offset_assert[
-	offsetof(struct actor_datum, meta.unit_index) == 0x18 ? 1 : -1];
-typedef char actor_stimulus_panic_type_offset_assert[
-	offsetof(struct actor_datum, stimuli.panic_type) == 0x308 ? 1 : -1];
-typedef char actor_stimulus_panic_prop_index_offset_assert[
-	offsetof(struct actor_datum, stimuli.panic_prop_index) == 0x30C ? 1 : -1];
-typedef char actor_stimulus_direction_size_assert[
-	sizeof(struct direction_specification) == 0x10 ? 1 : -1];
-typedef char actor_stimulus_direction_prop_index_offset_assert[
-	offsetof(struct direction_specification, prop_index) == 0x4 ? 1 : -1];
-typedef char actor_stimulus_direction_point_offset_assert[
-	offsetof(struct direction_specification, point) == 0x4 ? 1 : -1];
-typedef char actor_stimulus_prop_unit_index_offset_assert[
-	offsetof(struct prop_datum, unit_index) == 0x18 ? 1 : -1];
-typedef char actor_stimulus_prop_enemy_offset_assert[
-	offsetof(struct prop_datum, enemy) == 0x60 ? 1 : -1];
-typedef char actor_stimulus_prop_dead_offset_assert[
-	offsetof(struct prop_datum, dead) == 0x127 ? 1 : -1];
+typedef char actor_stimulus_data_size_assert[HALO_LAYOUT_ASSERT_32(sizeof(struct actor_stimulus_data) == 0x64)];
+typedef char actor_stimuli_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct actor_datum, stimuli) == 0x2EC)];
+typedef char actor_stimulus_vehicle_eviction_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct actor_datum, stimuli.vehicle_eviction) == 0x2ED)];
+typedef char actor_stimulus_was_surprised_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct actor_datum, stimuli.was_surprised) == 0x2F0)];
+typedef char actor_stimulus_suspicion_combat_status_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct actor_datum, stimuli.suspicion_combat_status) == 0x34A)];
+typedef char actor_stimulus_suspicion_timer_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct actor_datum, stimuli.suspicion_timer) == 0x34C)];
+typedef char actor_stimulus_actor_mode_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct actor_datum, state.mode) == 0x6A)];
+typedef char actor_stimulus_actor_unit_index_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct actor_datum, meta.unit_index) == 0x18)];
+typedef char actor_stimulus_panic_type_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct actor_datum, stimuli.panic_type) == 0x308)];
+typedef char actor_stimulus_panic_prop_index_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct actor_datum, stimuli.panic_prop_index) == 0x30C)];
+typedef char actor_stimulus_direction_size_assert[HALO_LAYOUT_ASSERT_32(sizeof(struct direction_specification) == 0x10)];
+typedef char actor_stimulus_direction_prop_index_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct direction_specification, prop_index) == 0x4)];
+typedef char actor_stimulus_direction_point_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct direction_specification, point) == 0x4)];
+typedef char actor_stimulus_prop_unit_index_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct prop_datum, unit_index) == 0x18)];
+typedef char actor_stimulus_prop_enemy_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct prop_datum, enemy) == 0x60)];
+typedef char actor_stimulus_prop_dead_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct prop_datum, dead) == 0x127)];
 
 /* ---------- globals */
 

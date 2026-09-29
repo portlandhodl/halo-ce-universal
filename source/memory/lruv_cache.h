@@ -58,10 +58,8 @@ struct lruv_cache_block
 	long user_data;
 };
 
-typedef char lruv_cache_size_assert[
-	sizeof(struct lruv_cache) == 0x44 ? 1 : -1];
-typedef char lruv_cache_block_size_assert[
-	sizeof(struct lruv_cache_block) == 0x1C ? 1 : -1];
+typedef char lruv_cache_size_assert[HALO_LAYOUT_ASSERT_32(sizeof(struct lruv_cache) == 0x44)];
+typedef char lruv_cache_block_size_assert[HALO_LAYOUT_ASSERT_32(sizeof(struct lruv_cache_block) == 0x1C)];
 
 /* ---------- prototypes/LRUV_CACHE.C */
 

@@ -131,8 +131,7 @@ struct build_sprite_vertex
 	pixel32 color;
 };
 
-typedef char build_sprite_vertex_size_assert[
-	sizeof(struct build_sprite_vertex) == 0x18 ? 1 : -1];
+typedef char build_sprite_vertex_size_assert[HALO_LAYOUT_ASSERT_32(sizeof(struct build_sprite_vertex) == 0x18)];
 
 struct build_sprite_globals_data
 {
@@ -147,8 +146,7 @@ struct build_sprite_globals_data
 	real_vector3d viewer_space_world_forward;
 };
 
-typedef char build_sprite_globals_data_size_assert[
-	sizeof(struct build_sprite_globals_data) == 0x28 ? 1 : -1];
+typedef char build_sprite_globals_data_size_assert[HALO_LAYOUT_ASSERT_32(sizeof(struct build_sprite_globals_data) == 0x28)];
 
 /* ---------- prototypes */
 

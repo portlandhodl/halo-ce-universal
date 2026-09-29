@@ -44,8 +44,7 @@ struct structure_surface
 	word vertex_indices[NUMBER_OF_VERTICES_PER_TRIANGLE];
 };
 
-typedef char structure_surface_size_assert[
-	sizeof(struct structure_surface) == 0x6 ? 1 : -1];
+typedef char structure_surface_size_assert[HALO_LAYOUT_ASSERT_32(sizeof(struct structure_surface) == 0x6)];
 
 struct structure_material
 {
@@ -98,16 +97,11 @@ struct structure_cluster
 	byte unused34[0x34];
 };
 
-typedef char structure_cluster_size_assert[
-	sizeof(struct structure_cluster) == 0x68 ? 1 : -1];
-typedef char structure_cluster_fog_reference_offset_assert[
-	offsetof(struct structure_cluster, fog_reference) == 0x02 ? 1 : -1];
-typedef char structure_cluster_background_sound_offset_assert[
-	offsetof(struct structure_cluster, background_sound_palette_index) == 0x04 ? 1 : -1];
-typedef char structure_cluster_weather_offset_assert[
-	offsetof(struct structure_cluster, weather_palette_index) == 0x08 ? 1 : -1];
-typedef char structure_cluster_predicted_resources_offset_assert[
-	offsetof(struct structure_cluster, predicted_resources) == 0x28 ? 1 : -1];
+typedef char structure_cluster_size_assert[HALO_LAYOUT_ASSERT_32(sizeof(struct structure_cluster) == 0x68)];
+typedef char structure_cluster_fog_reference_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct structure_cluster, fog_reference) == 0x02)];
+typedef char structure_cluster_background_sound_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct structure_cluster, background_sound_palette_index) == 0x04)];
+typedef char structure_cluster_weather_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct structure_cluster, weather_palette_index) == 0x08)];
+typedef char structure_cluster_predicted_resources_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct structure_cluster, predicted_resources) == 0x28)];
 
 /*
  * The January scenario code indexes this palette with a 0x74-byte stride and
@@ -120,8 +114,7 @@ struct structure_background_sound_palette_entry
 	byte unused30[0x44];
 };
 
-typedef char structure_background_sound_palette_entry_size_assert[
-	sizeof(struct structure_background_sound_palette_entry) == 0x74 ? 1 : -1];
+typedef char structure_background_sound_palette_entry_size_assert[HALO_LAYOUT_ASSERT_32(sizeof(struct structure_background_sound_palette_entry) == 0x74)];
 
 struct structure_sound_environment_palette_entry
 {
@@ -130,8 +123,7 @@ struct structure_sound_environment_palette_entry
 	byte unused30[0x20];
 };
 
-typedef char structure_sound_environment_palette_entry_size_assert[
-	sizeof(struct structure_sound_environment_palette_entry) == 0x50 ? 1 : -1];
+typedef char structure_sound_environment_palette_entry_size_assert[HALO_LAYOUT_ASSERT_32(sizeof(struct structure_sound_environment_palette_entry) == 0x50)];
 
 struct structure_runtime_decal
 {
@@ -157,13 +149,10 @@ struct structure_fog_plane
 	byte unused14[0xC];
 };
 
-typedef char structure_fog_plane_size_assert[
-	sizeof(struct structure_fog_plane) == 0x20 ? 1 : -1];
+typedef char structure_fog_plane_size_assert[HALO_LAYOUT_ASSERT_32(sizeof(struct structure_fog_plane) == 0x20)];
 
-typedef char structure_fog_region_size_assert[
-	sizeof(struct structure_fog_region) == 0x28 ? 1 : -1];
-typedef char structure_fog_region_weather_offset_assert[
-	offsetof(struct structure_fog_region, weather_palette_index) == 0x26 ? 1 : -1];
+typedef char structure_fog_region_size_assert[HALO_LAYOUT_ASSERT_32(sizeof(struct structure_fog_region) == 0x28)];
+typedef char structure_fog_region_weather_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct structure_fog_region, weather_palette_index) == 0x26)];
 
 struct structure_fog_palette_entry
 {
@@ -172,8 +161,7 @@ struct structure_fog_palette_entry
 	byte unused2[0x58];
 };
 
-typedef char structure_fog_palette_entry_size_assert[
-	sizeof(struct structure_fog_palette_entry) == 0x88 ? 1 : -1];
+typedef char structure_fog_palette_entry_size_assert[HALO_LAYOUT_ASSERT_32(sizeof(struct structure_fog_palette_entry) == 0x88)];
 
 struct structure_bsp
 {

@@ -550,20 +550,15 @@ static word processed_bsp_flags;
 #pragma bss_seg()
 #endif
 
-typedef char verify_object_type_definition_size[
-	sizeof(struct object_type_definition) == 0xA0 ? 1 : -1];
+typedef char verify_object_type_definition_size[HALO_LAYOUT_ASSERT_32(sizeof(struct object_type_definition) == 0xA0)];
 
-typedef char verify_object_type_definition_group_tag_offset[
-	offsetof(struct object_type_definition, group_tag) == 0x4 ? 1 : -1];
+typedef char verify_object_type_definition_group_tag_offset[HALO_LAYOUT_ASSERT_32(offsetof(struct object_type_definition, group_tag) == 0x4)];
 
-typedef char verify_object_type_definition_game_datum_size_offset[
-	offsetof(struct object_type_definition, game_datum_size) == 0x8 ? 1 : -1];
+typedef char verify_object_type_definition_game_datum_size_offset[HALO_LAYOUT_ASSERT_32(offsetof(struct object_type_definition, game_datum_size) == 0x8)];
 
-typedef char verify_object_type_definition_part_definitions_offset[
-	offsetof(struct object_type_definition, part_definitions) == 0x5C ? 1 : -1];
+typedef char verify_object_type_definition_part_definitions_offset[HALO_LAYOUT_ASSERT_32(offsetof(struct object_type_definition, part_definitions) == 0x5C)];
 
-typedef char verify_object_type_definition_next_offset[
-	offsetof(struct object_type_definition, next) == 0x9C ? 1 : -1];
+typedef char verify_object_type_definition_next_offset[HALO_LAYOUT_ASSERT_32(offsetof(struct object_type_definition, next) == 0x9C)];
 
 /* ---------- public code */
 

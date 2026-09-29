@@ -250,8 +250,7 @@ struct actor_combat_vehicle_definition_view
 	unsigned long flags;
 };
 
-typedef char actor_combat_vehicle_definition_flags_offset_assert[
-	offsetof(struct actor_combat_vehicle_definition_view, flags) == 0x2F0 ? 1 : -1];
+typedef char actor_combat_vehicle_definition_flags_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct actor_combat_vehicle_definition_view, flags) == 0x2F0)];
 
 /* ---------- prototypes */
 

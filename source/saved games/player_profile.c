@@ -143,8 +143,7 @@ enum
 
 /* ---------- structures */
 
-typedef char verify_player_profile_size[
-	sizeof(struct player_profile) == 0x30 ? 1 : -1];
+typedef char verify_player_profile_size[HALO_LAYOUT_ASSERT_32(sizeof(struct player_profile) == 0x30)];
 
 struct player_profile_file_block
 {
@@ -154,8 +153,7 @@ struct player_profile_file_block
 		sizeof(struct player_profile) - sizeof(XCALCSIG_SIGNATURE)];
 };
 
-typedef char verify_player_profile_file_block_size[
-	sizeof(struct player_profile_file_block) == SAVED_GAME_FILE_BLOCK_SIZE ? 1 : -1];
+typedef char verify_player_profile_file_block_size[HALO_LAYOUT_ASSERT_32(sizeof(struct player_profile_file_block) == SAVED_GAME_FILE_BLOCK_SIZE)];
 
 struct player_profile_write_request
 {
@@ -171,12 +169,9 @@ struct player_profile_runtime_globals
 	boolean initialized;
 };
 
-typedef char verify_player_profile_thread_offset[
-	offsetof(struct player_profile_runtime_globals, thread) == 0x64 ? 1 : -1];
-typedef char verify_player_profile_initialized_offset[
-	offsetof(struct player_profile_runtime_globals, initialized) == 0x68 ? 1 : -1];
-typedef char verify_player_profile_globals_size[
-	sizeof(struct player_profile_runtime_globals) == 0x6C ? 1 : -1];
+typedef char verify_player_profile_thread_offset[HALO_LAYOUT_ASSERT_32(offsetof(struct player_profile_runtime_globals, thread) == 0x64)];
+typedef char verify_player_profile_initialized_offset[HALO_LAYOUT_ASSERT_32(offsetof(struct player_profile_runtime_globals, initialized) == 0x68)];
+typedef char verify_player_profile_globals_size[HALO_LAYOUT_ASSERT_32(sizeof(struct player_profile_runtime_globals) == 0x6C)];
 
 /* ---------- prototypes */
 

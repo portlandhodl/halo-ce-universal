@@ -657,47 +657,31 @@ union game_engine_update_iterator
 	struct object_iterator object;
 };
 
-typedef char verify_postgame_statistic_entry_size[
-	sizeof(struct postgame_statistic_entry) == 0x1C ? 1 : -1];
-typedef char verify_hud_globals_single_player_font_index_offset[
-	offsetof(
+typedef char verify_postgame_statistic_entry_size[HALO_LAYOUT_ASSERT_32(sizeof(struct postgame_statistic_entry) == 0x1C)];
+typedef char verify_hud_globals_single_player_font_index_offset[HALO_LAYOUT_ASSERT_32(offsetof(
 		struct hud_globals_definition,
-		messaging.single_player_font.index) == 0x54 ? 1 : -1];
-typedef char verify_hud_globals_multi_player_font_index_offset[
-	offsetof(
+		messaging.single_player_font.index) == 0x54)];
+typedef char verify_hud_globals_multi_player_font_index_offset[HALO_LAYOUT_ASSERT_32(offsetof(
 		struct hud_globals_definition,
-		messaging.multi_player_font.index) == 0x64 ? 1 : -1];
-typedef char verify_hud_globals_carnage_report_bitmap_index_offset[
-	offsetof(
+		messaging.multi_player_font.index) == 0x64)];
+typedef char verify_hud_globals_carnage_report_bitmap_index_offset[HALO_LAYOUT_ASSERT_32(offsetof(
 		struct hud_globals_definition,
-		carnage_report_bitmap.index) == 0x3D4 ? 1 : -1];
-typedef char verify_game_engine_goal_size[sizeof(struct game_engine_goal) == 0x20 ? 1 : -1];
-typedef char verify_game_engine_globals_postgame_timer_offset[
-	offsetof(struct game_engine_globals, postgame_timer) == 0x8 ? 1 : -1];
-typedef char verify_game_engine_globals_next_team_index_offset[
-	offsetof(struct game_engine_globals, next_team_index) == 0x4 ? 1 : -1];
-typedef char verify_game_engine_globals_postgame_progress_offset[
-	offsetof(struct game_engine_globals, postgame_progress) == 0xC ? 1 : -1];
-typedef char verify_game_engine_globals_postgame_state_offset[
-	offsetof(struct game_engine_globals, postgame_state) == 0x10 ? 1 : -1];
-typedef char verify_game_engine_globals_hud_message_timers_offset[
-	offsetof(struct game_engine_globals, hud_message_timers) == 0x14 ? 1 : -1];
-typedef char verify_game_engine_globals_size[
-	sizeof(struct game_engine_globals) == 0x24 ? 1 : -1];
-typedef char verify_game_engine_stage_variant_offset[
-	offsetof(struct game_engine_stage, variant) == 0x40 ? 1 : -1];
-typedef char verify_game_engine_stage_size[
-	sizeof(struct game_engine_stage) == 0xA8 ? 1 : -1];
-typedef char verify_scenario_netgame_flag_size[
-	sizeof(struct scenario_netgame_flag) == 0x94 ? 1 : -1];
+		carnage_report_bitmap.index) == 0x3D4)];
+typedef char verify_game_engine_goal_size[HALO_LAYOUT_ASSERT_32(sizeof(struct game_engine_goal) == 0x20)];
+typedef char verify_game_engine_globals_postgame_timer_offset[HALO_LAYOUT_ASSERT_32(offsetof(struct game_engine_globals, postgame_timer) == 0x8)];
+typedef char verify_game_engine_globals_next_team_index_offset[HALO_LAYOUT_ASSERT_32(offsetof(struct game_engine_globals, next_team_index) == 0x4)];
+typedef char verify_game_engine_globals_postgame_progress_offset[HALO_LAYOUT_ASSERT_32(offsetof(struct game_engine_globals, postgame_progress) == 0xC)];
+typedef char verify_game_engine_globals_postgame_state_offset[HALO_LAYOUT_ASSERT_32(offsetof(struct game_engine_globals, postgame_state) == 0x10)];
+typedef char verify_game_engine_globals_hud_message_timers_offset[HALO_LAYOUT_ASSERT_32(offsetof(struct game_engine_globals, hud_message_timers) == 0x14)];
+typedef char verify_game_engine_globals_size[HALO_LAYOUT_ASSERT_32(sizeof(struct game_engine_globals) == 0x24)];
+typedef char verify_game_engine_stage_variant_offset[HALO_LAYOUT_ASSERT_32(offsetof(struct game_engine_stage, variant) == 0x40)];
+typedef char verify_game_engine_stage_size[HALO_LAYOUT_ASSERT_32(sizeof(struct game_engine_stage) == 0xA8)];
+typedef char verify_scenario_netgame_flag_size[HALO_LAYOUT_ASSERT_32(sizeof(struct scenario_netgame_flag) == 0x94)];
 
-typedef char verify_scenario_netgame_equipment_size[
-	sizeof(struct scenario_netgame_equipment) == 0x90 ? 1 : -1];
+typedef char verify_scenario_netgame_equipment_size[HALO_LAYOUT_ASSERT_32(sizeof(struct scenario_netgame_equipment) == 0x90)];
 
-typedef char verify_scenario_starting_equipment_size[
-	sizeof(struct scenario_starting_equipment) == 0xCC ? 1 : -1];
-typedef char verify_item_permutation_definition_size[
-	sizeof(struct item_permutation_definition) == 0x54 ? 1 : -1];
+typedef char verify_scenario_starting_equipment_size[HALO_LAYOUT_ASSERT_32(sizeof(struct scenario_starting_equipment) == 0xCC)];
+typedef char verify_item_permutation_definition_size[HALO_LAYOUT_ASSERT_32(sizeof(struct item_permutation_definition) == 0x54)];
 
 /* ---------- prototypes */
 

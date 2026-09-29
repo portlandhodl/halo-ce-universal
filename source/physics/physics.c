@@ -221,15 +221,11 @@ struct game_globals_falling_damage
 	real runtime_maximum_damage_velocity;
 };
 
-typedef char game_globals_falling_damage_size_assert[
-	sizeof(struct game_globals_falling_damage) == 0x98 ? 1 : -1];
+typedef char game_globals_falling_damage_size_assert[HALO_LAYOUT_ASSERT_32(sizeof(struct game_globals_falling_damage) == 0x98)];
 
-typedef char powered_mass_point_definition_size_assert[
-	sizeof(struct powered_mass_point_definition) == 0x80 ? 1 : -1];
-typedef char powered_mass_point_datum_size_assert[
-	sizeof(struct powered_mass_point_datum) == 0x60 ? 1 : -1];
-typedef char mass_point_datum_size_assert[
-	sizeof(struct mass_point_datum) == 0x130 ? 1 : -1];
+typedef char powered_mass_point_definition_size_assert[HALO_LAYOUT_ASSERT_32(sizeof(struct powered_mass_point_definition) == 0x80)];
+typedef char powered_mass_point_datum_size_assert[HALO_LAYOUT_ASSERT_32(sizeof(struct powered_mass_point_datum) == 0x60)];
+typedef char mass_point_datum_size_assert[HALO_LAYOUT_ASSERT_32(sizeof(struct mass_point_datum) == 0x130)];
 
 /* ---------- prototypes */
 

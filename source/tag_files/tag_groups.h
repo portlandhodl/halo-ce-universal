@@ -105,8 +105,7 @@ struct tag_reference_definition
 	unsigned long *group_tags;
 };
 
-typedef char tag_reference_definition_size_assert[
-	sizeof(struct tag_reference_definition) == 0xC ? 1 : -1];
+typedef char tag_reference_definition_size_assert[HALO_LAYOUT_ASSERT_32(sizeof(struct tag_reference_definition) == 0xC)];
 
 struct tag_data
 {

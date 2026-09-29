@@ -37,8 +37,7 @@ struct widget_instance_prefix
 	short local_player_index;
 };
 
-typedef char widget_instance_local_player_index_offset[
-	offsetof(struct widget_instance_prefix, local_player_index) == 8 ? 1 : -1];
+typedef char widget_instance_local_player_index_offset[HALO_LAYOUT_ASSERT_32(offsetof(struct widget_instance_prefix, local_player_index) == 8)];
 
 /* ---------- prototypes */
 

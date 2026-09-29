@@ -263,10 +263,8 @@ struct virtual_keyboard_globals
 	wchar_t saved_text[MAXIMUM_VIRTUAL_KEYBOARD_SAVED_TEXT_LENGTH];
 };
 
-typedef char verify_virtual_keyboard_globals_size[
-	sizeof(struct virtual_keyboard_globals) == 0x68 ? 1 : -1];
-typedef char verify_virtual_keyboard_key_size[
-	sizeof(struct virtual_keyboard_key) == 0x50 ? 1 : -1];
+typedef char verify_virtual_keyboard_globals_size[HALO_LAYOUT_ASSERT_32(sizeof(struct virtual_keyboard_globals) == 0x68)];
+typedef char verify_virtual_keyboard_key_size[HALO_LAYOUT_ASSERT_32(sizeof(struct virtual_keyboard_key) == 0x50)];
 
 /* ---------- prototypes */
 

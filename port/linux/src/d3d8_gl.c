@@ -1818,7 +1818,7 @@ static GLuint vertex_shader_get(struct vertex_shader_object *program, BOOL immed
 	return program->shader[variant];
 }
 
-typedef char pixel_shader_key_size_assert[sizeof(struct nv2a_pixel_shader_key) % 4 == 0 ? 1 : -1];
+typedef char pixel_shader_key_size_assert[HALO_LAYOUT_ASSERT_32(sizeof(struct nv2a_pixel_shader_key) % 4 == 0)];
 
 static GLuint fragment_shader_get(const struct nv2a_pixel_shader_key *key)
 {

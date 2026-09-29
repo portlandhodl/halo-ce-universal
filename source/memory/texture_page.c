@@ -80,8 +80,7 @@ struct texture_page_channel
 	short height;
 };
 
-typedef char texture_page_channel_size_assert[
-	sizeof(struct texture_page_channel) == 6 ? 1 : -1];
+typedef char texture_page_channel_size_assert[HALO_LAYOUT_ASSERT_32(sizeof(struct texture_page_channel) == 6)];
 
 /* ---------- prototypes */
 

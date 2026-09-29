@@ -44,18 +44,9 @@ struct projectile_datum
 	struct _projectile_datum projectile;
 };
 
-typedef char projectile_target_object_index_offset_assert[
-	offsetof(struct projectile_datum, projectile.target_object_index) == 0x1E8
-		? 1
-		: -1];
-typedef char projectile_detonation_timer_offset_assert[
-	offsetof(struct projectile_datum, projectile.detonation_timer) == 0x1F0
-		? 1
-		: -1];
-typedef char projectile_arming_time_offset_assert[
-	offsetof(struct projectile_datum, projectile.arming_time) == 0x1F8
-		? 1
-		: -1];
+typedef char projectile_target_object_index_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct projectile_datum, projectile.target_object_index) == 0x1E8)];
+typedef char projectile_detonation_timer_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct projectile_datum, projectile.detonation_timer) == 0x1F0)];
+typedef char projectile_arming_time_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct projectile_datum, projectile.arming_time) == 0x1F8)];
 
 /* ---------- prototypes/PROJECTILES.C */
 

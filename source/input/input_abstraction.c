@@ -134,8 +134,7 @@ struct vehicle_definition
 	short vehicle_type;
 };
 
-typedef char verify_input_vehicle_type_offset[
-	offsetof(struct vehicle_definition, vehicle_type) == 0x2F4 ? 1 : -1];
+typedef char verify_input_vehicle_type_offset[HALO_LAYOUT_ASSERT_32(offsetof(struct vehicle_definition, vehicle_type) == 0x2F4)];
 
 struct input_abstraction_runtime_globals
 {
@@ -147,20 +146,13 @@ struct input_abstraction_runtime_globals
 	unsigned long time_of_first_device_insertion;
 };
 
-typedef char verify_game_input_state_size[
-	sizeof(struct game_input_state) == 0x1C ? 1 : -1];
-typedef char verify_input_abstraction_input_states_offset[
-	offsetof(struct input_abstraction_runtime_globals, input_states) == 0x60 ? 1 : -1];
-typedef char verify_input_abstraction_device_timer_offset[
-	offsetof(struct input_abstraction_runtime_globals, device_enumeration_startup_timer) == 0xD0 ? 1 : -1];
-typedef char verify_input_abstraction_controller_available_offset[
-	offsetof(struct input_abstraction_runtime_globals, controller_available) == 0xD4 ? 1 : -1];
-typedef char verify_input_abstraction_initialized_offset[
-	offsetof(struct input_abstraction_runtime_globals, initialized) == 0xD8 ? 1 : -1];
-typedef char verify_input_abstraction_first_insertion_offset[
-	offsetof(struct input_abstraction_runtime_globals, time_of_first_device_insertion) == 0xDC ? 1 : -1];
-typedef char verify_input_abstraction_runtime_globals_size[
-	sizeof(struct input_abstraction_runtime_globals) == 0xE0 ? 1 : -1];
+typedef char verify_game_input_state_size[HALO_LAYOUT_ASSERT_32(sizeof(struct game_input_state) == 0x1C)];
+typedef char verify_input_abstraction_input_states_offset[HALO_LAYOUT_ASSERT_32(offsetof(struct input_abstraction_runtime_globals, input_states) == 0x60)];
+typedef char verify_input_abstraction_device_timer_offset[HALO_LAYOUT_ASSERT_32(offsetof(struct input_abstraction_runtime_globals, device_enumeration_startup_timer) == 0xD0)];
+typedef char verify_input_abstraction_controller_available_offset[HALO_LAYOUT_ASSERT_32(offsetof(struct input_abstraction_runtime_globals, controller_available) == 0xD4)];
+typedef char verify_input_abstraction_initialized_offset[HALO_LAYOUT_ASSERT_32(offsetof(struct input_abstraction_runtime_globals, initialized) == 0xD8)];
+typedef char verify_input_abstraction_first_insertion_offset[HALO_LAYOUT_ASSERT_32(offsetof(struct input_abstraction_runtime_globals, time_of_first_device_insertion) == 0xDC)];
+typedef char verify_input_abstraction_runtime_globals_size[HALO_LAYOUT_ASSERT_32(sizeof(struct input_abstraction_runtime_globals) == 0xE0)];
 
 /* ---------- prototypes */
 

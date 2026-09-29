@@ -371,7 +371,7 @@ struct tag_group
 	short child_count;
 };
 
-typedef char tag_group_size_assert[sizeof(struct tag_group) == 0x60 ? 1 : -1];
+typedef char tag_group_size_assert[HALO_LAYOUT_ASSERT_32(sizeof(struct tag_group) == 0x60)];
 
 /* ---------- END OWNER HEADER PREREQUISITE */
 

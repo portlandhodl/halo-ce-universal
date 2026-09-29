@@ -376,8 +376,7 @@ struct unit_control_data
 	real_vector3d looking_vector;
 };
 
-typedef char unit_control_data_size_assert[
-	sizeof(struct unit_control_data) == 0x40 ? 1 : -1];
+typedef char unit_control_data_size_assert[HALO_LAYOUT_ASSERT_32(sizeof(struct unit_control_data) == 0x40)];
 
 /* Players needs the vehicle control prefix only.  VEHICLES.C owns the full
    runtime datum, which has not yet been made a shared definition. */
@@ -416,10 +415,8 @@ struct players_static_data
 	struct player_screen_flash_parameters screen_flash_parameters[2];
 };
 
-typedef char players_static_data_size_assert[
-	sizeof(struct players_static_data) == 0xC18 ? 1 : -1];
-typedef char players_static_data_screen_flash_offset_assert[
-	offsetof(struct players_static_data, screen_flash_parameters) == 0xBF0 ? 1 : -1];
+typedef char players_static_data_size_assert[HALO_LAYOUT_ASSERT_32(sizeof(struct players_static_data) == 0xC18)];
+typedef char players_static_data_screen_flash_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct players_static_data, screen_flash_parameters) == 0xBF0)];
 
 /* ---------- prototypes */
 

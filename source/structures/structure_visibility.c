@@ -228,16 +228,11 @@ struct structure_visibility_shader_environment
 	real mirror_depth;
 };
 
-typedef char structure_visibility_cluster_size_assert[
-	sizeof(struct structure_visibility_cluster) == 0x68 ? 1 : -1];
-typedef char structure_visibility_subcluster_size_assert[
-	sizeof(struct structure_visibility_subcluster) == 0x24 ? 1 : -1];
-typedef char structure_visibility_portal_size_assert[
-	sizeof(struct structure_visibility_portal) == 0x40 ? 1 : -1];
-typedef char structure_visibility_mirror_size_assert[
-	sizeof(struct structure_visibility_mirror) == 0x40 ? 1 : -1];
-typedef char structure_visibility_shader_environment_refraction_offset_assert[
-	offsetof(struct structure_visibility_shader_environment, mirror_index_of_refraction) == 0x30C ? 1 : -1];
+typedef char structure_visibility_cluster_size_assert[HALO_LAYOUT_ASSERT_32(sizeof(struct structure_visibility_cluster) == 0x68)];
+typedef char structure_visibility_subcluster_size_assert[HALO_LAYOUT_ASSERT_32(sizeof(struct structure_visibility_subcluster) == 0x24)];
+typedef char structure_visibility_portal_size_assert[HALO_LAYOUT_ASSERT_32(sizeof(struct structure_visibility_portal) == 0x40)];
+typedef char structure_visibility_mirror_size_assert[HALO_LAYOUT_ASSERT_32(sizeof(struct structure_visibility_mirror) == 0x40)];
+typedef char structure_visibility_shader_environment_refraction_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct structure_visibility_shader_environment, mirror_index_of_refraction) == 0x30C)];
 
 /* ---------- prototypes */
 

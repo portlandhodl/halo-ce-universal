@@ -266,24 +266,15 @@ struct render_debug_globals_definition
 	boolean string_overflow_reported;
 };
 
-typedef char render_debug_cache_entry_size_check[
-	sizeof(struct render_debug_cache_entry) == 0x38 ? 1 : -1];
-typedef char render_debug_globals_size_check[
-	sizeof(struct render_debug_globals_definition) == 0x740C ? 1 : -1];
-typedef char render_debug_globals_strings_offset_check[
-	offsetof(struct render_debug_globals_definition, strings) == 0x0000 ? 1 : -1];
-typedef char render_debug_globals_entries_offset_check[
-	offsetof(struct render_debug_globals_definition, entries) == 0x0400 ? 1 : -1];
-typedef char render_debug_globals_game_time_offset_check[
-	offsetof(struct render_debug_globals_definition, game_time) == 0x7400 ? 1 : -1];
-typedef char render_debug_globals_entry_count_offset_check[
-	offsetof(struct render_debug_globals_definition, entry_count) == 0x7404 ? 1 : -1];
-typedef char render_debug_globals_string_offset_offset_check[
-	offsetof(struct render_debug_globals_definition, string_offset) == 0x7408 ? 1 : -1];
-typedef char render_debug_globals_entry_overflow_offset_check[
-	offsetof(struct render_debug_globals_definition, entry_overflow_reported) == 0x740A ? 1 : -1];
-typedef char render_debug_globals_string_overflow_offset_check[
-	offsetof(struct render_debug_globals_definition, string_overflow_reported) == 0x740B ? 1 : -1];
+typedef char render_debug_cache_entry_size_check[HALO_LAYOUT_ASSERT_32(sizeof(struct render_debug_cache_entry) == 0x38)];
+typedef char render_debug_globals_size_check[HALO_LAYOUT_ASSERT_32(sizeof(struct render_debug_globals_definition) == 0x740C)];
+typedef char render_debug_globals_strings_offset_check[HALO_LAYOUT_ASSERT_32(offsetof(struct render_debug_globals_definition, strings) == 0x0000)];
+typedef char render_debug_globals_entries_offset_check[HALO_LAYOUT_ASSERT_32(offsetof(struct render_debug_globals_definition, entries) == 0x0400)];
+typedef char render_debug_globals_game_time_offset_check[HALO_LAYOUT_ASSERT_32(offsetof(struct render_debug_globals_definition, game_time) == 0x7400)];
+typedef char render_debug_globals_entry_count_offset_check[HALO_LAYOUT_ASSERT_32(offsetof(struct render_debug_globals_definition, entry_count) == 0x7404)];
+typedef char render_debug_globals_string_offset_offset_check[HALO_LAYOUT_ASSERT_32(offsetof(struct render_debug_globals_definition, string_offset) == 0x7408)];
+typedef char render_debug_globals_entry_overflow_offset_check[HALO_LAYOUT_ASSERT_32(offsetof(struct render_debug_globals_definition, entry_overflow_reported) == 0x740A)];
+typedef char render_debug_globals_string_overflow_offset_check[HALO_LAYOUT_ASSERT_32(offsetof(struct render_debug_globals_definition, string_overflow_reported) == 0x740B)];
 
 /* ---------- prototypes */
 

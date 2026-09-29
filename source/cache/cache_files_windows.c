@@ -239,22 +239,24 @@ struct cache_file_structure_bsp_header
 	unsigned long signature;
 };
 
+/* the cache file's own header, exactly its 0x800 bytes on disk (the LP64
+port reads it raw: long32/ulong32, cseries.h) */
 struct cache_file_header
 {
-	unsigned long header_signature;
-	long version;
-	long file_length;
+	ulong32 header_signature;
+	long32 version;
+	long32 file_length;
 	byte reservedC[4];
-	long tag_data_offset;
-	long tag_data_size;
+	long32 tag_data_offset;
+	long32 tag_data_size;
 	byte reserved18[8];
 	char name[0x20];
 	char build[0x20];
 	short scenario_type;
 	short pad62;
-	unsigned long checksum;
+	ulong32 checksum;
 	byte reserved68[0x794];
-	unsigned long footer_signature;
+	ulong32 footer_signature;
 };
 
 struct cached_map_file
@@ -296,44 +298,33 @@ struct cache_file_runtime_globals
 	struct cache_file_request *requests;
 };
 
-typedef char verify_cache_file_header_size[
-	sizeof(struct cache_file_header) == 0x800 ? 1 : -1];
-typedef char verify_cached_map_file_size[
-	sizeof(struct cached_map_file) == 0x80C ? 1 : -1];
-typedef char verify_cached_map_file_name_offset[
-	offsetof(
+typedef char verify_cache_file_header_size[HALO_LAYOUT_ASSERT_32(sizeof(struct cache_file_header) == 0x800)];
+typedef char verify_cached_map_file_size[HALO_LAYOUT_ASSERT_32(sizeof(struct cached_map_file) == 0x80C)];
+typedef char verify_cached_map_file_name_offset[HALO_LAYOUT_ASSERT_32(offsetof(
 		struct cached_map_file,
-		header.name) == 0x2C ? 1 : -1];
-typedef char verify_cache_file_request_size[
-	sizeof(struct cache_file_request) == 0x20 ? 1 : -1];
-typedef char verify_cache_file_request_blocking_offset[
-	offsetof(
+		header.name) == 0x2C)];
+typedef char verify_cache_file_request_size[HALO_LAYOUT_ASSERT_32(sizeof(struct cache_file_request) == 0x20)];
+typedef char verify_cache_file_request_blocking_offset[HALO_LAYOUT_ASSERT_32(offsetof(
 		struct cache_file_request,
-		blocking) == 0x1C ? 1 : -1];
-typedef char verify_cache_file_request_pending_offset[
-	offsetof(
+		blocking) == 0x1C)];
+typedef char verify_cache_file_request_pending_offset[HALO_LAYOUT_ASSERT_32(offsetof(
 		struct cache_file_request,
-		pending) == 0x1D ? 1 : -1];
-typedef char verify_cache_file_copy_in_progress_offset[
-	offsetof(
+		pending) == 0x1D)];
+typedef char verify_cache_file_copy_in_progress_offset[HALO_LAYOUT_ASSERT_32(offsetof(
 		struct cache_file_runtime_globals,
-		copy_in_progress) == 0x3048 ? 1 : -1];
-typedef char verify_cache_file_copying_map_index_offset[
-	offsetof(
+		copy_in_progress) == 0x3048)];
+typedef char verify_cache_file_copying_map_index_offset[HALO_LAYOUT_ASSERT_32(offsetof(
 		struct cache_file_runtime_globals,
-		copying_to_map_file_index) == 0x304A ? 1 : -1];
-typedef char verify_cache_file_copying_map_name_offset[
-	offsetof(
+		copying_to_map_file_index) == 0x304A)];
+typedef char verify_cache_file_copying_map_name_offset[HALO_LAYOUT_ASSERT_32(offsetof(
 		struct cache_file_runtime_globals,
-		copying_to_map_file_name) == 0x304C ? 1 : -1];
-typedef char verify_cache_file_open_map_index_offset[
-	offsetof(
+		copying_to_map_file_name) == 0x304C)];
+typedef char verify_cache_file_open_map_index_offset[HALO_LAYOUT_ASSERT_32(offsetof(
 		struct cache_file_runtime_globals,
-		open_map_file_index) == 0x306C ? 1 : -1];
-typedef char verify_cache_file_requests_offset[
-	offsetof(
+		open_map_file_index) == 0x306C)];
+typedef char verify_cache_file_requests_offset[HALO_LAYOUT_ASSERT_32(offsetof(
 		struct cache_file_runtime_globals,
-		requests) == 0x3078 ? 1 : -1];
+		requests) == 0x3078)];
 
 /* ---------- prototypes */
 

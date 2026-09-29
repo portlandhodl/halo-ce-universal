@@ -208,8 +208,7 @@ struct distributed_effect_part_definition
 	byte unused028[0x68 - 0x28];
 };
 
-typedef char distributed_effect_part_definition_size_assert[
-	sizeof(struct distributed_effect_part_definition) == 0x68 ? 1 : -1];
+typedef char distributed_effect_part_definition_size_assert[HALO_LAYOUT_ASSERT_32(sizeof(struct distributed_effect_part_definition) == 0x68)];
 
 /* the vehicle damage in the globals' falling damage block, as vehicles.c
 has it */

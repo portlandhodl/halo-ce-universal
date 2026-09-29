@@ -147,34 +147,20 @@ struct hud_scripted_globals
 	byte reserved2[2];
 };
 
-typedef char unit_hud_state_auxilary_flash_time_offset_assert[
-	offsetof(struct unit_hud_state, auxilary_flash_time) == 0x22 ? 1 : -1];
-typedef char unit_hud_state_sound_flags_offset_assert[
-	offsetof(struct unit_hud_state, sound_flags) == 0x24 ? 1 : -1];
-typedef char unit_hud_state_last_sound_handles_offset_assert[
-	offsetof(struct unit_hud_state, last_sound_handles) == 0x28 ? 1 : -1];
-typedef char unit_hud_state_size_assert[
-	sizeof(struct unit_hud_state) == 0x58 ? 1 : -1];
-typedef char unit_hud_globals_script_flags_offset_assert[
-	offsetof(struct unit_hud_globals, script_flags) == 0x160 ? 1 : -1];
-typedef char unit_hud_globals_size_assert[
-	sizeof(struct unit_hud_globals) == 0x164 ? 1 : -1];
-typedef char hud_scripted_globals_size_assert[
-	sizeof(struct hud_scripted_globals) == 0x4 ? 1 : -1];
-typedef char hud_messaging_parameters_definition_size_assert[
-	sizeof(struct hud_messaging_parameters_definition) == 0x120 ? 1 : -1];
-typedef char hud_waypoint_definition_size_assert[
-	sizeof(struct hud_waypoint_definition) == 0x9C ? 1 : -1];
-typedef char hud_multiplayer_parameters_definition_size_assert[
-	sizeof(struct hud_multiplayer_parameters_definition) == 0x104 ? 1 : -1];
-typedef char hud_defaults_definition_size_assert[
-	sizeof(struct hud_defaults_definition) == 0x50 ? 1 : -1];
-typedef char hud_damage_indicators_definition_indicator_bitmap_offset_assert[
-	offsetof(struct hud_damage_indicators_definition, indicator_bitmap) == 0x28 ? 1 : -1];
-typedef char hud_damage_indicators_definition_size_assert[
-	sizeof(struct hud_damage_indicators_definition) == 0x50 ? 1 : -1];
-typedef char hud_globals_definition_damage_indicators_offset_assert[
-	offsetof(struct hud_globals_definition, damage_indicators) == 0x310 ? 1 : -1];
+typedef char unit_hud_state_auxilary_flash_time_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct unit_hud_state, auxilary_flash_time) == 0x22)];
+typedef char unit_hud_state_sound_flags_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct unit_hud_state, sound_flags) == 0x24)];
+typedef char unit_hud_state_last_sound_handles_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct unit_hud_state, last_sound_handles) == 0x28)];
+typedef char unit_hud_state_size_assert[HALO_LAYOUT_ASSERT_32(sizeof(struct unit_hud_state) == 0x58)];
+typedef char unit_hud_globals_script_flags_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct unit_hud_globals, script_flags) == 0x160)];
+typedef char unit_hud_globals_size_assert[HALO_LAYOUT_ASSERT_32(sizeof(struct unit_hud_globals) == 0x164)];
+typedef char hud_scripted_globals_size_assert[HALO_LAYOUT_ASSERT_32(sizeof(struct hud_scripted_globals) == 0x4)];
+typedef char hud_messaging_parameters_definition_size_assert[HALO_LAYOUT_ASSERT_32(sizeof(struct hud_messaging_parameters_definition) == 0x120)];
+typedef char hud_waypoint_definition_size_assert[HALO_LAYOUT_ASSERT_32(sizeof(struct hud_waypoint_definition) == 0x9C)];
+typedef char hud_multiplayer_parameters_definition_size_assert[HALO_LAYOUT_ASSERT_32(sizeof(struct hud_multiplayer_parameters_definition) == 0x104)];
+typedef char hud_defaults_definition_size_assert[HALO_LAYOUT_ASSERT_32(sizeof(struct hud_defaults_definition) == 0x50)];
+typedef char hud_damage_indicators_definition_indicator_bitmap_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct hud_damage_indicators_definition, indicator_bitmap) == 0x28)];
+typedef char hud_damage_indicators_definition_size_assert[HALO_LAYOUT_ASSERT_32(sizeof(struct hud_damage_indicators_definition) == 0x50)];
+typedef char hud_globals_definition_damage_indicators_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct hud_globals_definition, damage_indicators) == 0x310)];
 
 /* ---------- prototypes */
 

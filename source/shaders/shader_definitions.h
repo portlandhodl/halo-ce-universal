@@ -69,22 +69,14 @@ struct shader_effect_definition
 	byte reserved_after_secondary_map_zsprite_radius_scale[20];
 };
 
-typedef char shader_effect_secondary_map_offset_assert[
-	offsetof(struct shader_effect_definition, secondary_map) == 0x4C ? 1 : -1];
-typedef char shader_effect_secondary_map_anchor_offset_assert[
-	offsetof(struct shader_effect_definition, secondary_map_anchor) == 0x5C ? 1 : -1];
-typedef char shader_effect_secondary_map_flags_offset_assert[
-	offsetof(struct shader_effect_definition, secondary_map_flags) == 0x5E ? 1 : -1];
-typedef char shader_effect_secondary_map_animation_offset_assert[
-	offsetof(struct shader_effect_definition, secondary_map_animation) == 0x60 ? 1 : -1];
-typedef char shader_effect_secondary_map_radius_offset_assert[
-	offsetof(struct shader_effect_definition, secondary_map_radius) == 0x98 ? 1 : -1];
-typedef char shader_effect_secondary_map_zsprite_radius_scale_offset_assert[
-	offsetof(struct shader_effect_definition, secondary_map_zsprite_radius_scale) == 0x9C ? 1 : -1];
-typedef char shader_effect_framebuffer_fade_mode_offset_assert[
-	offsetof(struct shader_effect_definition, framebuffer_fade_mode) == 0x2C ? 1 : -1];
-typedef char shader_effect_definition_size_assert[
-	sizeof(struct shader_effect_definition) == 0xB4 ? 1 : -1];
+typedef char shader_effect_secondary_map_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct shader_effect_definition, secondary_map) == 0x4C)];
+typedef char shader_effect_secondary_map_anchor_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct shader_effect_definition, secondary_map_anchor) == 0x5C)];
+typedef char shader_effect_secondary_map_flags_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct shader_effect_definition, secondary_map_flags) == 0x5E)];
+typedef char shader_effect_secondary_map_animation_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct shader_effect_definition, secondary_map_animation) == 0x60)];
+typedef char shader_effect_secondary_map_radius_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct shader_effect_definition, secondary_map_radius) == 0x98)];
+typedef char shader_effect_secondary_map_zsprite_radius_scale_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct shader_effect_definition, secondary_map_zsprite_radius_scale) == 0x9C)];
+typedef char shader_effect_framebuffer_fade_mode_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct shader_effect_definition, framebuffer_fade_mode) == 0x2C)];
+typedef char shader_effect_definition_size_assert[HALO_LAYOUT_ASSERT_32(sizeof(struct shader_effect_definition) == 0xB4)];
 
 /* ---------- prototypes/SHADER_DEFINITIONS.C */
 

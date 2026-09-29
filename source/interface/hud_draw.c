@@ -347,18 +347,12 @@ struct multitexture_overlay_hud_element_definition
 	long unused160[32];
 };
 
-typedef char number_hud_element_definition_size_assert[
-	sizeof(struct number_hud_element_definition) == 0x54 ? 1 : -1];
-typedef char hud_number_definition_size_assert[
-	sizeof(struct hud_number_definition) == 0x64 ? 1 : -1];
-typedef char rasterizer_meter_parameters_size_assert[
-	sizeof(struct rasterizer_meter_parameters) == 0x1C ? 1 : -1];
-typedef char weapon_interface_state_size_assert[
-	sizeof(struct weapon_interface_state) == 0x20 ? 1 : -1];
-typedef char multitexture_overlay_hud_element_effector_definition_size_assert[
-	sizeof(struct multitexture_overlay_hud_element_effector_definition) == 0xDC ? 1 : -1];
-typedef char multitexture_overlay_hud_element_definition_size_assert[
-	sizeof(struct multitexture_overlay_hud_element_definition) == 0x1E0 ? 1 : -1];
+typedef char number_hud_element_definition_size_assert[HALO_LAYOUT_ASSERT_32(sizeof(struct number_hud_element_definition) == 0x54)];
+typedef char hud_number_definition_size_assert[HALO_LAYOUT_ASSERT_32(sizeof(struct hud_number_definition) == 0x64)];
+typedef char rasterizer_meter_parameters_size_assert[HALO_LAYOUT_ASSERT_32(sizeof(struct rasterizer_meter_parameters) == 0x1C)];
+typedef char weapon_interface_state_size_assert[HALO_LAYOUT_ASSERT_32(sizeof(struct weapon_interface_state) == 0x20)];
+typedef char multitexture_overlay_hud_element_effector_definition_size_assert[HALO_LAYOUT_ASSERT_32(sizeof(struct multitexture_overlay_hud_element_effector_definition) == 0xDC)];
+typedef char multitexture_overlay_hud_element_definition_size_assert[HALO_LAYOUT_ASSERT_32(sizeof(struct multitexture_overlay_hud_element_definition) == 0x1E0)];
 
 /* ---------- prototypes */
 

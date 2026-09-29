@@ -32,8 +32,7 @@ struct bsp3d_node
 	long children[2];
 };
 
-typedef char bsp3d_node_size_check[
-	sizeof(struct bsp3d_node) == 0xC ? 1 : -1];
+typedef char bsp3d_node_size_check[HALO_LAYOUT_ASSERT_32(sizeof(struct bsp3d_node) == 0xC)];
 
 /* ---------- prototypes/BSP3D.C */
 

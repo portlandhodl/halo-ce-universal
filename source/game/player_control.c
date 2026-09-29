@@ -283,14 +283,10 @@ struct mouse_state
 	byte buttons[NUMBER_OF_MOUSE_BUTTONS];
 };
 
-typedef char input_blob_size_assert[
-	sizeof(struct input_blob) == sizeof(struct player_action) ? 1 : -1];
-typedef char game_input_state_size_assert[
-	sizeof(struct game_input_state) == 0x1C ? 1 : -1];
-typedef char mouse_state_size_assert[
-	sizeof(struct mouse_state) == 0x10 ? 1 : -1];
-typedef char mouse_state_buttons_offset_assert[
-	offsetof(struct mouse_state, buttons) == 0xC ? 1 : -1];
+typedef char input_blob_size_assert[HALO_LAYOUT_ASSERT_32(sizeof(struct input_blob) == sizeof(struct player_action))];
+typedef char game_input_state_size_assert[HALO_LAYOUT_ASSERT_32(sizeof(struct game_input_state) == 0x1C)];
+typedef char mouse_state_size_assert[HALO_LAYOUT_ASSERT_32(sizeof(struct mouse_state) == 0x10)];
+typedef char mouse_state_buttons_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct mouse_state, buttons) == 0xC)];
 
 /* ---------- prototypes */
 

@@ -412,8 +412,7 @@ struct enumerated_saved_game_file
 	boolean valid;
 };
 
-typedef char verify_enumerated_saved_game_file_size[
-	sizeof(struct enumerated_saved_game_file) == 0x206 ? 1 : -1];
+typedef char verify_enumerated_saved_game_file_size[HALO_LAYOUT_ASSERT_32(sizeof(struct enumerated_saved_game_file) == 0x206)];
 
 struct saved_game_files_globals
 {
@@ -426,10 +425,8 @@ struct saved_game_files_globals
 	boolean enumeration_in_progress;
 };
 
-typedef char verify_saved_game_files_globals_memory_units_dirty_offset[
-	offsetof(struct saved_game_files_globals, memory_units_dirty) == 0x117 ? 1 : -1];
-typedef char verify_saved_game_files_globals_size[
-	sizeof(struct saved_game_files_globals) == 0x11C ? 1 : -1];
+typedef char verify_saved_game_files_globals_memory_units_dirty_offset[HALO_LAYOUT_ASSERT_32(offsetof(struct saved_game_files_globals, memory_units_dirty) == 0x117)];
+typedef char verify_saved_game_files_globals_size[HALO_LAYOUT_ASSERT_32(sizeof(struct saved_game_files_globals) == 0x11C)];
 
 /* ---------- prototypes */
 

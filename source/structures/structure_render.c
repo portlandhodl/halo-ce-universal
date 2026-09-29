@@ -127,24 +127,19 @@ struct structure_render_globals
 	real_vector3d fog_offset_vector;
 };
 
-typedef char verify_structure_render_environment_geometry_valid_offset[
-	offsetof(
+typedef char verify_structure_render_environment_geometry_valid_offset[HALO_LAYOUT_ASSERT_32(offsetof(
 		struct structure_render_globals,
-		environment_geometry_valid) == 0x0 ? 1 : -1];
-typedef char verify_structure_render_environment_triangles_index_offset[
-	offsetof(
+		environment_geometry_valid) == 0x0)];
+typedef char verify_structure_render_environment_triangles_index_offset[HALO_LAYOUT_ASSERT_32(offsetof(
 		struct structure_render_globals,
-		environment_triangles_index) == 0x4 ? 1 : -1];
-typedef char verify_structure_render_fog_offset_valid_offset[
-	offsetof(
+		environment_triangles_index) == 0x4)];
+typedef char verify_structure_render_fog_offset_valid_offset[HALO_LAYOUT_ASSERT_32(offsetof(
 		struct structure_render_globals,
-		fog_offset_valid) == 0x8 ? 1 : -1];
-typedef char verify_structure_render_fog_offset_vector_offset[
-	offsetof(
+		fog_offset_valid) == 0x8)];
+typedef char verify_structure_render_fog_offset_vector_offset[HALO_LAYOUT_ASSERT_32(offsetof(
 		struct structure_render_globals,
-		fog_offset_vector) == 0xC ? 1 : -1];
-typedef char verify_structure_render_globals_size[
-	sizeof(struct structure_render_globals) == 0x18 ? 1 : -1];
+		fog_offset_vector) == 0xC)];
+typedef char verify_structure_render_globals_size[HALO_LAYOUT_ASSERT_32(sizeof(struct structure_render_globals) == 0x18)];
 
 /* ---------- prototypes */
 

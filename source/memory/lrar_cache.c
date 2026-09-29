@@ -92,8 +92,8 @@ struct lrar_cache
 	unsigned long signature;
 };
 
-typedef char lrar_cache_size_assert[sizeof(struct lrar_cache) == 0x48 ? 1 : -1];
-typedef char lrar_cache_block_size_assert[sizeof(struct lrar_cache_block) == 0x10 ? 1 : -1];
+typedef char lrar_cache_size_assert[HALO_LAYOUT_ASSERT_32(sizeof(struct lrar_cache) == 0x48)];
+typedef char lrar_cache_block_size_assert[HALO_LAYOUT_ASSERT_32(sizeof(struct lrar_cache_block) == 0x10)];
 
 /* ---------- prototypes */
 

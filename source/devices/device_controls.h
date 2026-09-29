@@ -53,14 +53,10 @@ struct control_definition
 	struct _control_definition control;
 };
 
-typedef char verify_control_definition_control_offset[
-	offsetof(struct control_definition, control) == 0x290 ? 1 : -1];
-typedef char verify_control_definition_on_effect_index_offset[
-	offsetof(struct control_definition, control.on_effect.index) == 0x2F4 ? 1 : -1];
-typedef char verify_control_definition_off_effect_index_offset[
-	offsetof(struct control_definition, control.off_effect.index) == 0x304 ? 1 : -1];
-typedef char verify_control_definition_denied_effect_index_offset[
-	offsetof(struct control_definition, control.denied_effect.index) == 0x314 ? 1 : -1];
+typedef char verify_control_definition_control_offset[HALO_LAYOUT_ASSERT_32(offsetof(struct control_definition, control) == 0x290)];
+typedef char verify_control_definition_on_effect_index_offset[HALO_LAYOUT_ASSERT_32(offsetof(struct control_definition, control.on_effect.index) == 0x2F4)];
+typedef char verify_control_definition_off_effect_index_offset[HALO_LAYOUT_ASSERT_32(offsetof(struct control_definition, control.off_effect.index) == 0x304)];
+typedef char verify_control_definition_denied_effect_index_offset[HALO_LAYOUT_ASSERT_32(offsetof(struct control_definition, control.denied_effect.index) == 0x314)];
 
 struct _control_datum
 {

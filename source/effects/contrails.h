@@ -56,10 +56,8 @@ struct contrail_point_datum
 	long next_contrail_point_index;
 };
 
-typedef char verify_contrail_datum_size[
-	sizeof(struct contrail_datum) == 0x44 ? 1 : -1];
-typedef char verify_contrail_point_datum_size[
-	sizeof(struct contrail_point_datum) == 0x38 ? 1 : -1];
+typedef char verify_contrail_datum_size[HALO_LAYOUT_ASSERT_32(sizeof(struct contrail_datum) == 0x44)];
+typedef char verify_contrail_point_datum_size[HALO_LAYOUT_ASSERT_32(sizeof(struct contrail_point_datum) == 0x38)];
 
 /* ---------- prototypes/CONTRAILS.C */
 

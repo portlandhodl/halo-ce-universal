@@ -717,10 +717,8 @@ struct reply_usage
 		long reply_actor_index);
 };
 
-typedef char dialogue_usage_size_assert[
-	sizeof(struct dialogue_usage) == 0x28 ? 1 : -1];
-typedef char reply_usage_size_assert[
-	sizeof(struct reply_usage) == 0x24 ? 1 : -1];
+typedef char dialogue_usage_size_assert[HALO_LAYOUT_ASSERT_32(sizeof(struct dialogue_usage) == 0x28)];
+typedef char reply_usage_size_assert[HALO_LAYOUT_ASSERT_32(sizeof(struct reply_usage) == 0x24)];
 
 struct ai_conversation_line_view
 {
@@ -729,8 +727,7 @@ struct ai_conversation_line_view
 	short current_line;
 };
 
-typedef char ai_conversation_line_view_current_line_offset_assert[
-	offsetof(struct ai_conversation_line_view, current_line) == 0x48 ? 1 : -1];
+typedef char ai_conversation_line_view_current_line_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct ai_conversation_line_view, current_line) == 0x48)];
 
 struct ai_conversation_driver_datum_view
 {
@@ -866,8 +863,7 @@ struct ai_communication_possibility
 	word pad36;
 };
 
-typedef char ai_communication_possibility_size_assert[
-	sizeof(struct ai_communication_possibility) == 0x38 ? 1 : -1];
+typedef char ai_communication_possibility_size_assert[HALO_LAYOUT_ASSERT_32(sizeof(struct ai_communication_possibility) == 0x38)];
 
 struct ai_communication_globals_view
 {
@@ -893,64 +889,35 @@ struct actor_iterator
 	long next_index;
 };
 
-typedef char ai_conversation_datum_header_size_assert[
-	sizeof(struct ai_conversation_datum_header) == 0x14 ? 1 : -1];
-typedef char ai_conversation_datum_view_size_assert[
-	sizeof(struct ai_conversation_datum_view) == 0x64 ? 1 : -1];
-typedef char ai_conversation_datum_view_line_index_offset_assert[
-	offsetof(struct ai_conversation_datum_view, line_index) == 0x48 ? 1 : -1];
-typedef char ai_conversation_datum_view_line_advance_offset_assert[
-	offsetof(struct ai_conversation_datum_view, line_advance) == 0x63 ? 1 : -1];
-typedef char ai_conversation_datum_header_any_line_spoken_offset_assert[
-	offsetof(struct ai_conversation_datum_header, any_line_spoken) == 0x5 ? 1 : -1];
-typedef char ai_conversation_datum_header_begun_offset_assert[
-	offsetof(struct ai_conversation_datum_header, begun) == 0x6 ? 1 : -1];
-typedef char ai_conversation_datum_header_waiting_to_advance_offset_assert[
-	offsetof(struct ai_conversation_datum_header, waiting_to_advance) == 0x8 ? 1 : -1];
-typedef char ai_conversation_datum_header_told_to_advance_offset_assert[
-	offsetof(struct ai_conversation_datum_header, told_to_advance) == 0x9 ? 1 : -1];
-typedef char scenario_conversation_definition_view_size_assert[
-	sizeof(struct scenario_conversation_definition_view) == 0x74 ? 1 : -1];
-typedef char scenario_conversation_definition_participants_offset_assert[
-	offsetof(struct scenario_conversation_definition_view, participants) == 0x50 ? 1 : -1];
-typedef char scenario_conversation_definition_lines_offset_assert[
-	offsetof(struct scenario_conversation_definition_view, lines) == 0x5C ? 1 : -1];
-typedef char scenario_conversation_participant_view_size_assert[
-	sizeof(struct scenario_conversation_participant_view) == 0x54 ? 1 : -1];
-typedef char scenario_conversation_line_view_size_assert[
-	sizeof(struct scenario_conversation_line_view) == 0x7C ? 1 : -1];
-typedef char ai_conversation_driver_datum_view_size_assert[
-	sizeof(struct ai_conversation_driver_datum_view) == 0x64 ? 1 : -1];
-typedef char ai_conversation_driver_participant_bitmask_offset_assert[
-	offsetof(struct ai_conversation_driver_datum_view, participant_bitmask) == 0x14 ? 1 : -1];
-typedef char ai_conversation_driver_actor_indices_offset_assert[
-	offsetof(struct ai_conversation_driver_datum_view, actor_indices) == 0x28 ? 1 : -1];
-typedef char ai_conversation_driver_line_flags_offset_assert[
-	offsetof(struct ai_conversation_driver_datum_view, line_flags) == 0x4E ? 1 : -1];
-typedef char ai_conversation_driver_line_unit_index_offset_assert[
-	offsetof(struct ai_conversation_driver_datum_view, line_unit_index) == 0x54 ? 1 : -1];
-typedef char ai_conversation_driver_line_address_unit_index_offset_assert[
-	offsetof(struct ai_conversation_driver_datum_view, line_address_unit_index) == 0x58 ? 1 : -1];
-typedef char recent_conversation_view_size_assert[
-	sizeof(struct recent_conversation_view) == 0x10 ? 1 : -1];
-typedef char ai_print_conversations_offset_assert[
-	offsetof(struct ai_debug_state, print_conversations) == 0x9F ? 1 : -1];
-typedef char ai_communication_unit_speech_item_size_assert[
-	sizeof(struct unit_speech_item) == 0x30 ? 1 : -1];
-typedef char ai_communication_unit_speech_item_ai_offset_assert[
-	offsetof(struct unit_speech_item, ai) == 0x10 ? 1 : -1];
-typedef char ai_communication_actor_mode_offset_assert[
-	offsetof(struct actor_datum, state.mode) == 0x6A ? 1 : -1];
-typedef char ai_communication_actor_unit_index_offset_assert[
-	offsetof(struct actor_datum, meta.unit_index) == 0x18 ? 1 : -1];
-typedef char ai_communication_actor_idle_combat_offset_assert[
-	offsetof(struct actor_datum, control.idle_vocalization_combat) == 0x6CC ? 1 : -1];
-typedef char ai_communication_actor_idle_timer_offset_assert[
-	offsetof(struct actor_datum, control.idle_vocalization_timer) == 0x6CE ? 1 : -1];
-typedef char ai_communication_actor_iterator_size_assert[
-	sizeof(struct actor_iterator) == 0x1C ? 1 : -1];
-typedef char ai_communication_actor_iterator_index_offset_assert[
-	offsetof(struct actor_iterator, index) == 0x14 ? 1 : -1];
+typedef char ai_conversation_datum_header_size_assert[HALO_LAYOUT_ASSERT_32(sizeof(struct ai_conversation_datum_header) == 0x14)];
+typedef char ai_conversation_datum_view_size_assert[HALO_LAYOUT_ASSERT_32(sizeof(struct ai_conversation_datum_view) == 0x64)];
+typedef char ai_conversation_datum_view_line_index_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct ai_conversation_datum_view, line_index) == 0x48)];
+typedef char ai_conversation_datum_view_line_advance_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct ai_conversation_datum_view, line_advance) == 0x63)];
+typedef char ai_conversation_datum_header_any_line_spoken_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct ai_conversation_datum_header, any_line_spoken) == 0x5)];
+typedef char ai_conversation_datum_header_begun_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct ai_conversation_datum_header, begun) == 0x6)];
+typedef char ai_conversation_datum_header_waiting_to_advance_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct ai_conversation_datum_header, waiting_to_advance) == 0x8)];
+typedef char ai_conversation_datum_header_told_to_advance_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct ai_conversation_datum_header, told_to_advance) == 0x9)];
+typedef char scenario_conversation_definition_view_size_assert[HALO_LAYOUT_ASSERT_32(sizeof(struct scenario_conversation_definition_view) == 0x74)];
+typedef char scenario_conversation_definition_participants_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct scenario_conversation_definition_view, participants) == 0x50)];
+typedef char scenario_conversation_definition_lines_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct scenario_conversation_definition_view, lines) == 0x5C)];
+typedef char scenario_conversation_participant_view_size_assert[HALO_LAYOUT_ASSERT_32(sizeof(struct scenario_conversation_participant_view) == 0x54)];
+typedef char scenario_conversation_line_view_size_assert[HALO_LAYOUT_ASSERT_32(sizeof(struct scenario_conversation_line_view) == 0x7C)];
+typedef char ai_conversation_driver_datum_view_size_assert[HALO_LAYOUT_ASSERT_32(sizeof(struct ai_conversation_driver_datum_view) == 0x64)];
+typedef char ai_conversation_driver_participant_bitmask_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct ai_conversation_driver_datum_view, participant_bitmask) == 0x14)];
+typedef char ai_conversation_driver_actor_indices_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct ai_conversation_driver_datum_view, actor_indices) == 0x28)];
+typedef char ai_conversation_driver_line_flags_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct ai_conversation_driver_datum_view, line_flags) == 0x4E)];
+typedef char ai_conversation_driver_line_unit_index_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct ai_conversation_driver_datum_view, line_unit_index) == 0x54)];
+typedef char ai_conversation_driver_line_address_unit_index_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct ai_conversation_driver_datum_view, line_address_unit_index) == 0x58)];
+typedef char recent_conversation_view_size_assert[HALO_LAYOUT_ASSERT_32(sizeof(struct recent_conversation_view) == 0x10)];
+typedef char ai_print_conversations_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct ai_debug_state, print_conversations) == 0x9F)];
+typedef char ai_communication_unit_speech_item_size_assert[HALO_LAYOUT_ASSERT_32(sizeof(struct unit_speech_item) == 0x30)];
+typedef char ai_communication_unit_speech_item_ai_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct unit_speech_item, ai) == 0x10)];
+typedef char ai_communication_actor_mode_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct actor_datum, state.mode) == 0x6A)];
+typedef char ai_communication_actor_unit_index_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct actor_datum, meta.unit_index) == 0x18)];
+typedef char ai_communication_actor_idle_combat_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct actor_datum, control.idle_vocalization_combat) == 0x6CC)];
+typedef char ai_communication_actor_idle_timer_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct actor_datum, control.idle_vocalization_timer) == 0x6CE)];
+typedef char ai_communication_actor_iterator_size_assert[HALO_LAYOUT_ASSERT_32(sizeof(struct actor_iterator) == 0x1C)];
+typedef char ai_communication_actor_iterator_index_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct actor_iterator, index) == 0x14)];
 
 /* ---------- prototypes */
 

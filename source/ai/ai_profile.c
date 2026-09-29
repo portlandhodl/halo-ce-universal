@@ -131,12 +131,9 @@ struct actor_iterator
 typedef short (*ai_meter_sample_proc)(
 	void);
 
-typedef char ai_meter_size_assert[
-	sizeof(struct ai_meter) == 0x88 ? 1 : -1];
-typedef char ai_profile_globals_meters_offset_assert[
-	offsetof(struct ai_profile_globals, meters) == 0x0C ? 1 : -1];
-typedef char ai_profile_globals_size_assert[
-	sizeof(struct ai_profile_globals) == 0xEEC ? 1 : -1];
+typedef char ai_meter_size_assert[HALO_LAYOUT_ASSERT_32(sizeof(struct ai_meter) == 0x88)];
+typedef char ai_profile_globals_meters_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct ai_profile_globals, meters) == 0x0C)];
+typedef char ai_profile_globals_size_assert[HALO_LAYOUT_ASSERT_32(sizeof(struct ai_profile_globals) == 0xEEC)];
 
 struct ai_meter_definition
 {

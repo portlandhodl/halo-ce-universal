@@ -375,10 +375,8 @@ struct bitmap_extract_cube_map_face
 	short source_y_row_delta;
 };
 
-typedef char bitmap_extract_entry_size_assert[
-	sizeof(struct bitmap_extract_entry) == 0x10 ? 1 : -1];
-typedef char bitmap_extract_data_size_assert[
-	sizeof(struct bitmap_extract_data) == 0x2C ? 1 : -1];
+typedef char bitmap_extract_entry_size_assert[HALO_LAYOUT_ASSERT_32(sizeof(struct bitmap_extract_entry) == 0x10)];
+typedef char bitmap_extract_data_size_assert[HALO_LAYOUT_ASSERT_32(sizeof(struct bitmap_extract_data) == 0x2C)];
 
 /* ---------- prototypes */
 

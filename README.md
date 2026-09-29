@@ -91,6 +91,7 @@ To build the game:
 | Target | Result |
 | --- | --- |
 | `ninja linux` | `build/linux/halo` |
+| `ninja linux64` (experimental) | `build/linux64/halo`, a true 64-bit (LP64) executable; refer to [docs/linux64.md](docs/linux64.md) |
 | `ninja windows` (on Windows) | `build/windows/halo.exe` and `SDL3.dll` |
 | `ninja android_apk` | `port/android/app/build/outputs/apk/debug/app-debug.apk` |
 
