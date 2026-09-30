@@ -83,6 +83,7 @@ symbols in this file:
 /* ---------- headers */
 
 #include "cseries.h"
+#include "rasterizer_transparent_geometry_group.h"
 #include "cseries/errors.h"
 #include "rasterizer.h"
 #include "rasterizer_debug_options.h"
@@ -108,24 +109,6 @@ enum
 
 /* January's assert strings name this type and its sorted_index field, and pin
 the stride: the group array is walked with a 0xA0 element size. */
-struct transparent_geometry_group
-{
-	unsigned long geometry_flags;
-	long object_index;
-	long source_object_index;
-	struct shader *shader;
-	byte opaque10[0x44];
-	long dynamic_vertex_buffer_index;
-	struct vertex_buffer const *vertex_buffer;
-	byte opaque5c[0x14];
-	real z_sort;
-	byte opaque74[0x1C];
-	long sorted_index;
-	byte opaque94[9];
-	boolean cortana_hack;
-	byte opaque9e[2];
-};
-
 typedef char transparent_geometry_group_size_assert[HALO_LAYOUT_ASSERT_32(sizeof(struct transparent_geometry_group) == 0xA0)];
 typedef char transparent_geometry_group_geometry_flags_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct transparent_geometry_group, geometry_flags) == 0x0)];
 typedef char transparent_geometry_group_object_index_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct transparent_geometry_group, object_index) == 0x4)];

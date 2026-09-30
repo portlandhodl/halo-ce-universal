@@ -592,17 +592,24 @@ struct rasterizer_globals_definition rasterizer_globals =
 	{ 0 },
 	{ 0 },
 	{ 0 },
-	{ 0, 3, 0, 0 },
+	/* the reserved38 bytes { 0, 3, 0, 0 } are push_buffer_size 0x300 and
+	kick_off_size 0 (the Xbox layout, rasterizer.h) */
+	0x300,
+	0,
 	FALSE,
 	TRUE,
 	FALSE,
 	0,
-	0,
+	{ 0 },
 	{ 0 },
 	0.0625f,
 	1024.f,
 	0.01171875f,
 	1024.f,
+	NULL,
+	NULL,
+	NULL,
+	0,
 	{ 0 }
 };
 struct rasterizer_debug_options_definition rasterizer_debug_options =

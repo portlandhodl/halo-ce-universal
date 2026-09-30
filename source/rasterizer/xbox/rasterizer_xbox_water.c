@@ -47,6 +47,7 @@ symbols in this file:
 
 /* ---------- headers */
 
+#include "rasterizer/xbox/rasterizer_xbox_pixel_shader.h"
 #include "cseries/cseries.h"
 #include "cseries/errors.h"
 #include "game/game_globals.h"
@@ -66,6 +67,7 @@ symbols in this file:
 #include <xtl.h>
 #include "rasterizer_xbox.h"
 #include "rasterizer/rasterizer_transparent_geometry.h"
+#include "rasterizer_transparent_geometry_group.h"
 #include "rasterizer_xbox_water.h"
 
 /* ---------- constants */
@@ -117,16 +119,6 @@ struct rasterizer_water_debug_options
 	boolean water;
 };
 
-struct transparent_geometry_group
-{
-	unsigned long geometry_flags;
-	byte reserved04[0x8];
-	struct shader *shader;
-	short shader_permutation_index;
-	byte reserved12[0x6E];
-	real_plane3d plane;
-};
-
 struct water_ripple
 {
 	byte reserved00[0x4];
@@ -166,27 +158,7 @@ struct shader_transparent_water_definition
 	struct tag_block ripples;
 };
 
-struct pixel_shader_definition
-{
-	unsigned long alpha_inputs[8];
-	unsigned long final_combiner_inputs_abcd;
-	unsigned long final_combiner_inputs_efg;
-	unsigned long constant_0[8];
-	unsigned long constant_1[8];
-	unsigned long alpha_outputs[8];
-	unsigned long rgb_inputs[8];
-	unsigned long compare_mode;
-	unsigned long final_combiner_constant_0;
-	unsigned long final_combiner_constant_1;
-	unsigned long rgb_outputs[8];
-	unsigned long combiner_count;
-	unsigned long texture_modes;
-	unsigned long dot_mapping;
-	unsigned long input_texture;
-	unsigned long c0_mapping;
-	unsigned long c1_mapping;
-	unsigned long final_combiner_constants;
-};
+/* struct pixel_shader_definition is shared, in rasterizer/xbox/rasterizer_xbox_pixel_shader.h (docs/linux64.md) */
 
 typedef char verify_water_ripple_size[HALO_LAYOUT_ASSERT_32(sizeof(struct water_ripple) == 0x4C)];
 typedef char verify_water_ripple_animation_angle_offset[HALO_LAYOUT_ASSERT_32(offsetof(struct water_ripple, animation_angle) == 0x28)];

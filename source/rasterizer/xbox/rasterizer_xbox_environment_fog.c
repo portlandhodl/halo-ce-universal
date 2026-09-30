@@ -122,7 +122,10 @@ symbols in this file:
 
 /* ---------- headers */
 
+#include "rasterizer/xbox/rasterizer_xbox_pixel_shader.h"
 #include "cseries.h"
+#include "rasterizer_transparent_geometry_group.h"
+#include "rasterizer_model_types.h"
 #include "errors.h"
 #include "real_math.h"
 #include "bitmaps/bitmap_group.h"
@@ -274,27 +277,7 @@ struct fog_screen
 	real wind_perpendicular_weight;
 };
 
-struct pixel_shader_definition
-{
-	unsigned long alpha_inputs[NUMBER_OF_PIXEL_SHADER_STAGES];
-	unsigned long final_combiner_inputs_abcd;
-	unsigned long final_combiner_inputs_efg;
-	unsigned long constant_0[NUMBER_OF_PIXEL_SHADER_STAGES];
-	unsigned long constant_1[NUMBER_OF_PIXEL_SHADER_STAGES];
-	unsigned long alpha_outputs[NUMBER_OF_PIXEL_SHADER_STAGES];
-	unsigned long rgb_inputs[NUMBER_OF_PIXEL_SHADER_STAGES];
-	unsigned long compare_mode;
-	unsigned long final_combiner_constant_0;
-	unsigned long final_combiner_constant_1;
-	unsigned long rgb_outputs[NUMBER_OF_PIXEL_SHADER_STAGES];
-	unsigned long combiner_count;
-	unsigned long texture_modes;
-	unsigned long dot_mapping;
-	unsigned long input_texture;
-	unsigned long c0_mapping;
-	unsigned long c1_mapping;
-	unsigned long final_combiner_constants;
-};
+/* struct pixel_shader_definition is shared, in rasterizer/xbox/rasterizer_xbox_pixel_shader.h (docs/linux64.md) */
 
 struct rasterizer_environment_fog_screen_wind
 {
@@ -333,72 +316,6 @@ struct shader_transparent_chicago_definition
 	struct tag_reference map;
 };
 
-struct rasterizer_model_skinning_parameters
-{
-	real_matrix4x3 const *node_matrices;
-	short node_matrix_count;
-	word pad06;
-};
-
-struct rasterizer_model_effect_parameters
-{
-	short type;
-	word pad02;
-	real intensity;
-	byte reserved08[4];
-	long source_object_index;
-	real_point3d centroid;
-	struct shader *shader;
-	struct render_animation animation;
-};
-
-struct rasterizer_model_begin_parameters
-{
-	unsigned long geometry_flags;
-	long unique_identifier;
-	struct rasterizer_model_skinning_parameters skinning;
-	struct render_lighting lighting;
-	struct render_animation animation;
-	struct rasterizer_model_effect_parameters effect;
-	real_point3d centroid;
-	real radius;
-	real_vector2d base_map_scale;
-};
-
-struct transparent_geometry_group
-{
-	unsigned long geometry_flags;
-	long object_index;
-	long source_object_index;
-	struct shader *shader;
-	short shader_permutation_index;
-	word pad12;
-	struct rasterizer_model_effect_parameters effect;
-	real_vector2d model_base_map_scale;
-	long dynamic_triangle_buffer_index;
-	struct triangle_buffer const *triangle_buffer;
-	long first_triangle_index;
-	long triangle_count;
-	long dynamic_vertex_buffer_index;
-	struct vertex_buffer const *vertex_buffer;
-	struct bitmap_data const *lightmap;
-	real_matrix4x3 const *node_matrices;
-	short node_matrix_count;
-	word pad66;
-	struct render_lighting const *lighting;
-	struct render_animation const *animation;
-	real z_sort;
-	real_point3d centroid;
-	real_plane3d plane;
-	long sorted_index;
-	short previous_group_presorted_index;
-	short next_group_presorted_index;
-	long active_camouflage_transparent_source_object_index;
-	boolean sort_last;
-	boolean cortana_hack;
-	byte pad9E[2];
-};
-
 typedef char rasterizer_environment_fog_window_parameters_fog_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct rasterizer_window_begin_parameters, fog) == 0x1E8)];
 typedef char rasterizer_environment_fog_window_parameters_field_of_view_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct rasterizer_window_begin_parameters, camera.vertical_field_of_view) == 0x30)];
 typedef char rasterizer_environment_fog_window_parameters_viewport_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct rasterizer_window_begin_parameters, camera.viewport_bounds) == 0x34)];
@@ -408,7 +325,7 @@ typedef char rasterizer_environment_fog_screen_window_size_assert[HALO_LAYOUT_AS
 typedef char rasterizer_environment_fog_screen_window_layers_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct rasterizer_environment_fog_screen_window, layers) == 0xC)];
 typedef char rasterizer_environment_fog_screen_window_wind_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct rasterizer_environment_fog_screen_window, wind) == 0x2C)];
 typedef char rasterizer_environment_fog_chicago_map_scale_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct shader_transparent_chicago_definition, map_u_scale) == 0x9C)];
-typedef char rasterizer_environment_fog_model_skinning_size_assert[HALO_LAYOUT_ASSERT_32(sizeof(struct rasterizer_model_skinning_parameters) == 0x8)];
+typedef char rasterizer_environment_fog_model_skinning_size_assert[HALO_LAYOUT_ASSERT_32(sizeof(struct rasterizer_model_skinning) == 0x8)];
 typedef char rasterizer_environment_fog_model_map_scale_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct rasterizer_model_begin_parameters, base_map_scale) == 0xC4)];
 typedef char rasterizer_environment_fog_transparent_group_size_assert[HALO_LAYOUT_ASSERT_32(sizeof(struct transparent_geometry_group) == 0xA0)];
 typedef char rasterizer_environment_fog_transparent_group_map_scale_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct transparent_geometry_group, model_base_map_scale) == 0x3C)];
@@ -1485,7 +1402,7 @@ void _rasterizer_environment_fog_screen_begin(
 				{
 					struct transparent_geometry_group *group =
 						&opaque_model_submit_parameters[group_index];
-					struct rasterizer_model_skinning_parameters skinning;
+					struct rasterizer_model_skinning skinning;
 
 					if (group->shader->base.type == _shader_type_transparent_chicago &&
 						!TEST_FLAG(

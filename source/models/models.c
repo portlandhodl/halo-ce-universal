@@ -73,6 +73,7 @@ symbols in this file:
 #include "math/real_math.h"
 #include "objects/objects.h"
 #include "rasterizer/rasterizer_geometry.h"
+#include "rasterizer/rasterizer_model_types.h"
 #include "render/render.h"
 #include "render/render_debug.h"
 #include "scenario/scenario.h"
@@ -208,12 +209,9 @@ struct shader_model_definition
 	real translucency;
 };
 
-struct rasterizer_model_skinning
-{
-	real_matrix4x3 const *node_matrices;
-	short node_matrix_count;
-	word pad;
-};
+/* struct rasterizer_model_skinning, struct render_model_effect and struct
+rasterizer_model_begin_parameters come from rasterizer_model_types.h — the
+LP64 port needs the draw packet defined once (docs/linux64.md) */
 
 struct render_sort_filth
 {
@@ -224,30 +222,6 @@ struct render_sort_filth
 	short part_index;
 	word pad;
 };
-
-struct render_model_effect
-{
-	short type;
-	word pad;
-	real intensity;
-	byte reserved[0x20];
-};
-
-struct rasterizer_model_begin_parameters
-{
-	unsigned long geometry_flags;
-	long unique_identifier;
-	struct rasterizer_model_skinning skinning;
-	struct render_lighting lighting;
-	struct render_animation animation;
-	struct render_model_effect effect;
-	real_point3d centroid;
-	real radius;
-	real_vector2d base_map_scale;
-};
-
-typedef char verify_render_model_effect_size[HALO_LAYOUT_ASSERT_32(sizeof(struct render_model_effect) == 0x28)];
-typedef char verify_rasterizer_model_begin_parameters_size[HALO_LAYOUT_ASSERT_32(sizeof(struct rasterizer_model_begin_parameters) == 0xCC)];
 
 struct rasterizer_debug_options
 {

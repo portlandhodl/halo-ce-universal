@@ -72,6 +72,7 @@ symbols in this file:
 
 /* ---------- headers */
 
+#include "rasterizer/xbox/rasterizer_xbox_pixel_shader.h"
 #include "cseries/cseries.h"
 #include "cseries/errors.h"
 #include "game/game_globals.h"
@@ -79,6 +80,7 @@ symbols in this file:
 #include "rasterizer/common/rasterizer_common.h"
 #include "rasterizer/rasterizer_geometry.h"
 #include "rasterizer/rasterizer_transparent_geometry.h"
+#include "rasterizer_transparent_geometry_group.h"
 
 #include <xtl.h>
 #include "rasterizer/xbox/rasterizer_xbox.h"
@@ -108,43 +110,6 @@ struct bitmap_data;
 struct shader;
 struct vertex_buffer;
 
-struct transparent_geometry_group
-{
-	unsigned long geometry_flags;
-	long object_index;
-	long source_object_index;
-	struct shader const *shader;
-	short shader_permutation_index;
-	short pad12;
-	short effect_type;
-	byte reserved16[0x26];
-	real_vector2d model_base_map_scale;
-	long dynamic_triangle_buffer_index;
-	void (*render_proc)(
-		long object_index,
-		long widget_index);
-	long first_triangle_index;
-	long triangle_count;
-	long dynamic_vertex_buffer_index;
-	struct vertex_buffer const *vertex_buffers;
-	struct bitmap_data const *lightmap;
-	void const *node_matrices;
-	short node_matrix_count;
-	word pad66;
-	void const *lighting;
-	void const *animation;
-	real z_sort;
-	real_point3d centroid;
-	real_plane3d plane;
-	long sorted_index;
-	short previous_group_presorted_index;
-	short next_group_presorted_index;
-	long active_camouflage_transparent_source_object_index;
-	byte reserved9C;
-	boolean cortana_hack;
-	byte reserved9E[2];
-};
-
 typedef char transparent_geometry_group_size_assert[HALO_LAYOUT_ASSERT_32(sizeof(struct transparent_geometry_group) == 0xA0)];
 
 
@@ -161,27 +126,7 @@ struct rasterizer_debug_options
 typedef char rasterizer_debug_options_size_assert[HALO_LAYOUT_ASSERT_32(sizeof(struct rasterizer_debug_options) == 0x68)];
 typedef char rasterizer_debug_options_zbias_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct rasterizer_debug_options, zbias) == 0x54)];
 
-struct pixel_shader_definition
-{
-	unsigned long alpha_inputs[8];
-	unsigned long final_combiner_inputs_abcd;
-	unsigned long final_combiner_inputs_efg;
-	unsigned long constant_0[8];
-	unsigned long constant_1[8];
-	unsigned long alpha_outputs[8];
-	unsigned long rgb_inputs[8];
-	unsigned long compare_mode;
-	unsigned long final_combiner_constant_0;
-	unsigned long final_combiner_constant_1;
-	unsigned long rgb_outputs[8];
-	unsigned long combiner_count;
-	unsigned long texture_modes;
-	unsigned long dot_mapping;
-	unsigned long input_texture;
-	unsigned long c0_mapping;
-	unsigned long c1_mapping;
-	unsigned long final_combiner_constants;
-};
+/* struct pixel_shader_definition is shared, in rasterizer/xbox/rasterizer_xbox_pixel_shader.h (docs/linux64.md) */
 
 /* ---------- prototypes */
 
@@ -303,7 +248,7 @@ void _rasterizer_widget_submit(
 			group->first_triangle_index = object_index;
 			group->triangle_count = widget_index;
 			group->dynamic_vertex_buffer_index = NONE;
-			group->vertex_buffers = NULL;
+			group->vertex_buffer = NULL;
 			group->lightmap = NULL;
 			null_plane.n.i = 0.0f;
 			null_plane.n.j = 0.0f;

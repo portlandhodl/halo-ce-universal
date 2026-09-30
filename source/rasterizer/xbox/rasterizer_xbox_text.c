@@ -40,6 +40,7 @@ symbols in this file:
 
 /* ---------- headers */
 
+#include "rasterizer/xbox/rasterizer_xbox_pixel_shader.h"
 #include "cseries.h"
 #include "bitmaps/bitmap_color_conversion.h"
 #include "cseries/errors.h"
@@ -89,49 +90,12 @@ struct rasterizer_text_debug_options
 
 struct bitmap_data;
 
-struct rasterizer_text_begin_parameters
-{
-	void *meter_parameters;
-	real_vector2d const *scale;
-	boolean map_enabled[3];
-	byte pad0B;
-	struct bitmap_data const *map[3];
-	boolean clamp[3];
-	byte pad1B;
-	real_vector2d const *texture_offset[3];
-	real first_constants[6];
-	real second_constants[6];
-	real_rgb_color const *constant_color[3];
-	real_argb_color color;
-	unsigned long reserved74;
-	real const *constant_alpha[3];
-	unsigned long reserved84;
-	short framebuffer_blend_function;
-	boolean point_filtering;
-	byte pad8B;
-};
+/* the begin packet is rasterizer.h's rasterizer_dynamic_screen_geometry_parameters,
+shared with the units that fill it (docs/linux64.md) */
+#define rasterizer_text_begin_parameters \
+	rasterizer_dynamic_screen_geometry_parameters
 
-struct pixel_shader_definition
-{
-	unsigned long alpha_inputs[8];
-	unsigned long final_combiner_inputs_abcd;
-	unsigned long final_combiner_inputs_efg;
-	unsigned long constant_0[8];
-	unsigned long constant_1[8];
-	unsigned long alpha_outputs[8];
-	unsigned long rgb_inputs[8];
-	unsigned long compare_mode;
-	unsigned long final_combiner_constant_0;
-	unsigned long final_combiner_constant_1;
-	unsigned long rgb_outputs[8];
-	unsigned long combiner_count;
-	unsigned long texture_modes;
-	unsigned long dot_mapping;
-	unsigned long input_texture;
-	unsigned long c0_mapping;
-	unsigned long c1_mapping;
-	unsigned long final_combiner_constants;
-};
+/* struct pixel_shader_definition is shared, in rasterizer/xbox/rasterizer_xbox_pixel_shader.h (docs/linux64.md) */
 
 /* ---------- prototypes */
 

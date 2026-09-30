@@ -645,20 +645,23 @@ enum
 
 /* ---------- macros */
 
+/* the backend's fields live in the one rasterizer_globals_definition
+(rasterizer.h); a private view of the object cannot share it on LP64
+(docs/linux64.md) */
 #define rasterizer_push_buffer_size \
-	(((struct rasterizer_xbox_rasterizer_globals *)&rasterizer_globals)->push_buffer_size)
+	(rasterizer_globals.push_buffer_size)
 #define rasterizer_kick_off_size \
-	(((struct rasterizer_xbox_rasterizer_globals *)&rasterizer_globals)->kick_off_size)
+	(rasterizer_globals.kick_off_size)
 #define rasterizer_floating_point_z_buffer \
-	(((struct rasterizer_xbox_rasterizer_globals *)&rasterizer_globals)->floating_point_z_buffer)
+	(rasterizer_globals.floating_point_zbuffer)
 #define rasterizer_refresh_rate \
-	(((struct rasterizer_xbox_rasterizer_globals *)&rasterizer_globals)->refresh_rate)
+	(rasterizer_globals.refresh_rate)
 #define rasterizer_default_2d_hardware_format \
-	(((struct rasterizer_xbox_rasterizer_globals *)&rasterizer_globals)->default_2d_hardware_format)
+	(rasterizer_globals.default_2d_hardware_format)
 #define rasterizer_default_3d_hardware_format \
-	(((struct rasterizer_xbox_rasterizer_globals *)&rasterizer_globals)->default_3d_hardware_format)
+	(rasterizer_globals.default_3d_hardware_format)
 #define rasterizer_default_cm_hardware_format \
-	(((struct rasterizer_xbox_rasterizer_globals *)&rasterizer_globals)->default_cm_hardware_format)
+	(rasterizer_globals.default_cm_hardware_format)
 
 /* ---------- structures */
 
@@ -2860,33 +2863,15 @@ void rasterizer_set_vertex_shader(
 
 
 /* January's Xbox backend owns the fields beyond rasterizer.h's shared public
- * prefix.  This typed private view is backed by this object's option handling,
- * initialization constants, and texture-creation destinations. */
-struct rasterizer_xbox_rasterizer_globals
-{
-	byte reserved00[0x38];
-	short push_buffer_size;
-	short kick_off_size;
-	boolean floating_point_z_buffer;
-	byte reserved3D[3];
-	short refresh_rate;
-	byte reserved42[0x12];
-	void *default_2d_hardware_format;
-	void *default_3d_hardware_format;
-	void *default_cm_hardware_format;
-	byte reserved60[8];
-};
-
-typedef char verify_rasterizer_xbox_rasterizer_globals_size[HALO_LAYOUT_ASSERT_32(sizeof(struct rasterizer_xbox_rasterizer_globals) ==
-		sizeof(struct rasterizer_globals_definition))];
+ * prefix; they are in rasterizer_globals_definition now (docs/linux64.md) */
 typedef char verify_rasterizer_xbox_push_buffer_size_offset[HALO_LAYOUT_ASSERT_32(offsetof(
-		struct rasterizer_xbox_rasterizer_globals,
+		struct rasterizer_globals_definition,
 		push_buffer_size) == 0x38)];
 typedef char verify_rasterizer_xbox_refresh_rate_offset[HALO_LAYOUT_ASSERT_32(offsetof(
-		struct rasterizer_xbox_rasterizer_globals,
+		struct rasterizer_globals_definition,
 		refresh_rate) == 0x40)];
 typedef char verify_rasterizer_xbox_default_2d_hardware_format_offset[HALO_LAYOUT_ASSERT_32(offsetof(
-		struct rasterizer_xbox_rasterizer_globals,
+		struct rasterizer_globals_definition,
 		default_2d_hardware_format) == 0x54)];
 
 boolean _rasterizer_initialize(

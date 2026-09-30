@@ -91,6 +91,7 @@ symbols in this file:
 #include "rasterizer/rasterizer.h"
 #include "rasterizer/rasterizer_geometry.h"
 #include "rasterizer/rasterizer_models.h"
+#include "rasterizer/rasterizer_model_types.h"
 #include "render/render.h"
 #include "scenario/scenario.h"
 #include "scenario/scenario_definitions.h"
@@ -150,62 +151,9 @@ enum
 
 /* ---------- structures */
 
-/* Target-proven vertex layouts used by this translation unit's quad helper. */
-struct model_vertex_uncompressed
-{
-	real_point3d position;
-	real_vector3d normal;
-	real_vector3d binormal;
-	real_vector3d tangent;
-	real_point2d texcoord;
-	short nodes[2];
-	real node_weights[2];
-};
-
-struct model_vertex_compressed
-{
-	real_point3d position;
-	unsigned long normal;
-	unsigned long binormal;
-	unsigned long tangent;
-	point2d texcoord;
-	byte nodes[2];
-	short node_weight;
-};
-
-typedef char verify_model_vertex_uncompressed_size[HALO_LAYOUT_ASSERT_32(sizeof(struct model_vertex_uncompressed) == 0x44)];
-typedef char verify_model_vertex_compressed_size[HALO_LAYOUT_ASSERT_32(sizeof(struct model_vertex_compressed) == 0x20)];
-
-/* January-local render packet layouts used by render_dynamic_quad. */
-struct rasterizer_model_skinning
-{
-	real_matrix4x3 const *node_matrices;
-	short node_matrix_count;
-	word pad;
-};
-
-struct render_model_effect
-{
-	short type;
-	word pad;
-	real intensity;
-	byte reserved[0x20];
-};
-
-struct rasterizer_model_begin_parameters
-{
-	unsigned long geometry_flags;
-	long unique_identifier;
-	struct rasterizer_model_skinning skinning;
-	struct render_lighting lighting;
-	struct render_animation animation;
-	struct render_model_effect effect;
-	real_point3d centroid;
-	real radius;
-	real_vector2d base_map_scale;
-};
-
-typedef char verify_rasterizer_model_begin_parameters_size[HALO_LAYOUT_ASSERT_32(sizeof(struct rasterizer_model_begin_parameters) == 0xCC)];
+/* The vertex layouts and the January-local render packet layouts used by
+this translation unit's quad helper come from rasterizer_model_types.h —
+the LP64 port needs them defined once (docs/linux64.md) */
 
 /* January scenario flag layout consumed by the King map scan. */
 typedef char verify_scenario_netgame_flag_size[HALO_LAYOUT_ASSERT_32(sizeof(struct scenario_netgame_flag) == 0x94)];

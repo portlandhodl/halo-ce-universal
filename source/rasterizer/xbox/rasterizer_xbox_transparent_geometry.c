@@ -130,6 +130,7 @@ symbols in this file:
 
 /* ---------- headers */
 
+#include "rasterizer/xbox/rasterizer_xbox_pixel_shader.h"
 #include "cseries.h"
 #include "cseries/errors.h"
 #include "main/main_internal.h"
@@ -138,6 +139,8 @@ symbols in this file:
 #include "rasterizer/rasterizer_active_camouflage.h"
 #include "rasterizer/rasterizer_geometry.h"
 #include "rasterizer/rasterizer_transparent_geometry.h"
+#include "rasterizer/rasterizer_model_types.h"
+#include "rasterizer/rasterizer_transparent_geometry_group.h"
 #include "rasterizer/xbox/rasterizer_xbox_internal.h"
 #include "render/render_debug.h"
 #include "shaders/shader_definitions.h"
@@ -418,27 +421,7 @@ typedef char rasterizer_transparent_geometry_debug_options_zsprites_offset_asser
 typedef char rasterizer_transparent_geometry_debug_options_values_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct rasterizer_transparent_geometry_debug_options_prefix,
 		debug_shader_values) == 0x70)];
 
-struct pixel_shader_definition
-{
-	unsigned long alpha_inputs[8];
-	unsigned long final_combiner_inputs_abcd;
-	unsigned long final_combiner_inputs_efg;
-	unsigned long constant_0[8];
-	unsigned long constant_1[8];
-	unsigned long alpha_outputs[8];
-	unsigned long rgb_inputs[8];
-	unsigned long compare_mode;
-	unsigned long final_combiner_constant_0;
-	unsigned long final_combiner_constant_1;
-	unsigned long rgb_outputs[8];
-	unsigned long combiner_count;
-	unsigned long texture_modes;
-	unsigned long dot_mapping;
-	unsigned long input_texture;
-	unsigned long c0_mapping;
-	unsigned long c1_mapping;
-	unsigned long final_combiner_constants;
-};
+/* struct pixel_shader_definition is shared, in rasterizer/xbox/rasterizer_xbox_pixel_shader.h (docs/linux64.md) */
 
 /* the transparent shader tag layouts January reads here; the same file-local
  * form SHADER_TRANSPARENT_GENERIC_PREPROCESSOR.C and
@@ -604,69 +587,9 @@ struct shader_transparent_meter_definition
 typedef char shader_transparent_meter_gradient_min_color_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct shader_transparent_meter_definition, gradient_min_color) == 0x7C)];
 typedef char shader_transparent_meter_brightness_source_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct shader_transparent_meter_definition, meter_brightness_source) == 0xD8)];
 
-struct rasterizer_model_skinning_parameters
-{
-	void const *node_matrices;
-	short node_matrix_count;
-	word pad06;
-};
-
-struct transparent_geometry_group
-{
-	unsigned long geometry_flags;
-	long object_index;
-	long source_object_index;
-	struct shader *shader;
-	short shader_permutation_index;
-	short pad12;
-	short effect_type;
-	short pad16;
-	real effect_intensity;
-	byte reserved1C[0x20];
-	real_vector2d model_base_map_scale;
-	long dynamic_triangle_buffer_index;
-	/* a NULL shader marks a widget group: rasterizer_xbox_widgets.c stores
-	 * render_proc here and its two arguments in the next two fields */
-	union
-	{
-		struct triangle_buffer const *triangle_buffer;
-		void (*render_proc)(
-			long object_index,
-			long widget_index);
-	};
-	long first_triangle_index;
-	long triangle_count;
-	long dynamic_vertex_buffer_index;
-	struct vertex_buffer const *vertex_buffer;
-	struct bitmap_data const *lightmap;
-	void const *node_matrices;
-	short node_matrix_count;
-	word pad66;
-	struct render_lighting const *lighting;
-	struct render_animation const *animation;
-	real z_sort;
-	real_point3d centroid;
-	real_plane3d plane;
-	long sorted_index;
-	short previous_group_presorted_index;
-	short next_group_presorted_index;
-	long active_camouflage_transparent_source_object_index;
-	byte reserved9C;
-	boolean cortana_hack;
-	byte reserved9E[2];
-};
-
-typedef char transparent_geometry_group_size_assert[HALO_LAYOUT_ASSERT_32(sizeof(struct transparent_geometry_group) == 0xA0)];
-typedef char transparent_geometry_group_triangle_buffer_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct transparent_geometry_group, triangle_buffer) == 0x48)];
-typedef char transparent_geometry_group_vertex_buffer_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct transparent_geometry_group, vertex_buffer) == 0x58)];
-typedef char transparent_geometry_group_effect_type_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct transparent_geometry_group, effect_type) == 0x14)];
-typedef char transparent_geometry_group_effect_intensity_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct transparent_geometry_group, effect_intensity) == 0x18)];
-typedef char transparent_geometry_group_node_matrices_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct transparent_geometry_group, node_matrices) == 0x60)];
-typedef char transparent_geometry_group_lighting_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct transparent_geometry_group, lighting) == 0x68)];
-typedef char transparent_geometry_group_centroid_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct transparent_geometry_group, centroid) == 0x74)];
-typedef char transparent_geometry_group_sorted_index_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct transparent_geometry_group, sorted_index) == 0x90)];
-typedef char transparent_geometry_group_active_camouflage_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct transparent_geometry_group,
-		active_camouflage_transparent_source_object_index) == 0x98)];
+/* struct rasterizer_model_skinning (rasterizer_model_types.h) and struct
+transparent_geometry_group (rasterizer_transparent_geometry_group.h) are
+shared with the other rasterizer units (docs/linux64.md) */
 
 struct rasterizer_xbox_transparent_geometry_globals
 {
@@ -1041,7 +964,7 @@ void rasterizer_transparent_geometry_group_draw(
 
 		if (rasterizer_debug_options.debug_transparent_geometry)
 		{
-			struct rasterizer_model_skinning_parameters skinning;
+			struct rasterizer_model_skinning skinning;
 
 			if (!TEST_FLAG(group->geometry_flags, _rasterizer_geometry_no_queue_bit) &&
 				group->shader &&
@@ -1297,7 +1220,7 @@ void rasterizer_transparent_geometry_group_draw(
 
 						if (!shader_ignores_effect(source_group->shader))
 						{
-							struct rasterizer_model_skinning_parameters skinning;
+							struct rasterizer_model_skinning skinning;
 
 							if (source_group->node_matrices && source_group->node_matrix_count)
 							{
@@ -1374,7 +1297,7 @@ void rasterizer_transparent_geometry_group_draw(
 
 				if (!TEST_FLAG(group->geometry_flags, _rasterizer_geometry_no_queue_bit))
 				{
-					struct rasterizer_model_skinning_parameters skinning;
+					struct rasterizer_model_skinning skinning;
 
 					if (group->node_matrices && group->node_matrix_count)
 					{

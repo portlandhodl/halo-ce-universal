@@ -140,6 +140,7 @@ symbols in this file:
 
 #define REAL_MATH_EXTERNAL_POINT_FROM_LINE3D
 #define REAL_MATH_EXTERNAL_SCALE_VECTOR3D
+#include "rasterizer/xbox/rasterizer_xbox_pixel_shader.h"
 #include "cseries.h"
 #include "bitmaps/bitmaps.h"
 #include "cseries/errors.h"
@@ -159,6 +160,7 @@ symbols in this file:
 #include "rasterizer/rasterizer_lights.h"
 #include "rasterizer/rasterizer_memory_pool.h"
 #include "rasterizer/rasterizer_transparent_geometry.h"
+#include "rasterizer/rasterizer_transparent_geometry_group.h"
 #include "shaders/shader_definitions.h"
 #include "shaders/shaders.h"
 
@@ -322,40 +324,8 @@ struct rasterizer_environment_debug_options
 	real vector_scale;
 };
 
-struct transparent_geometry_group
-{
-	unsigned long geometry_flags;
-	long object_index;
-	long source_object_index;
-	struct shader const *shader;
-	short shader_permutation_index;
-	short pad12;
-	short effect_type;
-	byte reserved16[0x26];
-	real_vector2d model_base_map_scale;
-	long dynamic_triangle_buffer_index;
-	long triangle_buffer_index;
-	long first_triangle_index;
-	long triangle_count;
-	long dynamic_vertex_buffer_index;
-	struct vertex_buffer const *vertex_buffers;
-	struct bitmap_data const *lightmap;
-	void const *node_matrices;
-	short node_matrix_count;
-	word pad66;
-	void const *lighting;
-	void const *animation;
-	real z_sort;
-	real_point3d centroid;
-	real_plane3d plane;
-	long sorted_index;
-	short previous_group_presorted_index;
-	short next_group_presorted_index;
-	long active_camouflage_transparent_source_object_index;
-	byte reserved9C;
-	boolean cortana_hack;
-	byte reserved9E[2];
-};
+/* struct transparent_geometry_group is shared with the other rasterizer
+units (rasterizer_transparent_geometry_group.h, docs/linux64.md) */
 
 struct rasterizer_environment_globals
 {
@@ -366,27 +336,7 @@ struct rasterizer_environment_globals
 	real specular_light_brightness;
 };
 
-struct pixel_shader_definition
-{
-	unsigned long alpha_inputs[8];
-	unsigned long final_combiner_inputs_abcd;
-	unsigned long final_combiner_inputs_efg;
-	unsigned long constant_0[8];
-	unsigned long constant_1[8];
-	unsigned long alpha_outputs[8];
-	unsigned long rgb_inputs[8];
-	unsigned long compare_mode;
-	unsigned long final_combiner_constant_0;
-	unsigned long final_combiner_constant_1;
-	unsigned long rgb_outputs[8];
-	unsigned long combiner_count;
-	unsigned long texture_modes;
-	unsigned long dot_mapping;
-	unsigned long input_texture;
-	unsigned long c0_mapping;
-	unsigned long c1_mapping;
-	unsigned long final_combiner_constants;
-};
+/* struct pixel_shader_definition is shared, in rasterizer/xbox/rasterizer_xbox_pixel_shader.h (docs/linux64.md) */
 
 struct point_light_geometry_parameters
 {
@@ -3203,11 +3153,11 @@ void _rasterizer_environment_transparent_geometry_submit(
 		group->effect_type = 0;
 		group->shader_permutation_index = shader_permutation_index;
 		group->dynamic_triangle_buffer_index = dynamic_triangle_buffer_index;
-		group->triangle_buffer_index = 0;
+		group->triangle_buffer = NULL;
 		group->first_triangle_index = first_triangle_index;
 		group->triangle_count = triangle_count;
 		group->dynamic_vertex_buffer_index = NONE;
-		group->vertex_buffers = vertex_buffers;
+		group->vertex_buffer = vertex_buffers;
 		group->lightmap = lightmap;
 		null_plane.n.i = 0.0f;
 		null_plane.n.j = 0.0f;

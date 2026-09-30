@@ -98,7 +98,9 @@ symbols in this file:
 
 /* ---------- headers */
 
+#include "rasterizer/xbox/rasterizer_xbox_pixel_shader.h"
 #include "cseries.h"
+#include "rasterizer_transparent_geometry_group.h"
 #include "cseries/errors.h"
 #define REAL_MATH_EXTERNAL_POINT_FROM_LINE3D
 #include "bitmaps/bitmap_color_conversion.h"
@@ -222,38 +224,6 @@ struct rasterizer_debug_options
 	unsigned long zbias;
 };
 
-struct rasterizer_model_skinning_parameters
-{
-	void const *node_matrices;
-	short node_matrix_count;
-	word pad06;
-};
-
-struct rasterizer_model_effect_parameters
-{
-	short type;
-	word pad02;
-	real intensity;
-	byte reserved08[4];
-	long source_object_index;
-	real_point3d centroid;
-	struct shader *shader;
-	struct render_animation animation;
-};
-
-struct rasterizer_model_begin_parameters
-{
-	unsigned long geometry_flags;
-	long unique_identifier;
-	struct rasterizer_model_skinning_parameters skinning;
-	struct render_lighting lighting;
-	struct render_animation animation;
-	struct rasterizer_model_effect_parameters effect;
-	real_point3d centroid;
-	real radius;
-	real_vector2d base_map_scale;
-};
-
 struct shader_model_properties
 {
 	word flags;
@@ -317,40 +287,6 @@ struct render_sort_filth
 	word pad0A;
 };
 
-struct transparent_geometry_group
-{
-	unsigned long geometry_flags;
-	long object_index;
-	long source_object_index;
-	struct shader *shader;
-	short shader_permutation_index;
-	word pad12;
-	struct rasterizer_model_effect_parameters effect;
-	real_vector2d model_base_map_scale;
-	long dynamic_triangle_buffer_index;
-	struct triangle_buffer const *triangle_buffer;
-	long first_triangle_index;
-	long triangle_count;
-	long dynamic_vertex_buffer_index;
-	struct vertex_buffer const *vertex_buffer;
-	struct bitmap_data const *lightmap;
-	real_matrix4x3 const *node_matrices;
-	short node_matrix_count;
-	word pad66;
-	struct render_lighting const *lighting;
-	struct render_animation const *animation;
-	real z_sort;
-	real_point3d centroid;
-	real_plane3d plane;
-	long sorted_index;
-	short previous_group_presorted_index;
-	short next_group_presorted_index;
-	long active_camouflage_transparent_source_object_index;
-	boolean sort_last;
-	boolean cortana_hack;
-	byte pad9E[2];
-};
-
 struct rasterizer_models_frame_statistics
 {
 	byte reserved000[0x14];
@@ -375,27 +311,7 @@ struct rasterizer_models_frame_statistics
 	unsigned long vertex_shader_work_accumulated;
 };
 
-struct pixel_shader_definition
-{
-	unsigned long alpha_inputs[8];
-	unsigned long final_combiner_inputs_abcd;
-	unsigned long final_combiner_inputs_efg;
-	unsigned long constant_0[8];
-	unsigned long constant_1[8];
-	unsigned long alpha_outputs[8];
-	unsigned long rgb_inputs[8];
-	unsigned long compare_mode;
-	unsigned long final_combiner_constant_0;
-	unsigned long final_combiner_constant_1;
-	unsigned long rgb_outputs[8];
-	unsigned long combiner_count;
-	unsigned long texture_modes;
-	unsigned long dot_mapping;
-	unsigned long input_texture;
-	unsigned long c0_mapping;
-	unsigned long c1_mapping;
-	unsigned long final_combiner_constants;
-};
+/* struct pixel_shader_definition is shared, in rasterizer/xbox/rasterizer_xbox_pixel_shader.h (docs/linux64.md) */
 
 struct shader_environment_diffuse_properties
 {
@@ -508,8 +424,8 @@ typedef char verify_shader_environment_cube_map_offset[HALO_LAYOUT_ASSERT_32(off
 		environment.reflection.cube_map) == 0x324)];
 
 typedef char verify_rasterizer_models_debug_options_zbias_offset[HALO_LAYOUT_ASSERT_32(offsetof(struct rasterizer_debug_options, zbias) == 0x54)];
-typedef char verify_rasterizer_model_parameters_effect_shader_offset[HALO_LAYOUT_ASSERT_32(offsetof(struct rasterizer_model_begin_parameters, effect.shader) == 0xA8)];
-typedef char verify_rasterizer_model_parameters_effect_animation_offset[HALO_LAYOUT_ASSERT_32(offsetof(struct rasterizer_model_begin_parameters, effect.animation) == 0xAC)];
+typedef char verify_rasterizer_model_parameters_effect_shader_offset[HALO_LAYOUT_ASSERT_32(offsetof(struct rasterizer_model_begin_parameters, effect.modifier_shader) == 0xA8)];
+typedef char verify_rasterizer_model_parameters_effect_animation_offset[HALO_LAYOUT_ASSERT_32(offsetof(struct rasterizer_model_begin_parameters, effect.modifier_animation) == 0xAC)];
 typedef char verify_rasterizer_models_statistics_vertex_shader_work_offset[HALO_LAYOUT_ASSERT_32(offsetof(
 		struct rasterizer_models_frame_statistics,
 		vertex_shader_work) == 0x158)];
@@ -1676,16 +1592,16 @@ void _rasterizer_model_draw(
 			676,
 			shader);
 
-		if (local_parameters->effect.shader)
+		if (local_parameters->effect.modifier_shader)
 		{
 			intensity_exponent_source = NONE;
 
-			if (local_parameters->effect.shader->base.type ==
+			if (local_parameters->effect.modifier_shader->base.type ==
 				_shader_type_transparent_plasma)
 			{
 				plasma = (struct shader_transparent_plasma_definition const *)
 					shader_get_and_verify_type(
-						local_parameters->effect.shader,
+						local_parameters->effect.modifier_shader,
 						_shader_type_transparent_plasma);
 				intensity_exponent_source = plasma->intensity_exponent_source;
 			}
@@ -1693,12 +1609,12 @@ void _rasterizer_model_draw(
 			if (intensity_exponent_source < 1 ||
 				intensity_exponent_source >
 					NUMBER_OF_SHADER_ANIMATION_FUNCTIONS ||
-				!local_parameters->effect.animation.values ||
-				local_parameters->effect.animation.values[
+				!local_parameters->effect.modifier_animation.values ||
+				local_parameters->effect.modifier_animation.values[
 					intensity_exponent_source-1] != 0.0f)
 			{
 				group = _rasterizer_model_transparent_geometry_submit(
-					local_parameters->effect.shader,
+					local_parameters->effect.modifier_shader,
 					shader_permutation_index,
 					triangle_buffer,
 					dynamic_triangle_buffer_index,
@@ -1711,7 +1627,7 @@ void _rasterizer_model_draw(
 				if (group)
 				{
 					group->animation = rasterizer_memory_alloc(
-						&local_parameters->effect.animation,
+						&local_parameters->effect.modifier_animation,
 						sizeof(struct render_animation));
 				}
 			}
@@ -2609,7 +2525,7 @@ struct transparent_geometry_group *_rasterizer_model_transparent_geometry_submit
 						local_parameters->effect.source_object_index!=0);
 					group->source_object_index =
 						local_parameters->effect.source_object_index;
-					group->centroid = local_parameters->effect.centroid;
+					group->centroid = local_parameters->effect.source_object_centroid;
 				}
 				group->shader = shader;
 				group->shader_permutation_index = shader_permutation_index;

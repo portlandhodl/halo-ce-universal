@@ -147,27 +147,49 @@ struct dynamic_screen_vertex
 
 typedef char verify_dynamic_screen_vertex_size[HALO_LAYOUT_ASSERT_32(sizeof(struct dynamic_screen_vertex) == 0x14)];
 
+/* The text backend (rasterizer_xbox_text.c) used to read this same packet
+through its own rasterizer_text_begin_parameters view; the unions keep its
+names (scale, clamp, first_constants, constant_color, constant_alpha, ...)
+on the same bytes. The two reserved longs in that view were 4 bytes there
+and 8 here — that is the LP64 divergence (docs/linux64.md). */
 struct rasterizer_dynamic_screen_geometry_parameters
 {
 	void *meter_parameters;
-	real_vector2d const *offset;
-	boolean map_anchor_screen[3];
+	union { real_vector2d const *offset; real_vector2d const *scale; };
+	union { boolean map_anchor_screen[3]; boolean map_enabled[3]; };
 	byte pad0B;
-	struct bitmap_data *map[3];
-	boolean map_wrapped[3];
+	struct bitmap_data const *map[3];
+	union { boolean map_wrapped[3]; boolean clamp[3]; };
 	byte pad1B;
-	real_point2d *map_offset[3];
-	real_vector2d map_scale[3];
-	real_vector2d map_texture_scale[3];
-	real_rgb_color const *map_tint[3];
-	real_argb_color plasma_fade;
-	boolean doing_plasma_effect;
-	byte pad75[3];
-	real const *map_fade[3];
-	short map0_to_1_blend_function;
-	short map1_to_2_blend_function;
+	union { real_point2d *map_offset[3]; real_vector2d const *texture_offset[3]; };
+	union
+	{
+		struct
+		{
+			real_vector2d map_scale[3];
+			real_vector2d map_texture_scale[3];
+		};
+		struct
+		{
+			real first_constants[6];
+			real second_constants[6];
+		};
+	};
+	union { real_rgb_color const *map_tint[3]; real_rgb_color const *constant_color[3]; };
+	union { real_argb_color plasma_fade; real_argb_color color; };
+	union
+	{
+		struct { boolean doing_plasma_effect; byte pad75[3]; };
+		ulong32 reserved74;
+	};
+	union { real const *map_fade[3]; real const *constant_alpha[3]; };
+	union
+	{
+		struct { short map0_to_1_blend_function; short map1_to_2_blend_function; };
+		ulong32 reserved84;
+	};
 	short framebuffer_blend_function;
-	boolean point_sampled;
+	union { boolean point_sampled; boolean point_filtering; };
 	byte pad8B;
 };
 
@@ -187,7 +209,10 @@ struct rasterizer_globals_definition
 	short current_lock_operation;
 	struct rasterizer_globals_reserved04 reserved04;
 	unsigned __int64 fps_accumulation_frame_index;
-	volatile unsigned long d3d_flip_count;
+	/* the counters are 32-bit on every build (the Xbox's D3D-flip and vblank
+	words); the LP64 port keeps the layout below at the Xbox offsets
+	(docs/linux64.md) */
+	volatile ulong32 d3d_flip_count;
 	byte reserved24[4];
 	/* Updated asynchronously as one 64-bit counter by the vblank callback. */
 	union
@@ -196,8 +221,8 @@ struct rasterizer_globals_definition
 		volatile unsigned __int64 frame_and_vertical_blank_index;
 		struct
 		{
-			volatile unsigned long frame_index;
-			volatile unsigned long vertical_blank_count;
+			volatile ulong32 frame_index;
+			volatile ulong32 vertical_blank_count;
 		};
 	};
 	union
@@ -205,22 +230,31 @@ struct rasterizer_globals_definition
 		volatile unsigned __int64 previous_frame_and_vertical_blank_index;
 		struct
 		{
-			volatile unsigned long previous_frame_index;
-			volatile unsigned long previous_vertical_blank_index;
+			volatile ulong32 previous_frame_index;
+			volatile ulong32 previous_vertical_blank_index;
 		};
 	};
-	byte reserved38[4];
+	/* the Xbox backend's fields (rasterizer_xbox.c used to reach them through
+	a private view of the object, which cannot share it on LP64) */
+	short push_buffer_size;
+	short kick_off_size;
 	boolean floating_point_zbuffer;
 	boolean framerate_throttle;
 	boolean framerate_throttle_debug;
 	byte reserved3F;
-	short framerate_throttle_target;
+	union
+	{
+		short framerate_throttle_target;
+		short refresh_rate;
+	};
 	byte reserved42[2];
 	real near_clip_distance;
 	real far_clip_distance;
 	real first_person_weapon_near_clip_distance;
 	real first_person_weapon_far_clip_distance;
-	byte reserved54[0xC];
+	void *default_2d_hardware_format;
+	void *default_3d_hardware_format;
+	void *default_cm_hardware_format;
 	short lightmap_mode;
 	byte reserved62[0x6];
 };

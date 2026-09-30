@@ -51,6 +51,7 @@ symbols in this file:
 /* ---------- headers */
 
 #include "cseries.h"
+#include "rasterizer_transparent_geometry_group.h"
 #include "bitmaps/bitmaps_inlines.h"
 #include "game/game_globals.h"
 #include "rasterizer/rasterizer.h"
@@ -205,40 +206,6 @@ struct shader_model_definition
 {
 	struct shader shader;
 	struct shader_model_properties model;
-};
-
-struct transparent_geometry_group
-{
-	unsigned long geometry_flags;
-	long object_index;
-	long source_object_index;
-	struct shader *shader;
-	short shader_permutation_index;
-	word pad12;
-	struct render_model_effect effect;
-	real_vector2d model_base_map_scale;
-	long dynamic_triangle_buffer_index;
-	struct triangle_buffer const *triangle_buffer;
-	long first_triangle_index;
-	long triangle_count;
-	long dynamic_vertex_buffer_index;
-	struct vertex_buffer const *vertex_buffer;
-	struct bitmap_data const *lightmap;
-	real_matrix4x3 const *node_matrices;
-	short node_matrix_count;
-	word pad66;
-	struct render_lighting const *lighting;
-	struct render_animation const *animation;
-	real z_sort;
-	real_point3d centroid;
-	real_plane3d plane;
-	long sorted_index;
-	short previous_group_presorted_index;
-	short next_group_presorted_index;
-	long active_camouflage_transparent_source_object_index;
-	boolean sort_last;
-	boolean cortana_hack;
-	byte pad9E[2];
 };
 
 typedef char verify_shader_model_texture_animation_offset[HALO_LAYOUT_ASSERT_32(offsetof(struct shader_model_definition, model.texture_animation) == 0xFC)];

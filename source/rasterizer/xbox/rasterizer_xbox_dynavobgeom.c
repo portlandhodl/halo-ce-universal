@@ -77,6 +77,7 @@ symbols in this file:
 #include "rasterizer/rasterizer_debug_options.h"
 #include "rasterizer/rasterizer_frame_statistics.h"
 #include "rasterizer/rasterizer_model_types.h"
+#include "rasterizer/rasterizer_transparent_geometry_group.h"
 #include "rasterizer/rasterizer_transparent_geometry.h"
 #include "render/render_cameras.h"
 #include "shaders/shader_definitions.h"
@@ -163,45 +164,8 @@ enum
 
 /* ---------- structures */
 
-struct transparent_geometry_group
-{
-	unsigned long geometry_flags;
-	long object_index;
-	long source_object_index;
-	struct shader *shader;
-	short shader_permutation_index;
-	short pad12;
-	struct render_model_effect effect;
-	real_vector2d model_base_map_scale;
-	long dynamic_triangle_buffer_index;
-	struct triangle_buffer const *triangle_buffer;
-	long first_triangle_index;
-	long triangle_count;
-	long dynamic_vertex_buffer_index;
-	struct vertex_buffer const *vertex_buffer;
-	struct bitmap_data const *lightmap;
-	real_matrix4x3 const *node_matrices;
-	short node_matrix_count;
-	short pad66;
-	struct render_lighting const *lighting;
-	struct render_animation const *animation;
-	real z_sort;
-	real_point3d centroid;
-	real_plane3d plane;
-	long sorted_index;
-	short previous_group_presorted_index;
-	short next_group_presorted_index;
-	long active_camouflage_transparent_source_object_index;
-	boolean sort_last;
-	boolean cortana_hack;
-	byte pad9E[2];
-};
-
-typedef char transparent_geometry_group_size_assert[HALO_LAYOUT_ASSERT_32(sizeof(struct transparent_geometry_group) == 0xA0)];
-typedef char transparent_geometry_group_model_base_map_scale_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct transparent_geometry_group, model_base_map_scale) == 0x3C)];
-typedef char transparent_geometry_group_z_sort_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct transparent_geometry_group, z_sort) == 0x70)];
-typedef char transparent_geometry_group_plane_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct transparent_geometry_group, plane) == 0x80)];
-typedef char transparent_geometry_group_cortana_hack_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct transparent_geometry_group, cortana_hack) == 0x9D)];
+/* struct transparent_geometry_group is shared with the other rasterizer
+units (rasterizer_transparent_geometry_group.h, docs/linux64.md) */
 
 struct rasterizer_meter_parameters
 {
