@@ -613,9 +613,9 @@ struct message_client_remove_player_request
 
 struct message_server_game_update
 {
-	unsigned long update_number;
-	long random_seed;
-	long game_time;
+	ulong32 update_number;
+	long32 random_seed;
+	long32 game_time;
 	byte __unknown0C[2];
 	short local_player_count;
 	struct player_action player_actions[MAXIMUM_NUMBER_OF_PLAYERS];
@@ -630,17 +630,17 @@ struct server_update
 
 struct message_client_graceful_game_exit_pregame
 {
-	long opaque;
+	long32 opaque;
 };
 
 struct message_client_graceful_game_exit_postgame
 {
-	long opaque;
+	long32 opaque;
 };
 
 struct message_client_loaded
 {
-	long opaque;
+	long32 opaque;
 };
 
 struct message_client_broadcast_game_search
@@ -652,7 +652,7 @@ struct message_client_broadcast_game_search
 
 struct message_client_ping
 {
-	long timestamp;
+	long32 timestamp;
 	word port;
 	byte __padding6[2];
 };
@@ -670,7 +670,7 @@ struct message_client_map_is_precached_pregame
 
 struct message_server_machine_accepted
 {
-	long random_seed;
+	long32 random_seed;
 	short machine_index;
 	byte __padding6[2];
 };

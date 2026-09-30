@@ -573,33 +573,33 @@ struct countdown_timer
 
 struct message_server_game_over
 {
-	long unused;
+	long32 unused;
 };
 
 struct message_server_begin_game
 {
-	long unused;
+	long32 unused;
 };
 
 struct message_server_remove_player_ingame
 {
 	struct network_player player;
-	long reason;
+	long32 reason;
 };
 
 struct message_server_graceful_game_exit_pregame
 {
-	long unused;
+	long32 unused;
 };
 
 struct message_server_switch_to_pregame
 {
-	long unused;
+	long32 unused;
 };
 
 struct message_server_graceful_game_exit_postgame
 {
-	long unused;
+	long32 unused;
 };
 
 struct message_server_machine_rejected
@@ -624,7 +624,7 @@ struct message_server_postgame_keep_alive
 
 struct message_client_game_update
 {
-	unsigned long update_number;
+	ulong32 update_number;
 	short unknown04;
 	short player_count;
 	struct player_action actions[MAXIMUM_PLAYERS_PER_MACHINE];
@@ -639,9 +639,9 @@ struct server_update
 
 struct message_server_game_update
 {
-	long update_number;
-	long random_seed;
-	long game_time;
+	long32 update_number;
+	long32 random_seed;
+	long32 game_time;
 	word unknown0C;
 	word player_count;
 	byte player_updates[MAXIMUM_NETWORK_PLAYER_COUNT * PLAYER_UPDATE_SIZE];

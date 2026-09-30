@@ -347,12 +347,12 @@ struct message_server_game_advertise
 
 struct message_server_pong
 {
-	long timestamp;
+	long32 timestamp;
 };
 
 struct message_server_machine_accepted
 {
-	long random_seed;
+	long32 random_seed;
 	short machine_index;
 	byte padding6[2];
 };
@@ -379,19 +379,19 @@ struct message_server_postgame_keep_alive
 
 struct message_server_begin_game
 {
-	long unused;
+	long32 unused;
 };
 
 struct message_server_graceful_game_exit_pregame
 {
-	long unused;
+	long32 unused;
 };
 
 struct message_server_game_update
 {
-	unsigned long update_number;
-	long random_seed;
-	long game_time;
+	ulong32 update_number;
+	long32 random_seed;
+	long32 game_time;
 	byte padding0C[2];
 	short local_player_count;
 	struct player_action player_actions[MAXIMUM_NUMBER_OF_PLAYERS];
@@ -400,22 +400,22 @@ struct message_server_game_update
 struct message_server_remove_player_ingame
 {
 	struct network_player player;
-	long reason;
+	long32 reason;
 };
 
 struct message_server_game_over
 {
-	long unused;
+	long32 unused;
 };
 
 struct message_server_switch_to_pregame
 {
-	long unused;
+	long32 unused;
 };
 
 struct message_server_graceful_game_exit_postgame
 {
-	long unused;
+	long32 unused;
 };
 
 /* ---------- prototypes */

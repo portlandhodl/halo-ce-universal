@@ -414,14 +414,14 @@ struct message_client_broadcast_game_search
 
 struct message_client_ping
 {
-	long timestamp;
+	long32 timestamp;
 	short port;
 	byte padding[2];
 };
 
 struct message_client_game_update
 {
-	unsigned long update_number;
+	ulong32 update_number;
 	short unknown;
 	short player_count;
 #ifdef HALO_LINUX
@@ -434,7 +434,7 @@ struct message_client_game_update
 
 struct message_server_pong
 {
-	long timestamp;
+	long32 timestamp;
 };
 
 struct message_server_game_advertise
@@ -474,12 +474,12 @@ struct message_client_settings_request
 
 struct message_client_game_start_request
 {
-	long countdown_time;
+	long32 countdown_time;
 };
 
 struct message_client_graceful_game_exit_pregame
 {
-	long unused;
+	long32 unused;
 };
 
 struct message_client_map_is_precached_pregame
@@ -489,17 +489,17 @@ struct message_client_map_is_precached_pregame
 
 struct message_client_loaded
 {
-	long unused;
+	long32 unused;
 };
 
 struct message_client_switch_to_pregame
 {
-	long unused;
+	long32 unused;
 };
 
 struct message_server_machine_accepted
 {
-	long random_seed;
+	long32 random_seed;
 	short machine_index;
 	byte padding[2];
 };
@@ -530,7 +530,7 @@ struct message_server_game_settings_update
 struct message_server_remove_player_ingame
 {
 	struct network_player player;
-	long game_time;
+	long32 game_time;
 };
 
 /* ---------- prototypes */
