@@ -174,18 +174,8 @@ struct font_drawing_globals
 	struct rasterizer_dynamic_screen_geometry_parameters multitexture_params;
 };
 
-struct font_character
-{
-	word character;
-	short character_width;
-	short bitmap_width;
-	short bitmap_height;
-	short bitmap_origin_x;
-	short bitmap_origin_y;
-	short hardware_character_index;
-	word pad;
-	long pixels_offset;
-};
+/* struct font_character comes from font_group.h — the LP64 port needs the
+glyph element defined once (docs/linux64.md) */
 
 struct parse_string_state
 {

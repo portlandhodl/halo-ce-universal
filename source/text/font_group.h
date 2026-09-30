@@ -18,7 +18,6 @@ header included in hcex build.
 enum
 {
 	FONT_GROUP_TAG = 'font',
-	FONT_CHARACTER_SIZE = 0x14,
 };
 
 /* ---------- macros */
@@ -27,7 +26,24 @@ enum
 
 /* ---------- structures */
 
-struct font_character;
+/* The glyph element, defined once for font_group.c and draw_string.c
+(docs/linux64.md): pixels_offset widens on LP64, so the translated block's
+stride is not the disk's 0x14 and font_group.c cannot read it with the
+hardcoded size. */
+struct font_character
+{
+	word character;
+	short character_width;
+	short bitmap_width;
+	short bitmap_height;
+	short bitmap_origin_x;
+	short bitmap_origin_y;
+	short hardware_character_index;
+	word pad;
+	long pixels_offset;
+};
+
+typedef char verify_font_character_size[HALO_LAYOUT_ASSERT_32(sizeof(struct font_character) == 0x14)];
 
 struct font_character_table
 {

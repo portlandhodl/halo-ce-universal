@@ -41,10 +41,10 @@ struct font_character *font_get_character_by_ascii_code(
 
 		if (*character_index != NONE)
 		{
-			character = tag_block_get_element_with_size(
+			character = TAG_BLOCK_GET_ELEMENT(
 				&font->characters,
 				*character_index,
-				FONT_CHARACTER_SIZE);
+				struct font_character);
 		}
 	}
 
