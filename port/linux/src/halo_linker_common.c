@@ -161,7 +161,15 @@ HALO_COMMON(timeout_for_endgame_sound, 28); /* long timeout_for_endgame_sound */
 HALO_COMMON(ui_plasma_effect_color, 16); /* real_argb_color ui_plasma_effect_color */
 HALO_COMMON(weather_particle_data, 4); /* struct data_array *weather_particle_data */
 HALO_COMMON(widget_data, 4); /* struct data_array *widget_data */
+/* wind_globals: the LP64 layout is 0xD10 (wind.c's `long time` widens); the
+32-bit size under-allocates it and the excess bytes trample the next bss
+symbol (memory_watch.c's watch_active, which disabled texture write
+detection — docs/linux64.md) */
+#ifdef HALO_LINUX64
+HALO_COMMON(wind_globals, 3344); /* struct wind_globals wind_globals */
+#else
 HALO_COMMON(wind_globals, 3340); /* struct wind_globals wind_globals */
+#endif
 HALO_COMMON(window_globals, 160); /* struct window_globals_prefix window_globals */
 
 /* ---------- functions */
