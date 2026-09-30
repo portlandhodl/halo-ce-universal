@@ -5,11 +5,12 @@
 and unfinished.
 
 Current state: the game starts, initialises OpenGL, audio and networking,
-finds the maps folder, reads the cache file headers, loads the tag blob of
-the `ui` map, and translates its header and instance table. It then runs
-stably, but cannot interpret the tags' own structures yet (see "The data
-translation layer" below), so no menu appears. Known lesser defect: player
-profile saves fail (`file_write` reports success with nothing written).
+finds the maps folder, loads the `ui` map's tags, and translates them at
+`tag_get` through the layout table (below). The main menu renders and plays
+its music; widgets take the mouse. Known defects: no map has been driven to
+a level yet (the object placements for the deeper groups need their
+composites completed — see "The data translation layer"), and player profile
+saves fail (`file_write` reports success with nothing written).
 
 ## What has been ported
 
@@ -83,31 +84,49 @@ item for the data translation layer.** To get the list back, make
   `ucontext` registers (`REG_EIP`, ...); it now uses `REG_RIP`/`REG_RBP`/
   `REG_RSP` on x86-64.
 
-## The data translation layer (not implemented)
+## The data translation layer
 
-The remaining boss fight. The tags' own structures in the blob keep the
+Implemented and in progress. The tags' own structures in the blob keep the
 32-bit disk layout: every `struct tag_block`, `struct tag_reference` and
 `struct tag_data` is smaller on disk than its LP64 form, and the group
 structures (scenario, bitmaps, sounds, models, ...) mix both with pointers.
 
-The original plan was to walk the blob with the tag field metadata
-(`struct tag_block_definition`, `struct tag_field`) and expand each element
-to its LP64 layout. **That metadata does not exist in this build**: the
-cache-beta decompilation kept the field definitions of only a handful of
-groups (the hs_* blocks, recorded animations, the leaf map), and the block
-definitions that exist record `element_size` as `sizeof()` of the compiled
-struct, not the file's.
+The tag field metadata (`struct tag_block_definition`, `struct tag_field`)
+does not exist in this build: the cache-beta decompilation kept the field
+definitions of only a handful of groups, and the block definitions that
+exist record `element_size` as `sizeof()` of the compiled struct, not the
+file's. So the layouts come from the DWARF of the two builds instead: the
+32-bit build's `sizeof`/`offsetof` is the file layout (it loads zero-copy),
+the 64-bit build's is the memory layout. `tools/linux64_layout.py` walks
+both from each known group's root structure and emits
+`port/linux/game/tag_layouts64_generated.c`; `tag_get` (cache_files.c) then
+converts each tag's root structure once, following the table
+(port/linux/game/tag_translate64.c): scalars copy (longs widen with their
+sign), pointers zero-extend (the blob sits in the reserved Xbox memory map
+below 4 GB), blocks translate their elements recursively into an arena, and
+tag_data payloads stay in the blob. A tag_data that is a whole data_array
+(the HaloScript node pool) gets its header and elements translated.
 
-So the group layouts have to be reconstructed — the community has them
-complete and open (Invader's tag definitions cover every group of the
-game) — and joined with the compiled LP64 layouts (both sides are in the
-DWARF of the two builds: the 32-bit build's `sizeof`/`offsetof` is the file
-layout, the 64-bit build's is the memory layout). A generator can emit a
-layout table from the two; the runtime translator then converts each tag at
-load, lazily at `tag_get` or eagerly at `scenario_tags_load`.
+Block element bindings come from the definition headers' `// element_type`
+comments, from `TAG_BLOCK_GET_ELEMENT` call sites, and from the
+BLOCK_OVERRIDES table in the generator where both are ambiguous.
 
-The same treatment is needed for the scenario's structure BSP header and for
-anything else read with a raw memory "magic" delta.
+**The per-unit partial views are the recurring hazard.** The decompilation
+declares many structures (tag groups and runtime packets alike) separately
+per unit; on the Xbox they coincide byte-for-byte, on LP64 they widen
+differently. The generator reports every same-name member at two offsets
+("LP64 view conflicts"); each is a structure to define once (as
+rasterizer_model_types.h, rasterizer_transparent_geometry_group.h,
+rasterizer_xbox_pixel_shader.h and ui_widget.h's widget_instance now do).
+The same rule bit in: the vertex shader bytecode and declarations
+(`unsigned long[]` token arrays, now `ulong32`), the stack memory pool's
+hardcoded header size, the object type table's hardcoded scenario offsets
+(now `offsetof`), and the `& LONG_MAX` designator masks (the XDK prefix
+keeps the game's 32-bit LONG_MAX/LONG_MIN).
+
+Still to do: the deeper groups' structures as maps demand them (the object
+placement elements' trailing fields, `game_globals.playlist`, ...), the
+saved games (raw game-state dumps), and the remaining conflict report.
 
 Saved games (raw dumps of the game state) and the system-link protocol carry
 the LP64 layouts; saves and multiplayer are therefore not compatible between

@@ -125,6 +125,7 @@ symbols in this file:
 #include "cseries.h"
 #include "cseries_windows.h"
 #include "errors.h"
+#include "tag_translate64.h"
 #include "tag_files/tag_groups.h"
 #include "tag_files/files.h"
 #include "cache_files.h"
@@ -214,11 +215,13 @@ pointers — but its structures have the 32-bit layouts. The tag header and
 the instance table get translated to their LP64 layouts here when a map
 loads; a tag's own structure still has the disk layout until the group
 translation layer exists. */
+/* the disk layout: the indices are signed (the salt can set the sign bit;
+they must sign-extend on LP64), the addresses are not */
 struct cache_file_tag_instance_32
 {
-	ulong32 group_tag;
-	ulong32 parent_group_tags[2];
-	ulong32 tag_index;
+	long32 group_tag;
+	long32 parent_group_tags[2];
+	long32 tag_index;
 	ulong32 name;
 	ulong32 base_address;
 	ulong32 unused[2];
@@ -287,6 +290,9 @@ static void tag_cache_translate_header_and_instances_64(
 
 	cache_file_globals.tag_header = &translated_tag_header;
 	global_tag_instances = translated_tag_instances;
+
+	/* the translator's per-map state (tag_translate64.c) */
+	tag_translate_new_map_64(blob_header->tag_count);
 }
 #endif
 
@@ -425,6 +431,7 @@ void scenario_tags_unload(
 		free(translated_tag_instances);
 		translated_tag_instances = NULL;
 	}
+	tag_translate_dispose_64();
 #endif
 
 	return;
@@ -837,6 +844,32 @@ boolean scenario_structure_bsp_load(
 	}
 
 	cache_file_globals.structure_bsp_header = reference->base_address;
+#ifdef HALO_LINUX64
+	/* the BSP region's header is the 32-bit disk layout too; translate it
+	like the tag header above (docs/linux64.md) */
+	{
+		struct cache_file_structure_bsp_header_32
+		{
+			ulong32 base_address;
+			long32 vertex_buffer_count;
+			ulong32 vertex_buffers;
+			long32 index_buffer_count;
+			ulong32 index_buffers;
+			ulong32 signature;
+		};
+		static struct cache_file_structure_bsp_header translated_bsp_header;
+		struct cache_file_structure_bsp_header_32 const *blob_header =
+			(struct cache_file_structure_bsp_header_32 const *)reference->base_address;
+
+		translated_bsp_header.base_address = (void *)(unsigned long)blob_header->base_address;
+		translated_bsp_header.vertex_buffer_count = blob_header->vertex_buffer_count;
+		translated_bsp_header.vertex_buffers = (void *)(unsigned long)blob_header->vertex_buffers;
+		translated_bsp_header.index_buffer_count = blob_header->index_buffer_count;
+		translated_bsp_header.index_buffers = (void *)(unsigned long)blob_header->index_buffers;
+		translated_bsp_header.signature = blob_header->signature;
+		cache_file_globals.structure_bsp_header = &translated_bsp_header;
+	}
+#endif
 	match_assert(
 		"c:\\halo\\SOURCE\\cache\\cache_files.c",
 		0xE0,
@@ -905,6 +938,15 @@ void *tag_get(
 		csprintf(temporary, "can't get() a tag with a base address!")
 	);
 	
+#ifdef HALO_LINUX64
+	/* the tag's structure still has the disk layout in the blob; translate
+	it to the LP64 layout once (docs/linux64.md) */
+	if (tag_instance->base_address)
+	{
+		tag_instance->base_address = tag_translate_64(
+			tag_instance->group_tag, (short)tag_index, tag_instance->base_address);
+	}
+#endif
 	return tag_instance->base_address;
 }
 
