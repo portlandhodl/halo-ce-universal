@@ -915,7 +915,7 @@ void sound_initialize(
 		return;
 	}
 
-	looping_sound_data = data_new("looping sounds", 0x80, 0xE4);
+	looping_sound_data = data_new("looping sounds", 0x80, sizeof(struct looping_sound_datum));
 	if (!looping_sound_data)
 	{
 		return;

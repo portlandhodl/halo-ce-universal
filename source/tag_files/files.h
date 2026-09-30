@@ -12,7 +12,14 @@ header included in hcex build.
 
 enum
 {
+#ifdef HALO_LINUX64
+	/* the LP64 port (docs/linux64.md): file_reference_info's signature and
+	file_handle are 64-bit, so the reference is 12 bytes wider. Runtime
+	only; file_reference is never in a disk format */
+	FILE_REFERENCE_SIZE = 280,
+#else
 	FILE_REFERENCE_SIZE = 268,
+#endif
 	MAXIMUM_FILENAME_LENGTH = 255
 };
 

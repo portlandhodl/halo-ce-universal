@@ -731,7 +731,7 @@ void hs_runtime_initialize(
 	short global_index;
 	long index;
 
-	hs_thread_data = game_state_data_new("hs thread", 0x100, 0x218);
+	hs_thread_data = game_state_data_new("hs thread", 0x100, sizeof(struct hs_thread_datum));
 	hs_global_data = game_state_data_new("hs globals", 0x400, 8);
 	if (hs_thread_data && hs_global_data)
 	{

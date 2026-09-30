@@ -134,7 +134,6 @@ enum
 	XBOX_TEXTURE_CACHE_STEALABLE_PAGE_COUNT =
 		XBOX_TEXTURE_CACHE_PAGE_COUNT -
 		2 * (XBOX_TEXTURE_CACHE_STEAL_GUARD_SIZE / XBOX_TEXTURE_CACHE_PAGE_SIZE),
-	XBOX_TEXTURE_CACHE_ENTRY_SIZE = 0x20,
 	XBOX_TEXTURE_CACHE_SIZE = 0x1600000,
 	XBOX_TEXTURE_CACHE_PROTECTION = 0x404,
 };
@@ -211,6 +210,10 @@ struct xbox_texture_cache_texture
 	struct bitmap_data *bitmap;
 	D3DBaseTexture hardware_format;
 };
+
+/* 0x20 on the Xbox; the LP64 port's texture entry holds a 64-bit bitmap
+pointer (docs/linux64.md) */
+#define XBOX_TEXTURE_CACHE_ENTRY_SIZE ((short)sizeof(struct xbox_texture_cache_texture))
 
 struct texture_cache_debug_options
 {

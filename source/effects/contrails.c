@@ -196,11 +196,11 @@ void contrails_initialize(
 {
 #ifdef HALO_LINUX
 	/* the native builds' larger contrail pools (halo_port_capacity.h) */
-	contrail_data = game_state_data_new("contrail", HALO_PORT_MAXIMUM_CONTRAILS, 0x44);
-	contrail_point_data = game_state_data_new("contrail point", MAXIMUM_CONTRAIL_POINTS, 0x38);
+	contrail_data = game_state_data_new("contrail", HALO_PORT_MAXIMUM_CONTRAILS, sizeof(struct contrail_datum));
+	contrail_point_data = game_state_data_new("contrail point", MAXIMUM_CONTRAIL_POINTS, sizeof(struct contrail_point_datum));
 #else
-	contrail_data = game_state_data_new("contrail", 256, 0x44);
-	contrail_point_data = game_state_data_new("contrail point", 1024, 0x38);
+	contrail_data = game_state_data_new("contrail", 256, sizeof(struct contrail_datum));
+	contrail_point_data = game_state_data_new("contrail point", 1024, sizeof(struct contrail_point_datum));
 #endif
 	if (contrail_data && contrail_point_data)
 		return;

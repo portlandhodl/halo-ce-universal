@@ -651,11 +651,11 @@ void effects_initialize(
 #ifdef HALO_LINUX
 	/* the native builds' larger effect pools (halo_port_capacity.h); a full
 	pool drops deterministic effects, damage included */
-	effect_data = game_state_data_new("effect", HALO_PORT_MAXIMUM_EFFECTS, 0xFC);
-	effect_location_data = game_state_data_new("effect location", HALO_PORT_MAXIMUM_EFFECT_LOCATIONS, 0x3C);
+	effect_data = game_state_data_new("effect", HALO_PORT_MAXIMUM_EFFECTS, sizeof(struct effect_datum));
+	effect_location_data = game_state_data_new("effect location", HALO_PORT_MAXIMUM_EFFECT_LOCATIONS, sizeof(struct effect_location_datum));
 #else
-	effect_data = game_state_data_new("effect", 0x100, 0xFC);
-	effect_location_data = game_state_data_new("effect location", 0x200, 0x3C);
+	effect_data = game_state_data_new("effect", 0x100, sizeof(struct effect_datum));
+	effect_location_data = game_state_data_new("effect location", 0x200, sizeof(struct effect_location_datum));
 #endif
 	if (!effect_data || !effect_location_data)
 		error(_error_immediate, "couldn't allocate effect globals");

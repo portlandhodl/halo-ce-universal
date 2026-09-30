@@ -130,6 +130,7 @@ symbols in this file:
 #include "devices/devices.h"
 #include "editor/editor_stubs.h"
 #include "items/items.h"
+#include "items/equipment.h"
 #include "items/projectiles.h"
 #include "items/projectiles_callbacks.h"
 #include "items/weapons.h"
@@ -229,9 +230,6 @@ void weapon_preprocess_node_orientations(
 	long object_index,
 	struct real_orientation *node_orientations);
 
-void equipment_place(
-	long object_index,
-	struct scenario_object_datum *scenario_object);
 boolean garbage_new(
 	long object_index);
 boolean garbage_update(
@@ -330,7 +328,7 @@ struct object_type_definition unit_data_definition =
 
 struct object_type_definition biped_data_definition =
 {
-	"biped", 'bipd', 0x480, 0x228, 0x234, 0x78,
+	"biped", 'bipd', 0x480, offsetof(struct scenario, bipeds), offsetof(struct scenario, biped_palette), 0x78,
 	bipeds_initialize, bipeds_dispose, bipeds_initialize_for_new_map, bipeds_dispose_from_old_map,
 	biped_adjust_placement, biped_new, biped_place, biped_delete, biped_update,
 	biped_export_function_values,
@@ -344,7 +342,7 @@ struct object_type_definition biped_data_definition =
 
 struct object_type_definition vehicle_data_definition =
 {
-	"vehicle", 'vehi', 0x47C, 0x240, 0x24C, 0x78,
+	"vehicle", 'vehi', 0x47C, offsetof(struct scenario, vehicles), offsetof(struct scenario, vehicle_palette), 0x78,
 	vehicles_initialize, vehicles_dispose, vehicles_initialize_for_new_map, vehicles_dispose_from_old_map,
 	NULL, vehicle_new, vehicle_place, vehicle_delete, vehicle_update,
 	vehicle_export_function_values,
@@ -372,7 +370,7 @@ struct object_type_definition item_data_definition =
 
 struct object_type_definition weapon_data_definition =
 {
-	"weapon", 'weap', 0x27C, 0x270, 0x27C, 0x5C,
+	"weapon", 'weap', 0x27C, offsetof(struct scenario, weapons), offsetof(struct scenario, weapon_palette), sizeof(struct scenario_weapon_datum),
 	weapons_initialize, weapons_dispose, weapons_initialize_for_new_map, weapons_dispose_from_old_map,
 	NULL, weapon_new, weapon_place, weapon_delete, weapon_update,
 	weapon_export_function_values,
@@ -386,7 +384,7 @@ struct object_type_definition weapon_data_definition =
 
 struct object_type_definition equipment_data_definition =
 {
-	"equipment", 'eqip', 0x1F4, 0x258, 0x264, 0x28,
+	"equipment", 'eqip', 0x1F4, offsetof(struct scenario, equipment), offsetof(struct scenario, equipment_palette), sizeof(struct scenario_equipment_datum),
 	NULL, NULL, NULL, NULL,
 	NULL, NULL, equipment_place, NULL, NULL,
 	NULL,
@@ -428,7 +426,7 @@ struct object_type_definition projectile_data_definition =
 
 struct object_type_definition scenery_data_definition =
 {
-	"scenery", 'scen', 0x1A8, 0x210, 0x21C, 0x48,
+	"scenery", 'scen', 0x1A8, offsetof(struct scenario, scenery), offsetof(struct scenario, scenery_palette), sizeof(struct scenario_object_datum)+sizeof(struct scenario_object_permutation),
 	scenery_initialize, scenery_dispose, scenery_initialize_for_new_map, scenery_dispose_from_old_map,
 	NULL, scenery_new, scenery_place, scenery_delete, scenery_update,
 	NULL,
@@ -442,7 +440,7 @@ struct object_type_definition scenery_data_definition =
 
 struct object_type_definition sound_scenery_data_definition =
 {
-	"sound_scenery", 'ssce', 0x1A8, 0x2DC, 0x2E8, 0x28,
+	"sound_scenery", 'ssce', 0x1A8, offsetof(struct scenario, sound_scenery), offsetof(struct scenario, sound_scenery_palette), sizeof(struct scenario_object_datum),
 	NULL, NULL, NULL, NULL,
 	NULL, sound_scenery_new, NULL, sound_scenery_delete, NULL,
 	NULL,
@@ -470,7 +468,7 @@ struct object_type_definition device_data_definition =
 
 struct object_type_definition machine_data_definition =
 {
-	"machine", 'mach', 0x1D8, 0x294, 0x2A0, 0x40,
+	"machine", 'mach', 0x1D8, offsetof(struct scenario, machines), offsetof(struct scenario, machine_palette), 0x40,
 	machines_initialize, machines_dispose, machines_initialize_for_new_map, machines_dispose_from_old_map,
 	NULL, machine_new, machine_place, machine_delete, machine_update,
 	NULL,
@@ -484,7 +482,7 @@ struct object_type_definition machine_data_definition =
 
 struct object_type_definition control_data_definition =
 {
-	"control", 'ctrl', 0x1CC, 0x2AC, 0x2B8, 0x40,
+	"control", 'ctrl', 0x1CC, offsetof(struct scenario, controls), offsetof(struct scenario, control_palette), 0x40,
 	controls_initialize, controls_dispose, controls_initialize_for_new_map, controls_dispose_from_old_map,
 	NULL, control_new, control_place, control_delete, control_update,
 	NULL,
@@ -498,7 +496,7 @@ struct object_type_definition control_data_definition =
 
 struct object_type_definition light_fixture_data_definition =
 {
-	"light_fixture", 'lifi', 0x1DC, 0x2C4, 0x2D0, 0x58,
+	"light_fixture", 'lifi', 0x1DC, offsetof(struct scenario, light_fixtures), offsetof(struct scenario, light_fixtures_palette), 0x58,
 	light_fixtures_initialize, light_fixtures_dispose, light_fixtures_initialize_for_new_map, light_fixtures_dispose_from_old_map,
 	NULL, light_fixture_new, light_fixture_place, light_fixture_delete, light_fixture_update,
 	NULL,

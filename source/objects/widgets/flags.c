@@ -220,7 +220,7 @@ struct data_array *flag_data;
 void flags_initialize(
 	void)
 {
-	flag_data = game_state_data_new("flag", 2, 0x16BC);
+	flag_data = game_state_data_new("flag", 2, sizeof(struct flag_datum_prefix));
 	if (!flag_data)
 		error(_error_immediate, "couldn't allocate flag globals");
 

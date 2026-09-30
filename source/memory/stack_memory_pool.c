@@ -367,7 +367,10 @@ void dispose_pointer(
 	unsigned long block_size;
 
 	match_assert("c:\\halo\\SOURCE\\memory\\stack_memory_pool.c", 0x197, p);
-	block = (struct stack_memory_pool_block *)((byte *)p-0x1C);
+	/* 0x1C is the 32-bit offsetof(data); the header is wider on LP64
+	(docs/linux64.md) */
+	block = (struct stack_memory_pool_block *)
+		((byte *)p-offsetof(struct stack_memory_pool_block, data));
 	if (!stack_memory_pool_valid_block(pool, block))
 	{
 		display_assert(
@@ -559,13 +562,15 @@ void *pool_resize_pointer(
 	boolean locked;
 
 	if (pointer)
-		block = (struct stack_memory_pool_block *)((byte *)pointer-0x18);
+		/* the two-step 0x18+sizeof(unsigned long) was the 32-bit
+		offsetof(data); the header is wider on LP64 (docs/linux64.md) */
+		block = (struct stack_memory_pool_block *)
+			((byte *)pointer-offsetof(struct stack_memory_pool_block, data));
 	else
 		block = NULL;
 	old_block_size = 0;
 	if (block)
 	{
-		block = (struct stack_memory_pool_block *)((byte *)block-sizeof(unsigned long));
 		match_assert("c:\\halo\\SOURCE\\memory\\stack_memory_pool.c", 0x22F, block);
 		old_block_size = block->size_and_flags&0x7FFFFFFF;
 	}

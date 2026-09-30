@@ -41,6 +41,7 @@ symbols in this file:
 #include "game/player_rumble.h"
 
 #include "game/players.h"
+#include "memory/data.h" /* datum_get: implicit int return truncates pointers on LP64 (docs/linux64.md) */
 #include "input/input.h"
 #include "interface/player_ui.h"
 #include "math/periodic_functions.h"
