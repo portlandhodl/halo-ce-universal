@@ -19,6 +19,20 @@ these headers. */
 #include <excpt.h>
 #include <limits.h>
 
+/* The C library's LONG_MAX/LONG_MIN/ULONG_MAX macros would otherwise
+replace the game's own 32-bit enumerators (cseries.h, read first) for the
+rest of the unit — and on LP64 they differ (the BSP node and leaf
+designators are 32-bit longs that mask the flag bit with LONG_MAX and set
+it with LONG_MIN, physics/bsp3d.c). Keep the macros at the game's values;
+the platforms' units that clamp with them (msvc_crt.c's 32-bit _stat)
+saturate to the same range either way (docs/linux64.md). */
+#undef LONG_MAX
+#undef LONG_MIN
+#undef ULONG_MAX
+#define LONG_MAX 2147483647L
+#define LONG_MIN (-2147483648L)
+#define ULONG_MAX 4294967295UL
+
 /* Winsock's fd_set capacity, unless the unit or its port sets its own
 (learn.microsoft.com, select: 64 by default). It comes before xdk_pdb.h,
 where struct fd_set is. */

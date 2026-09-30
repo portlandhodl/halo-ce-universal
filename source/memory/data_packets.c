@@ -261,7 +261,7 @@ void _data_packet_verify(
 				field_size = field->count * sizeof(short);
 				break;
 			case _data_packet_field_longs:
-				field_size = field->count * sizeof(long);
+				field_size = field->count * sizeof(long32);
 				break;
 			case _data_packet_field_int64s:
 				field_size = field->count * sizeof(__int64);
@@ -479,7 +479,7 @@ void _data_packet_decode(
 			{
 				void *source = data_decode_memory(state, field->count, -4);
 				if (source)
-					csmemcpy(decoded_data, source, field->count * sizeof(long));
+					csmemcpy(decoded_data, source, field->count * sizeof(long32));
 				break;
 			}
 			case _data_packet_field_int64s:

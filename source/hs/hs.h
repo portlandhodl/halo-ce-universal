@@ -130,6 +130,11 @@ typedef void (*hs_evaluate_procedure)(
 	long thread_index,
 	boolean initialize);
 
+/* packed to the short grid: the with_N_parameters wrappers (hs.c) place their
+arrays immediately after parameter_types[1], which only works when the base
+has no trailing padding — on LP64 the pointer members would pad it to 8
+(docs/linux64.md). The 32-bit layout is unchanged (it had no padding). */
+#pragma pack(push, 2)
 struct hs_function_definition
 {
 	short return_type;
@@ -142,6 +147,7 @@ struct hs_function_definition
 	short parameter_count;
 	short parameter_types[1];
 };
+#pragma pack(pop)
 
 struct hs_external_global_definition
 {

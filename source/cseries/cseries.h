@@ -149,9 +149,18 @@ brace, like the checked form, which some uses rely on (no semicolon). */
 #define SET_FLAG(f, b, v) ((v) ? ((f)|=(unsigned)FLAG(b)) : ((f)&=(unsigned)~FLAG(b)))
 
 #define BIT_VECTOR_SIZE_IN_LONGS(bit_count) (((bit_count) + (LONG_BITS - 1)) >> LONG_BITS_BITS)
+#ifdef HALO_LINUX64
+/* LP64 (docs/linux64.md): bit vectors stay arrays of 32-bit words — the
+game's fixed-size bit buffers (and the linker commons, halo_linker_common.c)
+are sized for them, and `long` is 8 bytes here */
+#define BIT_VECTOR_SIZE_IN_BYTES(bit_count) (sizeof(long32) * BIT_VECTOR_SIZE_IN_LONGS(bit_count))
+#define BIT_VECTOR_TEST_FLAG(bit_vector, bit) (TEST_FLAG(((ulong32 *)(bit_vector))[(bit) >> LONG_BITS_BITS], ((bit) & (LONG_BITS - 1))))
+#define BIT_VECTOR_SET_FLAG(bit_vector, bit, enable) (SET_FLAG(((ulong32 *)(bit_vector))[(bit) >> LONG_BITS_BITS], ((bit) & (LONG_BITS - 1)), enable))
+#else
 #define BIT_VECTOR_SIZE_IN_BYTES(bit_count) (sizeof(long) * BIT_VECTOR_SIZE_IN_LONGS(bit_count))
 #define BIT_VECTOR_TEST_FLAG(bit_vector, bit) (TEST_FLAG((bit_vector)[(bit) >> LONG_BITS_BITS], ((bit) & (LONG_BITS - 1))))
 #define BIT_VECTOR_SET_FLAG(bit_vector, bit, enable) (SET_FLAG((bit_vector)[(bit) >> LONG_BITS_BITS], ((bit) & (LONG_BITS - 1)), enable))
+#endif
 
 #define VALID_FLAGS(flags, bits) (!((flags)>>bits))
 

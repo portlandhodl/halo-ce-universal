@@ -830,8 +830,10 @@ struct recent_conversation_view
 
 struct dialogue_event_status
 {
-	long last_time_spoken;
-	long disable_until_time;
+	/* tick times; 32-bit (the LP64 port allocates 16 bytes per entry,
+	docs/linux64.md) */
+	long32 last_time_spoken;
+	long32 disable_until_time;
 };
 
 /* Function-local in the original; its construction code establishes this
