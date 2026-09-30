@@ -912,6 +912,7 @@ symbols in this file:
 #include "bungie_net/network/transport_endpoint_winsock.h"
 #include "interface/player_ui.h"
 #include "saved games/player_profile.h"
+#include "interface/ui_widget.h"
 #include "interface/ui_widget_definitions.h"
 
 /* ---------- constants */
@@ -920,32 +921,9 @@ symbols in this file:
 
 /* ---------- structures */
 
-struct widget_instance
-{
-	long definition_tag_index;
-	char const *name;
-	short local_player_index;
-	byte unknown0A[4];
-	short type;
-	boolean visible;
-	byte unknown11;
-	boolean disabled;
-	byte unknown13[9];
-	long unknown1C;
-	byte unknown20[12];
-	struct widget_instance *next;
-	struct widget_instance *parent;
-	struct widget_instance *child;
-	struct widget_instance *focused_child;
-	union
-	{
-		short selected_index;
-		wchar_t *text;
-		long value;
-	} data3C;
-	void *generated_list;
-	short generated_count;
-};
+/* struct widget_instance is shared, in interface/ui_widget.h; this unit's
+January view named the parameters bytes data3C/generated_list/generated_count
+(docs/linux64.md) */
 
 struct single_player_level_entry
 {
@@ -1056,8 +1034,6 @@ void main_set_map_name(
 	char *map_name);
 void main_defer_map_map_change(
 	void);
-void *widget_free(
-	void *pointer);
 boolean create_global_network_game_client(
 	void);
 boolean create_global_network_game_server(
@@ -1089,9 +1065,6 @@ void network_game_client_local_player_quit(
 	word controller_index);
 struct widget_instance *widget_instance_get_topmost_parent(
 	struct widget_instance *widget);
-struct widget_instance *widget_instance_get_nth_child(
-	struct widget_instance *widget,
-	long n);
 void display_error(
 	short error_code,
 	short local_player_index,
@@ -1175,11 +1148,6 @@ wchar_t *ustrncpy(
 	wchar_t *destination,
 	wchar_t const *source,
 	long count);
-void *ui_widget_realloc(
-	void *pointer,
-	word size,
-	char *file,
-	long line);
 
 extern byte cached_player_profile[0x9C];
 

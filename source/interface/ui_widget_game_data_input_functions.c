@@ -444,66 +444,9 @@ machines, and clang warns about the always-true char comparison */
 
 /* ---------- structures */
 
-struct ui_widget_text_box_parameters
-{
-	wchar_t *text;
-	short string_list_index;
-	byte padding06[0x0E];
-};
-
-struct ui_widget_list_parameters
-{
-	short selected_list_item_index;
-	short list_item_top_index;
-	void *list_items;
-	word number_of_items;
-	word padding0E;
-	struct widget_instance *extended_description;
-	wchar_t *item_text;
-};
-
-union ui_widget_parameters
-{
-	struct ui_widget_text_box_parameters text_box;
-	struct ui_widget_list_parameters list;
-};
-
-struct ui_widget_animation_data
-{
-	short current_frame_index;
-	short first_frame_index;
-	short last_frame_index;
-	short number_of_sprite_frames;
-};
-
-struct widget_instance
-{
-	long definition_tag_index;
-	char const *name;
-	short local_player_index;
-	short horizontal_offset;
-	short vertical_offset;
-	short type;
-	boolean visible;
-	boolean render_regardless_of_controller_index;
-	boolean never_receive_events;
-	boolean pause_game_time;
-	boolean delete_recursion_lock;
-	boolean error_dialog;
-	boolean close_if_local_player_controller_present;
-	byte padding17;
-	unsigned long creation_time;
-	unsigned long milliseconds_to_auto_close;
-	unsigned long auto_close_fade_time;
-	real alpha_modifier;
-	struct widget_instance *previous;
-	struct widget_instance *next;
-	struct widget_instance *parent;
-	struct widget_instance *child;
-	struct widget_instance *focused_child;
-	union ui_widget_parameters parameters;
-	struct ui_widget_animation_data animation;
-};
+/* struct widget_instance (with the parameter union's selected_list_item_index
+/ list_item_top_index names) is shared, in interface/ui_widget.h
+(docs/linux64.md) */
 
 struct ui_game_variant
 {

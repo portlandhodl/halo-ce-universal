@@ -64,6 +64,90 @@ enum
 
 /* ---------- structures */
 
+/* The runtime widget instance, defined once for all the interface units
+(docs/linux64.md): ui_widget.c, ui_widget_game_data_input_functions.c and
+ui_widget_event_handler_functions.c each used to declare their own view,
+whose pointers widen differently on LP64. The unions keep the other views'
+field names (never_receive_events, selected_list_item_index, data3C, ...)
+working on the same bytes. */
+struct widget_animation_data
+{
+	short current_frame_index;
+	short first_frame_index;
+	short last_frame_index;
+	short number_of_sprite_frames;
+};
+
+struct widget_instance
+{
+	long definition_tag_index;
+	char const *name;
+	short local_player_index;
+	short horizontal_offset;
+	short vertical_offset;
+	short type;
+	boolean visible;
+	boolean render_regardless_of_controller_index;
+	union { boolean disabled; boolean never_receive_events; };
+	boolean pause_game_time;
+	boolean delete_recursion_lock;
+	union { boolean widget_is_error_dialog; boolean error_dialog; };
+	boolean close_if_local_player_controller_present;
+	byte pad17;
+	long creation_time;
+	union { unsigned long milliseconds_to_auto_close; unsigned long unknown1C; };
+	unsigned long auto_close_fade_time;
+	real alpha_modifier;
+	struct widget_instance *previous;
+	struct widget_instance *next;
+	struct widget_instance *parent;
+	struct widget_instance *child;
+	struct widget_instance *focused_child;
+	union
+	{
+		struct
+		{
+			union
+			{
+				struct
+				{
+					wchar_t *text;
+					short string_list_index;
+				} text_box;
+				struct
+				{
+					union { short selected_index; short selected_list_item_index; };
+					/* counted back toward zero one step per rendered frame;
+					the two tab functions start it at +15 and -15 and the
+					column list renderer clears it */
+					union { short last_list_tab_direction; short list_item_top_index; };
+					void *list_items;
+					word number_of_items;
+					struct widget_instance *extended_description;
+					wchar_t *item_text;
+				} list;
+			};
+		} parameters;
+		/* ui_widget_event_handler_functions.c's January view of the same
+		bytes */
+		struct
+		{
+			union { short selected_index; wchar_t *text; long value; } data3C;
+			void *generated_list;
+			short generated_count;
+		};
+	};
+	struct widget_animation_data animation;
+};
+
+typedef char verify_widget_instance_size[HALO_LAYOUT_ASSERT_32(sizeof(struct widget_instance) == 0x58)];
+typedef char verify_widget_instance_animation_offset[HALO_LAYOUT_ASSERT_32(offsetof(struct widget_instance, animation) == 0x50)];
+typedef char verify_widget_instance_creation_time_offset[HALO_LAYOUT_ASSERT_32(offsetof(struct widget_instance, creation_time) == 0x18)];
+typedef char verify_widget_instance_alpha_modifier_offset[HALO_LAYOUT_ASSERT_32(offsetof(struct widget_instance, alpha_modifier) == 0x24)];
+typedef char verify_widget_instance_next_offset[HALO_LAYOUT_ASSERT_32(offsetof(struct widget_instance, next) == 0x2C)];
+typedef char verify_widget_instance_focused_child_offset[HALO_LAYOUT_ASSERT_32(offsetof(struct widget_instance, focused_child) == 0x38)];
+typedef char verify_widget_instance_text_box_string_list_index_offset[HALO_LAYOUT_ASSERT_32(offsetof(struct widget_instance, parameters.text_box.string_list_index) == 0x40)];
+
 /* ---------- prototypes/UI_WIDGET.C */
 
 boolean event_controller_index_compatible_with_widget(
