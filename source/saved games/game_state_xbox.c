@@ -267,7 +267,7 @@ void game_state_close_file(
 boolean game_state_write_to_file(
 	void)
 {
-	unsigned long bytes_written;
+	ulong32 bytes_written;
 	boolean result = FALSE;
 
 	match_assert(
@@ -303,7 +303,7 @@ boolean game_state_write_to_file(
 boolean game_state_read_from_file(
 	void)
 {
-	unsigned long bytes_read;
+	ulong32 bytes_read;
 	boolean result = FALSE;
 
 	match_assert(
@@ -346,7 +346,7 @@ boolean game_state_write_core(
 {
 	char path[1024];
 	HANDLE file;
-	unsigned long bytes_written;
+	ulong32 bytes_written;
 	boolean result = FALSE;
 
 	CreateDirectoryA("d:\\core", NULL);
@@ -373,7 +373,7 @@ boolean game_state_read_core_header(
 {
 	char path[1024];
 	HANDLE file;
-	unsigned long bytes_read;
+	ulong32 bytes_read;
 	boolean result = FALSE;
 
 	sprintf(path, "d:\\core\\%s", name);
@@ -399,7 +399,7 @@ void game_state_read_core(
 {
 	char path[1024];
 	HANDLE file;
-	unsigned long bytes_read;
+	ulong32 bytes_read;
 
 	sprintf(path, "d:\\core\\%s", name);
 	file = CreateFileA(path, GENERIC_READ, 0, NULL, OPEN_EXISTING, FILE_ATTRIBUTE_NORMAL,
@@ -449,7 +449,7 @@ static HANDLE game_state_open_persistent_storage(
 	char path[256];
 	byte zeroes[16*1024];
 	HANDLE file;
-	unsigned long bytes_written;
+	ulong32 bytes_written;
 	boolean success = FALSE;
 
 	if (directory || game_state_get_persistent_storage_path(path))
@@ -515,9 +515,9 @@ boolean game_state_read_header_from_persistent_storage(
 	HANDLE file;
 	unsigned long checksum;
 	unsigned long stored_checksum;
-	unsigned long bytes_read;
+	ulong32 bytes_read;
 	long remaining_size;
-	long read_size;
+	long32 read_size;
 	boolean result;
 
 	file = game_state_open_persistent_storage(NULL);
@@ -587,7 +587,7 @@ void game_state_write_to_persistent_storage(
 	byte saved_header[2048];
 	HANDLE file;
 	unsigned long checksum;
-	unsigned long bytes_written;
+	ulong32 bytes_written;
 
 	file = game_state_open_persistent_storage(NULL);
 	if (file != INVALID_HANDLE_VALUE)
@@ -634,7 +634,7 @@ void game_state_read_from_persistent_storage(
 	long buffer_size)
 {
 	HANDLE file;
-	unsigned long bytes_read;
+	ulong32 bytes_read;
 
 	file = game_state_open_persistent_storage(NULL);
 	if (file != INVALID_HANDLE_VALUE)

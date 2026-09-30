@@ -746,14 +746,14 @@ static void input_update_analog_button_state(
 static void input_get_device_states(
 	void)
 {
-	unsigned long memory_unit_insertions;
-	unsigned long memory_unit_removals;
+	ulong32 memory_unit_insertions;
+	ulong32 memory_unit_removals;
 	unsigned long device_change_flags = 0;
 	short gamepad_index;
 
 	{
-		unsigned long insertions;
-		unsigned long removals;
+		ulong32 insertions;
+		ulong32 removals;
 
 		if (XGetDeviceChanges(
 			XDEVICE_TYPE_GAMEPAD,
@@ -984,8 +984,8 @@ static void input_update_keyboard_devices(
 	void)
 {
 	{
-		unsigned long insertions;
-		unsigned long removals;
+		ulong32 insertions;
+		ulong32 removals;
 
 		if (XGetDeviceChanges(
 			XDEVICE_TYPE_DEBUG_KEYBOARD,

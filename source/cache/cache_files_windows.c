@@ -1171,7 +1171,7 @@ static boolean cache_file_read_header_from_dvd(
 		NULL);
 	if (file != INVALID_HANDLE_VALUE)
 	{
-		unsigned long bytes_read;
+		ulong32 bytes_read;
 
 		if (ReadFile(
 			file,

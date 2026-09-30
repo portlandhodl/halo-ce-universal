@@ -2038,7 +2038,7 @@ static boolean dsound_initialize_channel(
 {
 	struct sound_channel *channel= channel_get(channel_index);
 	boolean success= FALSE;
-	unsigned long speaker_config;
+	ulong32 speaker_config;
 	XBOXADPCMWAVEFORMAT wave_format;
 	DSSTREAMDESC stream_desc;
 	struct platform_sound_channel_properties properties;
@@ -2108,7 +2108,7 @@ static boolean dsound_initialize_channel(
 		else
 		{
 			unsigned long mixbins= 0;
-			long mixbin_volumes[MAXIMUM_DSOUND_MIXBINS];
+			long32 mixbin_volumes[MAXIMUM_DSOUND_MIXBINS];
 
 			IDirectSound_GetSpeakerConfig(dsound_globals.direct_sound, &speaker_config);
 
@@ -2579,7 +2579,7 @@ static void dsound_channel_fill(
 
 	while (channel->packet_count<MAXIMUM_SOUND_PACKETS && channel->playing_permutation)
 	{
-		unsigned long status;
+		ulong32 status;
 		HRESULT result= IDirectSoundStream_GetStatus(channel->stream, &status);
 
 		if (result<0)

@@ -846,7 +846,7 @@ boolean file_read(
 {
 	struct file_reference_info const *info =
 		file_reference_get_const_info(file);
-	unsigned long bytes_read;
+	ulong32 bytes_read;
 	boolean result = FALSE;
 
 	match_assert(
@@ -881,7 +881,7 @@ boolean file_write(
 {
 	struct file_reference_info const *info =
 		file_reference_get_const_info(file);
-	unsigned long bytes_written;
+	ulong32 bytes_written;
 	boolean result = FALSE;
 
 	match_assert(

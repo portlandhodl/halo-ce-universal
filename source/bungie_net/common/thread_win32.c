@@ -108,7 +108,7 @@ boolean create_thread(
 {
 	boolean success = FALSE;
 	struct thread_reference *reference;
-	unsigned long unused_thread_id;
+	ulong32 unused_thread_id;
 
 	match_assert("c:\\halo\\SOURCE\\bungie_net\\common\\thread_win32.c", 0x6B, function);
 	match_assert("c:\\halo\\SOURCE\\bungie_net\\common\\thread_win32.c", 0x6C, thread_reference);
@@ -152,7 +152,7 @@ boolean thread_has_exited(
 	struct thread_reference *thread_reference)
 {
 	boolean result = FALSE;
-	unsigned long exit_code;
+	ulong32 exit_code;
 
 	match_assert("c:\\halo\\SOURCE\\bungie_net\\common\\thread_win32.c", 0x98, thread_reference);
 
