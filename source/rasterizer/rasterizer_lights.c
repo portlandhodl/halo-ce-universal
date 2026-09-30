@@ -90,6 +90,7 @@ symbols in this file:
 #include "objects/widgets/widget_types.h"
 #include "render.h"
 #include "scenario/scenario.h"
+#include "structures/structure_bsp_definitions.h"
 #include "tag_files/tag_groups.h"
 #include "rasterizer_widgets.h"
 #include "rasterizer.h"
@@ -262,21 +263,9 @@ struct lens_flare_reflection
 typedef char verify_lens_flare_definition_size[HALO_LAYOUT_ASSERT_32(sizeof(struct lens_flare_definition) == 0xF0)];
 typedef char verify_lens_flare_reflection_size[HALO_LAYOUT_ASSERT_32(sizeof(struct lens_flare_reflection) == 0x80)];
 
-struct structure_bsp
-{
-	byte reserved000[0x11C];
-	struct tag_block lens_flares;
-	struct tag_block lens_flare_markers;
-	struct tag_block clusters;
-};
-
-struct structure_cluster
-{
-	byte reserved00[0x40];
-	word first_lens_flare_marker_index;
-	word lens_flare_marker_count;
-	byte reserved44[0x24];
-};
+/* struct structure_bsp and struct structure_cluster come from
+structures/structure_bsp_definitions.h — the LP64 port needs the tag
+structures defined once (docs/linux64.md) */
 
 struct structure_lens_flare
 {

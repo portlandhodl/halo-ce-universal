@@ -158,25 +158,8 @@ struct portal_hull
 	real_point2d vertices[MAXIMUM_PORTAL_HULL_VERTICES];
 };
 
-struct structure_visibility_cluster
-{
-	short sky_index;
-	short fog_designator;
-	short background_sound_palette_index;
-	short sound_environment_palette_index;
-	short weather_palette_index;
-	short transition_structure_bsp_index;
-	short first_runtime_decal_index;
-	word runtime_decal_count;
-	long unused[6];
-	struct tag_block predicted_resources;
-	struct tag_block subclusters;
-	word first_lens_flare_marker_index;
-	word lens_flare_marker_count;
-	struct tag_block surface_indices;
-	struct tag_block mirrors;
-	struct tag_block portal_indices;
-};
+/* the cluster element layout is structure_bsp_definitions.h's struct
+structure_cluster (docs/linux64.md) */
 
 struct structure_visibility_subcluster
 {
@@ -228,7 +211,7 @@ struct structure_visibility_shader_environment
 	real mirror_depth;
 };
 
-typedef char structure_visibility_cluster_size_assert[HALO_LAYOUT_ASSERT_32(sizeof(struct structure_visibility_cluster) == 0x68)];
+typedef char structure_cluster_size_visibility_assert[HALO_LAYOUT_ASSERT_32(sizeof(struct structure_cluster) == 0x68)];
 typedef char structure_visibility_subcluster_size_assert[HALO_LAYOUT_ASSERT_32(sizeof(struct structure_visibility_subcluster) == 0x24)];
 typedef char structure_visibility_portal_size_assert[HALO_LAYOUT_ASSERT_32(sizeof(struct structure_visibility_portal) == 0x40)];
 typedef char structure_visibility_mirror_size_assert[HALO_LAYOUT_ASSERT_32(sizeof(struct structure_visibility_mirror) == 0x40)];
@@ -405,7 +388,7 @@ static void structure_visibility_traverse_subclusters(
 		rendered_cluster_index++)
 	{
 		struct rendered_cluster *rendered_cluster;
-		struct structure_visibility_cluster *cluster;
+		struct structure_cluster *cluster;
 		struct render_frustum *frustum;
 		long subcluster_index;
 
@@ -418,7 +401,7 @@ static void structure_visibility_traverse_subclusters(
 		cluster = TAG_BLOCK_GET_ELEMENT(
 			&structure->clusters,
 			rendered_cluster->cluster_index,
-			struct structure_visibility_cluster);
+			struct structure_cluster);
 		frustum = structures_use_pvs_for_vs || render.cluster_index == NONE
 			? &render.frustum
 			: &rendered_cluster->frustum;
@@ -479,10 +462,10 @@ static void structure_visibility_traverse_surface_lists(
 		rendered_cluster_index++)
 	{
 		struct rendered_cluster *rendered_cluster = rendered_cluster_get(rendered_cluster_index);
-		struct structure_visibility_cluster *cluster = TAG_BLOCK_GET_ELEMENT(
+		struct structure_cluster *cluster = TAG_BLOCK_GET_ELEMENT(
 			&structure->clusters,
 			rendered_cluster->cluster_index,
-			struct structure_visibility_cluster);
+			struct structure_cluster);
 		long *surface_index_buffer = (long *)cluster->surface_indices.address;
 		struct render_frustum *frustum = structures_use_pvs_for_vs || render.cluster_index == NONE
 			? &render.frustum
@@ -996,7 +979,7 @@ boolean structure_visibility_find_mirror(
 					bit_index < LONG_BITS && (short)cluster_index < structure->clusters.count;
 					bit_index++, cluster_index++)
 				{
-					struct structure_visibility_cluster *cluster;
+					struct structure_cluster *cluster;
 					long mirror_index;
 
 					if (!TEST_FLAG(*cluster_pvs, bit_index))
@@ -1007,7 +990,7 @@ boolean structure_visibility_find_mirror(
 					cluster = TAG_BLOCK_GET_ELEMENT(
 						&structure->clusters,
 						(short)cluster_index,
-						struct structure_visibility_cluster);
+						struct structure_cluster);
 					for (mirror_index = 0;
 						(short)mirror_index < cluster->mirrors.count;
 						mirror_index++)
@@ -1104,10 +1087,10 @@ static short structure_visibility_build_surfaces_traverse_clusters(
 		(short)cluster_list_index < cluster_count && found_count < maximum_count;
 		cluster_list_index++)
 	{
-		struct structure_visibility_cluster *cluster = TAG_BLOCK_GET_ELEMENT(
+		struct structure_cluster *cluster = TAG_BLOCK_GET_ELEMENT(
 			&structure->clusters,
 			cluster_indices[(short)cluster_list_index],
-			struct structure_visibility_cluster);
+			struct structure_cluster);
 		long subcluster_index;
 
 		for (subcluster_index = 0;
@@ -1471,10 +1454,10 @@ static void structure_visibility_traverse_cluster(
 {
 	struct structure_bsp *structure = global_structure_bsp_get();
 	struct tag_block *clusters = &structure->clusters;
-	struct structure_visibility_cluster *cluster = TAG_BLOCK_GET_ELEMENT(
+	struct structure_cluster *cluster = TAG_BLOCK_GET_ELEMENT(
 		clusters,
 		cluster_index,
-		struct structure_visibility_cluster);
+		struct structure_cluster);
 	unsigned long *cluster_pvs = structure_bsp_get_cluster_pvs(
 		structure,
 		(short)render.cluster_index);
@@ -1658,7 +1641,7 @@ static void structure_visibility_find_clusters(
 			TAG_BLOCK_GET_ELEMENT(
 				&structure->clusters,
 				rendered_cluster->cluster_index,
-				struct structure_visibility_cluster);
+				struct structure_cluster);
 			render_camera_build_clipped_frustum_bounds(
 				&render.camera,
 				&rendered_cluster->clip_bounds,
@@ -1722,7 +1705,7 @@ void structure_visibility_compute(
 				TAG_BLOCK_GET_ELEMENT(
 					&structure->clusters,
 					cluster_index,
-					struct structure_visibility_cluster);
+					struct structure_cluster);
 				match_vassert(
 					"c:\\halo\\SOURCE\\structures\\structure_visibility.c",
 					0x118,
@@ -1747,7 +1730,7 @@ void structure_visibility_compute(
 	if (TAG_BLOCK_GET_ELEMENT(
 		&structure->clusters,
 		0,
-		struct structure_visibility_cluster)->subclusters.count)
+		struct structure_cluster)->subclusters.count)
 	{
 		structure_visibility_traverse_subclusters(structure);
 	}

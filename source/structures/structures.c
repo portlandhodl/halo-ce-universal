@@ -111,25 +111,8 @@ struct structure_fog_plane_render
 	struct tag_block vertices;
 };
 
-struct structure_cluster_graph
-{
-	short sky_index;
-	short fog_designator;
-	short background_sound_palette_index;
-	short sound_environment_palette_index;
-	short weather_palette_index;
-	short transition_structure_bsp_index;
-	short first_runtime_decal_index;
-	word runtime_decal_count;
-	long unused[6];
-	struct tag_block predicted_resources;
-	struct tag_block subclusters;
-	word first_lens_flare_marker_index;
-	word lens_flare_marker_count;
-	struct tag_block surface_indices;
-	struct tag_block mirrors;
-	struct tag_block portal_indices;
-};
+/* the cluster element layout is structure_bsp_definitions.h's struct
+structure_cluster (docs/linux64.md) */
 
 struct structure_cluster_portal
 {
@@ -193,8 +176,8 @@ struct structure_planar_fog_definition
 };
 
 typedef char verify_structure_fog_plane_render_size[HALO_LAYOUT_ASSERT_32(sizeof(struct structure_fog_plane_render) == 0x20)];
-typedef char verify_structure_cluster_graph_size[HALO_LAYOUT_ASSERT_32(sizeof(struct structure_cluster_graph) == 0x68)];
-typedef char verify_structure_cluster_graph_portal_indices_offset[HALO_LAYOUT_ASSERT_32(offsetof(struct structure_cluster_graph, portal_indices) == 0x5C)];
+typedef char verify_structure_cluster_size[HALO_LAYOUT_ASSERT_32(sizeof(struct structure_cluster) == 0x68)];
+typedef char verify_structure_cluster_portal_indices_offset[HALO_LAYOUT_ASSERT_32(offsetof(struct structure_cluster, portal_indices) == 0x5C)];
 typedef char verify_structure_cluster_portal_size[HALO_LAYOUT_ASSERT_32(sizeof(struct structure_cluster_portal) == 0x40)];
 typedef char verify_structure_surface_reference_size[HALO_LAYOUT_ASSERT_32(sizeof(struct structure_surface_reference) == 0x8)];
 typedef char verify_environment_vertex_compressed_size[HALO_LAYOUT_ASSERT_32(sizeof(struct environment_vertex_compressed) == 0x20)];
@@ -396,10 +379,10 @@ static short structure_clusters_in_sphere_recursive(
 	short *intersected_indices)
 {
 	struct structure_bsp *structure = global_structure_bsp_get();
-	struct structure_cluster_graph *cluster = TAG_BLOCK_GET_ELEMENT(
+	struct structure_cluster *cluster = TAG_BLOCK_GET_ELEMENT(
 		&structure->clusters,
 		cluster_index,
-		struct structure_cluster_graph);
+		struct structure_cluster);
 	short cluster_count;
 	short portal_list_index;
 
@@ -690,10 +673,10 @@ short structure_clusters_in_cone(
 	while (stack_depth > 0 && cluster_count < maximum_cluster_count)
 	{
 		short cluster_index = cluster_stack[--stack_depth];
-		struct structure_cluster_graph *cluster = TAG_BLOCK_GET_ELEMENT(
+		struct structure_cluster *cluster = TAG_BLOCK_GET_ELEMENT(
 			&structure->clusters,
 			cluster_index,
-			struct structure_cluster_graph);
+			struct structure_cluster);
 		short portal_index;
 
 		cluster_indices[cluster_count++] = cluster_index;

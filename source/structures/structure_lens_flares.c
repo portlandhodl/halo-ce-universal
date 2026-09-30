@@ -99,13 +99,8 @@ struct structure_lens_flare_marker
 	byte lens_flare_index;
 };
 
-struct structure_cluster_lens_flare_data
-{
-	byte reserved[0x40];
-	word first_lens_flare_marker_index;
-	word lens_flare_marker_count;
-	byte trailing[0x24];
-};
+/* the cluster's lens-flare marker fields live in structure_bsp_definitions.h's
+struct structure_cluster (docs/linux64.md) */
 
 struct structure_environment_vertex
 {
@@ -200,11 +195,11 @@ boolean build_structure_lens_flares(
 		TAG_BLOCK_GET_ELEMENT(
 			clusters,
 			cluster_index,
-			struct structure_cluster_lens_flare_data)->first_lens_flare_marker_index = 0;
+			struct structure_cluster)->first_lens_flare_marker_index = 0;
 		TAG_BLOCK_GET_ELEMENT(
 			clusters,
 			cluster_index,
-			struct structure_cluster_lens_flare_data)->lens_flare_marker_count = 0;
+			struct structure_cluster)->lens_flare_marker_count = 0;
 	}
 
 	for (lightmap_index = 0; lightmap_index < structure_bsp->lightmaps.count; lightmap_index++)
@@ -622,7 +617,7 @@ boolean build_structure_lens_flares(
 		for (marker_index = 0; marker_index < structure_bsp->lens_flare_markers.count; marker_index++)
 		{
 			struct temporary_lens_flare_marker *temporary_marker = &temp_markers[marker_index];
-			struct structure_cluster_lens_flare_data *cluster;
+			struct structure_cluster *cluster;
 			struct structure_lens_flare_marker *marker;
 
 			if (temporary_marker->cluster_index == NONE)
@@ -631,7 +626,7 @@ boolean build_structure_lens_flares(
 			cluster = TAG_BLOCK_GET_ELEMENT(
 				clusters,
 				temporary_marker->cluster_index,
-				struct structure_cluster_lens_flare_data);
+				struct structure_cluster);
 			if (temporary_marker->cluster_index != cluster_index)
 			{
 				match_assert("c:\\halo\\SOURCE\\structures\\structure_lens_flares.c", 415,
@@ -653,10 +648,10 @@ boolean build_structure_lens_flares(
 		{
 			for (cluster_index = 0; cluster_index < clusters->count; cluster_index++)
 			{
-				struct structure_cluster_lens_flare_data *cluster = TAG_BLOCK_GET_ELEMENT(
+				struct structure_cluster *cluster = TAG_BLOCK_GET_ELEMENT(
 					clusters,
 					cluster_index,
-					struct structure_cluster_lens_flare_data);
+					struct structure_cluster);
 				if (cluster->lens_flare_marker_count > 0)
 				{
 					match_assert("c:\\halo\\SOURCE\\structures\\structure_lens_flares.c", 444,

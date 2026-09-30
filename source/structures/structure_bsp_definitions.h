@@ -82,8 +82,10 @@ struct structure_cluster_runtime_decals
 
 /*
  * The January scenario code indexes this block with a 0x68-byte stride and
- * reads the background-sound palette index at +0x4.  The surrounding fields
- * remain unnamed until independently evidenced.
+ * reads the background-sound palette index at +0x4.  The layout is the union
+ * of the per-unit views (structures.c's structure_cluster_graph, visibility's
+ * structure_visibility_cluster, the lens-flare units' marker fields); the
+ * LP64 port needs this single definition (docs/linux64.md).
  */
 struct structure_cluster
 {
@@ -92,9 +94,17 @@ struct structure_cluster
 	short background_sound_palette_index;
 	short sound_environment_palette_index;
 	short weather_palette_index;
-	byte unusedA[0x1E];
+	short transition_structure_bsp_index;
+	short first_runtime_decal_index;
+	word runtime_decal_count;
+	long unused10[6];
 	struct tag_block predicted_resources;
-	byte unused34[0x34];
+	struct tag_block subclusters;		// structure_visibility_subcluster
+	word first_lens_flare_marker_index;
+	word lens_flare_marker_count;
+	struct tag_block surface_indices;
+	struct tag_block mirrors;			// structure_visibility_mirror
+	struct tag_block portal_indices;	// short
 };
 
 typedef char structure_cluster_size_assert[HALO_LAYOUT_ASSERT_32(sizeof(struct structure_cluster) == 0x68)];
@@ -102,6 +112,7 @@ typedef char structure_cluster_fog_reference_offset_assert[HALO_LAYOUT_ASSERT_32
 typedef char structure_cluster_background_sound_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct structure_cluster, background_sound_palette_index) == 0x04)];
 typedef char structure_cluster_weather_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct structure_cluster, weather_palette_index) == 0x08)];
 typedef char structure_cluster_predicted_resources_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct structure_cluster, predicted_resources) == 0x28)];
+typedef char structure_cluster_portal_indices_offset_assert[HALO_LAYOUT_ASSERT_32(offsetof(struct structure_cluster, portal_indices) == 0x5C)];
 
 /*
  * The January scenario code indexes this palette with a 0x74-byte stride and
