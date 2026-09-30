@@ -349,8 +349,10 @@ static unsigned long convert_texel(unsigned char kind, const unsigned char *sour
 }
 
 /* one level (or 3D slice set) of an uncompressed texture into BGRA */
+/* the texel buffers are DWORD: GL reads them as packed 4-byte RGBA, so the
+LP64 build cannot use unsigned long (docs/linux64.md) */
 static void decode_level(const struct xgpu_texture_description *description, unsigned long level,
-	const unsigned char *source, const D3DCOLOR *palette, unsigned long *destination)
+	const unsigned char *source, const D3DCOLOR *palette, DWORD *destination)
 {
 	struct format_information information = format_information(description->format);
 	unsigned long width = level_dimension(description->width, level);
@@ -372,9 +374,9 @@ static void decode_level(const struct xgpu_texture_description *description, uns
 	{
 		struct swizzle_masks masks = swizzle_masks(width, height, depth);
 		unsigned long *x_offsets = malloc(width * sizeof(unsigned long));
-
 		for (x = 0; x < width; x++)
 			x_offsets[x] = spread(masks.x, x);
+
 		for (z = 0; z < depth; z++)
 		{
 			unsigned long z_offset = spread(masks.z, z);
@@ -391,6 +393,7 @@ static void decode_level(const struct xgpu_texture_description *description, uns
 				}
 			}
 		}
+
 		free(x_offsets);
 	}
 }
@@ -444,7 +447,7 @@ static void dxt_color_block(const unsigned char *block, BOOL dxt1, unsigned long
 }
 
 static void dxt_decode_level(unsigned char kind, const unsigned char *source, unsigned long width, unsigned long height,
-	unsigned long depth, unsigned long *destination)
+	unsigned long depth, DWORD *destination)
 {
 	unsigned long blocks_x = (width + 3) / 4, blocks_y = (height + 3) / 4;
 	unsigned long block_bytes = kind == _texel_dxt1 ? 8 : 16;
@@ -580,13 +583,13 @@ static void upload(GLuint texture, GLenum target, const struct xgpu_texture_desc
 	unsigned long face_size = xgpu_texture_face_size(description);
 	unsigned long largest = description->width * description->height * description->depth;
 	BOOL decode_compressed = FALSE;
-	unsigned long *converted;
+	DWORD *converted;
 	unsigned long face, level;
 
 #ifdef HALO_ANDROID
 	decode_compressed = description->compressed && !xgpu_capabilities.s3tc;
 #endif
-	converted = description->compressed && !decode_compressed ? NULL : malloc(largest * sizeof(unsigned long));
+	converted = description->compressed && !decode_compressed ? NULL : malloc(largest * sizeof(DWORD));
 	glBindTexture(target, texture);
 	xgpu_gl_state_invalidate();
 #ifdef HALO_ANDROID

@@ -83,6 +83,17 @@ item for the data translation layer.** To get the list back, make
 - The crash reporter in `port/linux/src/memory_watch.c` read the 32-bit
   `ucontext` registers (`REG_EIP`, ...); it now uses `REG_RIP`/`REG_RBP`/
   `REG_RSP` on x86-64.
+- The linker commons are sized for the 32-bit layouts:
+  `HALO_COMMON(wind_globals, 3340)` under-allocated the LP64 `struct
+  wind_globals` (0xD10, its `long time` widens), and the excess bytes
+  trampled memory_watch.c's `watch_active` — texture write detection
+  silently turned off, and text cached after the first upload never
+  reached the GPU. **Any common whose type holds a long or a pointer is a
+  suspect for the same overrun.**
+- The texture decode buffers in `port/linux/src/xbox_textures.c` were
+  `unsigned long`: 8 bytes per texel on LP64, while GL reads them as
+  packed 4-byte RGBA. Every other texel landed as zero and the image
+  shifted — text glyphs rendered as vertical bars. They are `DWORD` now.
 
 ## The data translation layer
 
@@ -117,7 +128,8 @@ per unit; on the Xbox they coincide byte-for-byte, on LP64 they widen
 differently. The generator reports every same-name member at two offsets
 ("LP64 view conflicts"); each is a structure to define once (as
 rasterizer_model_types.h, rasterizer_transparent_geometry_group.h,
-rasterizer_xbox_pixel_shader.h and ui_widget.h's widget_instance now do).
+rasterizer_xbox_pixel_shader.h, ui_widget.h's widget_instance and
+font_group.h's font_character now do).
 The same rule bit in: the vertex shader bytecode and declarations
 (`unsigned long[]` token arrays, now `ulong32`), the stack memory pool's
 hardcoded header size, the object type table's hardcoded scenario offsets
