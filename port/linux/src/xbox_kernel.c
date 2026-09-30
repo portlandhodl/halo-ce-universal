@@ -118,8 +118,14 @@ struct platform_handle *platform_handle_get(HANDLE handle, long type)
 	struct platform_handle *result = (struct platform_handle *)handle;
 
 	/* GetCurrentProcess() and GetCurrentThread() are the pseudo handles -1
-	and -2; any other value in the top page cannot be a heap pointer */
+	and -2; any other value in the top page cannot be a heap pointer. LP64:
+	heap addresses live at 0x7xxx..., so test the sign bit instead — the
+	pseudo handles are negative either way (docs/linux64.md) */
+#ifdef HALO_LINUX64
+	if (!result || (long)handle < 0 ||
+#else
 	if (!result || (unsigned long)handle >= 0xfffff000UL ||
+#endif
 		result->signature != PLATFORM_HANDLE_SIGNATURE ||
 		(type && result->type != type))
 	{

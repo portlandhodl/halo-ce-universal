@@ -370,15 +370,18 @@ HRESULT WINAPI D3DDevice_CreateIndexBuffer(UINT length, DWORD usage, D3DFORMAT f
 	(void)pool;
 	if (!buffer)
 		return E_OUTOFMEMORY;
-	/* index data stays in ordinary memory on the Xbox too; Data is virtual */
-	memory = calloc(1, length ? length : 1);
+	/* index data stays in ordinary memory on the Xbox too; Data is virtual.
+	The LP64 port keeps it in the contiguous window like everything else:
+	host pointers are 64-bit there and Data is a 32-bit field
+	(docs/linux64.md) */
+	memory = allocate_resource_memory(length ? length : 1);
 	if (!memory)
 	{
 		free(buffer);
 		return E_OUTOFMEMORY;
 	}
 	buffer->Common = D3DCOMMON_TYPE_INDEXBUFFER | D3DCOMMON_D3DCREATED | 1;
-	buffer->Data = (DWORD)memory;
+	buffer->Data = PLATFORM_VIRTUAL_TO_PHYSICAL(memory);
 	*result = buffer;
 	return S_OK;
 }
